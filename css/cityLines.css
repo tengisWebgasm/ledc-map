@@ -1,0 +1,67 @@
+[city-lines] path {
+    opacity: 0;
+    pointer-events: none;
+}
+
+[city-lines] path[on] {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: dash 2000ms linear forwards;
+    opacity: 0.5;
+}
+
+[city-lines] path[on][selected] {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: dash 2000ms linear forwards;
+    opacity: 1;
+    stroke-width: 2;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.city-group {
+    opacity: 0.15;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+}
+
+.city-group[on] {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.city-group [pulse] {
+    opacity: 0;
+}
+
+.city-group[dc] {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.city-group[dc][on] [pulse] {
+    opacity: 1;
+}
+
+.city-group ellipse[identifier] {
+    fill: #00005C
+}
+
+.city-group[dc] ellipse[identifier] {
+    fill: #05A8D0
+}
+
+.city-name {
+    font: Metropolis, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 12px;
+    fill: #00005C;
+}

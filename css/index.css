@@ -1,0 +1,11 @@
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+	margin: 0;
+}
+
+select {
+	font: inherit;
+}
