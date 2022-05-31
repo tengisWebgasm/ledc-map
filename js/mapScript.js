@@ -1,4 +1,4 @@
-
+const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
 var mapElement = document.querySelector('#map-element');
 var sidePanel = document.querySelector("#map-side-panel");
 var selectStartCont = document.querySelector("#city-select-start");
@@ -477,10 +477,10 @@ setInterval(() => {
  */
 var expanded = false;
 var expandIcon = sidePanel.querySelector(".expand-icon");
+var expandDistance = vw > 767 ? 88 : 148;
 function expandMenu() {
-    console.log(expanded);
     if (expanded) {
-        sidePanel.style.transform = 'translateY(-88px)';
+        sidePanel.style.transform = 'translateY(-' + expandDistance + 'px)';
         expandIcon.style.transform = 'rotate(0deg)';
         expanded = false;
     } else {

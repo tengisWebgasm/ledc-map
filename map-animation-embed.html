@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/mapStyles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5f22d8281aaa21375aee7b55"
-        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
-        </script>
-    <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-</head>
-
 <body>
     <div id="ajaxContent">
         <div id="map-animation-embed">
@@ -25,7 +6,7 @@
                     'albury': {
                         // CAN1
                         'endpoint': {
-                            
+
                         },
                         'telco-partners': {
                             'cm': ['aws', 'azure', 'gcp', 'alicloud', 'ibm', 'huawei'],
@@ -109,6 +90,725 @@
                     },
                 };
             </script>
+            <style>
+                html {
+                    font-family: 'Poppins', sans-serif;
+                }
+
+                body {
+                    margin: 0;
+                }
+
+                select {
+                    font: inherit;
+                }
+
+                .container {
+                    display: block;
+                    width: 100%;
+                    max-width: 1380px;
+                    margin-right: auto;
+                    margin-left: auto;
+                    padding-right: 50px;
+                    padding-left: 50px;
+                }
+
+                p {
+                    margin: 0;
+                }
+
+                #map-animation-embed * {
+                    box-sizing: border-box;
+                }
+
+                #map-element svg {
+                    width: auto;
+                    height: 100%;
+                }
+
+                #map-container {
+                    width: 100%;
+                    height: calc(100vh - 54px);
+                    overflow-y: hidden;
+                    background-color: #8AB4F8;
+                    position: relative;
+                }
+
+                #map-wrapper {
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                }
+
+                #map-side-panel {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 100%;
+                    z-index: 2;
+                    background-color: #FFFFFF;
+                    transform: translateY(-88px);
+                    transition: transform 0.5s ease;
+                }
+
+                #map-side-panel h2 {
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 24px;
+                    line-height: 28px;
+                    margin: 0px;
+                    color: #010611;
+                }
+
+                #map-element-label {
+                    display: flex;
+                    justify-content: center;
+                    align-items: stretch;
+                    position: absolute;
+                    z-index: 4;
+                    top: 16px;
+                    margin: auto 0;
+                    padding: 8px 16px;
+                    background-color: #ffffff;
+                    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1);
+                    border-radius: 100px;
+                    font-size: 14px;
+                    line-height: 24px;
+                }
+
+                .city-select {
+                    width: 100%;
+                }
+
+                #map-element-label p {
+                    margin: 0;
+                }
+
+                #city-selection-container {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    gap: 20px;
+                    padding-top: 16px;
+                    padding-bottom: 24px;
+                }
+
+                #city-selection-expand {
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    height: 40px;
+                    width: 120px;
+                    transform: translate(-50%, calc(-100% + 12px));
+                    border: none;
+                    background-color: transparent;
+                    background-image: url(../public/Expand.svg);
+                    background-size: 80px 16px;
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                    cursor: pointer;
+                    z-index: 100;
+                }
+
+                .expand-icon {
+                    width: 16px;
+                    height: 16px;
+                    margin: auto;
+                    background-image: url("../public/expandIcon.svg");
+                    background-size: contain;
+                    transition: transform 0.5s ease;
+                }
+
+                #city-selection-expand * {
+                    cursor: pointer;
+                }
+
+                #city-selection-expand:active {
+                    opacity: 0.6;
+                }
+
+                #city-selection-icons {
+                    grid-area: icons;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                #city-select-start {
+                    grid-area: select-start;
+                }
+
+                #city-select-end {
+                    grid-area: select-end;
+                }
+
+                .city-select select {
+                    width: 100%;
+                    height: 100%;
+
+                    background-image: url('../public/map-pin.svg');
+                    background-position: 16px 50%;
+                    background-size: 16px;
+                    background-repeat: no-repeat;
+                    border: 1px solid #e7e7e9;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    padding: 12px;
+                    padding-left: 48px;
+                    color: #000000;
+
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 24px;
+                }
+
+                .city-select select:disabled {
+                    opacity: 0.7;
+                }
+
+                .city-select select>option:disabled {
+                    color: #dadada;
+                }
+
+                .city-select {
+                    position: relative;
+                }
+
+                .city-select:after {
+                    content: "";
+                    width: 0;
+                    height: 0;
+                    position: absolute;
+                    pointer-events: none;
+                }
+
+                .city-select:after {
+                    border-left: 5px solid transparent;
+                    border-right: 6px solid transparent;
+                    top: 21px;
+                    right: 22px;
+                    border-top: 6px solid #010611;
+                }
+
+                .city-select[disabled]:after {
+                    opacity: 0.3;
+                }
+
+                .city-select[active] select {
+                    /* color: #6E6D7A; */
+                    color: #00005c;
+                    font-weight: 500;
+                }
+
+                .city-select-label {
+                    position: absolute;
+                    left: 8px;
+                    top: 4px;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 10px;
+                    color: #6e6d7a;
+
+                    display: none;
+                }
+
+                .city-select[active] .city-select-label {
+                    display: block;
+                }
+
+                .city-select-mini-label {
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #6e6d7a;
+                }
+
+                .label-seperator {
+                    margin: 0 16px;
+                    width: 1px;
+                    background-color: #D6D6D6;
+                }
+
+                .label-marker {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 4px;
+                    margin-right: 8px;
+                    align-self: center;
+                }
+
+                #ping-display {
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 36px;
+                    line-height: 43px;
+                    color: #00005c;
+                }
+
+                #city-destination-details[off] {
+                    /* display: none; */
+                    visibility: hidden;
+                }
+
+                #map-element {
+                    position: absolute;
+                    width: auto;
+                    height: 100%;
+                }
+
+                #map-svg {
+                    position: relative;
+                    z-index: 0;
+                }
+
+                #map-img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                }
+
+                #map-element-holder {
+                    height: 100%;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    overflow: hidden;
+                }
+
+                #map-ping-panel {
+                    height: 2px;
+                    width: 2px;
+                    position: absolute;
+                    display: none;
+                    justify-content: center;
+                    left: 50px;
+                    top: 50px;
+                    transition: left 500ms cubic-bezier(0.45, 0, 0.55, 1),
+                        top 500ms cubic-bezier(0.45, 0, 0.55, 1);
+                }
+
+                #map-ping-panel[active] {
+                    display: flex;
+                }
+
+                #map-ping-content {
+                    position: absolute;
+                    width: auto;
+                    height: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: stretch;
+                    align-items: stretch;
+                    background-color: #001f5c;
+                    filter: drop-shadow(20px 20px 60px rgba(7, 21, 58, 0.09));
+                    border-radius: 6px;
+                    color: #ffffff;
+                    white-space: nowrap;
+                    bottom: 16px;
+                    padding: 12px 16px;
+                }
+
+                #map-ping-content [city-label] {
+                    text-transform: capitalize;
+                }
+
+                #map__ping-main {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding-bottom: 12px;
+                    border-bottom: 1px solid #ffffff20;
+                }
+
+                #map__ping-main>svg {
+                    width: 9px;
+                    height: 41px;
+                }
+
+                #map-ping-button {
+                    position: absolute;
+                    background: #001f5c;
+                    transform: translateX(-50%) rotate(-45deg);
+                    width: 16px;
+                    height: 16px;
+                    bottom: -8px;
+                    left: 50%;
+                }
+
+                #map__ping-city-wrapper {
+                    flex: 1 0 auto;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 1.71;
+                }
+
+                #map__ping-city-wrapper>div:first-child {
+                    margin-bottom: 8px;
+                }
+
+                .map__ping-city {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                }
+
+                .map__ping-city-link {
+                    padding-right: 18px;
+                    font-size: 14px;
+                    line-height: 20px;
+                    font-weight: 600;
+                    background-image: url('../public/chevron-right.svg');
+                    background-repeat: no-repeat;
+                    background-position: right center;
+                    text-decoration: none;
+                    color: #0097CE;
+                }
+
+                .map__ping-city-link:hover {
+                    text-decoration: underline;
+                }
+
+                #map-ping-panel-ping {
+                    font-size: 24px;
+                    line-height: 1.33;
+                    font-weight: 500;
+                    color: #34C759;
+                    font-family: 'Futura', 'Poppins', sans-serif;
+                }
+
+                #map__ping-mid {
+                    padding: 16px;
+                    border-top: solid;
+                    border-bottom: solid;
+                    border-width: 1px;
+                    border-color: #ffffff10;
+                }
+
+                #map__ping-mid-btn-wrapper {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    gap: 6px;
+                }
+
+                #map__ping-mid-label {
+                    font-weight: 400;
+                    font-size: 11px;
+                    line-height: 16px;
+                    color: #ffffff;
+                    opacity: 0.5;
+                    margin-bottom: 8px;
+                }
+
+                #map__ping-foot {
+                    display: flex;
+                    padding-top: 8px;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 15px;
+                    line-height: 1.6;
+                }
+
+                #map__ping-foot-btn {
+                    display: flex;
+                    gap: 8px;
+                    text-decoration: none;
+                    color: inherit;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+
+                #map-side-panel-a {}
+
+                #map-side-panel-b {
+                    background: #ffffff;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 1.71;
+                    color: #414144;
+                    padding-bottom: 24px;
+
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                #map-side-panel-b[on] {
+                    left: 0px;
+                    top: 0px;
+                }
+
+                .map-side-panel__network-container {
+                    display: flex;
+                    gap: 20px;
+                }
+
+                .map-side-panel__network-wrapper {
+                    flex: 1 0;
+                }
+
+                .map-side-panel__network-top p {
+                    margin-bottom: 6px;
+                    text-align: center;
+                }
+
+                .map-side-panel__carriers-wrapper {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 2px;
+                    max-width: 100%;
+                }
+
+                /* .service-container {
+	display: grid;
+	margin: 16px 0px 8px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: 46px;
+	column-gap: 6px;
+	row-gap: 8px;
+}
+
+.service-container[collapsed] {
+	height: 100px;
+	overflow: hidden;
+}
+
+.service-container-collapse {
+	font-size: 12px;
+	line-height: 12px;
+	text-align: center;
+	color: #05a8d0;
+	transition: opacity ease 200ms;
+	opacity: 0;
+	pointer-events: none;
+	margin-top: 2px;
+	margin-bottom: 0px;
+}
+
+.service-container-collapse:hover {
+	text-decoration: underline;
+}
+
+.service-container-collapse[numCollapsing] {
+	opacity: 1;
+	pointer-events: all;
+	margin-bottom: 10px;
+	cursor: pointer;
+} */
+
+                .service-item {
+                    background: #F5F5F5;
+                    box-sizing: border-box;
+                    border: none;
+                    cursor: pointer;
+                    flex: 0 0 16%;
+                    transition: box-shadow 0.2s ease-out;
+                }
+
+                .service-item div {
+                    position: relative;
+                    padding-top: 65%;
+                }
+
+                .service-item div img {
+                    max-width: 97%;
+                    max-height: 70%;
+                    top: 50%;
+                    bottom: 0;
+                    right: 0;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    position: absolute;
+                    object-fit: contain;
+                }
+
+                .service-item:hover {
+                    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+                }
+
+                @keyframes fadein {
+                    from {
+                        opacity: 0;
+                    }
+
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+                .service-item[active] {
+                    border: 1px solid #05a8d0;
+                    box-shadow: 0px 4px 10px rgba(41, 62, 64, 0.1);
+                }
+
+                .service-item img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+                #telco-block {
+                    background-color: white;
+                    position: relative;
+                    z-index: 3;
+                    padding-top: 20px;
+                }
+
+                #telco-separator,
+                #telco-separator2 {
+                    position: relative;
+                    background-color: white;
+                    width: 100%;
+                    z-index: 2;
+                }
+
+                #providers-block,
+                #net-fabric-block {
+                    position: relative;
+                    background-color: white;
+                    z-index: 1;
+                    /* min-height: 200px; */
+                    min-height: 150px;
+                    padding-bottom: 8px;
+                }
+
+                #net-fabric-block {
+                    min-height: 50px;
+                }
+
+                #providers-block[placeholder="on"] #providers-block-content {
+                    opacity: 0;
+                }
+
+                #net-fabric-block[placeholder="on"] #net-fabric-block-content {
+                    opacity: 0;
+                }
+
+                #providers-block-content,
+                #net-fabric-block-content {
+                    background-color: white;
+                    position: relative;
+                    z-index: 2;
+                    /* min-height: 200px; */
+                    min-height: 150px;
+                    transition: opacity ease 200ms;
+                }
+
+                #net-fabric-block-content {
+                    min-height: 40px;
+                }
+
+                #providers-block-placeholder,
+                #net-fabric-block-placeholder {
+                    position: absolute;
+                    text-align: center;
+                    top: 20px;
+                    width: 100%;
+                }
+
+                @media screen and (max-width: 1024px) {
+                    #map-container {
+                        grid-template-columns: auto;
+                        grid-template-rows: auto auto;
+                        grid-template-areas: "map""panel";
+                        background-color: transparent;
+                        border-top: none;
+                        border-bottom: none;
+                    }
+
+                    #map-side-panel {}
+
+                    #map-side-panel h2 {
+                        font-size: 18px;
+                    }
+
+                    #map-side-panel-a {
+                        grid-area: selection;
+                    }
+
+                    #map-side-panel-b {
+                        grid-area: partners;
+                        left: 0px;
+                        top: -1000px;
+                    }
+
+                    #map-ping-content {
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 14px;
+                        padding: 8px 12px 6px 12px;
+                    }
+
+                    #map-ping-panel-ping-holder {
+                        margin: 0px 12px;
+                        font-size: 12px;
+                        line-height: 12px;
+                    }
+
+                    #map-element {}
+
+                    #map-element-holder {}
+
+                }
+
+
+                @media screen and (max-width: 991px) {
+                    .container {
+                        padding-right: 31px;
+                        padding-left: 31px;
+                    }
+                }
+
+                @media screen and (max-width: 767px) {
+                    .container {
+                        padding-right: 5.33vw;
+                        padding-left: 5.33vw;
+                    }
+
+                    #map-element-holder {}
+
+                    #map-element-label {
+                        font-size: 12px;
+                        line-height: 18px;
+                    }
+
+                    .label-marker {
+                        width: 16px;
+                        height: 16px;
+                    }
+
+                    .label-seperator {
+                        margin: 0 8px;
+                    }
+
+                    .m-hide {
+                        display: none;
+                    }
+
+                    #city-selection-container {
+                        flex-direction: column;
+                        gap: 8px;
+                    }
+
+                    #map-side-panel {
+                        transform: translateY(-148px);
+                    }
+                }
+
+                @media screen and (max-width: 478px) {}
+            </style>
             <div id="map-container">
                 <div id="map-wrapper">
                     <div id="map-side-panel">
@@ -149,38 +849,34 @@
                                         <div class="map-side-panel__carriers-wrapper">
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/Life is on logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/Life is on logo.png" loading="lazy"
+                                                        alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/nbn.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/nbn.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/tpg.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/lumea.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/lumea.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/Telstra.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/ausgrid-logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/ausgrid-logo.png" loading="lazy"
+                                                        alt="">
                                                 </div>
                                             </button>
                                         </div>
@@ -192,38 +888,34 @@
                                         <div class="map-side-panel__carriers-wrapper">
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/Life is on logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/Life is on logo.png" loading="lazy"
+                                                        alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/nbn.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/nbn.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/tpg.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/lumea.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/lumea.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/Telstra.png" loading="lazy" alt="">
                                                 </div>
                                             </button>
                                             <button class="service-item" network-partner="cm">
                                                 <div>
-                                                    <img src="./public/providers/ausgrid-logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/ausgrid-logo.png" loading="lazy"
+                                                        alt="">
                                                 </div>
                                             </button>
                                         </div>
@@ -499,31 +1191,57 @@
                                         </div>
                                     </div>
                                 </div> -->
-                            </div> 
+                            </div>
                         </div>
-                    </div> 
+                    </div>
                     <div id="map-element-holder">
                         <div id="map-element">
-                            <script src="js/clickHandlers.js"></script>
+                            <script>
+
+                                var handleMapClick = (event) => {
+                                    if (selectEnd.value) {
+                                        selectEnd.value = '';
+                                        closeDestination();
+                                    } else if (selectStart.value) {
+                                        selectStart.value = '';
+                                        closeSelection();
+                                    }
+                                }
+
+                                var handleCityClick = (event) => {
+                                    event.stopPropagation();
+                                    if (event.currentTarget.hasAttribute('dc')) {
+                                        if (selectStart.value === event.currentTarget.id) {
+                                            selectStart.value = '';
+                                            closeSelection();
+                                        } else {
+                                            selectStart.value = event.currentTarget.id;
+                                            showSelection(event.currentTarget.id);
+                                        }
+                                    } else {
+                                        selectEnd.value = event.currentTarget.id;
+                                        selectDestination(event.currentTarget.id);
+                                    }
+                                }
+                            </script>
                             <embed src="public/Map.svg" alt="Map of Australia" id="map-img"></embed>
                             <svg onclick="handleMapClick(event)" xmlns="http://www.w3.org/2000/svg" id="map-svg"
                                 viewBox="0 0 1440 784" fill="none">
                                 <style>
-
                                     [city-lines] path {
                                         opacity: 0.3;
                                         pointer-events: none;
                                         stroke: #83ADFF;
                                         transition: all 0.2s ease-out;
                                     }
-    
+
                                     [city-lines] path[on] {
                                         opacity: 1;
                                         stroke-dasharray: 1200;
                                         stroke-dashoffset: 1200;
                                         animation: dash 2000ms linear forwards;
                                     }
-    
+
                                     [city-lines] path[on][selected] {
                                         stroke-dasharray: 1200;
                                         stroke-dashoffset: 1200;
@@ -531,47 +1249,47 @@
                                         opacity: 1;
                                         stroke: #001F5C;
                                     }
-    
+
                                     @keyframes dash {
                                         to {
                                             stroke-dashoffset: 0;
                                         }
                                     }
-    
+
                                     .city-group {
                                         opacity: 1;
                                         transition: opacity 200ms ease;
                                         pointer-events: none;
                                     }
-    
+
                                     .city-group[on] {
                                         opacity: 1;
                                         cursor: pointer;
                                         pointer-events: all;
                                     }
-    
+
                                     .city-group [pulse] {
                                         opacity: 0;
                                     }
-    
+
                                     .city-group[dc] {
                                         opacity: 1;
                                         cursor: pointer;
                                         pointer-events: all;
                                     }
-    
+
                                     .city-group[dc][on] [pulse] {
                                         opacity: 1;
                                     }
-    
+
                                     .city-group ellipse[identifier] {
                                         fill: #34C759;
                                     }
-    
+
                                     .city-group[dc][on] ellipse[identifier] {
                                         fill: #001F5C;
                                     }
-    
+
                                     .city-group[soon] ellipse[identifier] {
                                         fill: #FF9500;
                                     }
@@ -580,7 +1298,7 @@
                                         opacity: 0;
                                         stroke: transparent;
                                     }
-    
+
                                     .city-name {
                                         font: Metropolis, sans-serif;
                                         font-weight: 400;
@@ -593,17 +1311,23 @@
                                     <!-- NEW LINE HELPER -->
                                     <!-- <circle left-node cx="0" cy="0" r="2" fill="green" />
                                     <circle right-node cx="0" cy="0" r="2" fill="green" /> -->
-    
-                                    <path dc="albury" city="nowra" d="M827,571 C850.65,550.58 883.15,541.67 917.9,547.4" />
+
+                                    <path dc="albury" city="nowra"
+                                        d="M827,571 C850.65,550.58 883.15,541.67 917.9,547.4" />
                                     <path dc="albury" city="waggaWagga" d="M827 571C825.83 556 829.67 548 838.5,547" />
-                                    <path dc="albury" city="traralgon" d="M827,571 C838.5,583.63 842.3,605.67 821,625.4" />
+                                    <path dc="albury" city="traralgon"
+                                        d="M827,571 C838.5,583.63 842.3,605.67 821,625.4" />
                                     <path dc="albury" city="shepparton" d="M827 571C807.3 564 792.6 564 782.9,571" />
-                                    <path dc="dubbo" city="tamworth" d="M876.6,468 C872.52,439.67 913.58,411.88 938,425" />
-                                    <path dc="dubbo" city="bathurst" d="M876.6,468 C893.15,468.13 903.95,479.62 903,496.6" />
+                                    <path dc="dubbo" city="tamworth"
+                                        d="M876.6,468 C872.52,439.67 913.58,411.88 938,425" />
+                                    <path dc="dubbo" city="bathurst"
+                                        d="M876.6,468 C893.15,468.13 903.95,479.62 903,496.6" />
                                     <path dc="dubbo" city="sydneyNextDc"
                                         d="M876.6,468 C874.58,504.88 899.77,513.87 935.5,513.7" />
-                                    <path dc="dubbo" city="waggaWagga" d="M876.6 468C858.9 487.33 846.2 513.67 838.5,547" />
-                                    <path dc="newcastle" city="tamworth" d="M946.4,486 C950.8,471.32 962,432.73 938,425" />
+                                    <path dc="dubbo" city="waggaWagga"
+                                        d="M876.6 468C858.9 487.33 846.2 513.67 838.5,547" />
+                                    <path dc="newcastle" city="tamworth"
+                                        d="M946.4,486 C950.8,471.32 962,432.73 938,425" />
                                     <path dc="newcastle" city="coffsHabour"
                                         d="M946.4,486 C963.83,465.77 976.92,430.18 981,410.6" />
                                     <path dc="newcastle" city="bathurst"
@@ -672,8 +1396,7 @@
                                         d="M917.9 547.4C886.43 540.27 859.97 540.13 838.5,547" />
                                     <path dc="nowra" city="traralgon"
                                         d="M917.9,547.4 C917.1,583.35 882.4,617.8 821,625.4" />
-                                    <path dc="waggaWagga" city="albury"
-                                        d="M838.5 547C829.67 548 825.83 556 827,571" />
+                                    <path dc="waggaWagga" city="albury" d="M838.5 547C829.67 548 825.83 556 827,571" />
                                     <path dc="waggaWagga" city="dubbo"
                                         d="M838.5 547C846.2 513.67 858.9 487.33 876.6,468" />
                                     <path dc="waggaWagga" city="sydneyNextDc"
@@ -710,12 +1433,11 @@
                                         d="M785,596 C785.35,563.82 752,531.13 731,521.5" />
                                     <path dc="bendigo" city="adeleide"
                                         d="M785,596 C762.27,556.02 690.48,517.88 655.6,539.8" />
-                                    <path dc="shepparton" city="albury"
-                                        d="M782.9 571C792.6 564 807.3 564 827,571" />
+                                    <path dc="shepparton" city="albury" d="M782.9 571C792.6 564 807.3 564 827,571" />
                                     <path dc="shepparton" city="traralgon"
                                         d="M782.9,571 C800,581.78 817.05,597.72 821,625.4" />
                                     <path dc="shepparton" city="bendigo"
-                                        d="M782.9,571 C785.55,575.53 792.1,581.72 785,596" /> 
+                                        d="M782.9,571 C785.55,575.53 792.1,581.72 785,596" />
                                     <path dc="shepparton" city="mildura"
                                         d="M782.9,571 C785.6,541.95 771.25,517.3 731,521.5" />
                                     <path dc="geelong" city="melbourne"
@@ -751,185 +1473,193 @@
                                     <path dc="adeleide" city="mildura"
                                         d="M655.6 539.8C675.73 526.7 700.87 520.6 731,521.5" />
                                 </g>
-    
+
                                 <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
                                     <ellipse pulse cx="827" cy="571" rx="16" ry="16" fill="url('#pulseFill')"
                                         restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
                                     </ellipse>
                                     <ellipse cx="827" cy="571" rx="7" ry="7" fill="white" />
                                     <ellipse cx="827" cy="571" rx="5" ry="5" identifier />
                                     <text x="814.715" y="591" class="city-name">Albury</text>
                                 </g>
-    
+
                                 <g id="dubbo" class="city-group" dc onclick="handleCityClick(event)">
                                     <ellipse pulse cx="876.6" cy="468" rx="16" ry="16" fill="url('#pulseFill')"
                                         restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
                                     </ellipse>
                                     <ellipse cx="876.6" cy="468" rx="7" ry="7" fill="white" />
                                     <ellipse cx="876.6" cy="468" rx="5" ry="5" identifier />
                                     <text x="864" y="488" class="city-name">Dubbo</text>
                                 </g>
-    
+
                                 <g id="newcastle" class="city-group" dc onclick="handleCityClick(event)">
                                     <ellipse pulse cx="946.4" cy="486" rx="16" ry="16" fill="url('#pulseFill')"
                                         restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
                                     </ellipse>
                                     <ellipse cx="946.4" cy="486" rx="7" ry="7" fill="white" />
                                     <ellipse cx="946.4" cy="486" rx="5" ry="5" identifier />
                                     <text x="955.4" y="489" class="city-name">Newcastle</text>
                                 </g>
-    
+
                                 <g id="tamworth" class="city-group" dc onclick="handleCityClick(event)">
                                     <ellipse pulse cx="938" cy="425" rx="16" ry="16" fill="url('#pulseFill')"
                                         restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
                                     </ellipse>
                                     <ellipse cx="938" cy="425" rx="7" ry="7" fill="white" />
                                     <ellipse cx="938" cy="425" rx="5" ry="5" identifier />
                                     <text x="914.46" y="445" class="city-name">Tamworth</text>
                                 </g>
-    
+
                                 <g id="cairns" class="city-group" soon>
-    
+
                                     <ellipse cx="816.6" cy="97" rx="7" ry="7" fill="white" />
                                     <ellipse cx="816.6" cy="97" rx="5" ry="5" identifier />
                                     <text x="804.585" y="117" class="city-name">Cairns</text>
                                 </g>
-    
+
                                 <g id="bundaberg" class="city-group" soon>
-    
+
                                     <ellipse cx="956.6" cy="286" rx="7" ry="7" fill="white" />
                                     <ellipse cx="956.6" cy="286" rx="5" ry="5" identifier />
                                     <text x="934.955" y="306" class="city-name">Bundaberg</text>
                                 </g>
-    
+
                                 <g id="brisbaneNextDc" class="city-group" soon>
-    
+
                                     <ellipse cx="976" cy="351" rx="7" ry="7" fill="white" />
                                     <ellipse cx="976" cy="351" rx="5" ry="5" identifier />
                                     <text x="943.915" y="371" class="city-name">Brisbane - NextDC</text>
                                 </g>
-    
+
                                 <g id="coffsHabour" class="city-group" soon>
-    
+
                                     <ellipse cx="981" cy="410.6" rx="7" ry="7" fill="white" />
                                     <ellipse cx="981" cy="410.6" rx="5" ry="5" identifier />
                                     <text x="990" y="413.6" class="city-name">Coffs Habour</text>
                                 </g>
-    
+
                                 <g id="bathurst" class="city-group" soon>
-    
+
                                     <ellipse cx="903" cy="496.6" rx="7" ry="7" fill="white" />
                                     <ellipse cx="903" cy="496.6" rx="5" ry="5" identifier />
                                     <text x="886.665" y="516.6" class="city-name">Bathurst</text>
                                 </g>
-    
+
                                 <g id="sydneyEquinix" class="city-group" soon>
-    
+
                                     <ellipse cx="937.6" cy="503.5" rx="7" ry="7" fill="white" />
                                     <ellipse cx="937.6" cy="503.5" rx="5" ry="5" identifier />
                                     <text x="946.6" y="506.5" class="city-name">Sydney - Equinix</text>
                                 </g>
-    
+
                                 <g id="sydneyNextDc" class="city-group" soon>
-    
+
                                     <ellipse cx="935.5" cy="513.7" rx="7" ry="7" fill="white" />
                                     <ellipse cx="935.5" cy="513.7" rx="5" ry="5" identifier />
                                     <text x="944.5" y="516.7" class="city-name">Sydney - NextDC</text>
                                 </g>
-    
+
                                 <g id="nowra" class="city-group" soon>
-    
+
                                     <ellipse cx="917.9" cy="547.4" rx="7" ry="7" fill="white" />
                                     <ellipse cx="917.9" cy="547.4" rx="5" ry="5" identifier />
                                     <text x="926.9" y="550.4" class="city-name">Nowra</text>
                                 </g>
-    
+
                                 <g id="waggaWagga" class="city-group" soon>
-    
+
                                     <ellipse cx="838.5" cy="547" rx="7" ry="7" fill="white" />
                                     <ellipse cx="838.5" cy="547" rx="5" ry="5" identifier />
                                     <text x="810.87" y="567" class="city-name">Wagga Wagga</text>
                                 </g>
-    
+
                                 <g id="traralgon" class="city-group" soon>
-    
+
                                     <ellipse cx="821" cy="625.4" rx="7" ry="7" fill="white" />
                                     <ellipse cx="821" cy="625.4" rx="5" ry="5" identifier />
                                     <text x="803.18" y="645.4" class="city-name">Traralgon</text>
                                 </g>
-    
+
                                 <g id="melbourne" class="city-group" soon>
-    
+
                                     <ellipse cx="794.6" cy="618" rx="7" ry="7" fill="white" />
                                     <ellipse cx="794.6" cy="618" rx="5" ry="5" identifier />
                                     <text x="773.27" y="638" class="city-name">Melbourne</text>
                                 </g>
-    
+
                                 <g id="bendigo" class="city-group" soon>
-    
+
                                     <ellipse cx="785" cy="596" rx="7" ry="7" fill="white" />
                                     <ellipse cx="785" cy="596" rx="5" ry="5" identifier />
                                     <text x="768.89" y="616" class="city-name">Bendigo</text>
                                 </g>
-    
+
                                 <g id="shepparton" class="city-group" soon>
-    
+
                                     <ellipse cx="782.9" cy="571" rx="7" ry="7" fill="white" />
                                     <ellipse cx="782.9" cy="571" rx="5" ry="5" identifier />
                                     <text x="760.265" y="591" class="city-name">Shepparton</text>
                                 </g>
-    
+
                                 <g id="geelong" class="city-group" soon>
-    
+
                                     <ellipse cx="781.5" cy="628.4" rx="7" ry="7" fill="white" />
                                     <ellipse cx="781.5" cy="628.4" rx="5" ry="5" identifier />
                                     <text x="765.39" y="648.4" class="city-name">Geelong</text>
                                 </g>
-    
+
                                 <g id="ballarat" class="city-group" soon>
-    
+
                                     <ellipse cx="768.3" cy="612.3" rx="7" ry="7" fill="white" />
                                     <ellipse cx="768.3" cy="612.3" rx="5" ry="5" identifier />
                                     <text x="753.495" y="632.3" class="city-name">Ballarat</text>
                                 </g>
-    
+
                                 <g id="horsham" class="city-group" soon>
-    
+
                                     <ellipse cx="736.8" cy="591" rx="7" ry="7" fill="white" />
                                     <ellipse cx="736.8" cy="591" rx="5" ry="5" identifier />
                                     <text x="719.25" y="611" class="city-name">Horsham</text>
                                 </g>
-    
+
                                 <g id="mildura" class="city-group" soon>
-    
+
                                     <ellipse cx="731" cy="521.5" rx="7" ry="7" fill="white" />
                                     <ellipse cx="731" cy="521.5" rx="5" ry="5" identifier />
                                     <text x="716.24" y="541.5" class="city-name">Mildura</text>
                                 </g>
-    
+
                                 <g id="adeleide" class="city-group" soon>
-    
+
                                     <ellipse cx="655.6" cy="539.8" rx="7" ry="7" fill="white" />
                                     <ellipse cx="655.6" cy="539.8" rx="5" ry="5" identifier />
                                     <text x="638.5" y="559.8" class="city-name">Adeleide</text>
                                 </g>
-    
+
                                 <!-- <g id="frankurt" class="city-group" onclick="handleCityClick(event)">
                                     <rect x="538" y="152" height="16" width="74" fill="transparent" />
                                     <ellipse cx="546.946" cy="159.769" rx="5.67675" ry="5.67674" fill="white" />
@@ -994,7 +1724,7 @@
                                     <circle cx="517.432" cy="162.831" r="5.67848" fill="white" />
                                     <circle cx="517.432" cy="162.831" r="4.25886" fill="#00005C" />
                                 </g> -->
-    
+
                                 <defs>
                                     <radialGradient id="pulseFill">
                                         <stop offset="0.35" stop-color="#A5FFFF" />
@@ -1010,7 +1740,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter1_d" x="516.515" y="91.7056" width="436.143" height="155.511"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1022,7 +1753,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter2_d" x="515.228" y="73.3335" width="422.953" height="160.121"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1034,7 +1766,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter3_d" x="539.166" y="117.454" width="397.846" height="115.501"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1046,7 +1779,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter4_d" x="111.88" y="170.611" width="825.97" height="140.106"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1058,7 +1792,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter5_d" x="122.943" y="152.314" width="815.744" height="129.37"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1070,7 +1805,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter6_d" x="264.449" y="175.621" width="673.876" height="115.687"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1082,7 +1818,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter7_d" x="232.294" y="157.289" width="704.4" height="108.924"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1094,7 +1831,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter8_d" x="515.241" y="108.346" width="425.844" height="103.305"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1106,7 +1844,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter9_d" x="538.645" y="117.315" width="403.723" height="114.947"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1118,7 +1857,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter10_d" x="265.582" y="173.838" width="678.119" height="109.241"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1130,7 +1870,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter11_d" x="232.864" y="156.566" width="707.969" height="111.952"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1142,7 +1883,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter12_d" x="111.977" y="169.628" width="828.747" height="81.3457"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1154,7 +1896,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter13_d" x="123.047" y="150.233" width="817.602" height="80.6919"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1166,7 +1909,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter14_d" x="509.846" y="124.858" width="430.953" height="86.3907"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1178,7 +1922,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                 </defs>
                             </svg>
@@ -1187,8 +1932,10 @@
                                     <div id="map__ping-main">
                                         <svg width="9" height="41" viewBox="0 0 9 41" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="4.5" cy="5" r="1.5" transform="rotate(-180 4.5 5)" fill="#FFFFFF" />
-                                            <circle cx="4.5" cy="5" r="4" transform="rotate(-180 4.5 5)" stroke="#FFFFFF" />
+                                            <circle cx="4.5" cy="5" r="1.5" transform="rotate(-180 4.5 5)"
+                                                fill="#FFFFFF" />
+                                            <circle cx="4.5" cy="5" r="4" transform="rotate(-180 4.5 5)"
+                                                stroke="#FFFFFF" />
                                             <circle cx="4.5" cy="36" r="1.5" transform="rotate(-180 4.5 36)"
                                                 fill="#FFFFFF" />
                                             <circle cx="4.5" cy="36" r="4" transform="rotate(-180 4.5 36)"
@@ -1228,29 +1975,254 @@
                     </div>
                 </div>
             </div>
-            <script src="js/alphabetScript.js"></script>
-            <script src="js/mapScript.js"></script>
-            <!-- NEW LINE HELPER -->
-            <!-- <div style="
-              display: flex;
-              width: 100vw;
-              justify-content: center;
-              position: relative;
-              z-index: 10;
-              top: -100px;
-            ">
-                <div style="
-                width: 40px;
-                height: 40px;
-                background-color: aqua;
-              " toggle-left></div>
-                <div style="
-                width: 40px;
-                height: 40px;
-                background-color: blueviolet;
-              " toggle-right></div>
-            </div>
-            <script src="js/newLineHelper.js"></script> -->
+            <script>
+                var alphabetArray = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ|()".split("");
+
+                async function changeText(el, newText) {
+                    if (el.innerHTML === newText) return;
+                    const textChangeId = parseInt(el.getAttribute('text-change-id') || 0) + 1;
+                    el.setAttribute('text-change-id', textChangeId);
+
+                    const clear = setInterval(interval, 5);
+
+                    function interval() {
+                        if (el.getAttribute('text-change-id') != textChangeId || el.innerHTML === newText) {
+                            if (el.innerHTML === newText) el.removeAttribute('text-change-id');
+                            clearInterval(clear);
+                        }
+                        const textArr = [];
+                        for (let i = 0; i < newText.length; i++) {
+                            if (!el.innerHTML[i]) textArr[i] = Math.floor(Math.random() * alphabetArray.length);
+                            else if (el.innerHTML[i] === newText[i]) textArr[i] = alphabetArray.indexOf(el
+                                .innerHTML[i]);
+                            else textArr[i] = alphabetArray.indexOf(el.innerHTML[i]) + (alphabetArray.indexOf(el
+                                .innerHTML[i]) < alphabetArray.indexOf(newText[i]) ? 1 : -1);
+                        }
+                        const newArr = textArr.map(e => alphabetArray[e]);
+                        el.innerHTML = newArr.join('');
+                    }
+                }
+
+                async function changePing(el, newPing) {
+                    if (parseInt(el.innerHTML) === parseInt(newPing)) return;
+                    const textChangeId = parseInt(el.getAttribute('text-change-id') || 0) + 1;
+                    el.setAttribute('text-change-id', textChangeId);
+
+                    const clear = setInterval(interval, 80);
+
+                    function interval() {
+                        if (el.getAttribute('text-change-id') != textChangeId || parseInt(el.innerHTML) ===
+                            parseInt(newPing)) {
+                            if (parseInt(el.innerHTML) === parseInt(newPing)) el.removeAttribute('text-change-id');
+                            clearInterval(clear);
+                        }
+                        const textArr = [];
+                        for (let i = 0; i < newPing.length; i++) {
+                            if (isNaN(parseInt(el.innerHTML[i]))) textArr[i] = Math.floor(Math.random() * 10 + 1);
+                            else if (el.innerHTML[i] === newPing[i]) textArr[i] = alphabetArray.indexOf(el
+                                .innerHTML[i]);
+                            else textArr[i] = alphabetArray.indexOf(el.innerHTML[i]) + (alphabetArray.indexOf(el
+                                .innerHTML[i]) < alphabetArray.indexOf(newPing[i]) ? 1 : -1);
+                        }
+                        const newArr = textArr.map(e => alphabetArray[e]);
+                        el.innerHTML = newArr.join('') + 'ms';
+                    }
+                }
+            </script>
+            <script>
+                const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+                var mapElement = document.querySelector('#map-element');
+                var sidePanel = document.querySelector("#map-side-panel");
+                var selectStartCont = document.querySelector("#city-select-start");
+                var selectEndCont = document.querySelector("#city-select-end");
+                var selectStart = selectStartCont.querySelector('select');
+                var selectEnd = selectEndCont.querySelector('select');
+                var pingPanel = document.querySelector('#map-ping-panel');
+                var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
+                var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
+                var pingPanelContent = pingPanel.querySelector('#map-ping-content');
+                var pingPanelButton = pingPanel.querySelector('#map-ping-button');
+
+                // function called when some starting point (data center) is selected
+                var showSelection = (cityName) => {
+                    // adjust display of dropdowns
+                    selectStartCont.setAttribute('active', '');
+                    selectEnd.removeAttribute('disabled');
+                    selectEndCont.removeAttribute('disabled');
+
+                    // get data about starting point from json
+                    const curEndpoints = Object.keys(datacenterDetails[cityName]
+                        .endpoint); // valid city endpoints of the data center
+                    const datacentres = Object.keys(datacenterDetails); // all datacentres
+                    const curPartners = Object.keys(datacenterDetails[cityName][
+                        'telco-partners'
+                    ]); // telco partners of the data center
+                    const curProvidersSet = new Set(Object.values(datacenterDetails[cityName]['telco-partners'])
+                        .reduce((acc, cur) => [...acc, ...cur], [])); // cloud providers of the data center
+                    const curFabrics = Object.keys(datacenterDetails[cityName][
+                        'network-fabric'
+                    ]); // fabric partners of the data center
+                    const curFabricsSet = new Set(Object.values(datacenterDetails[cityName]['network-fabric'])
+                        .reduce((acc, cur) => [...acc, ...cur], [])); // fabric providers of the data center
+                    const curProviders = [...curProvidersSet];
+
+                    // display the lines and city
+                    [...document.querySelectorAll(`.city-group`)].forEach(group => {
+                        if (group.id === cityName) group.setAttribute('dc', '');
+                        else group.removeAttribute('dc');
+
+                        if (group.id === cityName || curEndpoints.includes(group.id)) group.setAttribute(
+                            'on', '');
+                        else group.removeAttribute('on');
+                    });
+                    try {
+                        [...document.querySelector('[city-lines]').querySelectorAll('path')].forEach(e => e
+                            .removeAttribute('on'));
+                        [...document.querySelectorAll(`[dc="${cityName}"]`)].forEach(e => {
+                            setTimeout(() => e.setAttribute('on', ''), Math.random() * 280);
+                        });
+                    } catch { }
+
+                    // adjust display of destination dropdown to highlight available cities 
+                    [...selectEnd.querySelectorAll('option')].forEach(opt => {
+                        if (curEndpoints.includes(opt.value) || !opt.value) opt.removeAttribute('disabled');
+                        else opt.setAttribute('disabled', '');
+                    })
+
+                    // adjust ping display for the datacenter to (selected?) global city
+                    if (curEndpoints.includes(selectEnd.value)) selectDestination(selectEnd.value);
+                    else {
+                        selectEnd.value = '';
+                        selectEndCont.removeAttribute('active');
+                        [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
+                        pingPanel.removeAttribute('active');
+                    }
+                }
+
+                var closeSelection = () => {
+                    selectStartCont.removeAttribute('active');
+                    selectEnd.value = '';
+                    selectEnd.setAttribute('disabled', '');
+                    selectEndCont.setAttribute('disabled', '');
+                    [...document.querySelector('[city-lines]').querySelectorAll('path')].forEach(e => e
+                        .removeAttribute('on'));
+                    [...document.querySelectorAll(`.city-group`)].forEach(group => {
+                        if (Object.keys(datacenterDetails).includes(group.id)) group.setAttribute('dc', '');
+                        group.removeAttribute('on');
+                    });
+
+                    closeDestination();
+                }
+
+                var selectDestination = (destName) => {
+                    selectEndCont.setAttribute('active', '');
+                    // destinationDetails.removeAttribute('off');
+                    [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
+
+                    // add dc to selected destination city to make it highlighted
+                    let otherCities = document.querySelectorAll('g.city-group:not(#' + selectStart.value + ')')
+                    for (let i = 0; i < otherCities.length; i++) {
+                        otherCities[i].removeAttribute('dc');
+                    }
+                    document.querySelector("#" + destName).setAttribute("dc", '');
+
+                    // set other lines invisible
+                    let otherLines = document.querySelectorAll(`[city-lines] path:not([city="${destName}"]):not([dc="${selectStart.value}"])`);
+                    for (let i = 0; i < otherLines.length; i++) {
+                        otherLines[i].setAttribute('invisible', '');
+                    }
+
+                    const curLine = document.querySelector(`[dc="${selectStart.value}"][city="${destName}"]`);
+                    curLine.setAttribute('selected', '');
+
+                    const dString = curLine.getAttribute('d').replaceAll(',', ' ').replaceAll('M', '').replaceAll(
+                        'C', ' ');
+                    const [px, py, qx, qy, rx, ry, sx, sy] = dString.split(/[ ]{1,}/);
+
+                    function getMidPoint(p, q, r, s) {
+                        return (parseFloat(p) + 3 * parseFloat(q) + 3 * parseFloat(r) + parseFloat(s)) / 8;
+                    }
+                    const [anchorX, anchorY] = [getMidPoint(px, qx, rx, sx), getMidPoint(py, qy, ry, sy)];
+
+                    const rootSVG = document.querySelector('#map-element svg');
+                    const point = rootSVG.createSVGPoint();
+                    let matrix, position;
+
+                    matrix = curLine.getCTM();
+                    point.x = anchorX;
+                    point.y = anchorY;
+                    position = point.matrixTransform(matrix);
+
+                    pingPanel.style.left = position.x + 'px';
+                    pingPanel.style.top = position.y + 'px';
+
+                    changeText(pingPanelDc, selectStart.options[selectStart.selectedIndex].label);
+                    changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
+                    changePing(document.querySelector('#map-ping-panel-ping'),
+                        `${parseInt(datacenterDetails[selectStart.value].endpoint[destName].ping)}`);
+                    pingPanel.setAttribute('active', '');
+                }
+
+                var closeDestination = () => {
+                    selectEndCont.removeAttribute('active');
+                    if (selectStart.value)
+                        document.querySelectorAll('g.city-group:not(#' + selectStart.value + ')').forEach(e => e.removeAttribute('dc'));
+                    [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
+
+                    [...document.querySelectorAll(`[city-lines] path[invisible]`)].forEach(e => e.removeAttribute('invisible'));
+                    pingPanel.removeAttribute('active');
+                }
+
+                selectStart.addEventListener('change', () => {
+                    if (selectStart.value) {
+                        showSelection(selectStart.value);
+                    } else {
+                        closeSelection();
+                    }
+                });
+
+                selectEnd.addEventListener('change', () => {
+                    if (selectEnd.value) {
+                        selectDestination(selectEnd.value);
+                    } else {
+                        closeDestination();
+                    }
+                });
+
+                // listen for pingpanel going off the page
+                let prvRight = parseInt(pingPanelContent.getBoundingClientRect().right);
+                setInterval(() => {
+                    if (parseInt(pingPanelContent.getBoundingClientRect().right) != prvRight) {
+                        prvRight = parseInt(pingPanelContent.getBoundingClientRect().right) || 0;
+                        marginLeft = parseInt(pingPanelContent.style.marginLeft) || 0;
+                        mapBounds = parseInt(mapElement.getBoundingClientRect().right);
+                        if (prvRight - marginLeft > mapBounds) {
+                            pingPanelContent.style.marginLeft = mapBounds - prvRight + marginLeft + 'px';
+                        } else {
+                            pingPanelContent.style.marginLeft = '';
+                        }
+                        pingPanelButton.style.marginRight = pingPanelContent.style.marginLeft;
+                    }
+                }, 20);
+                /**
+                 *  Expand side panel menu on expand btn click
+                 */
+                var expanded = false;
+                var expandIcon = sidePanel.querySelector(".expand-icon");
+                var expandDistance = vw > 767 ? 88 : 148;
+                function expandMenu() {
+                    if (expanded) {
+                        sidePanel.style.transform = 'translateY(-' + expandDistance + 'px)';
+                        expandIcon.style.transform = 'rotate(0deg)';
+                        expanded = false;
+                    } else {
+                        sidePanel.style.transform = 'translateY(-100%)';
+                        expandIcon.style.transform = 'rotate(180deg)';
+                        expanded = true;
+                    }
+                }
+
+            </script>
         </div>
     </div>
 </body>
