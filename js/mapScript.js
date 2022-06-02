@@ -31,18 +31,18 @@ var showSelection = (cityName) => {
     // get data about starting point from json
     const curEndpoints = Object.keys(datacenterDetails[cityName]
         .endpoint); // valid city endpoints of the data center
-    const datacentres = Object.keys(datacenterDetails); // all datacentres
-    const curPartners = Object.keys(datacenterDetails[cityName][
-        'telco-partners'
-    ]); // telco partners of the data center
-    const curProvidersSet = new Set(Object.values(datacenterDetails[cityName]['telco-partners'])
-        .reduce((acc, cur) => [...acc, ...cur], [])); // cloud providers of the data center
-    const curFabrics = Object.keys(datacenterDetails[cityName][
-        'network-fabric'
-    ]); // fabric partners of the data center
-    const curFabricsSet = new Set(Object.values(datacenterDetails[cityName]['network-fabric'])
-        .reduce((acc, cur) => [...acc, ...cur], [])); // fabric providers of the data center
-    const curProviders = [...curProvidersSet];
+    // const datacentres = Object.keys(datacenterDetails); // all datacentres
+    // const curPartners = Object.keys(datacenterDetails[cityName][
+    //     'telco-partners'
+    // ]); // telco partners of the data center
+    // const curProvidersSet = new Set(Object.values(datacenterDetails[cityName]['telco-partners'])
+    //     .reduce((acc, cur) => [...acc, ...cur], [])); // cloud providers of the data center
+    // const curFabrics = Object.keys(datacenterDetails[cityName][
+    //     'network-fabric'
+    // ]); // fabric partners of the data center
+    // const curFabricsSet = new Set(Object.values(datacenterDetails[cityName]['network-fabric'])
+    //     .reduce((acc, cur) => [...acc, ...cur], [])); // fabric providers of the data center
+    // const curProviders = [...curProvidersSet];
 
     // display the lines and city
     [...document.querySelectorAll(`.city-group`)].forEach(group => {
@@ -76,6 +76,8 @@ var showSelection = (cityName) => {
         [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
         pingPanel.removeAttribute('active');
     }
+
+    
 
     // show the data center telco partners
     // adjustTelcoPartnerDisplay(curPartners);

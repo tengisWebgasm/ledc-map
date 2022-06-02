@@ -27,20 +27,17 @@
                         'endpoint': {
                             
                         },
-                        'telco-partners': {
-                            'cm': ['aws', 'azure', 'gcp', 'alicloud', 'ibm', 'huawei'],
-                            'ct': ['aws', 'azure', 'alicloud', 'ibm'],
-                            'cu': ['ct-cloud', 'alicloud'],
-                            'hgc': ['aws', 'azure', 'gcp', 'alicloud'],
-                            'guangzhou-shunhang': [],
-                            'guangzhou-anju': [],
-                            'logicom-tech': [],
-                            'guangzhou-yingtong': [],
-                            'guangzhou-yunju': [],
-                            'nova': ['aws', 'salesforce', 'office-365', 'alicloud', 'tencent', 'azure'],
-                            'cypresstel': ['aws', 'alicloud', 'gcp', 'office-365', 'tencent', 'azure'],
+                        // Carriers with their respective public cloud providers
+                        'carriers': {
+                            'ledc': ['azure', 'google', 'aws'],
+                            'vocus': [],
+                            'telstra': ['azure', 'google', 'aws'],
+                            'encoo': [],
+                            'transgrid': [],
                         },
-                        'network-fabric': {},
+                        'msps': {
+
+                        }
                     },
                     'dubbo': {
                         // HKG2
@@ -49,16 +46,17 @@
                                 'ping': 47,
                             }
                         },
-                        'telco-partners': {
-                            'hgc': ['aws', 'azure', 'gcp', 'alicloud', 'salesforce', 'office-365'],
-                            'pccw': ['aws', 'azure', 'gcp', 'oracle', 'alicloud', 'ibm', 'tencent'],
-                            'hkbn': [],
-                            'hk-telecom': [],
-                            'cypresstel': ['aws', 'alicloud', 'gcp', 'office-365', 'tencent', 'azure'],
+                        // Carriers with their respective public cloud providers
+                        'carriers': {
+                            'ledc': ['azure', 'google', 'aws'],
+                            'vocus': [],
+                            'telstra': ['azure', 'google', 'aws'],
+                            'encoo': [],
                         },
-                        'network-fabric': {
-                            'console-connect': ['console-connectx'],
-                        },
+                        'msps': [
+                            'regionalIt',
+                            'toim',
+                        ]
                     },
                     'newcastle': {
                         // NKG1
@@ -67,16 +65,25 @@
                                 'ping': 30,
                             }
                         },
-                        'telco-partners': {
-                            'cm': ['aws', 'azure', 'gcp', 'alicloud', 'ibm', 'huawei'],
-                            'ct': ['aws', 'azure', 'alicloud', 'ibm'],
-                            'cu': ['ct-cloud', 'alicloud'],
-                            // 'srt': ['aws', 'alicloud', 'tencent', 'azure', 'huawei', 'u-cloud', 'baidu'],
-                            'nova': ['aws', 'salesforce', 'office-365', 'alicloud', 'tencent', 'azure'],
-                            'citic': ['aws', 'alicloud', 'tencent', 'azure', 'huawei', 'u-cloud', 'baidu'],
-                            'telstra-pbs': [],
+                        // Carriers with their respective public cloud providers
+                        'carriers': {
+                            'ledc': ['azure', 'google', 'aws'],
+                            'vocus': [],
+                            'telstra': ['azure', 'google', 'aws'],
+                            'encoo': [],
+                            'transgrid': [],
+                            'vergetel': [],
+                            'tpg': [],
+                            'superloop': [],
+                            'swoop': [],
+                            'nexon': []
                         },
-                        'network-fabric': {},
+                        'msps': [
+                            'toim',
+                            'newcastleConnect',
+                            'sabervox',
+                            'countrytell',
+                        ]
                     },
                     'tamworth': {
                         // SIN1
@@ -88,24 +95,20 @@
                                 'ping': 30,
                             },
                         },
-                        'telco-partners': {
-                            'singtel': ['aws', 'azure', 'gcp', 'alicloud', 'office-365', 'vmware', 'dell-emc',
-                                'hpe', 'nutanix'
-                            ],
-                            'starhub': ['aws', 'azure'],
-                            'telstra': ['aws', 'azure', 'ibm', 'vmware', 'netapp'],
-                            'm1': ['aws', 'nutanix'],
-                            'hgc': ['aws', 'azure', 'office-365'],
-                            'sp-telecom': ['aws', 'azure', 'gcp', 'alicloud'],
-                            'at&t': ['aws', 'azure', 'gcp', 'oracle', 'ibm', 'salesforce', 'dell-emc'],
-                            'nova': ['aws', 'salesforce', 'office-365', 'alicloud', 'tencent', 'azure'],
-                            'superloop': [],
-                            'cogent': [],
-                            'netlink-trust': [],
-                            'viewquest': [],
-                            'colt': [],
+                        // Carriers with their respective public cloud providers
+                        'carriers': {
+                            'ledc': ['azure', 'google', 'aws'],
+                            'vocus': [],
+                            'telstra': ['azure', 'google', 'aws'],
+                            'encoo': [],
+                            'transgrid': [],
+                            'vergetel': [],
                         },
-                        'network-fabric': {},
+                        'msps': [
+                            'regionalIt',
+                            'toim',
+                            'tamworthBroadcast'
+                        ]
                     },
                 };
             </script>
@@ -147,40 +150,64 @@
                                     <div class="map-side-panel__network-top">
                                         <p>Carriers/Network Aggrigators</p>
                                         <div class="map-side-panel__carriers-wrapper">
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="ledc">
                                                 <div>
-                                                    <img src="./public/providers/Life is on logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="ledc">
                                                 </div>
                                             </button>
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="vocus">
                                                 <div>
-                                                    <img src="./public/providers/nbn.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="vocus">
                                                 </div>
                                             </button>
-                                            <button class="service-item" network-partner="cm">
-                                                <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" network-partner="cm">
-                                                <div>
-                                                    <img src="./public/providers/lumea.png"
-                                                        loading="lazy" alt="">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="telstra">
                                                 <div>
                                                     <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="">
+                                                        loading="lazy" alt="telstra">
                                                 </div>
                                             </button>
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="encoo">
                                                 <div>
-                                                    <img src="./public/providers/ausgrid-logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="encoo">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="transgrid">
+                                                <div>
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="transgrid">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="vergetel">
+                                                <div>
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="vergetel">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="tpg">
+                                                <div>
+                                                    <img src="./public/providers/tpg.png"
+                                                        loading="lazy" alt="tpg">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="superloop">
+                                                <div>
+                                                    <img src="./public/providers/superloop.png"
+                                                        loading="lazy" alt="superloop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="swoop">
+                                                <div>
+                                                    <img src="./public/providers/swoop.png"
+                                                        loading="lazy" alt="swoop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="nexon">
+                                                <div>
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="nexon">
                                                 </div>
                                             </button>
                                         </div>
@@ -190,40 +217,64 @@
                                     <div class="map-side-panel__network-top">
                                         <p>Carriers/Network Aggrigators</p>
                                         <div class="map-side-panel__carriers-wrapper">
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="ledc">
                                                 <div>
-                                                    <img src="./public/providers/Life is on logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="ledc">
                                                 </div>
                                             </button>
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="vocus">
                                                 <div>
-                                                    <img src="./public/providers/nbn.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="vocus">
                                                 </div>
                                             </button>
-                                            <button class="service-item" network-partner="cm">
-                                                <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" network-partner="cm">
-                                                <div>
-                                                    <img src="./public/providers/lumea.png"
-                                                        loading="lazy" alt="">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="telstra">
                                                 <div>
                                                     <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="">
+                                                        loading="lazy" alt="telstra">
                                                 </div>
                                             </button>
-                                            <button class="service-item" network-partner="cm">
+                                            <button class="service-item" carrier="encoo">
                                                 <div>
-                                                    <img src="./public/providers/ausgrid-logo.png"
-                                                        loading="lazy" alt="">
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="encoo">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="transgrid">
+                                                <div>
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="transgrid">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="vergetel">
+                                                <div>
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="vergetel">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="tpg">
+                                                <div>
+                                                    <img src="./public/providers/tpg.png"
+                                                        loading="lazy" alt="tpg">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="superloop">
+                                                <div>
+                                                    <img src="./public/providers/superloop.png"
+                                                        loading="lazy" alt="superloop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="swoop">
+                                                <div>
+                                                    <img src="./public/providers/swoop.png"
+                                                        loading="lazy" alt="swoop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="nexon">
+                                                <div>
+                                                    <img src="./public/providers/"
+                                                        loading="lazy" alt="nexon">
                                                 </div>
                                             </button>
                                         </div>
