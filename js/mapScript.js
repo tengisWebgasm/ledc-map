@@ -6,6 +6,8 @@ var selectEndCont = document.querySelector("#city-select-end");
 var selectStart = selectStartCont.querySelector('select');
 var selectEnd = selectEndCont.querySelector('select');
 // var destinationDetails = document.querySelector("#city-destination-details");
+var carrierWrapperLeft = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0);
+var carrierWrapperRight = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1);
 var pingPanel = document.querySelector('#map-ping-panel');
 var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
 var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
@@ -77,7 +79,7 @@ var showSelection = (cityName) => {
         pingPanel.removeAttribute('active');
     }
 
-    
+
 
     // show the data center telco partners
     // adjustTelcoPartnerDisplay(curPartners);
@@ -166,7 +168,7 @@ var selectDestination = (destName) => {
     position = point.matrixTransform(matrix);
 
     pingPanel.style.left = position.x + 'px';
-    pingPanel.style.top = position.y + 'px';
+    pingPanel.style.top = position.y - 20 + 'px';
 
     changeText(pingPanelDc, selectStart.options[selectStart.selectedIndex].label);
     changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
@@ -491,3 +493,97 @@ function expandMenu() {
         expanded = true;
     }
 }
+
+/**
+ * Carrier nav buttons click handlers. Scrolls left or right
+ * @param {*} carriersWrapperIndex 0 for left side carriers, 1 for right side carriers
+ */
+
+function carrierScrollLeft(carriersWrapperIndex) {
+    var wrapper = carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
+    var scrollWidth = wrapper.getElementsByClassName("service-item").item(0).clientWidth;
+    wrapper.scroll({
+        left: wrapper.scrollLeft - scrollWidth,
+        behavior: "smooth",
+    });
+}
+function carrierScrollRight(carriersWrapperIndex) {
+    var wrapper = carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
+    var scrollWidth = wrapper.getElementsByClassName("service-item").item(1).clientWidth;
+    wrapper.scroll({
+        left: wrapper.scrollLeft + scrollWidth,
+        behavior: "smooth",
+    });
+}
+// Attach events to buttons
+var carrierNavButtonsLeft = document.getElementsByClassName("carriers-nav-btn left");
+var carrierNavButtonsRight = document.getElementsByClassName("carriers-nav-btn right");
+try {
+    carrierNavButtonsLeft.item(0).addEventListener("click", function() {
+        carrierScrollLeft(0);
+    });
+    carrierNavButtonsRight.item(0).addEventListener("click", function() {
+        carrierScrollRight(0);
+    });
+    carrierNavButtonsLeft.item(1).addEventListener("click", function() {
+        carrierScrollLeft(1)
+    });
+    carrierNavButtonsRight.item(1).addEventListener("click", function() {
+        carrierScrollRight(1)
+    });
+} catch (e) {
+    console.error(e);
+}
+
+function handleCarrierClick(e, carriersWrapperIndex) {
+    // determine if wrapper is on left or right side
+    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+    var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
+    var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
+
+    if (e.currentTarget.getAttribute("active") === ""){
+        // if cilcked carrier is already active - hide the msp section
+
+        e.currentTarget.removeAttribute("active");
+
+        // hide cloud wrapper
+        cloudWrapper.style.maxHeight = '0px';
+        setTimeout(function(){cloudWrapper.style.display = 'none';}, 400)
+    } else {
+        // if clicked carrier is not already active
+
+        // remove active from all on click        
+        [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
+            el.removeAttribute("active");
+        });
+        e.currentTarget.setAttribute("active", "");
+
+        // set cloud wrapper max height to 400px
+        cloudWrapper.style.display = 'block';
+        setTimeout(function(){cloudWrapper.style.maxHeight = '400px';}, 10);
+    }
+}
+
+[...document.getElementsByClassName("map-side-panel__carriers-wrapper")
+    .item(0)
+    .getElementsByClassName("service-item")]
+    .forEach(function(btn){
+        btn.addEventListener("click", function(e){
+            e.stopPropagation();
+            e.preventDefault();
+
+            handleCarrierClick(e, 0);
+        });
+    });
+
+[...document.getElementsByClassName("map-side-panel__carriers-wrapper")
+    .item(1)
+    .getElementsByClassName("service-item")]
+    .forEach(function(btn){
+        btn.addEventListener("click", function(e){
+            e.stopPropagation();
+            e.preventDefault();
+
+            handleCarrierClick(e, 1)
+        });
+    });
