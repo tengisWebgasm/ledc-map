@@ -21,6 +21,18 @@
     <div id="ajaxContent">
         <div id="map-animation-embed">
             <script>
+                var carrierCloudProviders = {
+                    'ledc': ['azure', 'google', 'aws'],
+                    'vocus': [],
+                    'telstra': ['azure', 'google', 'aws'],
+                    'encoo': [],
+                    'transgrid': [],
+                    'vergetel': [],
+                    'tpg': [],
+                    'superloop': [],
+                    'swoop': [],
+                    'nexon': []
+                }
                 var datacenterDetails = {
                     'albury': {
                         // CAN1
@@ -28,13 +40,13 @@
                             
                         },
                         // Carriers with their respective public cloud providers
-                        'carriers': {
-                            'ledc': ['azure', 'google', 'aws'],
-                            'vocus': [],
-                            'telstra': ['azure', 'google', 'aws'],
-                            'encoo': [],
-                            'transgrid': [],
-                        },
+                        'carriers': [
+                            'ledc',
+                            'vocus',
+                            'telstra',
+                            'encoo',
+                            'transgrid',
+                        ],
                         'msps': {
 
                         }
@@ -47,12 +59,12 @@
                             }
                         },
                         // Carriers with their respective public cloud providers
-                        'carriers': {
-                            'ledc': ['azure', 'google', 'aws'],
-                            'vocus': [],
-                            'telstra': ['azure', 'google', 'aws'],
-                            'encoo': [],
-                        },
+                        'carriers': [
+                            'ledc',
+                            'vocus',
+                            'telstra',
+                            'encoo',
+                        ],
                         'msps': [
                             'regionalIt',
                             'toim',
@@ -66,18 +78,18 @@
                             }
                         },
                         // Carriers with their respective public cloud providers
-                        'carriers': {
-                            'ledc': ['azure', 'google', 'aws'],
-                            'vocus': [],
-                            'telstra': ['azure', 'google', 'aws'],
-                            'encoo': [],
-                            'transgrid': [],
-                            'vergetel': [],
-                            'tpg': [],
-                            'superloop': [],
-                            'swoop': [],
-                            'nexon': []
-                        },
+                        'carriers': [
+                            'ledc',
+                            'vocus',
+                            'telstra',
+                            'encoo',
+                            'transgrid',
+                            'vergetel',
+                            'tpg',
+                            'superloop',
+                            'swoop',
+                            'nexon'
+                        ],
                         'msps': [
                             'toim',
                             'newcastleConnect',
@@ -96,14 +108,14 @@
                             },
                         },
                         // Carriers with their respective public cloud providers
-                        'carriers': {
-                            'ledc': ['azure', 'google', 'aws'],
-                            'vocus': [],
-                            'telstra': ['azure', 'google', 'aws'],
-                            'encoo': [],
-                            'transgrid': [],
-                            'vergetel': [],
-                        },
+                        'carriers': [
+                            'ledc',
+                            'vocus',
+                            'telstra',
+                            'encoo',
+                            'transgrid',
+                            'vergetel',
+                        ],
                         'msps': [
                             'regionalIt',
                             'toim',
@@ -154,13 +166,13 @@
                                         <div class="map-side-panel__carriers-wrapper">
                                             <button class="service-item" carrier="ledc" href="#">
                                                 <div>
-                                                    <img src="./public/providers/"
+                                                    <img src="./public/providers/ledc.svg"
                                                         loading="lazy" alt="ledc">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="vocus" href="#">
                                                 <div>
-                                                    <img src="./public/providers/"
+                                                    <img src="./public/providers/Vocus.svg"
                                                         loading="lazy" alt="vocus">
                                                 </div>
                                             </button>
@@ -172,19 +184,19 @@
                                             </button>
                                             <button class="service-item" carrier="encoo" href="#">
                                                 <div>
-                                                    <img src="./public/providers/"
+                                                    <img src="./public/providers/encoo.png"
                                                         loading="lazy" alt="encoo">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="transgrid" href="#">
                                                 <div>
-                                                    <img src="./public/providers/"
+                                                    <img src="./public/providers/transgrid.png"
                                                         loading="lazy" alt="transgrid">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="vergetel" href="#">
                                                 <div>
-                                                    <img src="./public/providers/"
+                                                    <img src="./public/providers/vergetel.png"
                                                         loading="lazy" alt="vergetel">
                                                 </div>
                                             </button>
@@ -196,19 +208,19 @@
                                             </button>
                                             <button class="service-item" carrier="superloop" href="#">
                                                 <div>
-                                                    <img src="./public/providers/superloop.png"
+                                                    <img src="./public/providers/superloop.svg"
                                                         loading="lazy" alt="superloop">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="swoop" href="#">
                                                 <div>
-                                                    <img src="./public/providers/swoop.png"
+                                                    <img src="./public/providers/swoop.svg"
                                                         loading="lazy" alt="swoop">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="nexon" href="#">
                                                 <div>
-                                                    <img src="./public/providers/"
+                                                    <img src="./public/providers/nexon.png"
                                                         loading="lazy" alt="nexon">
                                                 </div>
                                             </button>
@@ -255,24 +267,26 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p>Public Cloud Access</p>
-                                            <div class="map-side-panel__msp-wrapper cloud-wrapper">
-                                                <div class="msp-provider cloud-provider" cloud="azure">
-                                                    <div>
-                                                        <img src="./public/providers/"
-                                                            loading="lazy" alt="azure">
+                                            <div class="cloud-wrapper">
+                                                <p>Public Cloud Access</p>
+                                                <div class="map-side-panel__msp-wrapper">
+                                                    <div class="msp-provider cloud-provider" cloud="azure">
+                                                        <div>
+                                                            <img src="./public/providers/"
+                                                                loading="lazy" alt="azure">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="msp-provider cloud-provider" cloud="google">
-                                                    <div>
-                                                        <img src="./public/providers/"
-                                                            loading="lazy" alt="google">
+                                                    <div class="msp-provider cloud-provider" cloud="google">
+                                                        <div>
+                                                            <img src="./public/providers/"
+                                                                loading="lazy" alt="google">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="msp-provider cloud-provider" cloud="aws">
-                                                    <div>
-                                                        <img src="./public/providers/"
-                                                            loading="lazy" alt="aws">
+                                                    <div class="msp-provider cloud-provider" cloud="aws">
+                                                        <div>
+                                                            <img src="./public/providers/"
+                                                                loading="lazy" alt="aws">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -394,27 +408,30 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p>Public Cloud Access</p>
-                                            <div class="map-side-panel__msp-wrapper cloud-wrapper">
-                                                <div class="msp-provider cloud-provider" cloud="azure">
-                                                    <div>
-                                                        <img src="./public/providers/"
-                                                            loading="lazy" alt="azure">
+                                            <div class="cloud-wrapper">
+                                                <p>Public Cloud Access</p>
+                                                <div class="map-side-panel__msp-wrapper">
+                                                    <div class="msp-provider cloud-provider" cloud="azure">
+                                                        <div>
+                                                            <img src="./public/providers/"
+                                                                loading="lazy" alt="azure">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="msp-provider cloud-provider" cloud="google">
-                                                    <div>
-                                                        <img src="./public/providers/"
-                                                            loading="lazy" alt="google">
+                                                    <div class="msp-provider cloud-provider" cloud="google">
+                                                        <div>
+                                                            <img src="./public/providers/"
+                                                                loading="lazy" alt="google">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="msp-provider cloud-provider" cloud="aws">
-                                                    <div>
-                                                        <img src="./public/providers/"
-                                                            loading="lazy" alt="aws">
+                                                    <div class="msp-provider cloud-provider" cloud="aws">
+                                                        <div>
+                                                            <img src="./public/providers/"
+                                                                loading="lazy" alt="aws">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                         <div class="map-side-panel__footer">
                                             <p>Download Data Sheet:</p>

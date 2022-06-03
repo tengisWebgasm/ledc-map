@@ -540,6 +540,7 @@ function handleCarrierClick(e, carriersWrapperIndex) {
     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
     var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
     var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
+    var cloudProviders = document.getElementsByClassName("cloud-wrapper").item(leftRightSide);
 
     if (e.currentTarget.getAttribute("active") === ""){
         // if cilcked carrier is already active - hide the msp section
@@ -558,10 +559,34 @@ function handleCarrierClick(e, carriersWrapperIndex) {
         });
         e.currentTarget.setAttribute("active", "");
 
+        // filter cloud providers
+        var selectedCloudProviders = carrierCloudProviders[e.currentTarget.getAttribute("carrier")];
+        if (selectedCloudProviders.length <= 0) {
+            // if the selected carrier has no public cloud providers, hide providers wrapper
+            cloudProviders.style.maxHeight = '0px';
+        } else {
+            cloudProviders.style.maxHeight = '150px';
+            [...cloudProviders.getElementsByClassName("cloud-provider")].forEach(function(cloudEl) {
+                if (selectedCloudProviders.includes(cloudEl.getAttribute("cloud"))) {
+                    // if cloud provider is in selected list
+                    cloudEl.style.display = 'block';
+                } else {
+                    cloudEl.style.display = 'none';
+                }
+            })
+        }
+
         // set cloud wrapper max height to 400px
         cloudWrapper.style.display = 'block';
-        setTimeout(function(){cloudWrapper.style.maxHeight = '400px';}, 10);
+        setTimeout(function(){cloudWrapper.style.maxHeight = '300px';}, 10);
     }
+}
+
+function handleCarriersChange(carriersWrapperIndex) {
+    // determine if wrapper is on left or right side
+    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+
+    
 }
 
 [...document.getElementsByClassName("map-side-panel__carriers-wrapper")

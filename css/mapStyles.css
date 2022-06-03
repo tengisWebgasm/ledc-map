@@ -636,7 +636,6 @@ p {
 .msp-provider {
 	box-sizing: border-box;
 	border: none;
-	cursor: pointer;
 	flex: 0 0 16.66%;
 	padding-left: 1px;
 	padding-right: 1px;
@@ -663,8 +662,10 @@ p {
 	object-fit: contain;
 }
 
-.msp-provider:hover {
-	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.15);
+.cloud-wrapper {
+	max-height: 150px;
+	transition: max-height 0.4s ease;
+	overflow: hidden;
 }
 
 .map-side-panel__footer {
