@@ -2114,7 +2114,7 @@
             var pingPanelButton = pingPanel.querySelector('#map-ping-button');
 
             // function called when some starting point (data center) is selected
-            var showSelection = (cityName) => {
+            function showSelection(cityName){
                 // adjust display of dropdowns
                 selectStartCont.setAttribute('active', '');
                 selectEnd.removeAttribute('disabled');
@@ -2123,6 +2123,9 @@
                 // get data about starting point from json
                 const curEndpoints = Object.keys(datacenterDetails[cityName]
                     .endpoint);
+
+                // change carriers
+                handleCarriersChange(0, cityName);
 
                 // display the lines and city
                 [...document.querySelectorAll(`.city-group`)].forEach(group => {
@@ -2156,9 +2159,6 @@
                     [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
                     pingPanel.removeAttribute('active');
                 }
-
-                // change carriers
-                handleCarriersChange(0, cityName);
             }
 
             var closeSelection = () => {
@@ -2176,7 +2176,7 @@
                 closeDestination();
             }
 
-            var selectDestination = (destName) => {
+            function selectDestination(destName) {
                 selectEndCont.setAttribute('active', '');
                 // destinationDetails.removeAttribute('off');
                 [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
@@ -2193,6 +2193,9 @@
                 for (let i = 0; i < otherLines.length; i++) {
                     otherLines[i].setAttribute('invisible', '');
                 }
+
+                // change carriers
+                handleCarriersChange(1, destName);
 
                 const curLine = document.querySelector(`[dc="${selectStart.value}"][city="${destName}"]`);
                 curLine.setAttribute('selected', '');
@@ -2223,9 +2226,6 @@
                 changePing(document.querySelector('#map-ping-panel-ping'),
                     `${parseInt(datacenterDetails[selectStart.value].endpoint[destName].ping)}`);
                 pingPanel.setAttribute('active', '');
-
-                // change carriers
-                handleCarriersChange(1, cityName);
             }
 
             var closeDestination = () => {
@@ -2438,7 +2438,6 @@
                     });
                 });
         </script>
-        <script src="https://unpkg.com/@panzoom/panzoom@4.5.0/dist/panzoom.min.js"></script>
         <script>
             // const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
             if (vw <= 767) {
