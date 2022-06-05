@@ -79,7 +79,8 @@ var showSelection = (cityName) => {
         pingPanel.removeAttribute('active');
     }
 
-
+    // change carriers
+    handleCarriersChange(0, cityName);
 
     // show the data center telco partners
     // adjustTelcoPartnerDisplay(curPartners);
@@ -179,6 +180,9 @@ var selectDestination = (destName) => {
     // changePing(document.querySelector('#ping-display'),
     //     `${parseInt(datacenterDetails[selectStart.value].endpoint[destName].ping)}`);
     pingPanel.setAttribute('active', '');
+
+    // change carriers
+    handleCarriersChange(1, cityName);
 }
 
 var closeDestination = () => {
@@ -482,15 +486,20 @@ setInterval(() => {
 var expanded = false;
 var expandIcon = sidePanel.querySelector(".expand-icon");
 var expandDistance = vw > 767 ? 88 : 148;
+var expandOverlay = document.getElementById("map-side-panel-overlay");
 function expandMenu() {
     if (expanded) {
         sidePanel.style.transform = 'translateY(-' + expandDistance + 'px)';
         expandIcon.style.transform = 'rotate(0deg)';
         expanded = false;
+        expandOverlay.style.visibility = 'hidden';
+        expandOverlay.style.opacity = 0;
     } else {
         sidePanel.style.transform = 'translateY(-100%)';
         expandIcon.style.transform = 'rotate(180deg)';
         expanded = true;
+        expandOverlay.style.visibility = 'visible';
+        expandOverlay.style.opacity = 0.6;
     }
 }
 
@@ -535,6 +544,12 @@ try {
     console.error(e);
 }
 
+/**
+ * Event handler for when a carrier is clicked
+ *
+ * @param {*} e Click event object
+ * @param {*} carriersWrapperIndex 0 for left side, 1 for right side carrier.
+ */
 function handleCarrierClick(e, carriersWrapperIndex) {
     // determine if wrapper is on left or right side
     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
@@ -582,11 +597,30 @@ function handleCarrierClick(e, carriersWrapperIndex) {
     }
 }
 
-function handleCarriersChange(carriersWrapperIndex) {
+function handleCarriersChange(carriersWrapperIndex, cityName) {
     // determine if wrapper is on left or right side
     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+    var carrierWrapper = document.getElementsByClassName('map-side-panel__carriers-wrapper').item(leftRightSide);
+    var mspWrapper = document.getElementsByClassName("map-side-panel__msp-wrapper msp-wrapper").item(leftRightSide);
+    var cityDetails = datacenterDetails[cityName];
 
-    
+    // hide carriers that aren't in the selected city
+    [...carrierWrapper.getElementsByClassName("service-item")].forEach(function(carrierEl){
+        if (cityDetails['carriers'].includes(carrierEl.getAttribute("carrier"))) {
+            carrierEl.style.display = 'block';
+        } else {
+            carrierEl.style.display = 'none';
+        }
+    });
+
+    // hide msp providers that aren't in the selected city
+    [...mspWrapper.getElementsByClassName("msp-provider")].forEach(function(mspEl){
+        if (cityDetails['msps'].includes(mspEl.getAttribute("provider"))) {
+            mspEl.style.display = 'block';
+        } else {
+            mspEl.style.display = 'none';
+        }
+    });
 }
 
 [...document.getElementsByClassName("map-side-panel__carriers-wrapper")

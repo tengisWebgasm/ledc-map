@@ -35,6 +35,10 @@ p {
 	position: absolute;
 }
 
+#map-side-panel-overlay {
+	display: none;
+}
+
 #map-side-panel {
 	position: absolute;
 	left: 0;
@@ -44,6 +48,10 @@ p {
 	background-color: #FFFFFF;
 	transform: translateY(-88px);
 	transition: transform 0.5s ease;
+}
+
+#map-side-panel__network-seperator {
+	display: none;
 }
 
 #map-side-panel h2 {
@@ -586,8 +594,8 @@ p {
 }
 
 .service-item div img {
-	max-width: 97%;
-	max-height: 70%;
+	max-width: 90%;
+	max-height: 60%;
 	top: 50%;
 	bottom: 0;
 	right: 0;
@@ -621,7 +629,6 @@ p {
 	justify-content: center;
 	max-width: 100%;
 	position: relative;
-	max-width: 100%;
 	overflow-y: visible;
 	overflow-x: scroll;
 	-ms-overflow-style: none;  /* IE and Edge */
@@ -651,8 +658,8 @@ p {
 }
 
 .msp-provider div img {
-	max-width: 97%;
-	max-height: 70%;
+	max-width: 90%;
+	max-height: 50%;
 	top: 50%;
 	bottom: 0;
 	right: 0;
@@ -787,31 +794,12 @@ p {
 }
 
 @media screen and (max-width: 1024px) {
-	#map-container {
-		grid-template-columns: auto;
-		grid-template-rows: auto auto;
-		grid-template-areas: "map" "panel";
-		background-color: transparent;
-		border-top: none;
-		border-bottom: none;
-	}
-
 	#map-side-panel {
 		
 	}
 
 	#map-side-panel h2 {
 		font-size: 18px;
-	}
-
-	#map-side-panel-a {
-		grid-area: selection;
-	}
-
-	#map-side-panel-b {
-		grid-area: partners;
-		left: 0px;
-		top: -1000px;
 	}
 
 	#map-ping-content {
@@ -833,14 +821,74 @@ p {
 	#map-element-holder {
 		
 	}
-
-}
+	
+	#map-container {
+		height: calc(100vh - 50px);
+	}
+} 
 
 
 @media screen and (max-width: 991px) {
 	.container {
 		padding-right: 31px;
 		padding-left: 31px;
+	}
+
+	#map-element svg {
+		height: 90%;
+		max-height: 850px;
+	}
+
+	#map-element {
+		transform: translateX(-4%);
+	}
+
+	.carriers-nav-btn {
+		display: none;
+	}
+
+	.map-side-panel__msp-wrapper {
+		justify-content: start;
+	}
+
+	.service-item {
+		box-sizing: border-box;
+		border: none;
+		cursor: pointer;
+		border: 2px solid transparent;
+		flex: 0 0 30%;
+		padding-left: 1px;
+		padding-right: 1px;
+		background: #FFFFFF;
+		transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+		overflow: hidden;
+	}
+
+	.msp-provider {
+		box-sizing: border-box;
+		border: none;
+		flex: 0 0 30%;
+		padding-left: 1px;
+		padding-right: 1px;
+		background: #FFFFFF;
+		transition: box-shadow 0.2s ease-out;
+		overflow: hidden;
+	}
+
+	.map-side-panel__msp-wrapper>.cloud-provider:first-child {
+		margin-left: auto;
+	}
+
+	.map-side-panel__msp-wrapper>.cloud-provider:last-child {
+		margin-right: auto;
+	}
+
+	.map-side-panel__cloud-wrapper {
+		border-top: none;
+	}
+
+	.map-side-panel__cloud-wrapper>p:first-child {
+		margin-top: 0;
 	}
 }
 
@@ -850,8 +898,21 @@ p {
 	  padding-left: 5.33vw;
 	}
 
-	#map-element-holder {
-		
+	#map-side-panel-overlay {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background-color: #000000;
+		z-index: 1;
+		opacity: 0;
+		visibility: hidden;
+		display: block;
+		transition: opacity 0.3s ease-out, visibility 0.3s;	}
+
+	#map-element {
+		transform: translateX(-8%);
 	}
 
 	#map-element-label {
@@ -879,6 +940,22 @@ p {
 
 	#map-side-panel {
 		transform: translateY(-148px);
+	}
+
+	.map-side-panel__network-container {
+		flex-direction: column;
+	}
+
+	#map-side-panel-b {
+		max-height: 60vh;
+		overflow-y: auto;
+	}
+
+	#map-side-panel__network-seperator {
+		display: block;
+		height: 1px;
+		background-color: #D6D6D6;
+		margin: 0 -5.33vw 0 -5.33vw;
 	}
 }
 
