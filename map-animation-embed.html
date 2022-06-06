@@ -2146,7 +2146,7 @@
 
                 // hide left and right arrows if less than or equal to 6 carriers in city
                 if (vw > 767) {
-                    if (datacenterDetails[destName]['carriers'].length <= 6) {
+                    if (datacenterDetails[cityName]['carriers'].length <= 6) {
                         hideArrowButtons(0);
                     } else {
                         showArrowButtons(0);
@@ -2183,7 +2183,7 @@
                 closeDestination();
             }
 
-            function selectDestination(destName) {
+            function selectDestination(cityName) {
                 selectEndCont.setAttribute('active', '');
                 // destinationDetails.removeAttribute('off');
                 [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
@@ -2193,15 +2193,15 @@
                 for (let i = 0; i < otherCities.length; i++) {
                     otherCities[i].removeAttribute('dc');
                 }
-                document.querySelector("#" + destName).setAttribute("dc", '');
+                document.querySelector("#" + cityName).setAttribute("dc", '');
 
                 // set other lines invisible
-                let otherLines = document.querySelectorAll(`[city-lines] path:not([city="${destName}"]):not([dc="${selectStart.value}"])`);
+                let otherLines = document.querySelectorAll(`[city-lines] path:not([city="${cityName}"]):not([dc="${selectStart.value}"])`);
                 for (let i = 0; i < otherLines.length; i++) {
                     otherLines[i].setAttribute('invisible', '');
                 }
 
-                const curLine = document.querySelector(`[dc="${selectStart.value}"][city="${destName}"]`);
+                const curLine = document.querySelector(`[dc="${selectStart.value}"][city="${cityName}"]`);
                 curLine.setAttribute('selected', '');
 
                 const dString = curLine.getAttribute('d').replaceAll(',', ' ').replaceAll('M', '').replaceAll(
@@ -2229,16 +2229,16 @@
                 changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
                 changePing(
                     document.querySelector('#map-ping-panel-ping'),
-                    `${parseInt(datacenterDetails[selectStart.value].endpoint[destName].ping)}`
+                    `${parseInt(datacenterDetails[selectStart.value].endpoint[cityName].ping)}`
                 );
                 pingPanel.setAttribute('active', '');
 
                 // change carriers
-                handleCarriersChange(1, destName);
+                handleCarriersChange(1, cityName);
 
                 // hide left and right arrows if less than or equal to 6 carriers in city
                 if (vw > 767) {
-                    if (datacenterDetails[destName]['carriers'].length <= 6) {
+                    if (datacenterDetails[cityName]['carriers'].length <= 6) {
                         hideArrowButtons(0);
                     } else {
                         showArrowButtons(0);
