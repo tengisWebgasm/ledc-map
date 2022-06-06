@@ -5,26 +5,16 @@ var selectStartCont = document.querySelector("#city-select-start");
 var selectEndCont = document.querySelector("#city-select-end");
 var selectStart = selectStartCont.querySelector('select');
 var selectEnd = selectEndCont.querySelector('select');
-// var destinationDetails = document.querySelector("#city-destination-details");
 var carrierWrapperLeft = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0);
 var carrierWrapperRight = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1);
 var pingPanel = document.querySelector('#map-ping-panel');
 var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
 var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
-// var pingPanelBtnDc = pingPanel.querySelector('button[city-label="dc"]');
-// var pingPanelBtnCt = pingPanel.querySelector('button[city-label="destination"]');
-// var telcoContainer = document.querySelector('#map-side-panel-b');
-// var telcoBlock = document.querySelector('#telco-block');
-// var separatorBlock = document.querySelector('#telco-separator')
-// var providersBlock = document.querySelector('#providers-block');
-// var providerCloudContent = document.querySelector('#providers-block-content');
-
-// var netFabricBlock = document.querySelector('#net-fabric-block');
 var pingPanelContent = pingPanel.querySelector('#map-ping-content');
 var pingPanelButton = pingPanel.querySelector('#map-ping-button');
 
 // function called when some starting point (data center) is selected
-var showSelection = (cityName) => {
+function showSelection(cityName) {
     // adjust display of dropdowns
     selectStartCont.setAttribute('active', '');
     selectEnd.removeAttribute('disabled');
@@ -33,18 +23,6 @@ var showSelection = (cityName) => {
     // get data about starting point from json
     const curEndpoints = Object.keys(datacenterDetails[cityName]
         .endpoint); // valid city endpoints of the data center
-    // const datacentres = Object.keys(datacenterDetails); // all datacentres
-    // const curPartners = Object.keys(datacenterDetails[cityName][
-    //     'telco-partners'
-    // ]); // telco partners of the data center
-    // const curProvidersSet = new Set(Object.values(datacenterDetails[cityName]['telco-partners'])
-    //     .reduce((acc, cur) => [...acc, ...cur], [])); // cloud providers of the data center
-    // const curFabrics = Object.keys(datacenterDetails[cityName][
-    //     'network-fabric'
-    // ]); // fabric partners of the data center
-    // const curFabricsSet = new Set(Object.values(datacenterDetails[cityName]['network-fabric'])
-    //     .reduce((acc, cur) => [...acc, ...cur], [])); // fabric providers of the data center
-    // const curProviders = [...curProvidersSet];
 
     // display the lines and city
     [...document.querySelectorAll(`.city-group`)].forEach(group => {
@@ -79,35 +57,22 @@ var showSelection = (cityName) => {
         pingPanel.removeAttribute('active');
     }
 
-    // change carriers
-    handleCarriersChange(0, cityName);
+    // hide left and right arrows if less than or equal to 6 carriers in city
+    if (vw > 767) {
+        if (datacenterDetails[cityName]['carriers'].length <= 6) {
+            hideArrowButtons(0);
+        } else {
+            showArrowButtons(0);
+        }
+    }
 
-    // show the data center telco partners
-    // adjustTelcoPartnerDisplay(curPartners);
-
-    // account for previously selected telco partner
-    // if (curPartners.includes(telcoBlock.getAttribute('active-partner'))) {
-    //     const prvProviders = datacenterDetails[cityName]['telco-partners'][telcoBlock.getAttribute(
-    //         'active-partner')];
-    //     adjustCloudProviderDisplay(prvProviders);
-    // } else {
-    //     // turn off any active selections on telco partner button
-    //     [...telcoBlock.querySelectorAll('[telco-partner]')].forEach(partner => {
-    //         partner.removeAttribute('active');
-    //     });
-
-    //     // remove the active attribute
-    //     telcoBlock.removeAttribute('active-partner');
-
-    //     // show the data center's relevant cloud provideers
-    //     adjustCloudProviderDisplay(curProviders);
+    // expand menu
+    // if (!expanded && vw > 767) {
+    //     expandMenu();
     // }
 
-    // // show the data center fabric partners
-    // adjustFabricPartnerDisplay(curFabrics);
-
-    // // display the panel
-    // telcoContainer.setAttribute('on', '');
+    // change carriers
+    handleCarriersChange(0, cityName);
 }
 
 var closeSelection = () => {
@@ -123,13 +88,15 @@ var closeSelection = () => {
         group.removeAttribute('on');
     });
 
-    // [...telcoBlock.querySelectorAll('[telco-partner]')].forEach(partner => {
-    //     partner.removeAttribute('active');
-    // });
+    // hide menu
+    if (expanded) {
+        expandMenu();
+    }
+
     closeDestination();
 }
 
-var selectDestination = (destName) => {
+function selectDestination(cityName) {
     selectEndCont.setAttribute('active', '');
     // destinationDetails.removeAttribute('off');
     [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
@@ -139,15 +106,15 @@ var selectDestination = (destName) => {
     for (let i=0; i<otherCities.length; i++) {
         otherCities[i].removeAttribute('dc');
     }
-    document.querySelector("#" + destName).setAttribute("dc", '');
+    document.querySelector("#" + cityName).setAttribute("dc", '');
 
     // set other lines invisible
-    let otherLines = document.querySelectorAll(`[city-lines] path:not([city="${destName}"]):not([dc="${selectStart.value}"])`);
+    let otherLines = document.querySelectorAll(`[city-lines] path:not([city="${cityName}"]):not([dc="${selectStart.value}"])`);
     for (let i=0; i<otherLines.length; i++) {
         otherLines[i].setAttribute('invisible', '');
     }
 
-    const curLine = document.querySelector(`[dc="${selectStart.value}"][city="${destName}"]`);
+    const curLine = document.querySelector(`[dc="${selectStart.value}"][city="${cityName}"]`);
     curLine.setAttribute('selected', '');
 
     const dString = curLine.getAttribute('d').replaceAll(',', ' ').replaceAll('M', '').replaceAll(
@@ -173,16 +140,28 @@ var selectDestination = (destName) => {
 
     changeText(pingPanelDc, selectStart.options[selectStart.selectedIndex].label);
     changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
-    // changeText(pingPanelBtnDc, selectStart.options[selectStart.selectedIndex].label);
-    // changeText(pingPanelBtnCt, selectEnd.options[selectEnd.selectedIndex].label);
-    changePing(document.querySelector('#map-ping-panel-ping'),
-        `${parseInt(datacenterDetails[selectStart.value].endpoint[destName].ping)}`);
-    // changePing(document.querySelector('#ping-display'),
-    //     `${parseInt(datacenterDetails[selectStart.value].endpoint[destName].ping)}`);
+    changePing(
+        document.querySelector('#map-ping-panel-ping'),
+        `${parseInt(datacenterDetails[selectStart.value].endpoint[cityName].ping)}`
+    );
     pingPanel.setAttribute('active', '');
 
     // change carriers
     handleCarriersChange(1, cityName);
+
+    // hide left and right arrows if less than or equal to 6 carriers in city
+    if (vw > 767) {
+        if (datacenterDetails[cityName]['carriers'].length <= 6) {
+            hideArrowButtons(0);
+        } else {
+            showArrowButtons(0);
+        }
+    }
+
+    // expand menu
+    if (!expanded) {
+        expandMenu();
+    }
 }
 
 var closeDestination = () => {
@@ -212,245 +191,6 @@ selectEnd.addEventListener('change', () => {
     }
 });
 
-// click on telco block container to remove all choices
-// telcoBlock.addEventListener('click', e => {
-//     if (e.currentTarget === telcoBlock) {
-//         turnOffTelcoSelection();
-//     }
-// });
-
-// var turnOffTelcoSelection = () => {
-//     // turn off active selection on telco partner button
-//     [...telcoBlock.querySelectorAll('[telco-partner]')].forEach(partner => {
-//         partner.removeAttribute('active');
-//     });
-//     // remove the active attribute
-//     telcoBlock.removeAttribute('active-partner');
-//     // show all current providers
-//     const curProvidersSet = new Set(Object.values(datacenterDetails[selectStart.value][
-//         'telco-partners'
-//     ]).reduce((acc, cur) => [...acc, ...cur], [])); // cloud providers of the data center
-//     const curProviders = [...curProvidersSet];
-//     adjustCloudProviderDisplay(curProviders);
-// }
-
-// add click event listneners for each telco partner block
-// [...telcoBlock.querySelectorAll('[telco-partner]')].forEach(block => {
-//     block.addEventListener('click', (e) => {
-//         e.stopPropagation();
-//         if (e.currentTarget.hasAttribute('active')) {
-//             turnOffTelcoSelection();
-//             return;
-//         }
-
-//         telcoBlock.setAttribute('active-partner', e.currentTarget.getAttribute(
-//             'telco-partner'));
-//         [...telcoBlock.querySelectorAll('[telco-partner]')].forEach(partner => {
-//             partner.removeAttribute('active');
-//         });
-//         e.currentTarget.setAttribute('active', '');
-
-//         const curProviders = datacenterDetails[selectStart.value]['telco-partners'][e
-//             .currentTarget.getAttribute('telco-partner')
-//         ];
-//         adjustCloudProviderDisplay(curProviders);
-//     });
-// });
-
-// helper function to adjust the telco partners which are shown
-// var adjustTelcoPartnerDisplay = (showPartners) => {
-//     // get current positions of blocks to show 
-//     const prvBlockPositions = showPartners.map(partnerName => {
-//         const block = telcoBlock.querySelector(`[telco-partner="${partnerName}"]`);
-//         let rect;
-//         if (!block) console.error(`Unfound: [telco-partner="${partnerName}"]`);
-//         else rect = block.getBoundingClientRect();
-//         return {
-//             block: block,
-//             prvX: rect.x,
-//             prvY: rect.y,
-//             shouldAnimate: block.hasAttribute('show'),
-//         }
-//     });
-
-//     // turn on/off displays of blocks
-//     [...telcoBlock.querySelectorAll('[telco-partner]')].forEach(partner => {
-//         partner.style.transition = '';
-//         showPartners.includes(partner.getAttribute('telco-partner')) ? partner.setAttribute(
-//             'show', '') : partner.removeAttribute('show');
-//     });
-
-//     // adjust positions of blocks
-//     prvBlockPositions.forEach(pos => {
-//         const curRect = pos.block.getBoundingClientRect();
-//         pos.block.style.left = parseInt(pos.prvX) - parseInt(curRect.x) + 'px';
-//         pos.block.style.top = parseInt(pos.prvY) - parseInt(curRect.y) + 'px';
-//     });
-
-//     // flush styling and set all positions to 0
-//     setTimeout(() => {
-//         prvBlockPositions.forEach(pos => {
-//             if (pos.shouldAnimate) pos.block.style.transition =
-//                 'left ease 200ms, top ease 200ms';
-//             pos.block.offsetTop;
-//             pos.block.style.left = '0px';
-//             pos.block.style.top = '0px';
-//         });
-//     }, 0);
-
-//     // adjust collapser
-//     if (showPartners.length > 6) {
-//         const collapser = telcoBlock.querySelector('.service-container-collapse');
-//         const numCollapsing = showPartners.length - 6;
-//         collapser.setAttribute('numCollapsing', numCollapsing);
-//         if (collapser.innerHTML == "Show less") return;
-//         collapser.innerHTML = `Show more (${numCollapsing})`;
-//         telcoBlock.querySelector('.service-container').setAttribute('collapsed', '');
-//     } else {
-//         telcoBlock.querySelector('.service-container-collapse').removeAttribute('numCollapsing');
-//     }
-// }
-
-// // helper function to adjust the cloud providers which are shown
-// var adjustCloudProviderDisplay = (showProviders) => {
-//     if (!showProviders.length) { // we are not showing any providers
-//         providersBlock.setAttribute('placeholder', 'on');
-//         return;
-//     }
-//     // get current positions of blocks to show 
-//     const prvBlockPositions = showProviders.map(providerName => {
-//         const block = providersBlock.querySelector(`[cloud-provider="${providerName}"]`);
-//         const rect = block.getBoundingClientRect();
-//         return {
-//             block: block,
-//             prvX: rect.x,
-//             prvY: rect.y,
-//             shouldAnimate: block.hasAttribute('show'),
-//         }
-//     });
-//     // turn on/off displays of blocks
-//     [...providersBlock.querySelectorAll('[cloud-provider]')].forEach(provider => {
-//         provider.style.transition = '';
-//         showProviders.includes(provider.getAttribute('cloud-provider')) ? provider
-//             .setAttribute('show', '') : provider.removeAttribute('show');
-//     });
-//     // adjust positions of blocks
-//     prvBlockPositions.forEach(pos => {
-//         const curRect = pos.block.getBoundingClientRect();
-//         pos.block.style.left = parseInt(pos.prvX) - parseInt(curRect.x) + 'px';
-//         pos.block.style.top = parseInt(pos.prvY) - parseInt(curRect.y) + 'px';
-//     });
-//     providersBlock.setAttribute('placeholder', 'off');
-
-//     // flush styling and set all positions to 0
-//     setTimeout(() => {
-//         prvBlockPositions.forEach(pos => {
-//             if (pos.shouldAnimate) pos.block.style.transition =
-//                 'left ease 200ms, top ease 200ms';
-//             pos.block.offsetTop;
-//             pos.block.style.left = '0px';
-//             pos.block.style.top = '0px';
-//         });
-//     }, 0);
-
-//     // adjust collapser
-//     if (showProviders.length > 6) {
-//         const collapser = providersBlock.querySelector('.service-container-collapse');
-//         const numCollapsing = showProviders.length - 6;
-//         collapser.setAttribute('numCollapsing', numCollapsing);
-//         if (collapser.innerHTML == "Show less") return;
-//         collapser.innerHTML = `Show more (${numCollapsing})`;
-//         providersBlock.querySelector('.service-container').setAttribute('collapsed', '');
-//     } else {
-//         providersBlock.querySelector('.service-container-collapse').removeAttribute(
-//             'numCollapsing');
-//     }
-// }
-
-// // helper function to adjust the fabric partners which are shown
-// var adjustFabricPartnerDisplay = (showPartners) => {
-//     // get current positions of blocks to show 
-//     const prvBlockPositions = showPartners.map(partnerName => {
-//         const block = netFabricBlock.querySelector(
-//             `[net-fabric-provider="${partnerName}"]`);
-//         let rect;
-//         if (!block) console.error(`Unfound: [net-fabric-provider="${partnerName}"]`);
-//         else rect = block.getBoundingClientRect();
-//         return {
-//             block: block,
-//             prvX: rect.x,
-//             prvY: rect.y,
-//             shouldAnimate: block.hasAttribute('show'),
-//         }
-//     });
-
-//     // turn on/off displays of blocks
-//     [...netFabricBlock.querySelectorAll('[net-fabric-provider]')].forEach(partner => {
-//         partner.style.transition = '';
-//         showPartners.includes(partner.getAttribute('net-fabric-provider')) ? partner
-//             .setAttribute('show', '') : partner.removeAttribute('show');
-//     });
-
-//     // adjust positions of blocks
-//     prvBlockPositions.forEach(pos => {
-//         const curRect = pos.block.getBoundingClientRect();
-//         pos.block.style.left = parseInt(pos.prvX) - parseInt(curRect.x) + 'px';
-//         pos.block.style.top = parseInt(pos.prvY) - parseInt(curRect.y) + 'px';
-//     });
-
-//     // flush styling and set all positions to 0
-//     setTimeout(() => {
-//         prvBlockPositions.forEach(pos => {
-//             if (pos.shouldAnimate) pos.block.style.transition =
-//                 'left ease 200ms, top ease 200ms';
-//             pos.block.offsetTop;
-//             pos.block.style.left = '0px';
-//             pos.block.style.top = '0px';
-//         });
-//     }, 0);
-
-//     // adjust collapser
-//     if (showPartners.length > 6) {
-//         const collapser = netFabricBlock.querySelector('.service-container-collapse');
-//         const numCollapsing = showPartners.length - 6;
-//         collapser.setAttribute('numCollapsing', numCollapsing);
-//         if (collapser.innerHTML == "Show less") return;
-//         collapser.innerHTML = `Show more (${numCollapsing})`;
-//         netFabricBlock.querySelector('.service-container').setAttribute('collapsed', '');
-//     } else {
-//         netFabricBlock.querySelector('.service-container-collapse').removeAttribute(
-//             'numCollapsing');
-//     }
-// }
-
-// listen for click events on both of service container collapsers
-// var telcoBlockCollapser = telcoBlock.querySelector('.service-container-collapse');
-// var providersBlockCollapser = providersBlock.querySelector('.service-container-collapse');
-// telcoBlockCollapser.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     if (telcoBlockCollapser.innerHTML == "Show less") {
-//         telcoBlockCollapser.innerHTML =
-//             `Show more (${telcoBlockCollapser.getAttribute('numCollapsing')})`;
-//         telcoBlock.querySelector('.service-container').setAttribute('collapsed', '');
-//     } else {
-//         telcoBlockCollapser.innerHTML = 'Show less';
-//         telcoBlock.querySelector('.service-container').removeAttribute('collapsed');
-//     }
-// });
-// providersBlockCollapser.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     e.stopPropagation();
-//     if (providersBlockCollapser.innerHTML == "Show less") {
-//         providersBlockCollapser.innerHTML =
-//             `Show more (${providersBlockCollapser.getAttribute('numCollapsing')})`;
-//         providersBlock.querySelector('.service-container').setAttribute('collapsed', '');
-//     } else {
-//         providersBlockCollapser.innerHTML = 'Show less';
-//         providersBlock.querySelector('.service-container').removeAttribute('collapsed');
-//     }
-// });
-
 // listen for pingpanel going off the page
 let prvRight = parseInt(pingPanelContent.getBoundingClientRect().right);
 setInterval(() => {
@@ -466,19 +206,6 @@ setInterval(() => {
         pingPanelButton.style.marginRight = pingPanelContent.style.marginLeft;
     }
 }, 20);
-
-// $(function () {
-//     $('#city-select-start select').on('change', function () {
-//         let css = $(this).val()
-//         if (css == 'wong-chuk-hang' || css == 'kwai-chung') {
-//             $('#telco-separator2').show()
-//             $('#net-fabric-block').show()
-//         } else {
-//             $('#telco-separator2').hide()
-//             $('#net-fabric-block').hide()
-//         }
-//     })
-// })
 
 /**
  *  Expand side panel menu on expand btn click
@@ -516,6 +243,7 @@ function carrierScrollLeft(carriersWrapperIndex) {
         behavior: "smooth",
     });
 }
+
 function carrierScrollRight(carriersWrapperIndex) {
     var wrapper = carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
     var scrollWidth = wrapper.getElementsByClassName("service-item").item(1).clientWidth;
@@ -524,6 +252,7 @@ function carrierScrollRight(carriersWrapperIndex) {
         behavior: "smooth",
     });
 }
+
 // Attach events to buttons
 var carrierNavButtonsLeft = document.getElementsByClassName("carriers-nav-btn left");
 var carrierNavButtonsRight = document.getElementsByClassName("carriers-nav-btn right");
@@ -550,52 +279,52 @@ try {
  * @param {*} e Click event object
  * @param {*} carriersWrapperIndex 0 for left side, 1 for right side carrier.
  */
-function handleCarrierClick(e, carriersWrapperIndex) {
-    // determine if wrapper is on left or right side
-    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-    var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
-    var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
-    var cloudProviders = document.getElementsByClassName("cloud-wrapper").item(leftRightSide);
+// function handleCarrierClick(e, carriersWrapperIndex) {
+//     // determine if wrapper is on left or right side
+//     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+//     var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
+//     var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
+//     var cloudProviders = document.getElementsByClassName("cloud-wrapper").item(leftRightSide);
 
-    if (e.currentTarget.getAttribute("active") === ""){
-        // if cilcked carrier is already active - hide the msp section
+//     if (e.currentTarget.getAttribute("active") === ""){
+//         // if cilcked carrier is already active - hide the msp section
 
-        e.currentTarget.removeAttribute("active");
+//         e.currentTarget.removeAttribute("active");
 
-        // hide cloud wrapper
-        cloudWrapper.style.maxHeight = '0px';
-        setTimeout(function(){cloudWrapper.style.display = 'none';}, 400)
-    } else {
-        // if clicked carrier is not already active
+//         // hide cloud wrapper
+//         cloudWrapper.style.maxHeight = '0px';
+//         setTimeout(function(){cloudWrapper.style.display = 'none';}, 400)
+//     } else {
+//         // if clicked carrier is not already active
 
-        // remove active from all on click        
-        [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
-            el.removeAttribute("active");
-        });
-        e.currentTarget.setAttribute("active", "");
+//         // remove active from all on click        
+//         [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
+//             el.removeAttribute("active");
+//         });
+//         e.currentTarget.setAttribute("active", "");
 
-        // filter cloud providers
-        var selectedCloudProviders = carrierCloudProviders[e.currentTarget.getAttribute("carrier")];
-        if (selectedCloudProviders.length <= 0) {
-            // if the selected carrier has no public cloud providers, hide providers wrapper
-            cloudProviders.style.maxHeight = '0px';
-        } else {
-            cloudProviders.style.maxHeight = '150px';
-            [...cloudProviders.getElementsByClassName("cloud-provider")].forEach(function(cloudEl) {
-                if (selectedCloudProviders.includes(cloudEl.getAttribute("cloud"))) {
-                    // if cloud provider is in selected list
-                    cloudEl.style.display = 'block';
-                } else {
-                    cloudEl.style.display = 'none';
-                }
-            })
-        }
+//         // filter cloud providers
+//         var selectedCloudProviders = carrierCloudProviders[e.currentTarget.getAttribute("carrier")];
+//         if (selectedCloudProviders.length <= 0) {
+//             // if the selected carrier has no public cloud providers, hide providers wrapper
+//             cloudProviders.style.maxHeight = '0px';
+//         } else {
+//             cloudProviders.style.maxHeight = '150px';
+//             [...cloudProviders.getElementsByClassName("cloud-provider")].forEach(function(cloudEl) {
+//                 if (selectedCloudProviders.includes(cloudEl.getAttribute("cloud"))) {
+//                     // if cloud provider is in selected list
+//                     cloudEl.style.display = 'block';
+//                 } else {
+//                     cloudEl.style.display = 'none';
+//                 }
+//             })
+//         }
 
-        // set cloud wrapper max height to 400px
-        cloudWrapper.style.display = 'block';
-        setTimeout(function(){cloudWrapper.style.maxHeight = '300px';}, 10);
-    }
-}
+//         // set cloud wrapper max height to 400px
+//         cloudWrapper.style.display = 'block';
+//         setTimeout(function(){cloudWrapper.style.maxHeight = '300px';}, 10);
+//     }
+// }
 
 function handleCarriersChange(carriersWrapperIndex, cityName) {
     // determine if wrapper is on left or right side
@@ -623,26 +352,44 @@ function handleCarriersChange(carriersWrapperIndex, cityName) {
     });
 }
 
-[...document.getElementsByClassName("map-side-panel__carriers-wrapper")
-    .item(0)
-    .getElementsByClassName("service-item")]
-    .forEach(function(btn){
-        btn.addEventListener("click", function(e){
-            e.stopPropagation();
-            e.preventDefault();
+function hideArrowButtons(carriersWrapperIndex) {
+    // determine if wrapper is on left or right side
+    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+    var networkTopDiv = document.getElementsByClassName('map-side-panel__network-top').item(leftRightSide);
+    [...networkTopDiv.getElementsByClassName('carriers-nav-btn')].forEach(function(btn) {
+        btn.style.display = 'none';
+    })
+}
 
-            handleCarrierClick(e, 0);
-        });
-    });
+function showArrowButtons(carriersWrapperIndex) {
+    // determine if wrapper is on left or right side
+    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+    var networkTopDiv = document.getElementsByClassName('map-side-panel__network-top').item(leftRightSide);
+    [...networkTopDiv.getElementsByClassName('carriers-nav-btn')].forEach(function(btn) {
+        btn.style.display = 'block';
+    })
+}
 
-[...document.getElementsByClassName("map-side-panel__carriers-wrapper")
-    .item(1)
-    .getElementsByClassName("service-item")]
-    .forEach(function(btn){
-        btn.addEventListener("click", function(e){
-            e.stopPropagation();
-            e.preventDefault();
+// [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
+//     .item(0)
+//     .getElementsByClassName("service-item")]
+//     .forEach(function(btn){
+//         btn.addEventListener("click", function(e){
+//             e.stopPropagation();
+//             e.preventDefault();
 
-            handleCarrierClick(e, 1)
-        });
-    });
+//             handleCarrierClick(e, 0);
+//         });
+//     });
+
+// [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
+//     .item(1)
+//     .getElementsByClassName("service-item")]
+//     .forEach(function(btn){
+//         btn.addEventListener("click", function(e){
+//             e.stopPropagation();
+//             e.preventDefault();
+
+//             handleCarrierClick(e, 1)
+//         });
+//     });
