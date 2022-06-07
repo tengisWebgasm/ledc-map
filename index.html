@@ -112,324 +112,6 @@
             <div id="map-container">
                 <div id="map-wrapper">
                     <div id="map-side-panel-overlay" onclick="expandMenu()"></div>
-                    <div id="map-side-panel">
-                        <div id="map-side-panel-a">
-                            <button id="city-selection-expand" onclick="expandMenu()">
-                                <div class="expand-icon"></div>
-                            </button>
-                            <div id="city-selection-container" class="container">
-                                <div id="city-select-start" class="city-select">
-                                    <select>
-                                        <option value="">Select Data Centre</option>
-                                        <option value="albury">Albury</option>
-                                        <option value="dubbo">Dubbo</option>
-                                        <option value="newcastle">Newcastle</option>
-                                        <option value="tamworth">Tamworth</option>
-                                    </select>
-                                </div>
-                                <div id="city-select-end" class="city-select" disabled>
-                                    <select disabled>
-                                        <option value="">Select Data Centre</option>
-                                        <option value="albury">Albury</option>
-                                        <option value="dubbo">Dubbo</option>
-                                        <option value="newcastle">Newcastle</option>
-                                        <option value="tamworth">Tamworth</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- <div id="city-destination-details" off>
-                                <div class="city-select-mini-label">Ping/latency</div>
-                                <div id="ping-display">158ms</div>
-                            </div> -->
-                        </div>
-                        <div id="map-side-panel-b">
-                            <div class="map-side-panel__network-container container">
-                                <div class="map-side-panel__network-wrapper">
-                                    <p>Carriers/Network Aggrigators</p>
-                                    <div class="map-side-panel__network-top">
-                                        <button class="carriers-nav-btn left"></button>
-                                        <button class="carriers-nav-btn right"></button>
-                                        <div class="map-side-panel__carriers-wrapper">
-                                            <button class="service-item" carrier="ledc" href="#">
-                                                <div>
-                                                    <img src="./public/providers/ledc.svg"
-                                                        loading="lazy" alt="ledc">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="vocus" href="#">
-                                                <div>
-                                                    <img src="./public/providers/Vocus.svg"
-                                                        loading="lazy" alt="vocus">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="telstra" href="#">
-                                                <div>
-                                                    <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="telstra">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="encoo" href="#">
-                                                <div>
-                                                    <img src="./public/providers/encoo.png"
-                                                        loading="lazy" alt="encoo">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="transgrid" href="#">
-                                                <div>
-                                                    <img src="./public/providers/transgrid.png"
-                                                        loading="lazy" alt="transgrid">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="vergetel" href="#">
-                                                <div>
-                                                    <img src="./public/providers/vergetel.png"
-                                                        loading="lazy" alt="vergetel">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="tpg" href="#">
-                                                <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="tpg">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="superloop" href="#">
-                                                <div>
-                                                    <img src="./public/providers/superloop.svg"
-                                                        loading="lazy" alt="superloop">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="swoop" href="#">
-                                                <div>
-                                                    <img src="./public/providers/swoop.svg"
-                                                        loading="lazy" alt="swoop">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="nexon" href="#">
-                                                <div>
-                                                    <img src="./public/providers/nexon.png"
-                                                        loading="lazy" alt="nexon">
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="map-side-panel__network-bot">
-                                        <div class="map-side-panel__cloud-wrapper">
-                                            <p>MSP Providers </p>
-                                            <div class="map-side-panel__msp-wrapper msp-wrapper">
-                                                <div class="msp-provider" provider="regionalIt">
-                                                    <div>
-                                                        <img src="./public/providers/regionalIt.gif"
-                                                            loading="lazy" alt="regionalIt">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="toim">
-                                                    <div>
-                                                        <img src="./public/providers/toim.svg"
-                                                            loading="lazy" alt="toim">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="newcastleConnect">
-                                                    <div>
-                                                        <img src="./public/providers/newcastleConnect.png"
-                                                            loading="lazy" alt="newcastleConnect">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="sabervox">
-                                                    <div>
-                                                        <img src="./public/providers/sabervox.png"
-                                                            loading="lazy" alt="sabervox">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="countrytell">
-                                                    <div>
-                                                        <img src="./public/providers/countryTell.png"
-                                                            loading="lazy" alt="countrytell">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="tamworthBroadcast">
-                                                    <div>
-                                                        <img src="./public/providers/tamworthBroadcast.png"
-                                                            loading="lazy" alt="tamworthBroadcast">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="cloud-wrapper">
-                                                <p>Public Cloud Access</p>
-                                                <div class="map-side-panel__msp-wrapper">
-                                                    <div class="msp-provider cloud-provider" cloud="azure">
-                                                        <div>
-                                                            <img src="./public/providers/azure.png"
-                                                                loading="lazy" alt="azure">
-                                                        </div>
-                                                    </div>
-                                                    <div class="msp-provider cloud-provider" cloud="google">
-                                                        <div>
-                                                            <img src="./public/providers/google.png"
-                                                                loading="lazy" alt="google">
-                                                        </div>
-                                                    </div>
-                                                    <div class="msp-provider cloud-provider" cloud="aws">
-                                                        <div>
-                                                            <img src="./public/providers/aws.png"
-                                                                loading="lazy" alt="aws">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="map-side-panel__footer">
-                                            <p>Download Data Sheet:</p>
-                                            <button class="map-side-panel__download-button">
-                                                Select a city
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="map-side-panel__network-seperator"></div>
-                                <div class="map-side-panel__network-wrapper">
-                                    <p>Carriers/Network Aggrigators</p>
-                                    <div class="map-side-panel__network-top">
-                                        <button class="carriers-nav-btn left"></button>
-                                        <button class="carriers-nav-btn right"></button>
-                                        <div class="map-side-panel__carriers-wrapper">
-                                            <button class="service-item" carrier="ledc" href="#">
-                                                <div>
-                                                    <img src="./public/providers/ledc.svg"
-                                                        loading="lazy" alt="ledc">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="vocus" href="#">
-                                                <div>
-                                                    <img src="./public/providers/Vocus.svg"
-                                                        loading="lazy" alt="vocus">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="telstra" href="#">
-                                                <div>
-                                                    <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="telstra">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="encoo" href="#">
-                                                <div>
-                                                    <img src="./public/providers/encoo.png"
-                                                        loading="lazy" alt="encoo">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="transgrid" href="#">
-                                                <div>
-                                                    <img src="./public/providers/transgrid.png"
-                                                        loading="lazy" alt="transgrid">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="vergetel" href="#">
-                                                <div>
-                                                    <img src="./public/providers/vergetel.png"
-                                                        loading="lazy" alt="vergetel">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="tpg" href="#">
-                                                <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="tpg">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="superloop" href="#">
-                                                <div>
-                                                    <img src="./public/providers/superloop.svg"
-                                                        loading="lazy" alt="superloop">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="swoop" href="#">
-                                                <div>
-                                                    <img src="./public/providers/swoop.svg"
-                                                        loading="lazy" alt="swoop">
-                                                </div>
-                                            </button>
-                                            <button class="service-item" carrier="nexon" href="#">
-                                                <div>
-                                                    <img src="./public/providers/nexon.png"
-                                                        loading="lazy" alt="nexon">
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="map-side-panel__network-bot">
-                                        <div class="map-side-panel__cloud-wrapper">
-                                            <p>MSP Providers </p>
-                                            <div class="map-side-panel__msp-wrapper msp-wrapper">
-                                                <div class="msp-provider" provider="regionalIt">
-                                                    <div>
-                                                        <img src="./public/providers/regionalIt.gif"
-                                                            loading="lazy" alt="regionalIt">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="toim">
-                                                    <div>
-                                                        <img src="./public/providers/toim.svg"
-                                                            loading="lazy" alt="toim">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="newcastleConnect">
-                                                    <div>
-                                                        <img src="./public/providers/newcastleConnect.png"
-                                                            loading="lazy" alt="newcastleConnect">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="sabervox">
-                                                    <div>
-                                                        <img src="./public/providers/sabervox.png"
-                                                            loading="lazy" alt="sabervox">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="countrytell">
-                                                    <div>
-                                                        <img src="./public/providers/countryTell.png"
-                                                            loading="lazy" alt="countrytell">
-                                                    </div>
-                                                </div>
-                                                <div class="msp-provider" provider="tamworthBroadcast">
-                                                    <div>
-                                                        <img src="./public/providers/tamworthBroadcast.png"
-                                                            loading="lazy" alt="tamworthBroadcast">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="cloud-wrapper">
-                                                <p>Public Cloud Access</p>
-                                                <div class="map-side-panel__msp-wrapper">
-                                                    <div class="msp-provider cloud-provider" cloud="azure">
-                                                        <div>
-                                                            <img src="./public/providers/azure.png"
-                                                                loading="lazy" alt="azure">
-                                                        </div>
-                                                    </div>
-                                                    <div class="msp-provider cloud-provider" cloud="google">
-                                                        <div>
-                                                            <img src="./public/providers/google.png"
-                                                                loading="lazy" alt="google">
-                                                        </div>
-                                                    </div>
-                                                    <div class="msp-provider cloud-provider" cloud="aws">
-                                                        <div>
-                                                            <img src="./public/providers/aws.png"
-                                                                loading="lazy" alt="aws">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="map-side-panel__footer">
-                                            <p>Download Data Sheet:</p>
-                                            <button class="map-side-panel__download-button">
-                                                Select a city
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                    </div> 
                     <div id="map-element-holder">
                         <div id="map-element">
                             <script src="js/clickHandlers.js"></script>
@@ -1087,7 +769,331 @@
                             <div class="label-marker" style="background-color: #FF9500;"></div>
                             <p>Coming Soon</p>
                         </div>
+                        <div id="map-controls-holder" class="container">
+                            <div class="map-controls-wrapper">
+                                <button class="map-control-zoom-btn" id="map-btn-zoom-in"></button>
+                                <button class="map-control-zoom-btn" id="map-btn-zoom-out"></button>
+                            </div>
+                        </div>
                     </div>
+                    <div id="map-side-panel">
+                        <div id="map-side-panel-a">
+                            <button id="city-selection-expand" onclick="expandMenu()">
+                                <div class="expand-icon"></div>
+                            </button>
+                            <div id="city-selection-container" class="container">
+                                <div id="city-select-start" class="city-select">
+                                    <select>
+                                        <option value="">Select Data Centre</option>
+                                        <option value="albury">Albury</option>
+                                        <option value="dubbo">Dubbo</option>
+                                        <option value="newcastle">Newcastle</option>
+                                        <option value="tamworth">Tamworth</option>
+                                    </select>
+                                </div>
+                                <div id="city-select-end" class="city-select" disabled>
+                                    <select disabled>
+                                        <option value="">Select Data Centre</option>
+                                        <option value="albury">Albury</option>
+                                        <option value="dubbo">Dubbo</option>
+                                        <option value="newcastle">Newcastle</option>
+                                        <option value="tamworth">Tamworth</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div id="city-destination-details" off>
+                                <div class="city-select-mini-label">Ping/latency</div>
+                                <div id="ping-display">158ms</div>
+                            </div> -->
+                        </div>
+                        <div id="map-side-panel-b">
+                            <div class="map-side-panel__network-container container">
+                                <div class="map-side-panel__network-wrapper">
+                                    <p>Carriers/Network Aggrigators</p>
+                                    <div class="map-side-panel__network-top">
+                                        <button class="carriers-nav-btn left"></button>
+                                        <button class="carriers-nav-btn right"></button>
+                                        <div class="map-side-panel__carriers-wrapper">
+                                            <button class="service-item" carrier="ledc" href="#">
+                                                <div>
+                                                    <img src="./public/providers/ledc.svg"
+                                                        loading="lazy" alt="ledc">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="vocus" href="#">
+                                                <div>
+                                                    <img src="./public/providers/Vocus.svg"
+                                                        loading="lazy" alt="vocus">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="telstra" href="#">
+                                                <div>
+                                                    <img src="./public/providers/Telstra.png"
+                                                        loading="lazy" alt="telstra">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="encoo" href="#">
+                                                <div>
+                                                    <img src="./public/providers/encoo.png"
+                                                        loading="lazy" alt="encoo">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="transgrid" href="#">
+                                                <div>
+                                                    <img src="./public/providers/transgrid.png"
+                                                        loading="lazy" alt="transgrid">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="vergetel" href="#">
+                                                <div>
+                                                    <img src="./public/providers/vergetel.png"
+                                                        loading="lazy" alt="vergetel">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="tpg" href="#">
+                                                <div>
+                                                    <img src="./public/providers/tpg.png"
+                                                        loading="lazy" alt="tpg">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="superloop" href="#">
+                                                <div>
+                                                    <img src="./public/providers/superloop.svg"
+                                                        loading="lazy" alt="superloop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="swoop" href="#">
+                                                <div>
+                                                    <img src="./public/providers/swoop.svg"
+                                                        loading="lazy" alt="swoop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="nexon" href="#">
+                                                <div>
+                                                    <img src="./public/providers/nexon.png"
+                                                        loading="lazy" alt="nexon">
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="map-side-panel__network-bot">
+                                        <div class="map-side-panel__cloud-wrapper">
+                                            <p>MSP Providers </p>
+                                            <div class="map-side-panel__msp-wrapper msp-wrapper">
+                                                <div class="msp-provider" provider="regionalIt">
+                                                    <div>
+                                                        <img src="./public/providers/regionalIt.gif"
+                                                            loading="lazy" alt="regionalIt">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="toim">
+                                                    <div>
+                                                        <img src="./public/providers/toim.svg"
+                                                            loading="lazy" alt="toim">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="newcastleConnect">
+                                                    <div>
+                                                        <img src="./public/providers/newcastleConnect.png"
+                                                            loading="lazy" alt="newcastleConnect">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="sabervox">
+                                                    <div>
+                                                        <img src="./public/providers/sabervox.png"
+                                                            loading="lazy" alt="sabervox">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="countrytell">
+                                                    <div>
+                                                        <img src="./public/providers/countryTell.png"
+                                                            loading="lazy" alt="countrytell">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="tamworthBroadcast">
+                                                    <div>
+                                                        <img src="./public/providers/tamworthBroadcast.png"
+                                                            loading="lazy" alt="tamworthBroadcast">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cloud-wrapper">
+                                                <p>Public Cloud Access</p>
+                                                <div class="map-side-panel__msp-wrapper">
+                                                    <div class="msp-provider cloud-provider" cloud="azure">
+                                                        <div>
+                                                            <img src="./public/providers/azure.png"
+                                                                loading="lazy" alt="azure">
+                                                        </div>
+                                                    </div>
+                                                    <div class="msp-provider cloud-provider" cloud="google">
+                                                        <div>
+                                                            <img src="./public/providers/google.png"
+                                                                loading="lazy" alt="google">
+                                                        </div>
+                                                    </div>
+                                                    <div class="msp-provider cloud-provider" cloud="aws">
+                                                        <div>
+                                                            <img src="./public/providers/aws.png"
+                                                                loading="lazy" alt="aws">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="map-side-panel__footer">
+                                            <p>Download Data Sheet:</p>
+                                            <button class="map-side-panel__download-button">
+                                                Select a city
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="map-side-panel__network-seperator"></div>
+                                <div class="map-side-panel__network-wrapper">
+                                    <p>Carriers/Network Aggrigators</p>
+                                    <div class="map-side-panel__network-top">
+                                        <button class="carriers-nav-btn left"></button>
+                                        <button class="carriers-nav-btn right"></button>
+                                        <div class="map-side-panel__carriers-wrapper">
+                                            <button class="service-item" carrier="ledc" href="#">
+                                                <div>
+                                                    <img src="./public/providers/ledc.svg"
+                                                        loading="lazy" alt="ledc">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="vocus" href="#">
+                                                <div>
+                                                    <img src="./public/providers/Vocus.svg"
+                                                        loading="lazy" alt="vocus">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="telstra" href="#">
+                                                <div>
+                                                    <img src="./public/providers/Telstra.png"
+                                                        loading="lazy" alt="telstra">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="encoo" href="#">
+                                                <div>
+                                                    <img src="./public/providers/encoo.png"
+                                                        loading="lazy" alt="encoo">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="transgrid" href="#">
+                                                <div>
+                                                    <img src="./public/providers/transgrid.png"
+                                                        loading="lazy" alt="transgrid">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="vergetel" href="#">
+                                                <div>
+                                                    <img src="./public/providers/vergetel.png"
+                                                        loading="lazy" alt="vergetel">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="tpg" href="#">
+                                                <div>
+                                                    <img src="./public/providers/tpg.png"
+                                                        loading="lazy" alt="tpg">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="superloop" href="#">
+                                                <div>
+                                                    <img src="./public/providers/superloop.svg"
+                                                        loading="lazy" alt="superloop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="swoop" href="#">
+                                                <div>
+                                                    <img src="./public/providers/swoop.svg"
+                                                        loading="lazy" alt="swoop">
+                                                </div>
+                                            </button>
+                                            <button class="service-item" carrier="nexon" href="#">
+                                                <div>
+                                                    <img src="./public/providers/nexon.png"
+                                                        loading="lazy" alt="nexon">
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="map-side-panel__network-bot">
+                                        <div class="map-side-panel__cloud-wrapper">
+                                            <p>MSP Providers </p>
+                                            <div class="map-side-panel__msp-wrapper msp-wrapper">
+                                                <div class="msp-provider" provider="regionalIt">
+                                                    <div>
+                                                        <img src="./public/providers/regionalIt.gif"
+                                                            loading="lazy" alt="regionalIt">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="toim">
+                                                    <div>
+                                                        <img src="./public/providers/toim.svg"
+                                                            loading="lazy" alt="toim">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="newcastleConnect">
+                                                    <div>
+                                                        <img src="./public/providers/newcastleConnect.png"
+                                                            loading="lazy" alt="newcastleConnect">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="sabervox">
+                                                    <div>
+                                                        <img src="./public/providers/sabervox.png"
+                                                            loading="lazy" alt="sabervox">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="countrytell">
+                                                    <div>
+                                                        <img src="./public/providers/countryTell.png"
+                                                            loading="lazy" alt="countrytell">
+                                                    </div>
+                                                </div>
+                                                <div class="msp-provider" provider="tamworthBroadcast">
+                                                    <div>
+                                                        <img src="./public/providers/tamworthBroadcast.png"
+                                                            loading="lazy" alt="tamworthBroadcast">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cloud-wrapper">
+                                                <p>Public Cloud Access</p>
+                                                <div class="map-side-panel__msp-wrapper">
+                                                    <div class="msp-provider cloud-provider" cloud="azure">
+                                                        <div>
+                                                            <img src="./public/providers/azure.png"
+                                                                loading="lazy" alt="azure">
+                                                        </div>
+                                                    </div>
+                                                    <div class="msp-provider cloud-provider" cloud="google">
+                                                        <div>
+                                                            <img src="./public/providers/google.png"
+                                                                loading="lazy" alt="google">
+                                                        </div>
+                                                    </div>
+                                                    <div class="msp-provider cloud-provider" cloud="aws">
+                                                        <div>
+                                                            <img src="./public/providers/aws.png"
+                                                                loading="lazy" alt="aws">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="map-side-panel__footer">
+                                            <p>Download Data Sheet:</p>
+                                            <button class="map-side-panel__download-button">
+                                                Select a city
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div> 
                 </div>
             </div>
             <script src="js/alphabetScript.js"></script>
@@ -1116,7 +1122,7 @@
         </div>
     </div>
     <script src="https://unpkg.com/@panzoom/panzoom@4.5.0/dist/panzoom.min.js"></script>
-    <script src="/js/panzoomScript.js"></script>
+    <script src="./js/panzoomScript.js"></script>
 </body>
 
 </html>

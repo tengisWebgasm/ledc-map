@@ -1,210 +1,257 @@
-const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-var mapElement = document.querySelector('#map-element');
+const vw = Math.max(
+	document.documentElement.clientWidth || 0,
+	window.innerWidth || 0
+);
+var mapElement = document.querySelector("#map-element");
 var sidePanel = document.querySelector("#map-side-panel");
+var sidePanelB = document.getElementById("map-side-panel-b");
 var selectStartCont = document.querySelector("#city-select-start");
 var selectEndCont = document.querySelector("#city-select-end");
-var selectStart = selectStartCont.querySelector('select');
-var selectEnd = selectEndCont.querySelector('select');
-var carrierWrapperLeft = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0);
-var carrierWrapperRight = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1);
-var pingPanel = document.querySelector('#map-ping-panel');
+var selectStart = selectStartCont.querySelector("select");
+var selectEnd = selectEndCont.querySelector("select");
+var carrierWrapperLeft = document
+	.getElementsByClassName("map-side-panel__carriers-wrapper")
+	.item(0);
+var carrierWrapperRight = document
+	.getElementsByClassName("map-side-panel__carriers-wrapper")
+	.item(1);
+var pingPanel = document.querySelector("#map-ping-panel");
 var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
 var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
-var pingPanelContent = pingPanel.querySelector('#map-ping-content');
-var pingPanelButton = pingPanel.querySelector('#map-ping-button');
+var pingPanelContent = pingPanel.querySelector("#map-ping-content");
+var pingPanelButton = pingPanel.querySelector("#map-ping-button");
 
 // function called when some starting point (data center) is selected
 function showSelection(cityName) {
-    // adjust display of dropdowns
-    selectStartCont.setAttribute('active', '');
-    selectEnd.removeAttribute('disabled');
-    selectEndCont.removeAttribute('disabled');
+	// adjust display of dropdowns
+	selectStartCont.setAttribute("active", "");
+	selectEnd.removeAttribute("disabled");
+	selectEndCont.removeAttribute("disabled");
 
-    // get data about starting point from json
-    const curEndpoints = Object.keys(datacenterDetails[cityName]
-        .endpoint); // valid city endpoints of the data center
+	// get data about starting point from json
+	const curEndpoints = Object.keys(datacenterDetails[cityName].endpoint); // valid city endpoints of the data center
 
-    // display the lines and city
-    [...document.querySelectorAll(`.city-group`)].forEach(group => {
-        if (group.id === cityName) group.setAttribute('dc', '');
-        else group.removeAttribute('dc');
+	// display the lines and city
+	[...document.querySelectorAll(`.city-group`)].forEach((group) => {
+		if (group.id === cityName) group.setAttribute("dc", "");
+		else group.removeAttribute("dc");
 
-        if (group.id === cityName || curEndpoints.includes(group.id)) group.setAttribute(
-            'on', '');
-        else group.removeAttribute('on');
-    });
-    try {
-        [...document.querySelector('[city-lines]').querySelectorAll('path')].forEach(e => e
-            .removeAttribute('on'));
-        [...document.querySelectorAll(`[dc="${cityName}"]`)].forEach(e => {
-            setTimeout(() => e.setAttribute('on', ''), Math.random() * 280);
-        });
-    } catch { }
+		if (group.id === cityName || curEndpoints.includes(group.id))
+			group.setAttribute("on", "");
+		else group.removeAttribute("on");
+	});
+	try {
+		[
+			...document.querySelector("[city-lines]").querySelectorAll("path"),
+		].forEach((e) => e.removeAttribute("on"));
+		[...document.querySelectorAll(`[dc="${cityName}"]`)].forEach((e) => {
+			setTimeout(() => e.setAttribute("on", ""), Math.random() * 280);
+		});
+	} catch {}
 
-    // adjust display of destination dropdown to highlight available cities 
-    [...selectEnd.querySelectorAll('option')].forEach(opt => {
-        if (curEndpoints.includes(opt.value) || !opt.value) opt.removeAttribute('disabled');
-        else opt.setAttribute('disabled', '');
-    })
+	// adjust display of destination dropdown to highlight available cities
+	[...selectEnd.querySelectorAll("option")].forEach((opt) => {
+		if (curEndpoints.includes(opt.value) || !opt.value)
+			opt.removeAttribute("disabled");
+		else opt.setAttribute("disabled", "");
+	});
 
-    // adjust ping display for the datacenter to (selected?) global city
-    if (curEndpoints.includes(selectEnd.value)) selectDestination(selectEnd.value);
-    else {
-        selectEnd.value = '';
-        selectEndCont.removeAttribute('active');
-        // destinationDetails.setAttribute('off', '');
-        [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
-        pingPanel.removeAttribute('active');
-    }
+	// adjust ping display for the datacenter to (selected?) global city
+	if (curEndpoints.includes(selectEnd.value))
+		selectDestination(selectEnd.value);
+	else {
+		selectEnd.value = "";
+		selectEndCont.removeAttribute("active");
+		// destinationDetails.setAttribute('off', '');
+		[...document.querySelectorAll("[dc][city]")].forEach((e) =>
+			e.removeAttribute("selected")
+		);
+		pingPanel.removeAttribute("active");
+	}
 
-    // hide left and right arrows if less than or equal to 6 carriers in city
-    if (vw > 767) {
-        if (datacenterDetails[cityName]['carriers'].length <= 6) {
-            hideArrowButtons(0);
-        } else {
-            showArrowButtons(0);
-        }
-    }
+	// hide left and right arrows if less than or equal to 6 carriers in city
+	if (vw > 767) {
+		if (datacenterDetails[cityName]["carriers"].length <= 6) {
+			hideArrowButtons(0);
+		} else {
+			showArrowButtons(0);
+		}
+	}
 
-    // expand menu
-    // if (!expanded && vw > 767) {
-    //     expandMenu();
-    // }
+	// expand menu
+	// if (!expanded && vw > 767) {
+	//     expandMenu();
+	// }
 
-    // change carriers
-    handleCarriersChange(0, cityName);
+	// change carriers
+	handleCarriersChange(0, cityName);
 }
 
 var closeSelection = () => {
-    // telcoContainer.removeAttribute('on');
-    selectStartCont.removeAttribute('active');
-    selectEnd.value = '';
-    selectEnd.setAttribute('disabled', '');
-    selectEndCont.setAttribute('disabled', '');
-    [...document.querySelector('[city-lines]').querySelectorAll('path')].forEach(e => e
-        .removeAttribute('on'));
-    [...document.querySelectorAll(`.city-group`)].forEach(group => {
-        if (Object.keys(datacenterDetails).includes(group.id)) group.setAttribute('dc', '');
-        group.removeAttribute('on');
-    });
+	// telcoContainer.removeAttribute('on');
+	selectStartCont.removeAttribute("active");
+	selectEnd.value = "";
+	selectEnd.setAttribute("disabled", "");
+	selectEndCont.setAttribute("disabled", "");
+	[
+		...document.querySelector("[city-lines]").querySelectorAll("path"),
+	].forEach((e) => e.removeAttribute("on"));
+	[...document.querySelectorAll(`.city-group`)].forEach((group) => {
+		if (Object.keys(datacenterDetails).includes(group.id))
+			group.setAttribute("dc", "");
+		group.removeAttribute("on");
+	});
 
-    // hide menu
-    if (expanded) {
-        expandMenu();
-    }
+	// hide menu
+	if (expanded) {
+		expandMenu();
+	}
 
-    closeDestination();
-}
+	closeDestination();
+};
 
 function selectDestination(cityName) {
-    selectEndCont.setAttribute('active', '');
-    // destinationDetails.removeAttribute('off');
-    [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
+	selectEndCont.setAttribute("active", "");
+	// destinationDetails.removeAttribute('off');
+	[...document.querySelectorAll("[dc][city]")].forEach((e) =>
+		e.removeAttribute("selected")
+	);
 
-    // add dc to selected destination city to make it highlighted
-    let otherCities = document.querySelectorAll('g.city-group:not(#' + selectStart.value + ')')
-    for (let i=0; i<otherCities.length; i++) {
-        otherCities[i].removeAttribute('dc');
-    }
-    document.querySelector("#" + cityName).setAttribute("dc", '');
+	// add dc to selected destination city to make it highlighted
+	let otherCities = document.querySelectorAll(
+		"g.city-group:not(#" + selectStart.value + ")"
+	);
+	for (let i = 0; i < otherCities.length; i++) {
+		otherCities[i].removeAttribute("dc");
+	}
+	document.querySelector("#" + cityName).setAttribute("dc", "");
 
-    // set other lines invisible
-    let otherLines = document.querySelectorAll(`[city-lines] path:not([city="${cityName}"]):not([dc="${selectStart.value}"])`);
-    for (let i=0; i<otherLines.length; i++) {
-        otherLines[i].setAttribute('invisible', '');
-    }
+	// set other lines invisible
+	let otherLines = document.querySelectorAll(
+		`[city-lines] path:not([city="${cityName}"]):not([dc="${selectStart.value}"])`
+	);
+	for (let i = 0; i < otherLines.length; i++) {
+		otherLines[i].setAttribute("invisible", "");
+	}
 
-    const curLine = document.querySelector(`[dc="${selectStart.value}"][city="${cityName}"]`);
-    curLine.setAttribute('selected', '');
+	const curLine = document.querySelector(
+		`[dc="${selectStart.value}"][city="${cityName}"]`
+	);
+	curLine.setAttribute("selected", "");
 
-    const dString = curLine.getAttribute('d').replaceAll(',', ' ').replaceAll('M', '').replaceAll(
-        'C', ' ');
-    const [px, py, qx, qy, rx, ry, sx, sy] = dString.split(/[ ]{1,}/);
+	const dString = curLine
+		.getAttribute("d")
+		.replaceAll(",", " ")
+		.replaceAll("M", "")
+		.replaceAll("C", " ");
+	const [px, py, qx, qy, rx, ry, sx, sy] = dString.split(/[ ]{1,}/);
 
-    function getMidPoint(p, q, r, s) {
-        return (parseFloat(p) + 3 * parseFloat(q) + 3 * parseFloat(r) + parseFloat(s)) / 8;
-    }
-    const [anchorX, anchorY] = [getMidPoint(px, qx, rx, sx), getMidPoint(py, qy, ry, sy)];
+	function getMidPoint(p, q, r, s) {
+		return (
+			(parseFloat(p) +
+				3 * parseFloat(q) +
+				3 * parseFloat(r) +
+				parseFloat(s)) /
+			8
+		);
+	}
+	const [anchorX, anchorY] = [
+		getMidPoint(px, qx, rx, sx),
+		getMidPoint(py, qy, ry, sy),
+	];
 
-    const rootSVG = document.querySelector('#map-element svg');
-    const point = rootSVG.createSVGPoint();
-    let matrix, position;
+	const rootSVG = document.querySelector("#map-element svg");
+	const point = rootSVG.createSVGPoint();
+	let matrix, position;
 
-    matrix = curLine.getCTM();
-    point.x = anchorX;
-    point.y = anchorY;
-    position = point.matrixTransform(matrix);
+	matrix = curLine.getCTM();
+	point.x = anchorX;
+	point.y = anchorY;
+	position = point.matrixTransform(matrix);
 
-    pingPanel.style.left = position.x + 'px';
-    pingPanel.style.top = position.y - 20 + 'px';
+	pingPanel.style.left = position.x + "px";
+	pingPanel.style.top = position.y - 20 + "px";
 
-    changeText(pingPanelDc, selectStart.options[selectStart.selectedIndex].label);
-    changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
-    changePing(
-        document.querySelector('#map-ping-panel-ping'),
-        `${parseInt(datacenterDetails[selectStart.value].endpoint[cityName].ping)}`
-    );
-    pingPanel.setAttribute('active', '');
+	changeText(
+		pingPanelDc,
+		selectStart.options[selectStart.selectedIndex].label
+	);
+	changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
+	changePing(
+		document.querySelector("#map-ping-panel-ping"),
+		`${parseInt(
+			datacenterDetails[selectStart.value].endpoint[cityName].ping
+		)}`
+	);
+	pingPanel.setAttribute("active", "");
 
-    // change carriers
-    handleCarriersChange(1, cityName);
+	// change carriers
+	handleCarriersChange(1, cityName);
 
-    // hide left and right arrows if less than or equal to 6 carriers in city
-    if (vw > 767) {
-        if (datacenterDetails[cityName]['carriers'].length <= 6) {
-            hideArrowButtons(0);
-        } else {
-            showArrowButtons(0);
-        }
-    }
+	// hide left and right arrows if less than or equal to 6 carriers in city
+	if (vw > 767) {
+		if (datacenterDetails[cityName]["carriers"].length <= 6) {
+			hideArrowButtons(0);
+		} else {
+			showArrowButtons(0);
+		}
+	}
 
-    // expand menu
-    if (!expanded) {
-        expandMenu();
-    }
+	// expand menu
+	if (!expanded) {
+		expandMenu();
+	}
 }
 
 var closeDestination = () => {
-    selectEndCont.removeAttribute('active');
-    if (selectStart.value)
-        document.querySelectorAll('g.city-group:not(#' + selectStart.value + ')').forEach(e => e.removeAttribute('dc'));
-    // destinationDetails.setAttribute('off', '');
-    [...document.querySelectorAll('[dc][city]')].forEach(e => e.removeAttribute('selected'));
-    
-    [...document.querySelectorAll(`[city-lines] path[invisible]`)].forEach(e => e.removeAttribute('invisible'));
-    pingPanel.removeAttribute('active');
-}
+	selectEndCont.removeAttribute("active");
+	if (selectStart.value)
+		document
+			.querySelectorAll("g.city-group:not(#" + selectStart.value + ")")
+			.forEach((e) => e.removeAttribute("dc"));
+	// destinationDetails.setAttribute('off', '');
+	[...document.querySelectorAll("[dc][city]")].forEach((e) =>
+		e.removeAttribute("selected")
+	);
 
-selectStart.addEventListener('change', () => {
-    if (selectStart.value) {
-        showSelection(selectStart.value);
-    } else {
-        closeSelection();
-    }
+	[...document.querySelectorAll(`[city-lines] path[invisible]`)].forEach(
+		(e) => e.removeAttribute("invisible")
+	);
+	pingPanel.removeAttribute("active");
+};
+
+selectStart.addEventListener("change", () => {
+	if (selectStart.value) {
+		showSelection(selectStart.value);
+	} else {
+		closeSelection();
+	}
 });
 
-selectEnd.addEventListener('change', () => {
-    if (selectEnd.value) {
-        selectDestination(selectEnd.value);
-    } else {
-        closeDestination();
-    }
+selectEnd.addEventListener("change", () => {
+	if (selectEnd.value) {
+		selectDestination(selectEnd.value);
+	} else {
+		closeDestination();
+	}
 });
 
 // listen for pingpanel going off the page
 let prvRight = parseInt(pingPanelContent.getBoundingClientRect().right);
 setInterval(() => {
-    if (parseInt(pingPanelContent.getBoundingClientRect().right) != prvRight) {
-        prvRight = parseInt(pingPanelContent.getBoundingClientRect().right) || 0;
-        marginLeft = parseInt(pingPanelContent.style.marginLeft) || 0;
-        mapBounds = parseInt(mapElement.getBoundingClientRect().right);
-        if (prvRight - marginLeft > mapBounds) {
-            pingPanelContent.style.marginLeft = mapBounds - prvRight + marginLeft + 'px';
-        } else {
-            pingPanelContent.style.marginLeft = '';
-        }
-        pingPanelButton.style.marginRight = pingPanelContent.style.marginLeft;
-    }
+	if (parseInt(pingPanelContent.getBoundingClientRect().right) != prvRight) {
+		prvRight =
+			parseInt(pingPanelContent.getBoundingClientRect().right) || 0;
+		marginLeft = parseInt(pingPanelContent.style.marginLeft) || 0;
+		mapBounds = parseInt(mapElement.getBoundingClientRect().right);
+		if (prvRight - marginLeft > mapBounds) {
+			pingPanelContent.style.marginLeft =
+				mapBounds - prvRight + marginLeft + "px";
+		} else {
+			pingPanelContent.style.marginLeft = "";
+		}
+		pingPanelButton.style.marginRight = pingPanelContent.style.marginLeft;
+	}
 }, 20);
 
 /**
@@ -213,21 +260,30 @@ setInterval(() => {
 var expanded = false;
 var expandIcon = sidePanel.querySelector(".expand-icon");
 var expandDistance = vw > 767 ? 88 : 148;
+var sidePanelBMaxHeight = vw > 767 ? "500px" : "60vh";
 var expandOverlay = document.getElementById("map-side-panel-overlay");
 function expandMenu() {
-    if (expanded) {
-        sidePanel.style.transform = 'translateY(-' + expandDistance + 'px)';
-        expandIcon.style.transform = 'rotate(0deg)';
-        expanded = false;
-        expandOverlay.style.visibility = 'hidden';
-        expandOverlay.style.opacity = 0;
-    } else {
-        sidePanel.style.transform = 'translateY(-100%)';
-        expandIcon.style.transform = 'rotate(180deg)';
-        expanded = true;
-        expandOverlay.style.visibility = 'visible';
-        expandOverlay.style.opacity = 0.6;
-    }
+	if (expanded) {
+		sidePanelB.style.maxHeight = "0px";
+		expandIcon.style.transform = "rotate(0deg)";
+		expanded = false;
+		expandOverlay.style.visibility = "hidden";
+		expandOverlay.style.opacity = 0;
+	} else {
+		sidePanelB.style.maxHeight = sidePanelBMaxHeight;
+		expandIcon.style.transform = "rotate(180deg)";
+		window.scrollTo({
+			top:
+				sidePanel.offsetTop -
+				sidePanel.scrollTop +
+				sidePanel.clientTop -
+				200,
+			behavior: "smooth",
+		});
+		expanded = true;
+		expandOverlay.style.visibility = "visible";
+		expandOverlay.style.opacity = 0.6;
+	}
 }
 
 /**
@@ -236,41 +292,51 @@ function expandMenu() {
  */
 
 function carrierScrollLeft(carriersWrapperIndex) {
-    var wrapper = carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
-    var scrollWidth = wrapper.getElementsByClassName("service-item").item(0).clientWidth;
-    wrapper.scroll({
-        left: wrapper.scrollLeft - scrollWidth,
-        behavior: "smooth",
-    });
+	var wrapper =
+		carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
+	var scrollWidth = wrapper
+		.getElementsByClassName("service-item")
+		.item(0).clientWidth;
+	wrapper.scroll({
+		left: wrapper.scrollLeft - scrollWidth,
+		behavior: "smooth",
+	});
 }
 
 function carrierScrollRight(carriersWrapperIndex) {
-    var wrapper = carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
-    var scrollWidth = wrapper.getElementsByClassName("service-item").item(1).clientWidth;
-    wrapper.scroll({
-        left: wrapper.scrollLeft + scrollWidth,
-        behavior: "smooth",
-    });
+	var wrapper =
+		carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
+	var scrollWidth = wrapper
+		.getElementsByClassName("service-item")
+		.item(1).clientWidth;
+	wrapper.scroll({
+		left: wrapper.scrollLeft + scrollWidth,
+		behavior: "smooth",
+	});
 }
 
 // Attach events to buttons
-var carrierNavButtonsLeft = document.getElementsByClassName("carriers-nav-btn left");
-var carrierNavButtonsRight = document.getElementsByClassName("carriers-nav-btn right");
+var carrierNavButtonsLeft = document.getElementsByClassName(
+	"carriers-nav-btn left"
+);
+var carrierNavButtonsRight = document.getElementsByClassName(
+	"carriers-nav-btn right"
+);
 try {
-    carrierNavButtonsLeft.item(0).addEventListener("click", function() {
-        carrierScrollLeft(0);
-    });
-    carrierNavButtonsRight.item(0).addEventListener("click", function() {
-        carrierScrollRight(0);
-    });
-    carrierNavButtonsLeft.item(1).addEventListener("click", function() {
-        carrierScrollLeft(1)
-    });
-    carrierNavButtonsRight.item(1).addEventListener("click", function() {
-        carrierScrollRight(1)
-    });
+	carrierNavButtonsLeft.item(0).addEventListener("click", function () {
+		carrierScrollLeft(0);
+	});
+	carrierNavButtonsRight.item(0).addEventListener("click", function () {
+		carrierScrollRight(0);
+	});
+	carrierNavButtonsLeft.item(1).addEventListener("click", function () {
+		carrierScrollLeft(1);
+	});
+	carrierNavButtonsRight.item(1).addEventListener("click", function () {
+		carrierScrollRight(1);
+	});
 } catch (e) {
-    console.error(e);
+	console.error(e);
 }
 
 /**
@@ -297,7 +363,7 @@ try {
 //     } else {
 //         // if clicked carrier is not already active
 
-//         // remove active from all on click        
+//         // remove active from all on click
 //         [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
 //             el.removeAttribute("active");
 //         });
@@ -327,47 +393,67 @@ try {
 // }
 
 function handleCarriersChange(carriersWrapperIndex, cityName) {
-    // determine if wrapper is on left or right side
-    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-    var carrierWrapper = document.getElementsByClassName('map-side-panel__carriers-wrapper').item(leftRightSide);
-    var mspWrapper = document.getElementsByClassName("map-side-panel__msp-wrapper msp-wrapper").item(leftRightSide);
-    var cityDetails = datacenterDetails[cityName];
+	// determine if wrapper is on left or right side
+	var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+	var carrierWrapper = document
+		.getElementsByClassName("map-side-panel__carriers-wrapper")
+		.item(leftRightSide);
+	var mspWrapper = document
+		.getElementsByClassName("map-side-panel__msp-wrapper msp-wrapper")
+		.item(leftRightSide);
+	var cityDetails = datacenterDetails[cityName];
 
-    // hide carriers that aren't in the selected city
-    [...carrierWrapper.getElementsByClassName("service-item")].forEach(function(carrierEl){
-        if (cityDetails['carriers'].includes(carrierEl.getAttribute("carrier"))) {
-            carrierEl.style.display = 'block';
-        } else {
-            carrierEl.style.display = 'none';
-        }
-    });
+	// hide carriers that aren't in the selected city
+	[...carrierWrapper.getElementsByClassName("service-item")].forEach(
+		function (carrierEl) {
+			if (
+				cityDetails["carriers"].includes(
+					carrierEl.getAttribute("carrier")
+				)
+			) {
+				carrierEl.style.display = "block";
+			} else {
+				carrierEl.style.display = "none";
+			}
+		}
+	);
 
-    // hide msp providers that aren't in the selected city
-    [...mspWrapper.getElementsByClassName("msp-provider")].forEach(function(mspEl){
-        if (cityDetails['msps'].includes(mspEl.getAttribute("provider"))) {
-            mspEl.style.display = 'block';
-        } else {
-            mspEl.style.display = 'none';
-        }
-    });
+	// hide msp providers that aren't in the selected city
+	[...mspWrapper.getElementsByClassName("msp-provider")].forEach(function (
+		mspEl
+	) {
+		if (cityDetails["msps"].includes(mspEl.getAttribute("provider"))) {
+			mspEl.style.display = "block";
+		} else {
+			mspEl.style.display = "none";
+		}
+	});
 }
 
 function hideArrowButtons(carriersWrapperIndex) {
-    // determine if wrapper is on left or right side
-    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-    var networkTopDiv = document.getElementsByClassName('map-side-panel__network-top').item(leftRightSide);
-    [...networkTopDiv.getElementsByClassName('carriers-nav-btn')].forEach(function(btn) {
-        btn.style.display = 'none';
-    })
+	// determine if wrapper is on left or right side
+	var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+	var networkTopDiv = document
+		.getElementsByClassName("map-side-panel__network-top")
+		.item(leftRightSide);
+	[...networkTopDiv.getElementsByClassName("carriers-nav-btn")].forEach(
+		function (btn) {
+			btn.style.display = "none";
+		}
+	);
 }
 
 function showArrowButtons(carriersWrapperIndex) {
-    // determine if wrapper is on left or right side
-    var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-    var networkTopDiv = document.getElementsByClassName('map-side-panel__network-top').item(leftRightSide);
-    [...networkTopDiv.getElementsByClassName('carriers-nav-btn')].forEach(function(btn) {
-        btn.style.display = 'block';
-    })
+	// determine if wrapper is on left or right side
+	var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+	var networkTopDiv = document
+		.getElementsByClassName("map-side-panel__network-top")
+		.item(leftRightSide);
+	[...networkTopDiv.getElementsByClassName("carriers-nav-btn")].forEach(
+		function (btn) {
+			btn.style.display = "block";
+		}
+	);
 }
 
 // [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
