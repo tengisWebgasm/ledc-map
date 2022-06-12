@@ -11,6 +11,8 @@ var handleMapClick = (event) => {
 
 var handleCityClick = (event) => {
     event.stopPropagation();
+    event.preventDefault();
+    event.stopImmediatePropagation();
     if (event.currentTarget.hasAttribute('dc')) {
         if (selectStart.value === event.currentTarget.id) {
             selectStart.value = '';

@@ -296,6 +296,7 @@ p {
 	top: 50px;
 	transition: left 500ms cubic-bezier(0.45, 0, 0.55, 1),
 		top 500ms cubic-bezier(0.45, 0, 0.55, 1);
+	cursor: default;
 }
 
 #map-ping-panel[active] {
@@ -317,6 +318,8 @@ p {
 	white-space: nowrap;
 	bottom: 16px;
 	padding: 12px 16px;
+	transition: transform 0.3s ease-out;
+	transform-origin: bottom center;
 }
 
 #map-ping-content [city-label] {
@@ -707,7 +710,7 @@ p {
 	text-align: center;
 	color: #001F5C;
 
-	background-image: url("../public/Download.svg");
+	background-image: url("../public/Download-black.svg");
 	background-repeat: no-repeat;
 	background-position: 16px 50%;
 	background-color: transparent;
@@ -794,19 +797,55 @@ p {
 
 #map-controls-holder {
 	position: absolute;
+	display: flex;
+	justify-content: end;
 	z-index: 2;
 	bottom: 0;
 	transform: translateY(-88px);
 }
 
 .map-controls-wrapper {
-	margin-left: auto;
 	width: auto;
 	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+	border-radius: 6px;
+	overflow: hidden;
 }
 
 .map-control-zoom-btn {
+	width: 30px;
+	height: 30px;
+	border: none;
+	background-color: #ffffff;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: 10px;
+	cursor: pointer;
+	opacity: 0.7;
+	transition: opacity 0.2s ease-out, background-color 0.1s ease;
+}
 
+.map-control-zoom-btn:hover {
+	opacity: 1;
+}
+
+.map-control-zoom-btn:active {
+	background-color: #dadada;
+}
+
+#map-btn-zoom-in {
+	background-image: url("../public/plus.png");
+}
+
+#map-btn-zoom-out {
+	background-image: url("../public/minus.png");
+}
+
+#map-btn-zoom-reset {
+	border-top: 2px #dadada solid;
+	background-size: 15px;
+	background-image: url("../public/reset.png");
 }
 
 @media screen and (max-width: 1024px) {
@@ -853,10 +892,6 @@ p {
 	#map-element svg {
 		height: 90%;
 		max-height: 850px;
-	}
-
-	#map-element {
-		transform: translateX(-4%);
 	}
 
 	.carriers-nav-btn {
@@ -929,10 +964,7 @@ p {
 		opacity: 0;
 		visibility: hidden;
 		display: block;
-		transition: opacity 0.3s ease-out, visibility 0.3s;	}
-
-	#map-element {
-		transform: translateX(-8%);
+		transition: opacity 0.3s ease-out, visibility 0.3s;	
 	}
 
 	#map-element-label {

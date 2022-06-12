@@ -2,11 +2,11 @@ const vw = Math.max(
 	document.documentElement.clientWidth || 0,
 	window.innerWidth || 0
 );
-var mapElement = document.querySelector("#map-element");
-var sidePanel = document.querySelector("#map-side-panel");
+var mapElement = document.getElementById("map-element");
+var sidePanel = document.getElementById("map-side-panel");
 var sidePanelB = document.getElementById("map-side-panel-b");
-var selectStartCont = document.querySelector("#city-select-start");
-var selectEndCont = document.querySelector("#city-select-end");
+var selectStartCont = document.getElementById("city-select-start");
+var selectEndCont = document.getElementById("city-select-end");
 var selectStart = selectStartCont.querySelector("select");
 var selectEnd = selectEndCont.querySelector("select");
 var carrierWrapperLeft = document
@@ -15,11 +15,11 @@ var carrierWrapperLeft = document
 var carrierWrapperRight = document
 	.getElementsByClassName("map-side-panel__carriers-wrapper")
 	.item(1);
-var pingPanel = document.querySelector("#map-ping-panel");
+var pingPanel = document.getElementById("map-ping-panel");
 var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
 var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
-var pingPanelContent = pingPanel.querySelector("#map-ping-content");
-var pingPanelButton = pingPanel.querySelector("#map-ping-button");
+var pingPanelContent = document.getElementById("map-ping-content");
+var pingPanelButton = document.getElementById("map-ping-button");
 
 // function called when some starting point (data center) is selected
 function showSelection(cityName) {
@@ -85,6 +85,13 @@ function showSelection(cityName) {
 
 	// change carriers
 	handleCarriersChange(0, cityName);
+
+	// change learn more link and datasheet city name/link
+	var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(0);
+	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(0);
+	var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+	learnMoreLink.href = "/dc_location/" + cityName + "/";
+	downloadDataSheetBtn.innerHTML = capitalizedName;
 }
 
 var closeSelection = () => {
@@ -106,6 +113,10 @@ var closeSelection = () => {
 	if (expanded) {
 		expandMenu();
 	}
+	
+	// change download data sheet button text to "Select a city"
+	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(0);
+	downloadDataSheetBtn.innerHTML = "Select a city";
 
 	closeDestination();
 };
@@ -201,6 +212,13 @@ function selectDestination(cityName) {
 	if (!expanded) {
 		expandMenu();
 	}
+
+	// change learn more link and datasheet city name/link
+	var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(1);
+	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(1);
+	var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+	learnMoreLink.href = "/dc_location/" + cityName + "/";
+	downloadDataSheetBtn.innerHTML = capitalizedName;
 }
 
 var closeDestination = () => {
@@ -218,6 +236,10 @@ var closeDestination = () => {
 		(e) => e.removeAttribute("invisible")
 	);
 	pingPanel.removeAttribute("active");
+	
+	// change download data sheet button text to "Select a city"
+	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(1);
+	downloadDataSheetBtn.innerHTML = "Select a city";
 };
 
 selectStart.addEventListener("change", () => {
@@ -262,6 +284,7 @@ var expandIcon = sidePanel.querySelector(".expand-icon");
 var expandDistance = vw > 767 ? 88 : 148;
 var sidePanelBMaxHeight = vw > 767 ? "500px" : "60vh";
 var expandOverlay = document.getElementById("map-side-panel-overlay");
+
 function expandMenu() {
 	if (expanded) {
 		sidePanelB.style.maxHeight = "0px";
@@ -269,7 +292,7 @@ function expandMenu() {
 		expanded = false;
 		expandOverlay.style.visibility = "hidden";
 		expandOverlay.style.opacity = 0;
-	} else {
+	} else if (selectStart.value !== "" || selectEnd.value !== "") {
 		sidePanelB.style.maxHeight = sidePanelBMaxHeight;
 		expandIcon.style.transform = "rotate(180deg)";
 		window.scrollTo({
