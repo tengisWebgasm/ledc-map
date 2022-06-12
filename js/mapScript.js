@@ -291,10 +291,12 @@ function expandMenu() {
 		expanded = false;
 		expandOverlay.style.visibility = "hidden";
 		expandOverlay.style.opacity = 0;
-		window.scrollTo({
-			top: 0,
-			behavior: "smooth",
-		});
+		if (vw > 767) {
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
+		}
 	} else if (selectStart.value !== "" || selectEnd.value !== "") {
 		sidePanelB.style.maxHeight = sidePanelBMaxHeight;
 		expandIcon.style.transform = "rotate(180deg)";

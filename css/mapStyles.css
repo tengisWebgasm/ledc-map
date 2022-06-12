@@ -30,7 +30,7 @@ p {
 #map-wrapper {
 	height: 100%;
 	width: 100%;
-	position: absolute;
+	position: relative;
 }
 
 #map-side-panel-overlay {
@@ -524,13 +524,13 @@ p {
 }
 
 .carriers-nav-btn.left {
-	background-image: url("/ledc-map/public/arrow-left.svg");
+	background-image: url("/ledc-map/public/arrow-left-black.svg");
 	left: 0;
 	transform: translate(-50%, calc(-50% - 12px));
 }
 
 .carriers-nav-btn.right {
-	background-image: url("/ledc-map/public/arrow-right.svg");
+	background-image: url("/ledc-map/public/arrow-right-black.svg");
 	right: 0;
 	transform: translate(50%, calc(-50% - 12px));
 }
