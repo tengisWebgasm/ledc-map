@@ -281,7 +281,6 @@ setInterval(() => {
  */
 var expanded = false;
 var expandIcon = sidePanel.querySelector(".expand-icon");
-var expandDistance = vw > 767 ? 88 : 148;
 var sidePanelBMaxHeight = vw > 767 ? "500px" : "60vh";
 var expandOverlay = document.getElementById("map-side-panel-overlay");
 
@@ -292,17 +291,23 @@ function expandMenu() {
 		expanded = false;
 		expandOverlay.style.visibility = "hidden";
 		expandOverlay.style.opacity = 0;
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
 	} else if (selectStart.value !== "" || selectEnd.value !== "") {
 		sidePanelB.style.maxHeight = sidePanelBMaxHeight;
 		expandIcon.style.transform = "rotate(180deg)";
-		window.scrollTo({
-			top:
-				sidePanel.offsetTop -
-				sidePanel.scrollTop +
-				sidePanel.clientTop -
-				200,
-			behavior: "smooth",
-		});
+		if (vw > 767){
+			window.scrollTo({
+				top:
+					sidePanel.offsetTop -
+					sidePanel.scrollTop +
+					sidePanel.clientTop -
+					200,
+				behavior: "smooth",
+			});
+		}
 		expanded = true;
 		expandOverlay.style.visibility = "visible";
 		expandOverlay.style.opacity = 0.6;
