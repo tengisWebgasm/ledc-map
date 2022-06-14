@@ -25,7 +25,7 @@
                     'albury': {
                         // CAN1
                         'endpoint': {
-                            
+
                         },
                         'carriers': [
                             'ledc',
@@ -116,24 +116,22 @@
                         <div id="map-element">
                             <script src="js/clickHandlers.js"></script>
                             <embed src="public/Map.svg" alt="Map of Australia" id="map-img"></embed>
-                            <svg xmlns="http://www.w3.org/2000/svg" id="map-svg"
-                                viewBox="0 0 1440 784" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
                                 <style>
-
                                     [city-lines] path {
                                         opacity: 0.3;
                                         pointer-events: none;
                                         stroke: #83ADFF;
                                         transition: all 0.2s ease-out;
                                     }
-    
+
                                     [city-lines] path[on] {
                                         opacity: 1;
                                         stroke-dasharray: 1200;
                                         stroke-dashoffset: 1200;
                                         animation: dash 2000ms linear forwards;
                                     }
-    
+
                                     [city-lines] path[on][selected] {
                                         stroke-dasharray: 1200;
                                         stroke-dashoffset: 1200;
@@ -141,47 +139,47 @@
                                         opacity: 1;
                                         stroke: #001F5C;
                                     }
-    
+
                                     @keyframes dash {
                                         to {
                                             stroke-dashoffset: 0;
                                         }
                                     }
-    
+
                                     .city-group {
                                         opacity: 1;
                                         transition: opacity 200ms ease;
                                         pointer-events: none;
                                     }
-    
+
                                     .city-group[on] {
                                         opacity: 1;
                                         cursor: pointer;
                                         pointer-events: all;
                                     }
-    
+
                                     .city-group [pulse] {
                                         opacity: 0;
                                     }
-    
+
                                     .city-group[dc] {
                                         opacity: 1;
                                         cursor: pointer;
                                         pointer-events: all;
                                     }
-    
+
                                     .city-group[dc][on] [pulse] {
                                         opacity: 1;
                                     }
-    
+
                                     .city-group ellipse[identifier] {
                                         fill: #34C759;
                                     }
-    
+
                                     .city-group[dc][on] ellipse[identifier] {
                                         fill: #001F5C;
                                     }
-    
+
                                     .city-group[soon] ellipse[identifier] {
                                         fill: #FF9500;
                                     }
@@ -190,7 +188,7 @@
                                         opacity: 0;
                                         stroke: transparent;
                                     }
-    
+
                                     .city-name {
                                         font: Metropolis, sans-serif;
                                         font-weight: 400;
@@ -203,17 +201,23 @@
                                     <!-- NEW LINE HELPER -->
                                     <!-- <circle left-node cx="0" cy="0" r="2" fill="green" />
                                     <circle right-node cx="0" cy="0" r="2" fill="green" /> -->
-    
-                                    <path dc="albury" city="nowra" d="M827,571 C850.65,550.58 883.15,541.67 917.9,547.4" />
+
+                                    <path dc="albury" city="nowra"
+                                        d="M827,571 C850.65,550.58 883.15,541.67 917.9,547.4" />
                                     <path dc="albury" city="waggaWagga" d="M827 571C825.83 556 829.67 548 838.5,547" />
-                                    <path dc="albury" city="traralgon" d="M827,571 C838.5,583.63 842.3,605.67 821,625.4" />
+                                    <path dc="albury" city="traralgon"
+                                        d="M827,571 C838.5,583.63 842.3,605.67 821,625.4" />
                                     <path dc="albury" city="shepparton" d="M827 571C807.3 564 792.6 564 782.9,571" />
-                                    <path dc="dubbo" city="tamworth" d="M876.6,468 C872.52,439.67 913.58,411.88 938,425" />
-                                    <path dc="dubbo" city="bathurst" d="M876.6,468 C893.15,468.13 903.95,479.62 903,496.6" />
+                                    <path dc="dubbo" city="tamworth"
+                                        d="M876.6,468 C872.52,439.67 913.58,411.88 938,425" />
+                                    <path dc="dubbo" city="bathurst"
+                                        d="M876.6,468 C893.15,468.13 903.95,479.62 903,496.6" />
                                     <path dc="dubbo" city="sydneyNextDc"
                                         d="M876.6,468 C874.58,504.88 899.77,513.87 935.5,513.7" />
-                                    <path dc="dubbo" city="waggaWagga" d="M876.6 468C858.9 487.33 846.2 513.67 838.5,547" />
-                                    <path dc="newcastle" city="tamworth" d="M946.4,486 C950.8,471.32 962,432.73 938,425" />
+                                    <path dc="dubbo" city="waggaWagga"
+                                        d="M876.6 468C858.9 487.33 846.2 513.67 838.5,547" />
+                                    <path dc="newcastle" city="tamworth"
+                                        d="M946.4,486 C950.8,471.32 962,432.73 938,425" />
                                     <path dc="newcastle" city="coffsHabour"
                                         d="M946.4,486 C963.83,465.77 976.92,430.18 981,410.6" />
                                     <path dc="newcastle" city="bathurst"
@@ -282,8 +286,7 @@
                                         d="M917.9 547.4C886.43 540.27 859.97 540.13 838.5,547" />
                                     <path dc="nowra" city="traralgon"
                                         d="M917.9,547.4 C917.1,583.35 882.4,617.8 821,625.4" />
-                                    <path dc="waggaWagga" city="albury"
-                                        d="M838.5 547C829.67 548 825.83 556 827,571" />
+                                    <path dc="waggaWagga" city="albury" d="M838.5 547C829.67 548 825.83 556 827,571" />
                                     <path dc="waggaWagga" city="dubbo"
                                         d="M838.5 547C846.2 513.67 858.9 487.33 876.6,468" />
                                     <path dc="waggaWagga" city="sydneyNextDc"
@@ -320,12 +323,11 @@
                                         d="M785,596 C785.35,563.82 752,531.13 731,521.5" />
                                     <path dc="bendigo" city="adeleide"
                                         d="M785,596 C762.27,556.02 690.48,517.88 655.6,539.8" />
-                                    <path dc="shepparton" city="albury"
-                                        d="M782.9 571C792.6 564 807.3 564 827,571" />
+                                    <path dc="shepparton" city="albury" d="M782.9 571C792.6 564 807.3 564 827,571" />
                                     <path dc="shepparton" city="traralgon"
                                         d="M782.9,571 C800,581.78 817.05,597.72 821,625.4" />
                                     <path dc="shepparton" city="bendigo"
-                                        d="M782.9,571 C785.55,575.53 792.1,581.72 785,596" /> 
+                                        d="M782.9,571 C785.55,575.53 792.1,581.72 785,596" />
                                     <path dc="shepparton" city="mildura"
                                         d="M782.9,571 C785.6,541.95 771.25,517.3 731,521.5" />
                                     <path dc="geelong" city="melbourne"
@@ -361,183 +363,299 @@
                                     <path dc="adeleide" city="mildura"
                                         d="M655.6 539.8C675.73 526.7 700.87 520.6 731,521.5" />
                                 </g>
-    
-                                <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
-                                    <ellipse pulse cx="827" cy="571" rx="16" ry="16" fill="url('#pulseFill')"
-                                        restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                    </ellipse>
-                                    <ellipse cx="827" cy="571" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="827" cy="571" rx="5" ry="5" identifier />
-                                    <text x="814.715" y="591" class="city-name">Albury</text>
-                                </g>
-    
-                                <g id="dubbo" class="city-group" dc onclick="handleCityClick(event)">
-                                    <ellipse pulse cx="876.6" cy="468" rx="16" ry="16" fill="url('#pulseFill')"
-                                        restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                    </ellipse>
-                                    <ellipse cx="876.6" cy="468" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="876.6" cy="468" rx="5" ry="5" identifier />
-                                    <text x="864" y="488" class="city-name">Dubbo</text>
-                                </g>
-    
-                                <g id="newcastle" class="city-group" dc onclick="handleCityClick(event)">
-                                    <ellipse pulse cx="946.4" cy="486" rx="16" ry="16" fill="url('#pulseFill')"
-                                        restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                    </ellipse>
-                                    <ellipse cx="946.4" cy="486" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="946.4" cy="486" rx="5" ry="5" identifier />
-                                    <text x="955.4" y="489" class="city-name">Newcastle</text>
-                                </g>
-    
-                                <g id="tamworth" class="city-group" dc onclick="handleCityClick(event)">
-                                    <ellipse pulse cx="938" cy="425" rx="16" ry="16" fill="url('#pulseFill')"
-                                        restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s" repeatCount="indefinite"
-                                            keyTimes="0;0.5;1" keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                    </ellipse>
-                                    <ellipse cx="938" cy="425" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="938" cy="425" rx="5" ry="5" identifier />
-                                    <text x="914.46" y="445" class="city-name">Tamworth</text>
-                                </g>
-    
-                                <g id="cairns" class="city-group" soon>
-    
-                                    <ellipse cx="816.6" cy="97" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="816.6" cy="97" rx="5" ry="5" identifier />
-                                    <text x="804.585" y="117" class="city-name">Cairns</text>
-                                </g>
-    
-                                <g id="bundaberg" class="city-group" soon>
-    
-                                    <ellipse cx="956.6" cy="286" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="956.6" cy="286" rx="5" ry="5" identifier />
-                                    <text x="934.955" y="306" class="city-name">Bundaberg</text>
-                                </g>
-    
-                                <g id="brisbaneNextDc" class="city-group" soon>
-    
-                                    <ellipse cx="976" cy="351" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="976" cy="351" rx="5" ry="5" identifier />
-                                    <text x="943.915" y="371" class="city-name">Brisbane - NextDC</text>
-                                </g>
-    
-                                <g id="coffsHabour" class="city-group" soon>
-    
-                                    <ellipse cx="981" cy="410.6" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="981" cy="410.6" rx="5" ry="5" identifier />
-                                    <text x="990" y="413.6" class="city-name">Coffs Habour</text>
-                                </g>
-    
-                                <g id="bathurst" class="city-group" soon>
-    
-                                    <ellipse cx="903" cy="496.6" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="903" cy="496.6" rx="5" ry="5" identifier />
-                                    <text x="886.665" y="516.6" class="city-name">Bathurst</text>
-                                </g>
-    
-                                <g id="sydneyEquinix" class="city-group" soon>
-    
-                                    <ellipse cx="937.6" cy="503.5" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="937.6" cy="503.5" rx="5" ry="5" identifier />
-                                    <text x="946.6" y="506.5" class="city-name">Sydney - Equinix</text>
-                                </g>
-    
-                                <g id="sydneyNextDc" class="city-group" soon>
-    
-                                    <ellipse cx="935.5" cy="513.7" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="935.5" cy="513.7" rx="5" ry="5" identifier />
-                                    <text x="944.5" y="516.7" class="city-name">Sydney - NextDC</text>
-                                </g>
-    
-                                <g id="nowra" class="city-group" soon>
-    
-                                    <ellipse cx="917.9" cy="547.4" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="917.9" cy="547.4" rx="5" ry="5" identifier />
-                                    <text x="926.9" y="550.4" class="city-name">Nowra</text>
-                                </g>
-    
-                                <g id="waggaWagga" class="city-group" soon>
-    
-                                    <ellipse cx="838.5" cy="547" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="838.5" cy="547" rx="5" ry="5" identifier />
-                                    <text x="810.87" y="567" class="city-name">Wagga Wagga</text>
-                                </g>
-    
-                                <g id="traralgon" class="city-group" soon>
-    
-                                    <ellipse cx="821" cy="625.4" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="821" cy="625.4" rx="5" ry="5" identifier />
-                                    <text x="803.18" y="645.4" class="city-name">Traralgon</text>
-                                </g>
-    
-                                <g id="melbourne" class="city-group" soon>
-    
-                                    <ellipse cx="794.6" cy="618" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="794.6" cy="618" rx="5" ry="5" identifier />
-                                    <text x="773.27" y="638" class="city-name">Melbourne</text>
-                                </g>
-    
-                                <g id="bendigo" class="city-group" soon>
-    
-                                    <ellipse cx="785" cy="596" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="785" cy="596" rx="5" ry="5" identifier />
-                                    <text x="768.89" y="616" class="city-name">Bendigo</text>
-                                </g>
-    
-                                <g id="shepparton" class="city-group" soon>
-    
-                                    <ellipse cx="782.9" cy="571" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="782.9" cy="571" rx="5" ry="5" identifier />
-                                    <text x="760.265" y="591" class="city-name">Shepparton</text>
-                                </g>
-    
-                                <g id="geelong" class="city-group" soon>
-    
-                                    <ellipse cx="781.5" cy="628.4" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="781.5" cy="628.4" rx="5" ry="5" identifier />
-                                    <text x="765.39" y="648.4" class="city-name">Geelong</text>
-                                </g>
-    
-                                <g id="ballarat" class="city-group" soon>
-    
-                                    <ellipse cx="768.3" cy="612.3" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="768.3" cy="612.3" rx="5" ry="5" identifier />
-                                    <text x="753.495" y="632.3" class="city-name">Ballarat</text>
-                                </g>
-    
-                                <g id="horsham" class="city-group" soon>
-    
-                                    <ellipse cx="736.8" cy="591" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="736.8" cy="591" rx="5" ry="5" identifier />
-                                    <text x="719.25" y="611" class="city-name">Horsham</text>
-                                </g>
-    
-                                <g id="mildura" class="city-group" soon>
-    
-                                    <ellipse cx="731" cy="521.5" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="731" cy="521.5" rx="5" ry="5" identifier />
-                                    <text x="716.24" y="541.5" class="city-name">Mildura</text>
-                                </g>
-    
-                                <g id="adeleide" class="city-group" soon>
-    
-                                    <ellipse cx="655.6" cy="539.8" rx="7" ry="7" fill="white" />
-                                    <ellipse cx="655.6" cy="539.8" rx="5" ry="5" identifier />
-                                    <text x="638.5" y="559.8" class="city-name">Adeleide</text>
+
+                                <g city-pins>
+
+
+                                    <g id="cairns" class="city-group" soon>
+
+                                        <ellipse cx="820.7371128602052" cy="97.38728146147982" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="820.7371128602052" cy="97.38728146147982" rx="5" ry="5"
+                                            identifier />
+                                        <text x="806.2871128602052" y="111.38728146147982"
+                                            class="city-name">Cairns</text>
+                                    </g>
+
+                                    <g id="townsville" class="city-group" soon>
+
+                                        <ellipse cx="844.9244404433512" cy="159.17885905326798" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="844.9244404433512" cy="159.17885905326798" rx="5" ry="5"
+                                            identifier />
+                                        <text x="821.5744404433511" y="173.17885905326798"
+                                            class="city-name">Townsville</text>
+                                    </g>
+
+                                    <g id="mackay" class="city-group" soon>
+
+                                        <ellipse cx="898.843626788182" cy="209.02430572597478" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="898.843626788182" cy="209.02430572597478" rx="5" ry="5"
+                                            identifier />
+                                        <text x="881.593626788182" y="223.02430572597478"
+                                            class="city-name">Mackay</text>
+                                    </g>
+
+                                    <g id="rockhampton" class="city-group" soon>
+
+                                        <ellipse cx="929.0063970255691" cy="268.1735579755684" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="929.0063970255691" cy="268.1735579755684" rx="5" ry="5"
+                                            identifier />
+                                        <text x="898.056397025569" y="282.1735579755684"
+                                            class="city-name">Rockhampton</text>
+                                    </g>
+
+                                    <g id="gladstone" class="city-group" soon>
+
+                                        <ellipse cx="946.2264945736364" cy="280.5700901634841" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="946.2264945736364" cy="280.5700901634841" rx="5" ry="5"
+                                            identifier />
+                                        <text x="923.3264945736364" y="294.5700901634841"
+                                            class="city-name">Gladstone</text>
+                                    </g>
+
+                                    <g id="bundaberg" class="city-group" soon>
+
+                                        <ellipse cx="970.8419788819489" cy="307.23230769717986" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="970.8419788819489" cy="307.23230769717986" rx="5" ry="5"
+                                            identifier />
+                                        <text x="946.2419788819489" y="321.23230769717986"
+                                            class="city-name">Bundaberg</text>
+                                    </g>
+
+                                    <g id="nextDcBrisbane" class="city-group" soon>
+
+                                        <ellipse cx="986.1136606577933" cy="376.6145494696118" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="986.1136606577933" cy="376.6145494696118" rx="5" ry="5"
+                                            identifier />
+                                        <text x="947.4136606577932" y="390.6145494696118" class="city-name">NextDC
+                                            Brisbane</text>
+                                    </g>
+
+                                    <g id="coffsHarbour" class="city-group" soon>
+
+                                        <ellipse cx="988.2315503926139" cy="451.4524644421419" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="988.2315503926139" cy="451.4524644421419" rx="5" ry="5"
+                                            identifier />
+                                        <text x="997.2315503926139" y="454.4524644421419" class="city-name">Coffs
+                                            Harbour</text>
+                                    </g>
+
+                                    <g id="tamworth" class="city-group" dc onclick="handleCityClick(event)">
+                                        <ellipse pulse cx="938.2230997754256" cy="472.2941073715606" rx="16" ry="16"
+                                            fill="url('#pulseFill')" restart="always">
+                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        </ellipse>
+                                        <ellipse cx="938.2230997754256" cy="472.2941073715606" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="938.2230997754256" cy="472.2941073715606" rx="5" ry="5"
+                                            identifier />
+                                        <text x="915.9730997754256" y="486.2941073715606"
+                                            class="city-name">Tamworth</text>
+                                    </g>
+
+                                    <g id="newcastle" class="city-group" dc onclick="handleCityClick(event)">
+                                        <ellipse pulse cx="957.1874341790473" cy="520.8417765102862" rx="16" ry="16"
+                                            fill="url('#pulseFill')" restart="always">
+                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        </ellipse>
+                                        <ellipse cx="957.1874341790473" cy="520.8417765102862" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="957.1874341790473" cy="520.8417765102862" rx="5" ry="5"
+                                            identifier />
+                                        <text x="966.1874341790473" y="523.8417765102862"
+                                            class="city-name">Newcastle</text>
+                                    </g>
+
+                                    <g id="dubbo" class="city-group" dc onclick="handleCityClick(event)">
+                                        <ellipse pulse cx="885.5269382136016" cy="503.37192318141155" rx="16" ry="16"
+                                            fill="url('#pulseFill')" restart="always">
+                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        </ellipse>
+                                        <ellipse cx="885.5269382136016" cy="503.37192318141155" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="885.5269382136016" cy="503.37192318141155" rx="5" ry="5"
+                                            identifier />
+                                        <text x="870.7269382136017" y="517.3719231814116" class="city-name">Dubbo</text>
+                                    </g>
+
+                                    <g id="bathurst" class="city-group" soon>
+
+                                        <ellipse cx="907.7533334837127" cy="534.1702107457971" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="907.7533334837127" cy="534.1702107457971" rx="5" ry="5"
+                                            identifier />
+                                        <text x="889.0533334837127" y="548.1702107457971"
+                                            class="city-name">Bathurst</text>
+                                    </g>
+
+                                    <g id="nextDcSydney" class="city-group" soon>
+
+                                        <ellipse cx="943.1103228769467" cy="543.8377694663637" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="943.1103228769467" cy="543.8377694663637" rx="5" ry="5"
+                                            identifier />
+                                        <text x="952.1103228769467" y="546.8377694663637" class="city-name">NextDC
+                                            Sydney</text>
+                                    </g>
+
+                                    <g id="equinixSydney" class="city-group" soon>
+
+                                        <ellipse cx="944.5112128535308" cy="547.1945896169543" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="944.5112128535308" cy="547.1945896169543" rx="5" ry="5"
+                                            identifier />
+                                        <text x="953.5112128535308" y="550.1945896169543" class="city-name">Equinix
+                                            Sydney</text>
+                                    </g>
+
+                                    <g id="nowra" class="city-group" soon>
+
+                                        <ellipse cx="931.0198861397006" cy="573.0120312852273" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="931.0198861397006" cy="573.0120312852273" rx="5" ry="5"
+                                            identifier />
+                                        <text x="940.0198861397006" y="576.0120312852273" class="city-name">Nowra</text>
+                                    </g>
+
+                                    <g id="waggaWagga" class="city-group" soon>
+
+                                        <ellipse cx="857.2035310977211" cy="579.1149684076598" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="857.2035310977211" cy="579.1149684076598" rx="5" ry="5"
+                                            identifier />
+                                        <text x="841.3035310977211" y="593.1149684076598" class="city-name">Wagga</text>
+                                    </g>
+
+                                    <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
+                                        <ellipse pulse cx="847.1891833379199" cy="604.6290705436064" rx="16" ry="16"
+                                            fill="url('#pulseFill')" restart="always">
+                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        </ellipse>
+                                        <ellipse cx="847.1891833379199" cy="604.6290705436064" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="847.1891833379199" cy="604.6290705436064" rx="5" ry="5"
+                                            identifier />
+                                        <text x="832.9891833379198" y="618.6290705436064"
+                                            class="city-name">Albury</text>
+                                    </g>
+
+                                    <g id="mildura" class="city-group" soon>
+
+                                        <ellipse cx="738.4094518808859" cy="555.006213326951" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="738.4094518808859" cy="555.006213326951" rx="5" ry="5"
+                                            identifier />
+                                        <text x="722.0094518808859" y="569.006213326951"
+                                            class="city-name">Mildura</text>
+                                    </g>
+
+                                    <g id="shepparton" class="city-group" soon>
+
+                                        <ellipse cx="812.678144620788" cy="612.6407748059952" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="812.678144620788" cy="612.6407748059952" rx="5" ry="5"
+                                            identifier />
+                                        <text x="786.678144620788" y="626.6407748059952"
+                                            class="city-name">Shepparton</text>
+                                    </g>
+
+                                    <g id="traralgon" class="city-group" soon>
+
+                                        <ellipse cx="838.4615831516118" cy="660.663046547541" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="838.4615831516118" cy="660.663046547541" rx="5" ry="5"
+                                            identifier />
+                                        <text x="817.0115831516117" y="674.663046547541"
+                                            class="city-name">Traralgon</text>
+                                    </g>
+
+                                    <g id="bendigo" class="city-group" soon>
+
+                                        <ellipse cx="787.1605135654225" cy="622.5565335361689" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="787.1605135654225" cy="622.5565335361689" rx="5" ry="5"
+                                            identifier />
+                                        <text x="768.7105135654225" y="636.5565335361689"
+                                            class="city-name">Bendigo</text>
+                                    </g>
+
+                                    <g id="nextDcMelbourne" class="city-group" soon>
+
+                                        <ellipse cx="802.041657773514" cy="650.7584831508952" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="802.041657773514" cy="650.7584831508952" rx="5" ry="5"
+                                            identifier />
+                                        <text x="759.441657773514" y="664.7584831508952" class="city-name">NextDC
+                                            Melbourne</text>
+                                    </g>
+
+                                    <g id="adelaide" class="city-group" soon>
+
+                                        <ellipse cx="657.9170116301523" cy="573.9235971607628" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="657.9170116301523" cy="573.9235971607628" rx="5" ry="5"
+                                            identifier />
+                                        <text x="638.3670116301523" y="587.9235971607628"
+                                            class="city-name">Adelaide</text>
+                                    </g>
+
+                                    <g id="horsham" class="city-group" soon>
+
+                                        <ellipse cx="739.8547027124558" cy="621.4676815159634" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="739.8547027124558" cy="621.4676815159634" rx="5" ry="5"
+                                            identifier />
+                                        <text x="719.5547027124559" y="635.4676815159634"
+                                            class="city-name">Horsham</text>
+                                    </g>
+
+                                    <g id="ballarat" class="city-group" soon>
+
+                                        <ellipse cx="777.4045299653333" cy="643.5347364468175" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="777.4045299653333" cy="643.5347364468175" rx="5" ry="5"
+                                            identifier />
+                                        <text x="760.4045299653333" y="657.5347364468175"
+                                            class="city-name">Ballarat</text>
+                                    </g>
+
+                                    <g id="geelong" class="city-group" soon>
+
+                                        <ellipse cx="788.7832034310165" cy="659.4231208598454" rx="7" ry="7"
+                                            fill="white" />
+                                        <ellipse cx="788.7832034310165" cy="659.4231208598454" rx="5" ry="5"
+                                            identifier />
+                                        <text x="769.7832034310165" y="673.4231208598454"
+                                            class="city-name">Geelong</text>
+                                    </g>
+
                                 </g>
                                 <defs>
                                     <radialGradient id="pulseFill">
@@ -554,7 +672,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter1_d" x="516.515" y="91.7056" width="436.143" height="155.511"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -566,7 +685,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter2_d" x="515.228" y="73.3335" width="422.953" height="160.121"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -578,7 +698,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter3_d" x="539.166" y="117.454" width="397.846" height="115.501"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -590,7 +711,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter4_d" x="111.88" y="170.611" width="825.97" height="140.106"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -602,7 +724,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter5_d" x="122.943" y="152.314" width="815.744" height="129.37"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -614,7 +737,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter6_d" x="264.449" y="175.621" width="673.876" height="115.687"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -626,7 +750,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter7_d" x="232.294" y="157.289" width="704.4" height="108.924"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -638,7 +763,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter8_d" x="515.241" y="108.346" width="425.844" height="103.305"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -650,7 +776,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter9_d" x="538.645" y="117.315" width="403.723" height="114.947"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -662,7 +789,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter10_d" x="265.582" y="173.838" width="678.119" height="109.241"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -674,7 +802,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter11_d" x="232.864" y="156.566" width="707.969" height="111.952"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -686,7 +815,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter12_d" x="111.977" y="169.628" width="828.747" height="81.3457"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -698,7 +828,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter13_d" x="123.047" y="150.233" width="817.602" height="80.6919"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -710,7 +841,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                     <filter id="filter14_d" x="509.846" y="124.858" width="430.953" height="86.3907"
                                         filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -722,7 +854,8 @@
                                         <feColorMatrix type="matrix"
                                             values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
                                         <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                            result="shape" />
                                     </filter>
                                 </defs>
                             </svg>
@@ -731,8 +864,10 @@
                                     <div id="map__ping-main">
                                         <svg width="9" height="41" viewBox="0 0 9 41" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="4.5" cy="5" r="1.5" transform="rotate(-180 4.5 5)" fill="#FFFFFF" />
-                                            <circle cx="4.5" cy="5" r="4" transform="rotate(-180 4.5 5)" stroke="#FFFFFF" />
+                                            <circle cx="4.5" cy="5" r="1.5" transform="rotate(-180 4.5 5)"
+                                                fill="#FFFFFF" />
+                                            <circle cx="4.5" cy="5" r="4" transform="rotate(-180 4.5 5)"
+                                                stroke="#FFFFFF" />
                                             <circle cx="4.5" cy="36" r="1.5" transform="rotate(-180 4.5 36)"
                                                 fill="#FFFFFF" />
                                             <circle cx="4.5" cy="36" r="4" transform="rotate(-180 4.5 36)"
@@ -817,62 +952,56 @@
                                         <div class="map-side-panel__carriers-wrapper">
                                             <button class="service-item" carrier="ledc" href="#">
                                                 <div>
-                                                    <img src="./public/providers/ledc.svg"
-                                                        loading="lazy" alt="ledc">
+                                                    <img src="./public/providers/ledc.svg" loading="lazy" alt="ledc">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="vocus" href="#">
                                                 <div>
-                                                    <img src="./public/providers/Vocus.svg"
-                                                        loading="lazy" alt="vocus">
+                                                    <img src="./public/providers/Vocus.svg" loading="lazy" alt="vocus">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="telstra" href="#">
                                                 <div>
-                                                    <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="telstra">
+                                                    <img src="./public/providers/Telstra.png" loading="lazy"
+                                                        alt="telstra">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="encoo" href="#">
                                                 <div>
-                                                    <img src="./public/providers/encoo.png"
-                                                        loading="lazy" alt="encoo">
+                                                    <img src="./public/providers/encoo.png" loading="lazy" alt="encoo">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="transgrid" href="#">
                                                 <div>
-                                                    <img src="./public/providers/transgrid.png"
-                                                        loading="lazy" alt="transgrid">
+                                                    <img src="./public/providers/transgrid.png" loading="lazy"
+                                                        alt="transgrid">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="vergetel" href="#">
                                                 <div>
-                                                    <img src="./public/providers/vergetel.png"
-                                                        loading="lazy" alt="vergetel">
+                                                    <img src="./public/providers/vergetel.png" loading="lazy"
+                                                        alt="vergetel">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="tpg" href="#">
                                                 <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="tpg">
+                                                    <img src="./public/providers/tpg.png" loading="lazy" alt="tpg">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="superloop" href="#">
                                                 <div>
-                                                    <img src="./public/providers/superloop.svg"
-                                                        loading="lazy" alt="superloop">
+                                                    <img src="./public/providers/superloop.svg" loading="lazy"
+                                                        alt="superloop">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="swoop" href="#">
                                                 <div>
-                                                    <img src="./public/providers/swoop.svg"
-                                                        loading="lazy" alt="swoop">
+                                                    <img src="./public/providers/swoop.svg" loading="lazy" alt="swoop">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="nexon" href="#">
                                                 <div>
-                                                    <img src="./public/providers/nexon.png"
-                                                        loading="lazy" alt="nexon">
+                                                    <img src="./public/providers/nexon.png" loading="lazy" alt="nexon">
                                                 </div>
                                             </button>
                                         </div>
@@ -883,14 +1012,14 @@
                                             <div class="map-side-panel__msp-wrapper msp-wrapper">
                                                 <div class="msp-provider" provider="regionalIt">
                                                     <div>
-                                                        <img src="./public/providers/regionalIt.gif"
-                                                            loading="lazy" alt="regionalIt">
+                                                        <img src="./public/providers/regionalIt.gif" loading="lazy"
+                                                            alt="regionalIt">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="toim">
                                                     <div>
-                                                        <img src="./public/providers/toim.svg"
-                                                            loading="lazy" alt="toim">
+                                                        <img src="./public/providers/toim.svg" loading="lazy"
+                                                            alt="toim">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="newcastleConnect">
@@ -901,14 +1030,14 @@
                                                 </div>
                                                 <div class="msp-provider" provider="sabervox">
                                                     <div>
-                                                        <img src="./public/providers/sabervox.png"
-                                                            loading="lazy" alt="sabervox">
+                                                        <img src="./public/providers/sabervox.png" loading="lazy"
+                                                            alt="sabervox">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="countrytell">
                                                     <div>
-                                                        <img src="./public/providers/countryTell.png"
-                                                            loading="lazy" alt="countrytell">
+                                                        <img src="./public/providers/countryTell.png" loading="lazy"
+                                                            alt="countrytell">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="tamworthBroadcast">
@@ -923,20 +1052,20 @@
                                                 <div class="map-side-panel__msp-wrapper">
                                                     <div class="msp-provider cloud-provider" cloud="azure">
                                                         <div>
-                                                            <img src="./public/providers/azure.png"
-                                                                loading="lazy" alt="azure">
+                                                            <img src="./public/providers/azure.png" loading="lazy"
+                                                                alt="azure">
                                                         </div>
                                                     </div>
                                                     <div class="msp-provider cloud-provider" cloud="google">
                                                         <div>
-                                                            <img src="./public/providers/google.png"
-                                                                loading="lazy" alt="google">
+                                                            <img src="./public/providers/google.png" loading="lazy"
+                                                                alt="google">
                                                         </div>
                                                     </div>
                                                     <div class="msp-provider cloud-provider" cloud="aws">
                                                         <div>
-                                                            <img src="./public/providers/aws.png"
-                                                                loading="lazy" alt="aws">
+                                                            <img src="./public/providers/aws.png" loading="lazy"
+                                                                alt="aws">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -959,62 +1088,56 @@
                                         <div class="map-side-panel__carriers-wrapper">
                                             <button class="service-item" carrier="ledc" href="#">
                                                 <div>
-                                                    <img src="./public/providers/ledc.svg"
-                                                        loading="lazy" alt="ledc">
+                                                    <img src="./public/providers/ledc.svg" loading="lazy" alt="ledc">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="vocus" href="#">
                                                 <div>
-                                                    <img src="./public/providers/Vocus.svg"
-                                                        loading="lazy" alt="vocus">
+                                                    <img src="./public/providers/Vocus.svg" loading="lazy" alt="vocus">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="telstra" href="#">
                                                 <div>
-                                                    <img src="./public/providers/Telstra.png"
-                                                        loading="lazy" alt="telstra">
+                                                    <img src="./public/providers/Telstra.png" loading="lazy"
+                                                        alt="telstra">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="encoo" href="#">
                                                 <div>
-                                                    <img src="./public/providers/encoo.png"
-                                                        loading="lazy" alt="encoo">
+                                                    <img src="./public/providers/encoo.png" loading="lazy" alt="encoo">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="transgrid" href="#">
                                                 <div>
-                                                    <img src="./public/providers/transgrid.png"
-                                                        loading="lazy" alt="transgrid">
+                                                    <img src="./public/providers/transgrid.png" loading="lazy"
+                                                        alt="transgrid">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="vergetel" href="#">
                                                 <div>
-                                                    <img src="./public/providers/vergetel.png"
-                                                        loading="lazy" alt="vergetel">
+                                                    <img src="./public/providers/vergetel.png" loading="lazy"
+                                                        alt="vergetel">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="tpg" href="#">
                                                 <div>
-                                                    <img src="./public/providers/tpg.png"
-                                                        loading="lazy" alt="tpg">
+                                                    <img src="./public/providers/tpg.png" loading="lazy" alt="tpg">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="superloop" href="#">
                                                 <div>
-                                                    <img src="./public/providers/superloop.svg"
-                                                        loading="lazy" alt="superloop">
+                                                    <img src="./public/providers/superloop.svg" loading="lazy"
+                                                        alt="superloop">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="swoop" href="#">
                                                 <div>
-                                                    <img src="./public/providers/swoop.svg"
-                                                        loading="lazy" alt="swoop">
+                                                    <img src="./public/providers/swoop.svg" loading="lazy" alt="swoop">
                                                 </div>
                                             </button>
                                             <button class="service-item" carrier="nexon" href="#">
                                                 <div>
-                                                    <img src="./public/providers/nexon.png"
-                                                        loading="lazy" alt="nexon">
+                                                    <img src="./public/providers/nexon.png" loading="lazy" alt="nexon">
                                                 </div>
                                             </button>
                                         </div>
@@ -1025,14 +1148,14 @@
                                             <div class="map-side-panel__msp-wrapper msp-wrapper">
                                                 <div class="msp-provider" provider="regionalIt">
                                                     <div>
-                                                        <img src="./public/providers/regionalIt.gif"
-                                                            loading="lazy" alt="regionalIt">
+                                                        <img src="./public/providers/regionalIt.gif" loading="lazy"
+                                                            alt="regionalIt">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="toim">
                                                     <div>
-                                                        <img src="./public/providers/toim.svg"
-                                                            loading="lazy" alt="toim">
+                                                        <img src="./public/providers/toim.svg" loading="lazy"
+                                                            alt="toim">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="newcastleConnect">
@@ -1043,14 +1166,14 @@
                                                 </div>
                                                 <div class="msp-provider" provider="sabervox">
                                                     <div>
-                                                        <img src="./public/providers/sabervox.png"
-                                                            loading="lazy" alt="sabervox">
+                                                        <img src="./public/providers/sabervox.png" loading="lazy"
+                                                            alt="sabervox">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="countrytell">
                                                     <div>
-                                                        <img src="./public/providers/countryTell.png"
-                                                            loading="lazy" alt="countrytell">
+                                                        <img src="./public/providers/countryTell.png" loading="lazy"
+                                                            alt="countrytell">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider" provider="tamworthBroadcast">
@@ -1065,20 +1188,20 @@
                                                 <div class="map-side-panel__msp-wrapper">
                                                     <div class="msp-provider cloud-provider" cloud="azure">
                                                         <div>
-                                                            <img src="./public/providers/azure.png"
-                                                                loading="lazy" alt="azure">
+                                                            <img src="./public/providers/azure.png" loading="lazy"
+                                                                alt="azure">
                                                         </div>
                                                     </div>
                                                     <div class="msp-provider cloud-provider" cloud="google">
                                                         <div>
-                                                            <img src="./public/providers/google.png"
-                                                                loading="lazy" alt="google">
+                                                            <img src="./public/providers/google.png" loading="lazy"
+                                                                alt="google">
                                                         </div>
                                                     </div>
                                                     <div class="msp-provider cloud-provider" cloud="aws">
                                                         <div>
-                                                            <img src="./public/providers/aws.png"
-                                                                loading="lazy" alt="aws">
+                                                            <img src="./public/providers/aws.png" loading="lazy"
+                                                                alt="aws">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1092,9 +1215,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <script src="js/alphabetScript.js"></script>

@@ -1,47 +1,39 @@
-const camelCase = require('camelCase');
-const pixelWidth = require('string-pixel-width');
-
-/**
- * User input data, enter the following data manually.
- */
-var capitalName = "Adeleide"
-var pinX = 650.6
-var pinY = 532.8
-var labelDirection = "d" // can be d or r - determines where city label shows up relative to the pin
-var isOpen = false
-
-// These are automatically generated based on user input data.
-var camelName = camelCase(capitalName)
-pinX += 5
-pinY += 7
-var labelX = 0
-var labelY = 0
+import camelCase from 'camelCase';
+import pixelWidth from 'string-pixel-width';
 
 /**
  * Generation scripts
  */
 
 function wordToHalfLength(word) {
-    return pixelWidth(word, { size: 9 }) / 2
+    return pixelWidth(word, { size: 10 }) / 2
 }
 
-function getLabelPos(word) {
+function getLabelPos(word, pinX, pinY, labelDirection) {
+    var labelX = 0
+    var labelY = 0
+
     // label to value
     switch (labelDirection) {
         case 'd':
             labelX = pinX - wordToHalfLength(word)
-            labelY = pinY + 20
+            labelY = pinY + 14
             break
         case 'r':
             labelX = pinX + 9
             labelY = pinY + 3
     }
+
+    return {
+        x: labelX,
+        y: labelY
+    }
 }
 
-function generate() {
+function generate(capitalName, camelCaseName, pinX, pinY, labelX, labelY, isOpen) {
     // generate html
-    console.log(`
-        <g id="${camelName}" class="city-group" ${isOpen ? 'dc onclick="handleCityClick(event)' : "soon"}>
+    return `
+        <g id="${camelCaseName}" class="city-group" ${isOpen ? 'dc onclick="handleCityClick(event)"' : "soon"}>
             ${isOpen ? `<ellipse pulse cx="${pinX}" cy="${pinY}" rx="16" ry="16"
                 fill="url('#pulseFill')" restart="always">
                 <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
@@ -55,12 +47,15 @@ function generate() {
             <ellipse cx="${pinX}" cy="${pinY}" rx="5" ry="5" identifier />
             <text x="${labelX}" y="${labelY}" class="city-name">${capitalName}</text>
         </g>
-    `)
+    `
+}
+
+export function generateCity(city) {
+    let labelPos = getLabelPos(city.capitalName, city.x, city.y, city.labelDirection)
+    return generate(city.capitalName, city.camelCaseName, city.x, city.y, labelPos.x, labelPos.y, city.isOpen)
 }
 
 /**
  * Run scripts
  */
 
-getLabelPos(camelName)
-generate()
