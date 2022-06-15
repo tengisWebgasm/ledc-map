@@ -905,7 +905,6 @@ p {
 	.service-item {
 		box-sizing: border-box;
 		border: none;
-		cursor: pointer;
 		border: 2px solid transparent;
 		flex: 0 0 30%;
 		padding-left: 1px;
