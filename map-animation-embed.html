@@ -10,7 +10,6 @@
                     'carriers': [
                         'ledc',
                         'vocus',
-                        'telstra',
                         'encoo',
                         'transgrid',
                     ],
@@ -29,7 +28,6 @@
                     'carriers': [
                         'ledc',
                         'vocus',
-                        'telstra',
                         'encoo',
                     ],
                     'msps': [
@@ -47,7 +45,6 @@
                     'carriers': [
                         'ledc',
                         'vocus',
-                        'telstra',
                         'encoo',
                         'transgrid',
                         'vergetel',
@@ -60,7 +57,6 @@
                         'toim',
                         'newcastleConnect',
                         'sabervox',
-                        'countrytell',
                     ]
                 },
                 'tamworth': {
@@ -76,7 +72,6 @@
                     'carriers': [
                         'ledc',
                         'vocus',
-                        'telstra',
                         'encoo',
                         'transgrid',
                         'vergetel',
@@ -578,6 +573,7 @@
 
             .map-side-panel__carriers-wrapper {
                 display: flex;
+                justify-content: center;
                 max-width: 100%;
                 position: relative;
                 padding-bottom: 16px;
@@ -1788,7 +1784,7 @@
                     <div id="map-side-panel-b">
                         <div class="map-side-panel__network-container container">
                             <div class="map-side-panel__network-wrapper">
-                                <p>Carriers/Network Aggrigators</p>
+                                <p>Carriers/Network Aggregators</p>
                                 <div class="map-side-panel__network-top">
                                     <button class="carriers-nav-btn left"></button>
                                     <button class="carriers-nav-btn right"></button>
@@ -1803,12 +1799,6 @@
                                             <div>
                                                 <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
                                                     loading="lazy" alt="vocus">
-                                            </div>
-                                        </button>
-                                        <button class="service-item" carrier="telstra" href="#">
-                                            <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Telstra.png"
-                                                    loading="lazy" alt="telstra">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
@@ -1881,12 +1871,6 @@
                                                 <div>
                                                     <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
                                                         loading="lazy" alt="sabervox">
-                                                </div>
-                                            </div>
-                                            <div class="msp-provider" provider="countrytell">
-                                                <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/countryTell.png"
-                                                        loading="lazy" alt="countrytell">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
@@ -1930,7 +1914,7 @@
                             </div>
                             <div id="map-side-panel__network-seperator"></div>
                             <div class="map-side-panel__network-wrapper">
-                                <p>Carriers/Network Aggrigators</p>
+                                <p>Carriers/Network Aggregators</p>
                                 <div class="map-side-panel__network-top">
                                     <button class="carriers-nav-btn left"></button>
                                     <button class="carriers-nav-btn right"></button>
@@ -1945,12 +1929,6 @@
                                             <div>
                                                 <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
                                                     loading="lazy" alt="vocus">
-                                            </div>
-                                        </button>
-                                        <button class="service-item" carrier="telstra" href="#">
-                                            <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Telstra.png"
-                                                    loading="lazy" alt="telstra">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
@@ -2023,12 +2001,6 @@
                                                 <div>
                                                     <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
                                                         loading="lazy" alt="sabervox">
-                                                </div>
-                                            </div>
-                                            <div class="msp-provider" provider="countrytell">
-                                                <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/countryTell.png"
-                                                        loading="lazy" alt="countrytell">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
@@ -2340,9 +2312,9 @@
                 // hide left and right arrows if less than or equal to 6 carriers in city
                 if (vw > 767) {
                     if (datacenterDetails[cityName]["carriers"].length <= 6) {
-                        hideArrowButtons(0);
+                        hideArrowButtons(1);
                     } else {
-                        showArrowButtons(0);
+                        showArrowButtons(1);
                     }
                 }
 

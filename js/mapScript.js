@@ -73,6 +73,7 @@ function showSelection(cityName) {
 	if (vw > 767) {
 		if (datacenterDetails[cityName]["carriers"].length <= 6) {
 			hideArrowButtons(0);
+			// document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
 		} else {
 			showArrowButtons(0);
 		}
@@ -208,9 +209,9 @@ function selectDestination(cityName) {
 	// hide left and right arrows if less than or equal to 6 carriers in city
 	if (vw > 767) {
 		if (datacenterDetails[cityName]["carriers"].length <= 6) {
-			hideArrowButtons(0);
+			hideArrowButtons(1);
 		} else {
-			showArrowButtons(0);
+			showArrowButtons(1);
 		}
 	}
 
