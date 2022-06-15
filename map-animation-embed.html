@@ -1131,607 +1131,583 @@
                         </script>
                         <embed src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/Map.svg"
                             alt="Map of Australia" id="map-img"></embed>
-                            <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
-                                <style>
-                                    [city-lines] path {
-                                        opacity: 0.3;
-                                        pointer-events: none;
-                                        stroke: #83ADFF;
-                                        transition: all 0.2s ease-out;
+                        <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
+                            <style>
+                                [city-lines] path {
+                                    opacity: 0.3;
+                                    pointer-events: none;
+                                    stroke: #83ADFF;
+                                    transition: all 0.2s ease-out;
+                                }
+
+                                [city-lines] path[on] {
+                                    opacity: 1;
+                                    stroke-dasharray: 1200;
+                                    stroke-dashoffset: 1200;
+                                    animation: dash 2000ms linear forwards;
+                                }
+
+                                [city-lines] path[on][selected] {
+                                    stroke-dasharray: 1200;
+                                    stroke-dashoffset: 1200;
+                                    animation: dash 2000ms linear forwards;
+                                    opacity: 1;
+                                    stroke: #001F5C;
+                                }
+
+                                @keyframes dash {
+                                    to {
+                                        stroke-dashoffset: 0;
                                     }
+                                }
 
-                                    [city-lines] path[on] {
-                                        opacity: 1;
-                                        stroke-dasharray: 1200;
-                                        stroke-dashoffset: 1200;
-                                        animation: dash 2000ms linear forwards;
-                                    }
+                                .city-group {
+                                    opacity: 1;
+                                    transition: opacity 200ms ease;
+                                    pointer-events: none;
+                                }
 
-                                    [city-lines] path[on][selected] {
-                                        stroke-dasharray: 1200;
-                                        stroke-dashoffset: 1200;
-                                        animation: dash 2000ms linear forwards;
-                                        opacity: 1;
-                                        stroke: #001F5C;
-                                    }
+                                .city-group[on] {
+                                    opacity: 1;
+                                    cursor: pointer;
+                                    pointer-events: all;
+                                }
 
-                                    @keyframes dash {
-                                        to {
-                                            stroke-dashoffset: 0;
-                                        }
-                                    }
+                                .city-group [pulse] {
+                                    opacity: 0;
+                                }
 
-                                    .city-group {
-                                        opacity: 1;
-                                        transition: opacity 200ms ease;
-                                        pointer-events: none;
-                                    }
+                                .city-group[dc] {
+                                    opacity: 1;
+                                    cursor: pointer;
+                                    pointer-events: all;
+                                }
 
-                                    .city-group[on] {
-                                        opacity: 1;
-                                        cursor: pointer;
-                                        pointer-events: all;
-                                    }
+                                .city-group[dc][on] [pulse] {
+                                    opacity: 1;
+                                }
 
-                                    .city-group [pulse] {
-                                        opacity: 0;
-                                    }
+                                .city-group ellipse[identifier] {
+                                    fill: #34C759;
+                                }
 
-                                    .city-group[dc] {
-                                        opacity: 1;
-                                        cursor: pointer;
-                                        pointer-events: all;
-                                    }
+                                .city-group[dc][on] ellipse[identifier] {
+                                    fill: #001F5C;
+                                }
 
-                                    .city-group[dc][on] [pulse] {
-                                        opacity: 1;
-                                    }
+                                .city-group[soon] ellipse[identifier] {
+                                    fill: #FF9500;
+                                }
 
-                                    .city-group ellipse[identifier] {
-                                        fill: #34C759;
-                                    }
+                                [city-lines] path[invisible] {
+                                    opacity: 0;
+                                    stroke: transparent;
+                                }
 
-                                    .city-group[dc][on] ellipse[identifier] {
-                                        fill: #001F5C;
-                                    }
+                                .city-name {
+                                    font: Metropolis, sans-serif;
+                                    font-weight: 400;
+                                    font-size: 9px;
+                                    line-height: 14px;
+                                    fill: #00005C;
+                                }
+                            </style>
+                            <g city-lines>
+                                <!-- NEW LINE HELPER -->
+                                <circle left-node cx="0" cy="0" r="2" fill="green" />
+                                <circle right-node cx="0" cy="0" r="2" fill="green" />
 
-                                    .city-group[soon] ellipse[identifier] {
-                                        fill: #FF9500;
-                                    }
+                                <path dc="cairns" city="townsville"
+                                    d="M811.58,91 C814.57,116.57 816.92,130.08 838.56,144" />
+                                <path dc="townsville" city="mackay"
+                                    d="M838.56,144 C860.72,159.3 874.17,173.65 886.58,189" />
+                                <path dc="mackay" city="rockhampton"
+                                    d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
+                                <path dc="rockhampton" city="gladstone"
+                                    d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
+                                <path dc="gladstone" city="bundaberg"
+                                    d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
+                                <path dc="bundaberg" city="nextDcBrisbane"
+                                    d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
+                                <path dc="nextDcBrisbane" city="coffsHarbour"
+                                    d="M957.58,355 C969.22,376.5 976.51,399.25 973,420.4" />
+                                <path dc="nextDcBrisbane" city="tamworth"
+                                    d="M957.58,355 C952.58,388.82 940.38,410.63 924.58,438" />
+                                <path dc="coffsHarbour" city="tamworth"
+                                    d="M973,420.4 C957.66,422.32 938.67,430.13 924.58,438" />
+                                <path dc="coffsHarbour" city="newcastle"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4" />
+                                <path dc="tamworth" city="newcastle"
+                                    d="M924.58,438 C933.89,456.1 939.64,471 942,488.4" />
+                                <path dc="tamworth" city="dubbo"
+                                    d="M924.58,438 C902.88,440.53 883.73,452.27 867.58,469" />
+                                <path dc="tamworth" city="bathurst"
+                                    d="M924.58,438 C911.16,453.47 901.75,476.08 895.58,494" />
+                                <path dc="newcastle" city="bathurst"
+                                    d="M942,488.4 C926.98,486.92 911.45,488.58 895.58,494" />
+                                <path dc="newcastle" city="equinixSydney"
+                                    d="M942 488.4C937.33 496.73 932.67 505.07 928,513.4" />
+                                <path dc="dubbo" city="bathurst"
+                                    d="M867.58,469 C881.26,474.88 889.35,484.52 895.58,494" />
+                                <path dc="dubbo" city="nextDcSydney"
+                                    d="M867.58,469 C877.49,490.97 895.69,511.48 915,524.4" />
+                                <path dc="dubbo" city="wagga" d="M867.58,469 C865.66,494.05 858.95,520.25 847.58,538" />
+                                <path dc="bathurst" city="equinixSydney"
+                                    d="M895.58,494 C912.59,497.97 921.54,506.58 928,513.4" />
+                                <path dc="nextDcSydney" city="equinixSydney"
+                                    d="M915 524.4C919.33 520.73 923.67 517.07 928,513.4" />
+                                <path dc="nextDcSydney" city="nowra"
+                                    d="M915 524.4C915.33 530.4 915.67 536.4 916,542.4" />
+                                <path dc="nextDcSydney" city="wagga"
+                                    d="M915,524.4 C898.88,523.13 864.75,527.47 847.58,538" />
+                                <path dc="equinixSydney" city="nowra" d="M928 513.4C924 523.07 920 532.73 916,542.4" />
+                                <path dc="nowra" city="wagga" d="M916,542.4 C895.14,538.13 866.14,533.02 847.58,538" />
+                                <path dc="nowra" city="albury" d="M916,542.4 C889.28,542.93 852.45,553.72 830.58,565" />
+                                <path dc="nowra" city="traralgon"
+                                    d="M916,542.4 C879.59,562.67 829.79,593.43 814.58,626" />
+                                <path dc="wagga" city="albury" d="M847.58 538C841.91 547 836.25 556 830.58,565" />
+                                <path dc="wagga" city="mildura"
+                                    d="M847.58,538 C826.65,520.17 784.71,516.88 729.58,519" />
+                                <path dc="albury" city="shepparton" d="M830.58 565C820.91 569 811.25 573 801.58,577" />
+                                <path dc="albury" city="traralgon"
+                                    d="M830.58,565 C818.95,584.48 813.96,606.12 814.58,626" />
+                                <path dc="mildura" city="shepparton"
+                                    d="M729.58,519 C780.03,539.63 792.28,558.12 801.58,577" />
+                                <path dc="mildura" city="bendigo"
+                                    d="M729.58,519 C739.56,544.75 757.15,569.2 775.58,591" />
+                                <path dc="mildura" city="adelaide"
+                                    d="M729.58,519 C703.1,515.25 672.11,520.6 650.58,534" />
+                                <path dc="shepparton" city="traralgon"
+                                    d="M801.58 577C805.91 593.33 810.25 609.67 814.58,626" />
+                                <path dc="shepparton" city="bendigo"
+                                    d="M801.58 577C792.91 581.67 784.25 586.33 775.58,591" />
+                                <path dc="shepparton" city="nextDcMelbourne"
+                                    d="M801.58 577C798.58 591.67 795.58 606.33 792.58,621" />
+                                <path dc="traralgon" city="nextDcMelbourne"
+                                    d="M814.58 626C807.25 624.33 799.91 622.67 792.58,621" />
+                                <path dc="bendigo" city="nextDcMelbourne"
+                                    d="M775.58 591C781.25 601 786.91 611 792.58,621" />
+                                <path dc="bendigo" city="adelaide"
+                                    d="M775.58,591 C752.06,566.25 696.9,540.5 650.58,534" />
+                                <path dc="bendigo" city="horsham"
+                                    d="M775.58,591 C758.8,585.72 747.36,584.48 729.58,587" />
+                                <path dc="bendigo" city="ballarat" d="M775.58 591C770.58 596 765.58 601 760.58,606" />
+                                <path dc="bendigo" city="geelong" d="M775.58 591C775.91 603 776.25 615 776.58,627" />
+                                <path dc="nextDcMelbourne" city="geelong"
+                                    d="M792.58 621C787.25 623 781.91 625 776.58,627" />
+                                <path dc="adelaide" city="horsham"
+                                    d="M650.58,534 C680.61,565.52 698.1,575.08 729.58,587" />
+                                <path dc="horsham" city="ballarat"
+                                    d="M729.58,587 C739.71,598.73 749.85,601.72 760.58,606" />
+                                <path dc="ballarat" city="geelong" d="M760.58 606C765.91 613 771.25 620 776.58,627" />
 
-                                    [city-lines] path[invisible] {
-                                        opacity: 0;
-                                        stroke: transparent;
-                                    }
+                            </g>
 
-                                    .city-name {
-                                        font: Metropolis, sans-serif;
-                                        font-weight: 400;
-                                        font-size: 9px;
-                                        line-height: 14px;
-                                        fill: #00005C;
-                                    }
-                                </style>
-                                <g city-lines>
-                                    <!-- NEW LINE HELPER -->
-                                    <circle left-node cx="0" cy="0" r="2" fill="green" />
-                                    <circle right-node cx="0" cy="0" r="2" fill="green" />
+                            <g city-pins>
 
-                                    <path dc="cairns" city="townsville"
-                                        d="M811.58,91 C814.57,116.57 816.92,130.08 838.56,144" />
-                                    <path dc="townsville" city="mackay"
-                                        d="M838.56,144 C860.72,159.3 874.17,173.65 886.58,189" />
-                                    <path dc="mackay" city="rockhampton"
-                                        d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
-                                    <path dc="rockhampton" city="gladstone"
-                                        d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
-                                    <path dc="gladstone" city="bundaberg"
-                                        d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
-                                    <path dc="bundaberg" city="nextDcBrisbane"
-                                        d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
-                                    <path dc="nextDcBrisbane" city="coffsHarbour"
-                                        d="M957.58,355 C969.22,376.5 976.51,399.25 973,420.4" />
-                                    <path dc="nextDcBrisbane" city="tamworth"
-                                        d="M957.58,355 C952.58,388.82 940.38,410.63 924.58,438" />
-                                    <path dc="coffsHarbour" city="tamworth"
-                                        d="M973,420.4 C957.66,422.32 938.67,430.13 924.58,438" />
-                                    <path dc="coffsHarbour" city="newcastle"
-                                        d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4" />
-                                    <path dc="tamworth" city="newcastle"
-                                        d="M924.58,438 C933.89,456.1 939.64,471 942,488.4" />
-                                    <path dc="tamworth" city="dubbo"
-                                        d="M924.58,438 C902.88,440.53 883.73,452.27 867.58,469" />
-                                    <path dc="tamworth" city="bathurst"
-                                        d="M924.58,438 C911.16,453.47 901.75,476.08 895.58,494" />
-                                    <path dc="newcastle" city="bathurst"
-                                        d="M942,488.4 C926.98,486.92 911.45,488.58 895.58,494" />
-                                    <path dc="newcastle" city="equinixSydney"
-                                        d="M942 488.4C937.33 496.73 932.67 505.07 928,513.4" />
-                                    <path dc="dubbo" city="bathurst"
-                                        d="M867.58,469 C881.26,474.88 889.35,484.52 895.58,494" />
-                                    <path dc="dubbo" city="nextDcSydney"
-                                        d="M867.58,469 C877.49,490.97 895.69,511.48 915,524.4" />
-                                    <path dc="dubbo" city="wagga" 
-                                        d="M867.58,469 C865.66,494.05 858.95,520.25 847.58,538" />
-                                    <path dc="bathurst" city="equinixSydney"
-                                        d="M895.58,494 C912.59,497.97 921.54,506.58 928,513.4" />
-                                    <path dc="nextDcSydney" city="equinixSydney"
-                                        d="M915 524.4C919.33 520.73 923.67 517.07 928,513.4" />
-                                    <path dc="nextDcSydney" city="nowra"
-                                        d="M915 524.4C915.33 530.4 915.67 536.4 916,542.4" />
-                                    <path dc="nextDcSydney" city="wagga" 
-                                        d="M915,524.4 C898.88,523.13 864.75,527.47 847.58,538" />
-                                    <path dc="equinixSydney" city="nowra"
-                                        d="M928 513.4C924 523.07 920 532.73 916,542.4" />
-                                    <path dc="nowra" city="wagga" 
-                                        d="M916,542.4 C895.14,538.13 866.14,533.02 847.58,538" />
-                                    <path dc="nowra" city="albury"
-                                        d="M916,542.4 C889.28,542.93 852.45,553.72 830.58,565" />
-                                    <path dc="nowra" city="traralgon"
-                                        d="M916,542.4 C879.59,562.67 829.79,593.43 814.58,626" />
-                                    <path dc="wagga" city="albury" 
-                                        d="M847.58 538C841.91 547 836.25 556 830.58,565" />
-                                    <path dc="wagga" city="mildura" 
-                                        d="M847.58,538 C826.65,520.17 784.71,516.88 729.58,519" />
-                                    <path dc="albury" city="shepparton"
-                                        d="M830.58 565C820.91 569 811.25 573 801.58,577" />
-                                    <path dc="albury" city="traralgon"
-                                        d="M830.58,565 C818.95,584.48 813.96,606.12 814.58,626" />
-                                    <path dc="mildura" city="shepparton"
-                                        d="M729.58,519 C780.03,539.63 792.28,558.12 801.58,577" />
-                                    <path dc="mildura" city="bendigo"
-                                        d="M729.58,519 C739.56,544.75 757.15,569.2 775.58,591" />
-                                    <path dc="mildura" city="adelaide"
-                                        d="M729.58,519 C703.1,515.25 672.11,520.6 650.58,534" />
-                                    <path dc="shepparton" city="traralgon"
-                                        d="M801.58 577C805.91 593.33 810.25 609.67 814.58,626" />
-                                    <path dc="shepparton" city="bendigo"
-                                        d="M801.58 577C792.91 581.67 784.25 586.33 775.58,591" />
-                                    <path dc="shepparton" city="nextDcMelbourne"
-                                        d="M801.58 577C798.58 591.67 795.58 606.33 792.58,621" />
-                                    <path dc="traralgon" city="nextDcMelbourne"
-                                        d="M814.58 626C807.25 624.33 799.91 622.67 792.58,621" />
-                                    <path dc="bendigo" city="nextDcMelbourne"
-                                        d="M775.58 591C781.25 601 786.91 611 792.58,621" />
-                                    <path dc="bendigo" city="adelaide"
-                                        d="M775.58,591 C752.06,566.25 696.9,540.5 650.58,534" />
-                                    <path dc="bendigo" city="horsham"
-                                        d="M775.58,591 C758.8,585.72 747.36,584.48 729.58,587" />
-                                    <path dc="bendigo" city="ballarat"
-                                        d="M775.58 591C770.58 596 765.58 601 760.58,606" />
-                                    <path dc="bendigo" city="geelong"
-                                        d="M775.58 591C775.91 603 776.25 615 776.58,627" />
-                                    <path dc="nextDcMelbourne" city="geelong"
-                                        d="M792.58 621C787.25 623 781.91 625 776.58,627" />
-                                    <path dc="adelaide" city="horsham"
-                                        d="M650.58,534 C680.61,565.52 698.1,575.08 729.58,587" />
-                                    <path dc="horsham" city="ballarat"
-                                        d="M729.58,587 C739.71,598.73 749.85,601.72 760.58,606" />
-                                    <path dc="ballarat" city="geelong"
-                                        d="M760.58 606C765.91 613 771.25 620 776.58,627" />
+                                <g id="cairns" class="city-group" soon>
 
+                                    <ellipse cx="811.58" cy="91" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="811.58" cy="91" rx="5" ry="5" identifier />
+                                    <text x="797.13" y="105" class="city-name">Cairns</text>
                                 </g>
 
-                                <g city-pins>
+                                <g id="townsville" class="city-group" soon>
 
-                                    <g id="cairns" class="city-group" soon>
-
-                                        <ellipse cx="811.58" cy="91" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="811.58" cy="91" rx="5" ry="5" identifier />
-                                        <text x="797.13" y="105" class="city-name">Cairns</text>
-                                    </g>
-
-                                    <g id="townsville" class="city-group" soon>
-
-                                        <ellipse cx="838.56" cy="144" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="838.56" cy="144" rx="5" ry="5" identifier />
-                                        <text x="815.2099999999999" y="158" class="city-name">Townsville</text>
-                                    </g>
-
-                                    <g id="mackay" class="city-group" soon>
-
-                                        <ellipse cx="886.58" cy="189" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="886.58" cy="189" rx="5" ry="5" identifier />
-                                        <text x="869.33" y="203" class="city-name">Mackay</text>
-                                    </g>
-
-                                    <g id="rockhampton" class="city-group" soon>
-
-                                        <ellipse cx="914.58" cy="240" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="914.58" cy="240" rx="5" ry="5" identifier />
-                                        <text x="923.58" y="243" class="city-name">Rockhampton</text>
-                                    </g>
-
-                                    <g id="gladstone" class="city-group" soon>
-
-                                        <ellipse cx="934.58" cy="251" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="934.58" cy="251" rx="5" ry="5" identifier />
-                                        <text x="943.58" y="254" class="city-name">Gladstone</text>
-                                    </g>
-
-                                    <g id="bundaberg" class="city-group" soon>
-
-                                        <ellipse cx="956.58" cy="275" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="956.58" cy="275" rx="5" ry="5" identifier />
-                                        <text x="965.58" y="278" class="city-name">Bundaberg</text>
-                                    </g>
-
-                                    <g id="nextDcBrisbane" class="city-group" soon>
-
-                                        <ellipse cx="957.58" cy="355" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="957.58" cy="355" rx="5" ry="5" identifier />
-                                        <text x="966.58" y="358" class="city-name">NextDC Brisbane</text>
-                                    </g>
-
-                                    <g id="coffsHarbour" class="city-group" soon>
-
-                                        <ellipse cx="973" cy="420.4" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="973" cy="420.4" rx="5" ry="5" identifier />
-                                        <text x="982" y="423.4" class="city-name">Coffs Harbour</text>
-                                    </g>
-
-                                    <g id="tamworth" class="city-group" dc onclick="handleCityClick(event)">
-                                        <ellipse pulse cx="924.58" cy="438" rx="16" ry="16" fill="url('#pulseFill')"
-                                            restart="always">
-                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        </ellipse>
-                                        <ellipse cx="924.58" cy="438" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="924.58" cy="438" rx="5" ry="5" identifier />
-                                        <text x="902.33" y="452" class="city-name">Tamworth</text>
-                                    </g>
-
-                                    <g id="newcastle" class="city-group" dc onclick="handleCityClick(event)">
-                                        <ellipse pulse cx="942" cy="488.4" rx="16" ry="16" fill="url('#pulseFill')"
-                                            restart="always">
-                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        </ellipse>
-                                        <ellipse cx="942" cy="488.4" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="942" cy="488.4" rx="5" ry="5" identifier />
-                                        <text x="951" y="491.4" class="city-name">Newcastle</text>
-                                    </g>
-
-                                    <g id="dubbo" class="city-group" dc onclick="handleCityClick(event)">
-                                        <ellipse pulse cx="867.58" cy="469" rx="16" ry="16" fill="url('#pulseFill')"
-                                            restart="always">
-                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        </ellipse>
-                                        <ellipse cx="867.58" cy="469" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="867.58" cy="469" rx="5" ry="5" identifier />
-                                        <text x="852.7800000000001" y="483" class="city-name">Dubbo</text>
-                                    </g>
-
-                                    <g id="bathurst" class="city-group" soon>
-
-                                        <ellipse cx="895.58" cy="494" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="895.58" cy="494" rx="5" ry="5" identifier />
-                                        <text x="876.88" y="508" class="city-name">Bathurst</text>
-                                    </g>
-
-                                    <g id="nextDcSydney" class="city-group" soon>
-
-                                        <ellipse cx="915" cy="524.4" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="915" cy="524.4" rx="5" ry="5" identifier />
-                                        <text x="924" y="527.4" class="city-name">NextDC Sydney</text>
-                                    </g>
-
-                                    <g id="equinixSydney" class="city-group" soon>
-
-                                        <ellipse cx="928" cy="513.4" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="928" cy="513.4" rx="5" ry="5" identifier />
-                                        <text x="937" y="516.4" class="city-name">Equinix Sydney</text>
-                                    </g>
-
-                                    <g id="nowra" class="city-group" soon>
-
-                                        <ellipse cx="916" cy="542.4" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="916" cy="542.4" rx="5" ry="5" identifier />
-                                        <text x="925" y="545.4" class="city-name">Nowra</text>
-                                    </g>
-
-                                    <g id="wagga" class="city-group" soon>
-
-                                        <ellipse cx="847.58" cy="538" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="847.58" cy="538" rx="5" ry="5" identifier />
-                                        <text x="831.6800000000001" y="552" class="city-name">Wagga</text>
-                                    </g>
-
-                                    <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
-                                        <ellipse pulse cx="830.58" cy="565" rx="16" ry="16" fill="url('#pulseFill')"
-                                            restart="always">
-                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
-                                                repeatCount="indefinite" keyTimes="0;0.5;1"
-                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        </ellipse>
-                                        <ellipse cx="830.58" cy="565" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="830.58" cy="565" rx="5" ry="5" identifier />
-                                        <text x="816.38" y="579" class="city-name">Albury</text>
-                                    </g>
-
-                                    <g id="mildura" class="city-group" soon>
-
-                                        <ellipse cx="729.58" cy="519" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="729.58" cy="519" rx="5" ry="5" identifier />
-                                        <text x="713.1800000000001" y="533" class="city-name">Mildura</text>
-                                    </g>
-
-                                    <g id="shepparton" class="city-group" soon>
-
-                                        <ellipse cx="801.58" cy="577" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="801.58" cy="577" rx="5" ry="5" identifier />
-                                        <text x="775.58" y="591" class="city-name">Shepparton</text>
-                                    </g>
-
-                                    <g id="traralgon" class="city-group" soon>
-
-                                        <ellipse cx="814.58" cy="626" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="814.58" cy="626" rx="5" ry="5" identifier />
-                                        <text x="823.58" y="629" class="city-name">Traralgon</text>
-                                    </g>
-
-                                    <g id="bendigo" class="city-group" soon>
-
-                                        <ellipse cx="775.58" cy="591" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="775.58" cy="591" rx="5" ry="5" identifier />
-                                        <text x="757.13" y="605" class="city-name">Bendigo</text>
-                                    </g>
-
-                                    <g id="nextDcMelbourne" class="city-group" soon>
-
-                                        <ellipse cx="792.58" cy="621" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="792.58" cy="621" rx="5" ry="5" identifier />
-                                        <text x="749.98" y="635" class="city-name">NextDC Melbourne</text>
-                                    </g>
-
-                                    <g id="adelaide" class="city-group" soon>
-
-                                        <ellipse cx="650.58" cy="534" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="650.58" cy="534" rx="5" ry="5" identifier />
-                                        <text x="631.0300000000001" y="548" class="city-name">Adelaide</text>
-                                    </g>
-
-                                    <g id="horsham" class="city-group" soon>
-
-                                        <ellipse cx="729.58" cy="587" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="729.58" cy="587" rx="5" ry="5" identifier />
-                                        <text x="709.2800000000001" y="601" class="city-name">Horsham</text>
-                                    </g>
-
-                                    <g id="ballarat" class="city-group" soon>
-
-                                        <ellipse cx="760.58" cy="606" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="760.58" cy="606" rx="5" ry="5" identifier />
-                                        <text x="743.58" y="620" class="city-name">Ballarat</text>
-                                    </g>
-
-                                    <g id="geelong" class="city-group" soon>
-
-                                        <ellipse cx="776.58" cy="627" rx="7" ry="7" fill="white" />
-                                        <ellipse cx="776.58" cy="627" rx="5" ry="5" identifier />
-                                        <text x="757.58" y="641" class="city-name">Geelong</text>
-                                    </g>
-
-
+                                    <ellipse cx="838.56" cy="144" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="838.56" cy="144" rx="5" ry="5" identifier />
+                                    <text x="815.2099999999999" y="158" class="city-name">Townsville</text>
                                 </g>
-                                <defs>
-                                    <radialGradient id="pulseFill">
-                                        <stop offset="0.35" stop-color="#A5FFFF" />
-                                        <stop offset="1" stop-color="#A5FFFF" stop-opacity="0" />
-                                    </radialGradient>
-                                    <filter id="filter0_d" x="510.803" y="37.9297" width="430.779" height="277.135"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter1_d" x="516.515" y="91.7056" width="436.143" height="155.511"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter2_d" x="515.228" y="73.3335" width="422.953" height="160.121"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter3_d" x="539.166" y="117.454" width="397.846" height="115.501"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter4_d" x="111.88" y="170.611" width="825.97" height="140.106"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter5_d" x="122.943" y="152.314" width="815.744" height="129.37"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter6_d" x="264.449" y="175.621" width="673.876" height="115.687"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter7_d" x="232.294" y="157.289" width="704.4" height="108.924"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter8_d" x="515.241" y="108.346" width="425.844" height="103.305"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter9_d" x="538.645" y="117.315" width="403.723" height="114.947"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter10_d" x="265.582" y="173.838" width="678.119" height="109.241"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter11_d" x="232.864" y="156.566" width="707.969" height="111.952"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter12_d" x="111.977" y="169.628" width="828.747" height="81.3457"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter13_d" x="123.047" y="150.233" width="817.602" height="80.6919"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                    <filter id="filter14_d" x="509.846" y="124.858" width="430.953" height="86.3907"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix"
-                                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="4" />
-                                        <feColorMatrix type="matrix"
-                                            values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
-                                            result="shape" />
-                                    </filter>
-                                </defs>
-                            </svg>
+
+                                <g id="mackay" class="city-group" soon>
+
+                                    <ellipse cx="886.58" cy="189" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="886.58" cy="189" rx="5" ry="5" identifier />
+                                    <text x="869.33" y="203" class="city-name">Mackay</text>
+                                </g>
+
+                                <g id="rockhampton" class="city-group" soon>
+
+                                    <ellipse cx="914.58" cy="240" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="914.58" cy="240" rx="5" ry="5" identifier />
+                                    <text x="923.58" y="243" class="city-name">Rockhampton</text>
+                                </g>
+
+                                <g id="gladstone" class="city-group" soon>
+
+                                    <ellipse cx="934.58" cy="251" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="934.58" cy="251" rx="5" ry="5" identifier />
+                                    <text x="943.58" y="254" class="city-name">Gladstone</text>
+                                </g>
+
+                                <g id="bundaberg" class="city-group" soon>
+
+                                    <ellipse cx="956.58" cy="275" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="956.58" cy="275" rx="5" ry="5" identifier />
+                                    <text x="965.58" y="278" class="city-name">Bundaberg</text>
+                                </g>
+
+                                <g id="nextDcBrisbane" class="city-group" soon>
+
+                                    <ellipse cx="957.58" cy="355" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="957.58" cy="355" rx="5" ry="5" identifier />
+                                    <text x="966.58" y="358" class="city-name">NextDC Brisbane</text>
+                                </g>
+
+                                <g id="coffsHarbour" class="city-group" soon>
+
+                                    <ellipse cx="973" cy="420.4" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="973" cy="420.4" rx="5" ry="5" identifier />
+                                    <text x="982" y="423.4" class="city-name">Coffs Harbour</text>
+                                </g>
+
+                                <g id="tamworth" class="city-group" dc onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="924.58" cy="438" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
+                                    <ellipse cx="924.58" cy="438" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="924.58" cy="438" rx="5" ry="5" identifier />
+                                    <text x="902.33" y="452" class="city-name">Tamworth</text>
+                                </g>
+
+                                <g id="newcastle" class="city-group" dc onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="942" cy="488.4" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
+                                    <ellipse cx="942" cy="488.4" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="942" cy="488.4" rx="5" ry="5" identifier />
+                                    <text x="951" y="491.4" class="city-name">Newcastle</text>
+                                </g>
+
+                                <g id="dubbo" class="city-group" dc onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="867.58" cy="469" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
+                                    <ellipse cx="867.58" cy="469" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="867.58" cy="469" rx="5" ry="5" identifier />
+                                    <text x="852.7800000000001" y="483" class="city-name">Dubbo</text>
+                                </g>
+
+                                <g id="bathurst" class="city-group" soon>
+
+                                    <ellipse cx="895.58" cy="494" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="895.58" cy="494" rx="5" ry="5" identifier />
+                                    <text x="876.88" y="508" class="city-name">Bathurst</text>
+                                </g>
+
+                                <g id="nextDcSydney" class="city-group" soon>
+
+                                    <ellipse cx="915" cy="524.4" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="915" cy="524.4" rx="5" ry="5" identifier />
+                                    <text x="924" y="527.4" class="city-name">NextDC Sydney</text>
+                                </g>
+
+                                <g id="equinixSydney" class="city-group" soon>
+
+                                    <ellipse cx="928" cy="513.4" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="928" cy="513.4" rx="5" ry="5" identifier />
+                                    <text x="937" y="516.4" class="city-name">Equinix Sydney</text>
+                                </g>
+
+                                <g id="nowra" class="city-group" soon>
+
+                                    <ellipse cx="916" cy="542.4" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="916" cy="542.4" rx="5" ry="5" identifier />
+                                    <text x="925" y="545.4" class="city-name">Nowra</text>
+                                </g>
+
+                                <g id="wagga" class="city-group" soon>
+
+                                    <ellipse cx="847.58" cy="538" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="847.58" cy="538" rx="5" ry="5" identifier />
+                                    <text x="831.6800000000001" y="552" class="city-name">Wagga</text>
+                                </g>
+
+                                <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="830.58" cy="565" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
+                                    <ellipse cx="830.58" cy="565" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="830.58" cy="565" rx="5" ry="5" identifier />
+                                    <text x="816.38" y="579" class="city-name">Albury</text>
+                                </g>
+
+                                <g id="mildura" class="city-group" soon>
+
+                                    <ellipse cx="729.58" cy="519" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="729.58" cy="519" rx="5" ry="5" identifier />
+                                    <text x="713.1800000000001" y="533" class="city-name">Mildura</text>
+                                </g>
+
+                                <g id="shepparton" class="city-group" soon>
+
+                                    <ellipse cx="801.58" cy="577" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="801.58" cy="577" rx="5" ry="5" identifier />
+                                    <text x="775.58" y="591" class="city-name">Shepparton</text>
+                                </g>
+
+                                <g id="traralgon" class="city-group" soon>
+
+                                    <ellipse cx="814.58" cy="626" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="814.58" cy="626" rx="5" ry="5" identifier />
+                                    <text x="823.58" y="629" class="city-name">Traralgon</text>
+                                </g>
+
+                                <g id="bendigo" class="city-group" soon>
+
+                                    <ellipse cx="775.58" cy="591" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="775.58" cy="591" rx="5" ry="5" identifier />
+                                    <text x="757.13" y="605" class="city-name">Bendigo</text>
+                                </g>
+
+                                <g id="nextDcMelbourne" class="city-group" soon>
+
+                                    <ellipse cx="792.58" cy="621" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="792.58" cy="621" rx="5" ry="5" identifier />
+                                    <text x="749.98" y="635" class="city-name">NextDC Melbourne</text>
+                                </g>
+
+                                <g id="adelaide" class="city-group" soon>
+
+                                    <ellipse cx="650.58" cy="534" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="650.58" cy="534" rx="5" ry="5" identifier />
+                                    <text x="631.0300000000001" y="548" class="city-name">Adelaide</text>
+                                </g>
+
+                                <g id="horsham" class="city-group" soon>
+
+                                    <ellipse cx="729.58" cy="587" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="729.58" cy="587" rx="5" ry="5" identifier />
+                                    <text x="709.2800000000001" y="601" class="city-name">Horsham</text>
+                                </g>
+
+                                <g id="ballarat" class="city-group" soon>
+
+                                    <ellipse cx="760.58" cy="606" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="760.58" cy="606" rx="5" ry="5" identifier />
+                                    <text x="743.58" y="620" class="city-name">Ballarat</text>
+                                </g>
+
+                                <g id="geelong" class="city-group" soon>
+
+                                    <ellipse cx="776.58" cy="627" rx="7" ry="7" fill="white" />
+                                    <ellipse cx="776.58" cy="627" rx="5" ry="5" identifier />
+                                    <text x="757.58" y="641" class="city-name">Geelong</text>
+                                </g>
+
+
+                            </g>
+                            <defs>
+                                <radialGradient id="pulseFill">
+                                    <stop offset="0.35" stop-color="#A5FFFF" />
+                                    <stop offset="1" stop-color="#A5FFFF" stop-opacity="0" />
+                                </radialGradient>
+                                <filter id="filter0_d" x="510.803" y="37.9297" width="430.779" height="277.135"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter1_d" x="516.515" y="91.7056" width="436.143" height="155.511"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter2_d" x="515.228" y="73.3335" width="422.953" height="160.121"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter3_d" x="539.166" y="117.454" width="397.846" height="115.501"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter4_d" x="111.88" y="170.611" width="825.97" height="140.106"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter5_d" x="122.943" y="152.314" width="815.744" height="129.37"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter6_d" x="264.449" y="175.621" width="673.876" height="115.687"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter7_d" x="232.294" y="157.289" width="704.4" height="108.924"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter8_d" x="515.241" y="108.346" width="425.844" height="103.305"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter9_d" x="538.645" y="117.315" width="403.723" height="114.947"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter10_d" x="265.582" y="173.838" width="678.119" height="109.241"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter11_d" x="232.864" y="156.566" width="707.969" height="111.952"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter12_d" x="111.977" y="169.628" width="828.747" height="81.3457"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter13_d" x="123.047" y="150.233" width="817.602" height="80.6919"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                                <filter id="filter14_d" x="509.846" y="124.858" width="430.953" height="86.3907"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="4" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.847059 0 0 0 0 0.917647 0 0 0 0 0.917647 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
                         <div id="map-ping-panel">
                             <div id="map-ping-content">
                                 <div id="map__ping-main">
@@ -2200,7 +2176,7 @@
                     [
                         ...document.querySelector("[city-lines]").querySelectorAll("path"),
                     ].forEach((e) => e.removeAttribute("on"));
-                    [...document.querySelectorAll(`[dc="${cityName}"]`)].forEach((e) => {
+                    [...document.querySelectorAll(`[dc="${cityName}"], [city="${cityName}"]`)].forEach((e) => {
                         setTimeout(() => e.setAttribute("on", ""), Math.random() * 280);
                     });
                 } catch { }
@@ -2295,14 +2271,20 @@
 
                 // set other lines invisible
                 let otherLines = document.querySelectorAll(
-                    `[city-lines] path:not([city="${cityName}"]):not([dc="${selectStart.value}"])`
+                    `[city-lines]`
                 );
                 for (let i = 0; i < otherLines.length; i++) {
-                    otherLines[i].setAttribute("invisible", "");
+                    let dcFilter = otherLines[i].getAttribute("dc")
+                    let cityFilter = otherLines[i].getAttribute("cityFilter")
+                    if (!(dcFilter === selectStart.value && cityFilter === cityName)
+                        && !(cityFilter === selectStart.value && dcFilter === cityName)) {
+                        otherLines[i].setAttribute("invisible", "");
+                    }
                 }
 
                 const curLine = document.querySelector(
-                    `[dc="${selectStart.value}"][city="${cityName}"]`
+                    `[dc="${selectStart.value}"][city="${cityName}"],
+		[city="${selectStart.value}"][dc="${cityName}"]`
                 );
                 curLine.setAttribute("selected", "");
 
@@ -2437,7 +2419,6 @@
              */
             var expanded = false;
             var expandIcon = sidePanel.querySelector(".expand-icon");
-            var expandDistance = vw > 767 ? 88 : 148;
             var sidePanelBMaxHeight = vw > 767 ? "500px" : "60vh";
             var expandOverlay = document.getElementById("map-side-panel-overlay");
 
@@ -2525,6 +2506,59 @@
             } catch (e) {
                 console.error(e);
             }
+
+            /**
+             * Event handler for when a carrier is clicked
+             *
+             * @param {*} e Click event object
+             * @param {*} carriersWrapperIndex 0 for left side, 1 for right side carrier.
+             */
+            // function handleCarrierClick(e, carriersWrapperIndex) {
+            //     // determine if wrapper is on left or right side
+            //     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+            //     var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
+            //     var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
+            //     var cloudProviders = document.getElementsByClassName("cloud-wrapper").item(leftRightSide);
+
+            //     if (e.currentTarget.getAttribute("active") === ""){
+            //         // if cilcked carrier is already active - hide the msp section
+
+            //         e.currentTarget.removeAttribute("active");
+
+            //         // hide cloud wrapper
+            //         cloudWrapper.style.maxHeight = '0px';
+            //         setTimeout(function(){cloudWrapper.style.display = 'none';}, 400)
+            //     } else {
+            //         // if clicked carrier is not already active
+
+            //         // remove active from all on click
+            //         [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
+            //             el.removeAttribute("active");
+            //         });
+            //         e.currentTarget.setAttribute("active", "");
+
+            //         // filter cloud providers
+            //         var selectedCloudProviders = carrierCloudProviders[e.currentTarget.getAttribute("carrier")];
+            //         if (selectedCloudProviders.length <= 0) {
+            //             // if the selected carrier has no public cloud providers, hide providers wrapper
+            //             cloudProviders.style.maxHeight = '0px';
+            //         } else {
+            //             cloudProviders.style.maxHeight = '150px';
+            //             [...cloudProviders.getElementsByClassName("cloud-provider")].forEach(function(cloudEl) {
+            //                 if (selectedCloudProviders.includes(cloudEl.getAttribute("cloud"))) {
+            //                     // if cloud provider is in selected list
+            //                     cloudEl.style.display = 'block';
+            //                 } else {
+            //                     cloudEl.style.display = 'none';
+            //                 }
+            //             })
+            //         }
+
+            //         // set cloud wrapper max height to 400px
+            //         cloudWrapper.style.display = 'block';
+            //         setTimeout(function(){cloudWrapper.style.maxHeight = '300px';}, 10);
+            //     }
+            // }
 
             function handleCarriersChange(carriersWrapperIndex, cityName) {
                 // determine if wrapper is on left or right side
