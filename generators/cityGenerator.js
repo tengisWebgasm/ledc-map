@@ -50,12 +50,13 @@ function generate(capitalName, camelCaseName, pinX, pinY, labelX, labelY, isOpen
     `
 }
 
-export function generateCity(city) {
-    let labelPos = getLabelPos(city.capitalName, city.x, city.y, city.labelDirection)
-    return generate(city.capitalName, city.camelCaseName, city.x, city.y, labelPos.x, labelPos.y, city.isOpen)
-}
-
 /**
- * Run scripts
+ * Generates city pins HTML based on city data
+ * @param {*} city City data object containing the following keys: capitalizedName, x, y, labelDirection, isOpen
+ * @returns HTML containing a single pulsating city pin
  */
-
+export function generateCity(city) {
+    let labelPos = getLabelPos(city.capitalizedName, city.x, city.y, city.labelDirection)
+    let camelCaseName = camelCase(city.capitalizedName);
+    return generate(city.capitalizedName, camelCaseName, city.x, city.y, labelPos.x, labelPos.y, city.isOpen)
+}

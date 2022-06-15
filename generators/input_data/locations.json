@@ -1,11 +1,7 @@
 {
-    "leftTopCorner": {
-        "lat": -13.247794166908532,
-        "long": 109.68941020164561
-    },
     "cairns": {
-        "lat": -16.925491,
-        "long": 145.754120,
+        "x": 811.58,
+        "y": 91,
         "capitalizedName": "Cairns",
         "isOpen": false,
         "labelDirection": "d",
@@ -14,8 +10,8 @@
         ]
     },
     "townsville": {
-        "lat": -19.258965,
-        "long": 146.816956,
+        "x": 838.56,
+        "y": 144,
         "capitalizedName": "Townsville",
         "isOpen": false,
         "labelDirection": "d",
@@ -25,8 +21,8 @@
         ]
     },
     "mackay": {
-        "lat": -21.14130978487575,
-        "long": 149.18626497557807,
+        "x": 886.58,
+        "y": 189,
         "capitalizedName": "Mackay",
         "isOpen": false,
         "labelDirection": "d",
@@ -36,8 +32,8 @@
         ]
     },
     "rockhampton": {
-        "lat": 	-23.375000,
-        "long": 150.511673,
+        "x": 914.58,
+        "y": 240,
         "capitalizedName": "Rockhampton",
         "isOpen": false,
         "labelDirection": "r",
@@ -47,8 +43,8 @@
         ]
     },
     "gladstone": {
-        "lat": -23.843138,
-        "long":	151.268356,
+        "x": 934.58,
+        "y": 251,
         "capitalizedName": "Gladstone",
         "isOpen": false,
         "labelDirection": "r",
@@ -58,8 +54,8 @@
         ]
     },
     "bundaberg": {
-        "lat": -24.850000,
-        "long": 152.350006,
+        "x": 956.58,
+        "y": 275,
         "capitalizedName": "Bundaberg",
         "isOpen": false,
         "labelDirection": "r",
@@ -69,8 +65,8 @@
         ]
     },
     "nextDcBrisbane": {
-        "lat": -27.470125,
-        "long": 153.021072,
+        "x": 957.58,
+        "y": 355,
         "capitalizedName": "NextDC Brisbane",
         "isOpen": false,
         "labelDirection": "r",
@@ -81,8 +77,8 @@
         ]
     },
     "coffsHarbour": {
-        "lat": -30.296276,
-        "long": 153.114136,
+        "x": 973,
+        "y": 420.4,
         "capitalizedName": "Coffs Harbour",
         "isOpen": false,
         "labelDirection": "r",
@@ -93,8 +89,8 @@
         ]
     },
     "tamworth": {
-        "lat": -31.083332,
-        "long": 150.916672,
+        "x": 924.58,
+        "y": 438,
         "capitalizedName": "Tamworth",
         "isOpen": true,
         "labelDirection": "d",
@@ -107,8 +103,8 @@
         ]
     },
     "newcastle": {
-        "lat": -32.916668,
-        "long": 151.750000,
+        "x": 942,
+        "y": 488.4,
         "capitalizedName": "Newcastle",
         "isOpen": true,
         "labelDirection": "r",
@@ -120,8 +116,8 @@
         ]
     },
     "dubbo": {
-        "lat": -32.256943,
-        "long": 148.601105,
+        "x": 867.58,
+        "y": 469,
         "capitalizedName": "Dubbo",
         "isOpen": true,
         "labelDirection": "d",
@@ -129,12 +125,12 @@
             "tamworth",
             "bathurst",
             "nextDcSydney",
-            "waggaWagga"
+            "wagga"
         ]
     },
     "bathurst": {
-        "lat": -33.419998,
-        "long": 149.577774,
+        "x": 895.58,
+        "y": 494,
         "capitalizedName": "Bathurst",
         "isOpen": false,
         "labelDirection": "d",
@@ -146,8 +142,8 @@
         ]
     },
     "nextDcSydney": {
-        "lat": -33.785080067768945,
-        "long": 151.1314256404951,
+        "x": 915,
+        "y": 524.4,
         "capitalizedName": "NextDC Sydney",
         "isOpen": false,
         "labelDirection": "r",
@@ -155,12 +151,12 @@
             "dubbo",
             "equinixSydney",
             "nowra",
-            "waggaWagga"
+            "wagga"
         ]
     },
     "equinixSydney": {
-        "lat": -33.911845767065806,
-        "long": 151.19298334231374,
+        "x": 928,
+        "y": 513.4,
         "capitalizedName": "Equinix Sydney",
         "isOpen": false,
         "labelDirection": "r",
@@ -172,22 +168,22 @@
         ]
     },
     "nowra": {
-        "lat": -34.886805967587335,
-        "long": 150.60014944324288,
+        "x": 916,
+        "y": 542.4,
         "capitalizedName": "Nowra",
         "isOpen": false,
         "labelDirection": "r",
         "connections": [
             "equinixSydney",
             "nextDcSydney",
-            "waggaWagga",
+            "wagga",
             "albury",
             "traralgon"
         ]
     },
-    "waggaWagga": {
-        "lat": -35.117275,
-        "long": 147.356522,
+    "wagga": {
+        "x": 847.58,
+        "y": 538,
         "capitalizedName": "Wagga",
         "isOpen": false,
         "labelDirection": "d",
@@ -200,34 +196,34 @@
         ]
     },
     "albury": {
-        "lat": -36.080780,
-        "long": 146.916473,
+        "x": 830.58,
+        "y": 565,
         "capitalizedName": "Albury",
         "isOpen": true,
         "labelDirection": "d",
         "connections": [
-            "waggaWagga",
+            "wagga",
             "nowra",
             "traralgon",
             "shepparton"
         ]
     },
     "mildura": {
-        "lat": -34.206841,
-        "long": 142.136490,
+        "x": 729.58,
+        "y": 519,
         "capitalizedName": "Mildura",
         "isOpen": false,
         "labelDirection": "d",
         "connections": [
-            "waggaWagga",
+            "wagga",
             "shepparton",
             "bendigo",
             "adelaide"
         ]
     },
     "shepparton": {
-        "lat": -36.383331,
-        "long": 145.399994,
+        "x": 801.58,
+        "y": 577,
         "capitalizedName": "Shepparton",
         "isOpen": false,
         "labelDirection": "d",
@@ -240,11 +236,11 @@
         ]
     },
     "traralgon": {
-        "lat": -38.19682608941367,
-        "long": 146.53296607308846,
+        "x": 814.58,
+        "y": 626,
         "capitalizedName": "Traralgon",
         "isOpen": false,
-        "labelDirection": "d",
+        "labelDirection": "r",
         "connections": [
             "nowra",
             "albury",
@@ -253,8 +249,8 @@
         ]
     },
     "bendigo": {
-        "lat": -36.757786,
-        "long": 144.278702,
+        "x": 775.58,
+        "y": 591,
         "capitalizedName": "Bendigo",
         "isOpen": false,
         "labelDirection": "d",
@@ -269,8 +265,8 @@
         ]
     },
     "nextDcMelbourne": {
-        "lat": -37.82279386579723,
-        "long": 144.93260705549577,
+        "x": 792.58,
+        "y": 621,
         "capitalizedName": "NextDC Melbourne",
         "isOpen": false,
         "labelDirection": "d",
@@ -282,8 +278,8 @@
         ]
     },
     "adelaide": {
-        "lat": -34.921230,
-        "long": 138.599503,
+        "x": 650.58,
+        "y": 534,
         "capitalizedName": "Adelaide",
         "isOpen": false,
         "labelDirection": "d",
@@ -294,8 +290,8 @@
         ]
     },
     "horsham": {
-        "lat": -36.716667,
-        "long": 142.199997,
+        "x": 729.58,
+        "y": 587,
         "capitalizedName": "Horsham",
         "isOpen": false,
         "labelDirection": "d",
@@ -306,8 +302,8 @@
         ]
     },
     "ballarat": {
-        "lat": -37.549999,
-        "long": 143.850006,
+        "x": 760.58,
+        "y": 606,
         "capitalizedName": "Ballarat",
         "isOpen": false,
         "labelDirection": "d",
@@ -318,8 +314,8 @@
         ]
     },
     "geelong": {
-        "lat": -38.150002,
-        "long": 144.350006,
+        "x": 776.58,
+        "y": 627,
         "capitalizedName": "Geelong",
         "isOpen": false,
         "labelDirection": "d",
@@ -328,9 +324,5 @@
             "bendigo",
             "nextDcMelbourne"
         ]
-    },
-    "bottomRightCorner": {
-        "lat": -42.8544766194233,
-        "long": 172.96567893116267
     }
 }

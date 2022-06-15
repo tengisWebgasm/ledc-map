@@ -1,5 +1,6 @@
 import locationData from "./input_data/locations.json" assert { type: 'json' };
 import { generateCity } from "./cityGenerator.js";
+import { generateCityLines } from "./lineGenerator.js";
 import fs from  "fs"
 
 /**
@@ -33,37 +34,58 @@ function mapLatLongToPixels(city, startLoc, endLoc, startXY, endXY){
  * @returns Array of city positions
  */
 function main(startLoc, endLoc, startXY, endXY){
-    var citiesArray = []
-    var startLoc = locationData.leftTopCorner
-    var endLoc = locationData.bottomRightCorner
-    var startXY = {
-        x: 0,
-        y: 0
-    }
-    var endXY = {
-        x: 1440,
-        y: 784
-    }
+    var citiesArray = Object.values(locationData);
+    // var startLoc = locationData.leftTopCorner
+    // var endLoc = locationData.bottomRightCorner
+    // var startXY = {
+    //     x: 0,
+    //     y: 0
+    // }
+    // var endXY = {
+    //     x: 1440,
+    //     y: 784
+    // }
     
     // Loop over all locationData keys, except the corner positions
-    Object.keys(locationData).forEach(city => {
-        if (city == "leftTopCorner" || city == "bottomRightCorner")
-            return;
+    // Object.keys(locationData).forEach(city => {
+    //     if (city == "leftTopCorner" || city == "bottomRightCorner")
+    //         return;
     
-        citiesArray.push(mapLatLongToPixels(city, startLoc, endLoc, startXY, endXY))
-    })
+    //     citiesArray.push(mapLatLongToPixels(city, startLoc, endLoc, startXY, endXY))
+    // })
+
+    /**
+     * Generate stuff
+     */
     
-    // Generate city html
+    // Generate city HTML
     var cityHTML = "";
     citiesArray.forEach(city => {
         cityHTML += generateCity(city);
     })
+
+    // Generate city lines HTML
+    var cityLinesHTML = generateCityLines(citiesArray);
+
+
+
+    /**
+     *  Write to file
+     */
+
+    // city pin data to cities.html
     fs.writeFile('./output_data/cities.html', cityHTML, err => {
         if (err) {
           console.error(err);
         }
-        // file written successfully
-      });
+    });
+
+    // city lines to cityLines.html
+    fs.writeFile('./output_data/cityLines.html', cityLinesHTML, err => {
+        if (err) {
+          console.error(err);
+        }
+    });
 }
 
-console.log(main())
+main()
