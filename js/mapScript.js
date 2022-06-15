@@ -44,7 +44,7 @@ function showSelection(cityName) {
 		[
 			...document.querySelector("[city-lines]").querySelectorAll("path"),
 		].forEach((e) => e.removeAttribute("on"));
-		[...document.querySelectorAll(`[dc="${cityName}"]`)].forEach((e) => {
+		[...document.querySelectorAll(`[dc="${cityName}"], [city="${cityName}"]`)].forEach((e) => {
 			setTimeout(() => e.setAttribute("on", ""), Math.random() * 280);
 		});
 	} catch {}
@@ -139,14 +139,20 @@ function selectDestination(cityName) {
 
 	// set other lines invisible
 	let otherLines = document.querySelectorAll(
-		`[city-lines] path:not([city="${cityName}"]):not([dc="${selectStart.value}"])`
+		`[city-lines]`
 	);
 	for (let i = 0; i < otherLines.length; i++) {
-		otherLines[i].setAttribute("invisible", "");
+		let dcFilter = otherLines[i].getAttribute("dc")
+		let cityFilter = otherLines[i].getAttribute("cityFilter")
+		if (!(dcFilter === selectStart.value && cityFilter === cityName) 
+			&& !(cityFilter === selectStart.value && dcFilter === cityName)) {
+			otherLines[i].setAttribute("invisible", "");
+		}
 	}
 
 	const curLine = document.querySelector(
-		`[dc="${selectStart.value}"][city="${cityName}"]`
+		`[dc="${selectStart.value}"][city="${cityName}"],
+		[city="${selectStart.value}"][dc="${cityName}"]`
 	);
 	curLine.setAttribute("selected", "");
 
