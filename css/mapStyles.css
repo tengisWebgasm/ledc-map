@@ -476,7 +476,6 @@ p {
 
 .map-side-panel__carriers-wrapper {
 	display: flex;
-	justify-content: center;
 	max-width: 100%;
 	position: relative;
 	padding-bottom: 16px; /* to make hover shadow visible */

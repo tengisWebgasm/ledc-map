@@ -573,7 +573,6 @@
 
             .map-side-panel__carriers-wrapper {
                 display: flex;
-                justify-content: center;
                 max-width: 100%;
                 position: relative;
                 padding-bottom: 16px;
@@ -1851,7 +1850,7 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.gif"
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
                                                         loading="lazy" alt="regionalIt">
                                                 </div>
                                             </div>
@@ -1981,7 +1980,7 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.gif"
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
                                                         loading="lazy" alt="regionalIt">
                                                 </div>
                                             </div>
@@ -2177,8 +2176,10 @@
                 if (vw > 767) {
                     if (datacenterDetails[cityName]["carriers"].length <= 6) {
                         hideArrowButtons(0);
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
                     } else {
                         showArrowButtons(0);
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "flex-start";
                     }
                 }
 
@@ -2313,8 +2314,10 @@
                 if (vw > 767) {
                     if (datacenterDetails[cityName]["carriers"].length <= 6) {
                         hideArrowButtons(1);
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "center";
                     } else {
                         showArrowButtons(1);
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "flex-start";
                     }
                 }
 

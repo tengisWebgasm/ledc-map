@@ -73,9 +73,10 @@ function showSelection(cityName) {
 	if (vw > 767) {
 		if (datacenterDetails[cityName]["carriers"].length <= 6) {
 			hideArrowButtons(0);
-			// document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
 		} else {
 			showArrowButtons(0);
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "flex-start";
 		}
 	}
 
@@ -210,8 +211,10 @@ function selectDestination(cityName) {
 	if (vw > 767) {
 		if (datacenterDetails[cityName]["carriers"].length <= 6) {
 			hideArrowButtons(1);
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "center";
 		} else {
 			showArrowButtons(1);
+			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "flex-start";
 		}
 	}
 
