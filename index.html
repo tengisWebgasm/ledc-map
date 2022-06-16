@@ -114,7 +114,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
                                 <style>
                                     [city-lines] path {
-                                        opacity: 0.3;
+                                        opacity: 0.6;
                                         pointer-events: none;
                                         stroke: #83ADFF;
                                         transition: all 0.2s ease-out;
@@ -273,8 +273,6 @@
                                         d="M814.58 626C807.25 624.33 799.91 622.67 792.58,621" />
                                     <path dc="bendigo" city="nextDcMelbourne"
                                         d="M775.58 591C781.25 601 786.91 611 792.58,621" />
-                                    <path dc="bendigo" city="adelaide"
-                                        d="M775.58,591 C752.06,566.25 696.9,540.5 650.58,534" />
                                     <path dc="bendigo" city="horsham"
                                         d="M775.58,591 C758.8,585.72 747.36,584.48 729.58,587" />
                                     <path dc="bendigo" city="ballarat"
@@ -427,7 +425,7 @@
 
                                         <ellipse cx="847.58" cy="538" rx="7" ry="7" fill="white" />
                                         <ellipse cx="847.58" cy="538" rx="5" ry="5" identifier />
-                                        <text x="831.6800000000001" y="552" class="city-name">Wagga</text>
+                                        <text x="813.6800000000001" y="552" class="city-name">Wagga Wagga</text>
                                     </g>
 
                                     <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
@@ -456,7 +454,7 @@
 
                                         <ellipse cx="801.58" cy="577" rx="7" ry="7" fill="white" />
                                         <ellipse cx="801.58" cy="577" rx="5" ry="5" identifier />
-                                        <text x="775.58" y="591" class="city-name">Shepparton</text>
+                                        <text x="765" y="567" class="city-name">Shepparton</text>
                                     </g>
 
                                     <g id="traralgon" class="city-group" soon>
@@ -470,14 +468,17 @@
 
                                         <ellipse cx="775.58" cy="591" rx="7" ry="7" fill="white" />
                                         <ellipse cx="775.58" cy="591" rx="5" ry="5" identifier />
-                                        <text x="757.13" y="605" class="city-name">Bendigo</text>
+                                        <text x="752" y="582" class="city-name">Bendigo</text>
                                     </g>
 
                                     <g id="nextDcMelbourne" class="city-group" soon>
 
                                         <ellipse cx="792.58" cy="621" rx="7" ry="7" fill="white" />
                                         <ellipse cx="792.58" cy="621" rx="5" ry="5" identifier />
-                                        <text x="749.98" y="635" class="city-name">NextDC Melbourne</text>
+                                        <text x="770" y="630" class="city-name">
+                                            <tspan x="776" dy="1em">NextDC</tspan>
+                                            <tspan x="770" dy="1em">Melbourne</tspan>
+                                        </text>
                                     </g>
 
                                     <g id="adelaide" class="city-group" soon>
@@ -505,7 +506,7 @@
 
                                         <ellipse cx="776.58" cy="627" rx="7" ry="7" fill="white" />
                                         <ellipse cx="776.58" cy="627" rx="5" ry="5" identifier />
-                                        <text x="757.58" y="641" class="city-name">Geelong</text>
+                                        <text x="730" y="630" class="city-name">Geelong</text>
                                     </g>
 
 
@@ -912,11 +913,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="map-side-panel__footer">
-                                            <p>Download Data Sheet:</p>
-                                            <button class="map-side-panel__download-button">
+                                        <div class="map-side-panel__footer" href="#">
+                                            <a class="button button-primary bg-primary-2" href="/locations">
                                                 Select a city
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -1037,10 +1037,9 @@
                                             </div>
                                         </div>
                                         <div class="map-side-panel__footer">
-                                            <p>Download Data Sheet:</p>
-                                            <button class="map-side-panel__download-button">
+                                            <a class="button button-primary bg-primary-2" href="#">
                                                 Select a city
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

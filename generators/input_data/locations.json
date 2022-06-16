@@ -260,8 +260,7 @@
             "nextDcMelbourne",
             "geelong",
             "ballarat",
-            "horsham",
-            "adelaide"
+            "horsham"
         ]
     },
     "nextDcMelbourne": {
@@ -285,7 +284,6 @@
         "labelDirection": "d",
         "connections": [
             "mildura",
-            "bendigo",
             "horsham"
         ]
     },

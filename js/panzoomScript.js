@@ -34,6 +34,9 @@ mapBtnReset.addEventListener("click", function(){
 elem.addEventListener("panzoomzoom", function(e){
     mapPingContent.style.transform = `scale(${1/e.detail.scale})`;
 });
+elem.addEventListener("panzoomreset", function(e) {
+    mapPingContent.style.transform = `scale(${1/e.detail.scale})`;
+})
 
 /**
  * Differentiate between click and drag through variable isDraggedMap

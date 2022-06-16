@@ -8,6 +8,51 @@
 	padding-left: 50px;
 }
 
+.button {
+    display: inline-block;
+    padding: 15px 24px 13px;
+	border: none;
+    border-radius: 100px;
+    background-color: #212121;
+    -webkit-transition: box-shadow 200ms ease-out;
+    transition: box-shadow 200ms ease-out;
+    font-family: Poppins, sans-serif;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.43;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.button.button-primary {
+    background-color: #001f5c;
+    -webkit-transition: background-color 200ms ease-out, color 200ms ease-out, box-shadow 200ms ease-out;
+    transition: background-color 200ms ease-out, color 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+.button.button-primary.bg-primary-2 {
+    background-color: #0097ce;
+}
+
+.button.button-primary.bg-primary-2:hover {
+    background-color: #001f5c;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 24px 13px;
+    border-radius: 100px;
+    background-color: #212121;
+    -webkit-transition: box-shadow 200ms ease-out;
+    transition: box-shadow 200ms ease-out;
+    font-family: Poppins, sans-serif;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.43;
+    font-weight: 600;
+    text-decoration: none;
+}
+
 p {
 	margin: 0;
 }
@@ -684,40 +729,12 @@ p {
 
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 16px;
 
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 18px;
-	color: #7A7A7A;
-}
-
-.map-side-panel__footer p {
-	margin: 0;
-}
-
-.map-side-panel__footer button {
-	padding: 6px 16px 6px 40px;
-
-	border: 1px solid #001F5C;
-	border-radius: 100px;
-
-	font-family: 'Poppins', sans-serif;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 24px;
-	text-align: center;
-	color: #001F5C;
-
-	background-image: url("../public/Download-black.svg");
-	background-repeat: no-repeat;
-	background-position: 16px 50%;
-	background-color: transparent;
-}
-
-.map-side-panel__footer button:hover {
-	background-color: #001f5c4b;
 }
 
 @keyframes fadein {

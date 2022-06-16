@@ -90,10 +90,11 @@ function showSelection(cityName) {
 
 	// change learn more link and datasheet city name/link
 	var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(0);
-	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(0);
+	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
 	var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
 	learnMoreLink.href = "/dc_location/" + cityName + "/";
-	downloadDataSheetBtn.innerHTML = capitalizedName;
+	downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+	downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
 }
 
 var closeSelection = () => {
@@ -117,8 +118,9 @@ var closeSelection = () => {
 	}
 	
 	// change download data sheet button text to "Select a city"
-	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(0);
+	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
 	downloadDataSheetBtn.innerHTML = "Select a city";
+	downloadDataSheetBtn.href = "#";
 
 	closeDestination();
 };
@@ -141,7 +143,7 @@ function selectDestination(cityName) {
 
 	// set other lines invisible
 	let otherLines = document.querySelectorAll(
-		`[city-lines]`
+		`[city-lines] path`
 	);
 	for (let i = 0; i < otherLines.length; i++) {
 		let dcFilter = otherLines[i].getAttribute("dc")
@@ -225,10 +227,11 @@ function selectDestination(cityName) {
 
 	// change learn more link and datasheet city name/link
 	var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(1);
-	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(1);
+	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
 	var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
 	learnMoreLink.href = "/dc_location/" + cityName + "/";
-	downloadDataSheetBtn.innerHTML = capitalizedName;
+	downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+	downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
 }
 
 var closeDestination = () => {
@@ -248,8 +251,9 @@ var closeDestination = () => {
 	pingPanel.removeAttribute("active");
 	
 	// change download data sheet button text to "Select a city"
-	var downloadDataSheetBtn = document.getElementsByClassName("map-side-panel__download-button").item(1);
+	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
 	downloadDataSheetBtn.innerHTML = "Select a city";
+	downloadDataSheetBtn.href = "#";
 };
 
 selectStart.addEventListener("change", () => {
