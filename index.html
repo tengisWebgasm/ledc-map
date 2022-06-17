@@ -114,7 +114,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
                                 <style>
                                     [city-lines] path {
-                                        opacity: 0.3;
+                                        opacity: 1;
                                         pointer-events: none;
                                         stroke: #83ADFF;
                                         transition: all 0.2s ease-out;
@@ -122,6 +122,7 @@
 
                                     [city-lines] path[on] {
                                         opacity: 1;
+                                        stroke: #2f65d2;
                                         stroke-dasharray: 1200;
                                         stroke-dashoffset: 1200;
                                         animation: dash 2000ms linear forwards;
