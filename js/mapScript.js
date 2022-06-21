@@ -20,6 +20,9 @@ var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
 var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
 var pingPanelContent = document.getElementById("map-ping-content");
 var pingPanelButton = document.getElementById("map-ping-button");
+var mapLinkPanel = document.getElementById("map-link-panel");
+var mapLinkName = document.getElementById("map-link__city-name");
+var mapLinkLink = document.getElementById("map-link__city-link");
 
 // function called when some starting point (data center) is selected
 function showSelection(cityName) {
@@ -88,6 +91,9 @@ function showSelection(cityName) {
 	// change carriers
 	handleCarriersChange(0, cityName);
 
+	// hide map link panel
+	mapLinkPanel.classList.remove("active-panel")
+
 	// change learn more link and datasheet city name/link
 	var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(0);
 	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
@@ -140,6 +146,11 @@ function selectDestination(cityName) {
 		otherCities[i].removeAttribute("dc");
 	}
 	document.querySelector("#" + cityName).setAttribute("dc", "");
+
+	// Hide map-panel-a-notification
+	document.getElementById("map-panel-a-notification").style.maxHeight = '0px';
+	document.getElementById("map-panel-a-notification").style.visibility = 'hidden';
+	sidePanel.classList.remove("notification-active");
 
 	// set other lines invisible
 	let otherLines = document.querySelectorAll(
@@ -528,21 +539,37 @@ function showArrowButtons(carriersWrapperIndex) {
  *  When you hover over an open city, how map link panel and change text/link accordingly
  */
 if (vw > 992) {
-	var mapLinkPanel = document.getElementById("map-link-panel");
-	var mapLinkName = document.getElementById("map-link__city-name");
-	var mapLinkLink = document.getElementById("map-link__city-link");
 	document.querySelectorAll(".city-group[dc]").forEach(cityGroupEl => {
-	
 		var cityGroupRect = cityGroupEl.querySelector("ellipse[fill]:not([pulse]):not([identifier])");
+
+
+		var rootSVG = document.querySelector("#map-element svg");
+		var point = rootSVG.createSVGPoint();
+		var matrix, position;
+		matrix = cityGroupEl.getCTM();
 
 		cityGroupEl.addEventListener("mouseenter", function(e){
 			e.stopPropagation();
 			e.stopImmediatePropagation();
 			e.preventDefault();
 
+			if (selectStart.value || selectEnd.value) {
+				return;
+			}
+
+			// inner content and links
 			mapLinkName.innerHTML = cityGroupEl.getElementsByClassName("city-name").item(0).innerHTML;
 			mapLinkLink.href = "/dc_location/" + cityGroupEl.id; 
-			mapLinkPanel.style.transform = `translate(calc(${cityGroupRect.getAttribute("cx")}px - 8px), calc(${cityGroupRect.getAttribute("cy")}px - 40%))`;
+			
+			// positioning
+			point.x = cityGroupRect.getAttribute("cx");
+			point.y = cityGroupRect.getAttribute("cy");
+			position = point.matrixTransform(matrix);
+
+			mapLinkPanel.style.left = position.x + "px";
+			mapLinkPanel.style.top = position.y + "px";
+
+			// styling
 			mapLinkPanel.classList.add("active-panel");
 		})
 	
@@ -550,6 +577,10 @@ if (vw > 992) {
 			e.stopPropagation();
 			e.stopImmediatePropagation();
 			e.preventDefault();
+
+			if (selectStart.value || selectEnd.value) {
+				return;
+			}
 	
 			mapLinkPanel.classList.remove("active-panel")
 		})

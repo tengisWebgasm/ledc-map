@@ -115,7 +115,7 @@
                                 <style>
                                     [city-lines] path {
                                         pointer-events: none;
-                                        stroke: #001F5C;
+                                        stroke: #2b4a71;
                                         transition: all 0.2s ease-out;
                                     }
 
@@ -195,98 +195,40 @@
                                     <!-- NEW LINE HELPER -->
                                     <circle left-node cx="0" cy="0" r="2" fill="green" />
                                     <circle right-node cx="0" cy="0" r="2" fill="green" />
-
-                                    <path dc="cairns" city="townsville"
-                                        d="M811.58,91 C814.57,116.57 816.92,130.08 838.56,144" />
-                                    <path dc="townsville" city="mackay"
-                                        d="M838.56,144 C860.72,159.3 874.17,173.65 886.58,189" />
-                                    <path dc="mackay" city="rockhampton"
-                                        d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
-                                    <path dc="rockhampton" city="gladstone"
-                                        d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
-                                    <path dc="gladstone" city="bundaberg"
-                                        d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
-                                    <path dc="bundaberg" city="nextDcBrisbane"
-                                        d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
-                                    <path dc="nextDcBrisbane" city="coffsHarbour"
-                                        d="M957.58,355 C969.22,376.5 976.51,399.25 973,420.4" />
-                                    <path dc="nextDcBrisbane" city="tamworth"
-                                        d="M957.58,355 C952.58,388.82 940.38,410.63 924.58,438" />
-                                    <path dc="coffsHarbour" city="tamworth"
-                                        d="M973,420.4 C957.66,422.32 938.67,430.13 924.58,438" />
-                                    <path dc="coffsHarbour" city="newcastle"
+                                    
+                                    <path stroke-dasharray="10, 5" dc="albury" city="shepparton"
+                                        d="M830.58 565C820.91 569 811.25 573 801.58,577" />
+                                    <path stroke-dasharray="10, 5" dc="ballarat" city="geelong"
+                                        d="M760.58 606C765.91 613 771.25 620 776.58,627" />
+                                    <path stroke-dasharray="10, 5" dc="bendigo" city="nextDcMelbourne"
+                                        d="M775.58 591C781.25 601 786.91 611 792.58,621" />
+                                    <path stroke-dasharray="10, 5" dc="dubbo" city="wagga" 
+                                        d="M867.58,469 C865.66,494.05 858.95,520.25 847.58,538" />
+                                    <path stroke-dasharray="10, 5" dc="nextDcMelbourne" city="geelong"
+                                        d="M792.58 621C787.25 623 781.91 625 776.58,627" />
+                                    <path stroke-dasharray="10, 5" dc="coffsHarbour" city="newcastle"
                                         d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4" />
                                     <path dc="tamworth" city="newcastle"
                                         d="M924.58,438 C933.89,456.1 939.64,471 942,488.4" />
-                                    <path dc="tamworth" city="dubbo"
-                                        d="M924.58,438 C902.88,440.53 883.73,452.27 867.58,469" />
-                                    <path dc="tamworth" city="bathurst"
-                                        d="M924.58,438 C911.16,453.47 901.75,476.08 895.58,494" />
-                                    <path dc="newcastle" city="bathurst"
-                                        d="M942,488.4 C926.98,486.92 911.45,488.58 895.58,494" />
                                     <path dc="newcastle" city="equinixSydney"
                                         d="M942 488.4C937.33 496.73 932.67 505.07 928,513.4" />
-                                    <path dc="dubbo" city="bathurst"
-                                        d="M867.58,469 C881.26,474.88 889.35,484.52 895.58,494" />
-                                    <path dc="dubbo" city="nextDcSydney"
-                                        d="M867.58,469 C877.49,490.97 895.69,511.48 915,524.4" />
-                                    <path dc="dubbo" city="wagga" 
-                                        d="M867.58,469 C865.66,494.05 858.95,520.25 847.58,538" />
-                                    <path dc="bathurst" city="equinixSydney"
-                                        d="M895.58,494 C912.59,497.97 921.54,506.58 928,513.4" />
                                     <path dc="nextDcSydney" city="equinixSydney"
                                         d="M915 524.4C919.33 520.73 923.67 517.07 928,513.4" />
-                                    <path dc="nextDcSydney" city="nowra"
-                                        d="M915 524.4C915.33 530.4 915.67 536.4 916,542.4" />
-                                    <path dc="nextDcSydney" city="wagga" 
+                                    <path stroke-dasharray="10, 5" dc="nextDcSydney" city="wagga" 
                                         d="M915,524.4 C898.88,523.13 864.75,527.47 847.58,538" />
-                                    <path dc="equinixSydney" city="nowra"
-                                        d="M928 513.4C924 523.07 920 532.73 916,542.4" />
-                                    <path dc="nowra" city="wagga" 
-                                        d="M916,542.4 C895.14,538.13 866.14,533.02 847.58,538" />
-                                    <path dc="nowra" city="albury"
-                                        d="M916,542.4 C889.28,542.93 852.45,553.72 830.58,565" />
-                                    <path dc="nowra" city="traralgon"
-                                        d="M916,542.4 C879.59,562.67 829.79,593.43 814.58,626" />
-                                    <path dc="wagga" city="albury" 
-                                        d="M847.58 538C841.91 547 836.25 556 830.58,565" />
-                                    <path dc="wagga" city="mildura" 
-                                        d="M847.58,538 C826.65,520.17 784.71,516.88 729.58,519" />
-                                    <path dc="albury" city="shepparton"
-                                        d="M830.58 565C820.91 569 811.25 573 801.58,577" />
-                                    <path dc="albury" city="traralgon"
-                                        d="M830.58,565 C818.95,584.48 813.96,606.12 814.58,626" />
-                                    <path dc="mildura" city="shepparton"
-                                        d="M729.58,519 C780.03,539.63 792.28,558.12 801.58,577" />
-                                    <path dc="mildura" city="bendigo"
-                                        d="M729.58,519 C739.56,544.75 757.15,569.2 775.58,591" />
-                                    <path dc="mildura" city="adelaide"
-                                        d="M729.58,519 C703.1,515.25 672.11,520.6 650.58,534" />
-                                    <path dc="shepparton" city="traralgon"
-                                        d="M801.58 577C805.91 593.33 810.25 609.67 814.58,626" />
-                                    <path dc="shepparton" city="bendigo"
-                                        d="M801.58 577C792.91 581.67 784.25 586.33 775.58,591" />
-                                    <path dc="shepparton" city="nextDcMelbourne"
-                                        d="M801.58 577C798.58 591.67 795.58 606.33 792.58,621" />
-                                    <path dc="traralgon" city="nextDcMelbourne"
-                                        d="M814.58 626C807.25 624.33 799.91 622.67 792.58,621" />
-                                    <path dc="bendigo" city="nextDcMelbourne"
-                                        d="M775.58 591C781.25 601 786.91 611 792.58,621" />
-                                    <path dc="bendigo" city="horsham"
-                                        d="M775.58,591 C758.8,585.72 747.36,584.48 729.58,587" />
-                                    <path dc="bendigo" city="ballarat"
-                                        d="M775.58 591C770.58 596 765.58 601 760.58,606" />
-                                    <path dc="bendigo" city="geelong"
-                                        d="M775.58 591C775.91 603 776.25 615 776.58,627" />
-                                    <path dc="nextDcMelbourne" city="geelong"
-                                        d="M792.58 621C787.25 623 781.91 625 776.58,627" />
-                                    <path dc="adelaide" city="horsham"
-                                        d="M650.58,534 C680.61,565.52 698.1,575.08 729.58,587" />
-                                    <path dc="horsham" city="ballarat"
-                                        d="M729.58,587 C739.71,598.73 749.85,601.72 760.58,606" />
-                                    <path dc="ballarat" city="geelong"
-                                        d="M760.58 606C765.91 613 771.25 620 776.58,627" />
-
+                                    <path stroke-dasharray="10, 5" dc="cairns" city="townsville"
+                                        d="M811.58,91 C814.57,116.57 816.92,130.08 838.56,144" />
+                                    <path stroke-dasharray="10, 5" dc="townsville" city="mackay"
+                                        d="M838.56,144 C860.72,159.3 874.17,173.65 886.58,189" />
+                                    <path stroke-dasharray="10, 5" dc="mackay" city="rockhampton"
+                                        d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
+                                    <path stroke-dasharray="10, 5" dc="rockhampton" city="gladstone"
+                                        d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
+                                    <path stroke-dasharray="10, 5" dc="gladstone" city="bundaberg"
+                                        d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
+                                    <path stroke-dasharray="10, 5" dc="bundaberg" city="nextDcBrisbane"
+                                        d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
+                                        
                                 </g>
 
                                 <g city-pins>
@@ -754,13 +696,25 @@
                             </div>
                         </div>
                         <div id=map-element-label>
-                            <p class="m-hide">Explore our Datacentre network to find your location</p>
-                            <div class="label-seperator m-hide"></div>
-                            <div class="label-marker" style="background-color: #34C759;"></div>
-                            <p>Open Now</p>
-                            <div class="label-seperator"></div>
-                            <div class="label-marker" style="background-color: #FF9500;"></div>
-                            <p>Coming Soon</p>
+                            <div class="map-legend-section">
+                                <p class="m-hide">Explore our Datacentre network to find your location</p>
+                                <div class="label-seperator m-hide"></div>
+                                <div class="label-marker" style="background-color: #34C759;"></div>
+                                <p>Live</p>
+                                <div class="label-seperator"></div>
+                                <div class="label-marker" style="background-color: #FF9500;"></div>
+                                <p>In Progress</p>
+                                <div class="label-seperator"></div>
+                                <div class="label-marker" style="background-color: #2b4a71;"></div>
+                                <p>Coming Soon</p>
+                            </div>
+                            <div class="map-legend-section">
+                                <div class="label-line" style="background-color: #2b4a71;"></div>
+                                <p>Live</p>
+                                <div class="label-seperator"></div>
+                                <div class="label-line" style="background: linear-gradient(90deg, rgba(43,74,113,1) 35%, rgba(255,255,255,1) 36%, rgba(255,255,255,1) 64%, rgba(43,74,113,1) 65%);"></div>
+                                <p>Coming Soon</p>
+                            </div>
                         </div>
                         <div id="map-controls-holder" class="container">
                             <div class="map-controls-wrapper">
@@ -770,11 +724,14 @@
                             </div>
                         </div>
                     </div>
-                    <div id="map-side-panel">
+                    <div id="map-side-panel" class="notification-active">
                         <div id="map-side-panel-a">
                             <button id="city-selection-expand" onclick="expandMenu()">
                                 <div class="expand-icon"></div>
                             </button>
+                            <div id="map-panel-a-notification" class="container">
+                                <h1>Select Two Data Centres to View Location Information</h1>
+                            </div>
                             <div id="city-selection-container" class="container">
                                 <div id="city-select-start" class="city-select">
                                     <select>

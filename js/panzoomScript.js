@@ -6,7 +6,7 @@
 const elem = document.getElementById('map-element');
 const panzoom = Panzoom(elem, {
     startX: -90,
-    startScale: 1.1,
+    startScale: 1,
     minScale: 0.5,
 });
 

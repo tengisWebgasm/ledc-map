@@ -184,8 +184,13 @@
             #map-side-panel {
                 z-index: 2;
                 transform: translateY(-88px);
+                transition: transform 0.3s ease-out;
                 position: relative;
                 background-color: #FFFFFF;
+            }
+
+            #map-side-panel.notification-active {
+                transform: translateY(-128px);
             }
 
             #map-side-panel__network-seperator {
@@ -203,18 +208,29 @@
 
             #map-element-label {
                 display: flex;
-                justify-content: center;
-                align-items: stretch;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+
                 position: absolute;
                 z-index: 4;
                 top: 16px;
                 margin: auto 0;
-                padding: 8px 16px;
+
+                font-size: 14px;
+                line-height: 24px;
+            }
+
+            .map-legend-section {
+                display: flex;
+                justify-content: center;
+                align-items: stretch;
+
+
                 background-color: #ffffff;
                 box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1);
                 border-radius: 100px;
-                font-size: 14px;
-                line-height: 24px;
+                padding: 4px 16px;
             }
 
             .city-select {
@@ -374,15 +390,24 @@
             }
 
             .label-seperator {
-                margin: 0 16px;
+                margin: 2px 12px;
                 width: 1px;
                 background-color: #D6D6D6;
             }
 
             .label-marker {
-                width: 20px;
-                height: 20px;
+                width: 16px;
+                height: 16px;
                 border-radius: 4px;
+                margin-right: 8px;
+                align-self: center;
+            }
+
+            .label-line {
+                width: 20px;
+                height: 3px;
+                margin-top: 8px;
+                margin-bottom: 8px;
                 margin-right: 8px;
                 align-self: center;
             }
@@ -428,6 +453,60 @@
                 display: flex;
                 justify-content: center;
                 overflow: hidden;
+            }
+
+            #map-link-panel {
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 12px 16px;
+
+                background: #001F5C;
+                box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                cursor: default;
+
+                visibility: hidden;
+                opacity: 0;
+
+                transform: translate(-50%, calc(-100% - 20px));
+                transition: opacity 0.3s ease-out;
+                transition-property: visibility, opacity;
+                transition-delay: 0.4s;
+            }
+
+            #map-link-panel.active-panel,
+            #map-link-panel:hover {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            #map-link-panel>p {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 24px;
+                color: #FFFFFF;
+            }
+
+            #map-link__arrow {
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                width: 10px;
+                height: 5px;
+                transform: translate(-50%, 100%);
+                background-image: url("https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/ArrowDownPanel.svg");
+                background-position: center;
+                background-size: contain;
+            }
+
+            #map-link__city-name {
+                margin-right: 6px;
             }
 
             #map-ping-panel {
@@ -510,7 +589,8 @@
                 gap: 12px;
             }
 
-            .map__ping-city-link {
+            .map__ping-city-link,
+            #map-link__city-link {
                 padding-right: 18px;
                 font-size: 14px;
                 line-height: 20px;
@@ -522,7 +602,8 @@
                 color: #0097CE;
             }
 
-            .map__ping-city-link:hover {
+            .map__ping-city-link:hover,
+            #map-link__city-link:hover {
                 text-decoration: underline;
             }
 
@@ -577,6 +658,29 @@
             }
 
             #map-side-panel-a {}
+
+            #map-panel-a-notification {
+                max-height: 40px;
+                height: 40px;
+                overflow: hidden;
+
+                display: flex;
+                justify-content: stretch;
+                align-items: flex-end;
+
+                transition: max-height 0.3s ease-out, visibility 0.3s;
+            }
+
+            #map-panel-a-notification h1 {
+                width: 100%;
+                text-align: center;
+                font-size: 18px;
+                line-height: 20px;
+                font-family: 'Futura', 'Poppins', sans-serif;
+                font-weight: 500;
+                color: #001F5C;
+                margin: 0;
+            }
 
             #map-side-panel-b {
                 background: #ffffff;
@@ -680,50 +784,16 @@
                 transform: translate(50%, calc(-50% - 12px));
             }
 
-            /* .service-container {
-	display: grid;
-	margin: 16px 0px 8px;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-auto-rows: 46px;
-	column-gap: 6px;
-	row-gap: 8px;
-}
-
-.service-container[collapsed] {
-	height: 100px;
-	overflow: hidden;
-}
-
-.service-container-collapse {
-	font-size: 12px;
-	line-height: 12px;
-	text-align: center;
-	color: #05a8d0;
-	transition: opacity ease 200ms;
-	opacity: 0;
-	pointer-events: none;
-	margin-top: 2px;
-	margin-bottom: 0px;
-}
-
-.service-container-collapse:hover {
-	text-decoration: underline;
-}
-
-.service-container-collapse[numCollapsing] {
-	opacity: 1;
-	pointer-events: all;
-	margin-bottom: 10px;
-	cursor: pointer;
-} */
-
             .service-item {
                 box-sizing: border-box;
                 border: none;
+                /* cursor: pointer; */
+                /* border: 2px solid transparent; */
                 flex: 0 0 16.66%;
                 padding-left: 1px;
                 padding-right: 1px;
                 background: #FFFFFF;
+                /* transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out; */
                 overflow: hidden;
             }
 
@@ -781,6 +851,7 @@
                 padding-left: 1px;
                 padding-right: 1px;
                 background: #FFFFFF;
+                /* transition: box-shadow 0.2s ease-out; */
                 overflow: hidden;
             }
 
@@ -803,6 +874,8 @@
             }
 
             .cloud-wrapper {
+                /* max-height: 150px; */
+                /* transition: max-height 0.4s ease; */
                 overflow: hidden;
             }
 
@@ -812,8 +885,8 @@
                 border-top: 1px solid #D6D6D6;
 
                 display: flex;
-                justify-content: center;
                 align-items: center;
+                justify-content: center;
                 gap: 16px;
 
                 font-weight: 400;
@@ -857,6 +930,7 @@
                 position: relative;
                 background-color: white;
                 z-index: 1;
+                /* min-height: 200px; */
                 min-height: 150px;
                 padding-bottom: 8px;
             }
@@ -878,6 +952,7 @@
                 background-color: white;
                 position: relative;
                 z-index: 2;
+                /* min-height: 200px; */
                 min-height: 150px;
                 transition: opacity ease 200ms;
             }
@@ -898,7 +973,6 @@
                 position: absolute;
                 display: flex;
                 justify-content: end;
-                z-index: 2;
                 bottom: 0;
                 transform: translateY(-88px);
             }
@@ -906,6 +980,10 @@
             .map-controls-wrapper {
                 width: auto;
                 display: flex;
+                position: absolute;
+                bottom: 0;
+                top: auto;
+                z-index: 2;
                 flex-direction: column;
                 margin-bottom: 10px;
                 border-radius: 6px;
@@ -983,6 +1061,10 @@
                     padding-left: 31px;
                 }
 
+                #map-link-panel {
+                    display: none;
+                }
+
                 #map-element svg {
                     height: 90%;
                     max-height: 850px;
@@ -1044,6 +1126,21 @@
                 .container {
                     padding-right: 5.33vw;
                     padding-left: 5.33vw;
+                }
+
+                #map-side-panel.notification-active {
+                    transform: translateY(-100%);
+                }
+
+                #map-panel-a-notification {
+                    height: auto;
+                    max-height: 60px;
+                }
+
+                #map-panel-a-notification h1 {
+                    padding-top: 10px;
+                    font-size: 14px;
+                    line-height: 18px;
                 }
 
                 #map-side-panel-overlay {
@@ -1140,13 +1237,12 @@
                                 }
                             }
                         </script>
-                        <embed src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/Map.svg"
-                            alt="Map of Australia" id="map-img"></embed>
+                        <embed src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/Map.svg" alt="Map of Australia" id="map-img"></embed>
                         <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
                             <style>
                                 [city-lines] path {
                                     pointer-events: none;
-                                    stroke: #001F5C;
+                                    stroke: #2b4a71;
                                     transition: all 0.2s ease-out;
                                 }
 
@@ -1160,9 +1256,9 @@
                                 [city-lines] path[on][selected] {
                                     stroke-dasharray: 1200;
                                     stroke-dashoffset: 1200;
+                                    stroke: #001F5C;
                                     animation: dash 2000ms linear forwards;
                                     opacity: 1;
-                                    stroke: #001F5C;
                                 }
 
                                 @keyframes dash {
@@ -1227,87 +1323,38 @@
                                 <circle left-node cx="0" cy="0" r="2" fill="green" />
                                 <circle right-node cx="0" cy="0" r="2" fill="green" />
 
-                                <path dc="cairns" city="townsville"
-                                    d="M811.58,91 C814.57,116.57 816.92,130.08 838.56,144" />
-                                <path dc="townsville" city="mackay"
-                                    d="M838.56,144 C860.72,159.3 874.17,173.65 886.58,189" />
-                                <path dc="mackay" city="rockhampton"
-                                    d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
-                                <path dc="rockhampton" city="gladstone"
-                                    d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
-                                <path dc="gladstone" city="bundaberg"
-                                    d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
-                                <path dc="bundaberg" city="nextDcBrisbane"
-                                    d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
-                                <path dc="nextDcBrisbane" city="coffsHarbour"
-                                    d="M957.58,355 C969.22,376.5 976.51,399.25 973,420.4" />
-                                <path dc="nextDcBrisbane" city="tamworth"
-                                    d="M957.58,355 C952.58,388.82 940.38,410.63 924.58,438" />
-                                <path dc="coffsHarbour" city="tamworth"
-                                    d="M973,420.4 C957.66,422.32 938.67,430.13 924.58,438" />
-                                <path dc="coffsHarbour" city="newcastle"
+                                <path stroke-dasharray="10, 5" dc="albury" city="shepparton"
+                                    d="M830.58 565C820.91 569 811.25 573 801.58,577" />
+                                <path stroke-dasharray="10, 5" dc="ballarat" city="geelong"
+                                    d="M760.58 606C765.91 613 771.25 620 776.58,627" />
+                                <path stroke-dasharray="10, 5" dc="bendigo" city="nextDcMelbourne"
+                                    d="M775.58 591C781.25 601 786.91 611 792.58,621" />
+                                <path stroke-dasharray="10, 5" dc="dubbo" city="wagga"
+                                    d="M867.58,469 C865.66,494.05 858.95,520.25 847.58,538" />
+                                <path stroke-dasharray="10, 5" dc="nextDcMelbourne" city="geelong"
+                                    d="M792.58 621C787.25 623 781.91 625 776.58,627" />
+                                <path stroke-dasharray="10, 5" dc="coffsHarbour" city="newcastle"
                                     d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4" />
                                 <path dc="tamworth" city="newcastle"
                                     d="M924.58,438 C933.89,456.1 939.64,471 942,488.4" />
-                                <path dc="tamworth" city="dubbo"
-                                    d="M924.58,438 C902.88,440.53 883.73,452.27 867.58,469" />
-                                <path dc="tamworth" city="bathurst"
-                                    d="M924.58,438 C911.16,453.47 901.75,476.08 895.58,494" />
-                                <path dc="newcastle" city="bathurst"
-                                    d="M942,488.4 C926.98,486.92 911.45,488.58 895.58,494" />
                                 <path dc="newcastle" city="equinixSydney"
                                     d="M942 488.4C937.33 496.73 932.67 505.07 928,513.4" />
-                                <path dc="dubbo" city="bathurst"
-                                    d="M867.58,469 C881.26,474.88 889.35,484.52 895.58,494" />
-                                <path dc="dubbo" city="nextDcSydney"
-                                    d="M867.58,469 C877.49,490.97 895.69,511.48 915,524.4" />
-                                <path dc="dubbo" city="wagga" d="M867.58,469 C865.66,494.05 858.95,520.25 847.58,538" />
-                                <path dc="bathurst" city="equinixSydney"
-                                    d="M895.58,494 C912.59,497.97 921.54,506.58 928,513.4" />
                                 <path dc="nextDcSydney" city="equinixSydney"
                                     d="M915 524.4C919.33 520.73 923.67 517.07 928,513.4" />
-                                <path dc="nextDcSydney" city="nowra"
-                                    d="M915 524.4C915.33 530.4 915.67 536.4 916,542.4" />
-                                <path dc="nextDcSydney" city="wagga"
+                                <path stroke-dasharray="10, 5" dc="nextDcSydney" city="wagga"
                                     d="M915,524.4 C898.88,523.13 864.75,527.47 847.58,538" />
-                                <path dc="equinixSydney" city="nowra" d="M928 513.4C924 523.07 920 532.73 916,542.4" />
-                                <path dc="nowra" city="wagga" d="M916,542.4 C895.14,538.13 866.14,533.02 847.58,538" />
-                                <path dc="nowra" city="albury" d="M916,542.4 C889.28,542.93 852.45,553.72 830.58,565" />
-                                <path dc="nowra" city="traralgon"
-                                    d="M916,542.4 C879.59,562.67 829.79,593.43 814.58,626" />
-                                <path dc="wagga" city="albury" d="M847.58 538C841.91 547 836.25 556 830.58,565" />
-                                <path dc="wagga" city="mildura"
-                                    d="M847.58,538 C826.65,520.17 784.71,516.88 729.58,519" />
-                                <path dc="albury" city="shepparton" d="M830.58 565C820.91 569 811.25 573 801.58,577" />
-                                <path dc="albury" city="traralgon"
-                                    d="M830.58,565 C818.95,584.48 813.96,606.12 814.58,626" />
-                                <path dc="mildura" city="shepparton"
-                                    d="M729.58,519 C780.03,539.63 792.28,558.12 801.58,577" />
-                                <path dc="mildura" city="bendigo"
-                                    d="M729.58,519 C739.56,544.75 757.15,569.2 775.58,591" />
-                                <path dc="mildura" city="adelaide"
-                                    d="M729.58,519 C703.1,515.25 672.11,520.6 650.58,534" />
-                                <path dc="shepparton" city="traralgon"
-                                    d="M801.58 577C805.91 593.33 810.25 609.67 814.58,626" />
-                                <path dc="shepparton" city="bendigo"
-                                    d="M801.58 577C792.91 581.67 784.25 586.33 775.58,591" />
-                                <path dc="shepparton" city="nextDcMelbourne"
-                                    d="M801.58 577C798.58 591.67 795.58 606.33 792.58,621" />
-                                <path dc="traralgon" city="nextDcMelbourne"
-                                    d="M814.58 626C807.25 624.33 799.91 622.67 792.58,621" />
-                                <path dc="bendigo" city="nextDcMelbourne"
-                                    d="M775.58 591C781.25 601 786.91 611 792.58,621" />
-                                <path dc="bendigo" city="horsham"
-                                    d="M775.58,591 C758.8,585.72 747.36,584.48 729.58,587" />
-                                <path dc="bendigo" city="ballarat" d="M775.58 591C770.58 596 765.58 601 760.58,606" />
-                                <path dc="bendigo" city="geelong" d="M775.58 591C775.91 603 776.25 615 776.58,627" />
-                                <path dc="nextDcMelbourne" city="geelong"
-                                    d="M792.58 621C787.25 623 781.91 625 776.58,627" />
-                                <path dc="adelaide" city="horsham"
-                                    d="M650.58,534 C680.61,565.52 698.1,575.08 729.58,587" />
-                                <path dc="horsham" city="ballarat"
-                                    d="M729.58,587 C739.71,598.73 749.85,601.72 760.58,606" />
-                                <path dc="ballarat" city="geelong" d="M760.58 606C765.91 613 771.25 620 776.58,627" />
+                                <path stroke-dasharray="10, 5" dc="cairns" city="townsville"
+                                    d="M811.58,91 C814.57,116.57 816.92,130.08 838.56,144" />
+                                <path stroke-dasharray="10, 5" dc="townsville" city="mackay"
+                                    d="M838.56,144 C860.72,159.3 874.17,173.65 886.58,189" />
+                                <path stroke-dasharray="10, 5" dc="mackay" city="rockhampton"
+                                    d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
+                                <path stroke-dasharray="10, 5" dc="rockhampton" city="gladstone"
+                                    d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
+                                <path stroke-dasharray="10, 5" dc="gladstone" city="bundaberg"
+                                    d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
+                                <path stroke-dasharray="10, 5" dc="bundaberg" city="nextDcBrisbane"
+                                    d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
 
                             </g>
 
@@ -1530,7 +1577,6 @@
                                     <text x="730" y="630" class="city-name">Geelong</text>
                                 </g>
 
-
                             </g>
                             <defs>
                                 <radialGradient id="pulseFill">
@@ -1719,6 +1765,12 @@
                                 </filter>
                             </defs>
                         </svg>
+                        <div id="map-link-panel">
+                            <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/ConnectCircle.svg"></img>
+                            <p id="map-link__city-name">City Name</p>
+                            <a href="#" id="map-link__city-link">Learn more</a>
+                            <div id="map-link__arrow"></div>
+                        </div>
                         <div id="map-ping-panel">
                             <div id="map-ping-content">
                                 <div id="map__ping-main">
@@ -1754,13 +1806,27 @@
                         </div>
                     </div>
                     <div id=map-element-label>
-                        <p class="m-hide">Explore our Datacentre network to find your location</p>
-                        <div class="label-seperator m-hide"></div>
-                        <div class="label-marker" style="background-color: #34C759;"></div>
-                        <p>Open Now</p>
-                        <div class="label-seperator"></div>
-                        <div class="label-marker" style="background-color: #FF9500;"></div>
-                        <p>Coming Soon</p>
+                        <div class="map-legend-section">
+                            <p class="m-hide">Explore our Datacentre network to find your location</p>
+                            <div class="label-seperator m-hide"></div>
+                            <div class="label-marker" style="background-color: #34C759;"></div>
+                            <p>Live</p>
+                            <div class="label-seperator"></div>
+                            <div class="label-marker" style="background-color: #FF9500;"></div>
+                            <p>In Progress</p>
+                            <div class="label-seperator"></div>
+                            <div class="label-marker" style="background-color: #2b4a71;"></div>
+                            <p>Coming Soon</p>
+                        </div>
+                        <div class="map-legend-section">
+                            <div class="label-line" style="background-color: #2b4a71;"></div>
+                            <p>Live</p>
+                            <div class="label-seperator"></div>
+                            <div class="label-line"
+                                style="background: linear-gradient(90deg, rgba(43,74,113,1) 35%, rgba(255,255,255,1) 36%, rgba(255,255,255,1) 64%, rgba(43,74,113,1) 65%);">
+                            </div>
+                            <p>Coming Soon</p>
+                        </div>
                     </div>
                     <div id="map-controls-holder" class="container">
                         <div class="map-controls-wrapper">
@@ -1770,11 +1836,14 @@
                         </div>
                     </div>
                 </div>
-                <div id="map-side-panel">
+                <div id="map-side-panel" class="notification-active">
                     <div id="map-side-panel-a">
                         <button id="city-selection-expand" onclick="expandMenu()">
                             <div class="expand-icon"></div>
                         </button>
+                        <div id="map-panel-a-notification" class="container">
+                            <h1>Select Two Data Centres to View Location Information</h1>
+                        </div>
                         <div id="city-selection-container" class="container">
                             <div id="city-select-start" class="city-select">
                                 <select>
@@ -1795,6 +1864,10 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- <div id="city-destination-details" off>
+                                <div class="city-select-mini-label">Ping/latency</div>
+                                <div id="ping-display">158ms</div>
+                            </div> -->
                     </div>
                     <div id="map-side-panel-b">
                         <div class="map-side-panel__network-container container">
@@ -1806,56 +1879,50 @@
                                     <div class="map-side-panel__carriers-wrapper">
                                         <button class="service-item" carrier="ledc" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg"
-                                                    loading="lazy" alt="ledc">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg" loading="lazy" alt="ledc">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vocus" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
-                                                    loading="lazy" alt="vocus">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg" loading="lazy" alt="vocus">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png"
-                                                    loading="lazy" alt="encoo">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png" loading="lazy" alt="encoo">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="transgrid" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png"
-                                                    loading="lazy" alt="transgrid">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png" loading="lazy"
+                                                    alt="transgrid">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vergetel" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png"
-                                                    loading="lazy" alt="vergetel">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png" loading="lazy"
+                                                    alt="vergetel">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="tpg" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png"
-                                                    loading="lazy" alt="tpg">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png" loading="lazy" alt="tpg">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="superloop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg"
-                                                    loading="lazy" alt="superloop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg" loading="lazy"
+                                                    alt="superloop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="swoop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg"
-                                                    loading="lazy" alt="swoop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg" loading="lazy" alt="swoop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="nexon" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png"
-                                                    loading="lazy" alt="nexon">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png" loading="lazy" alt="nexon">
                                             </div>
                                         </button>
                                     </div>
@@ -1866,32 +1933,31 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
-                                                        loading="lazy" alt="regionalIt">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png" loading="lazy"
+                                                        alt="regionalIt">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="toim">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg"
-                                                        loading="lazy" alt="toim">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg" loading="lazy" alt="toim">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="newcastleConnect">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png"
-                                                        loading="lazy" alt="newcastleConnect">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png" loading="lazy"
+                                                        alt="newcastleConnect">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="sabervox">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
-                                                        loading="lazy" alt="sabervox">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png" loading="lazy"
+                                                        alt="sabervox">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png"
-                                                        loading="lazy" alt="tamworthBroadcast">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png" loading="lazy"
+                                                        alt="tamworthBroadcast">
                                                 </div>
                                             </div>
                                         </div>
@@ -1900,20 +1966,19 @@
                                             <div class="map-side-panel__msp-wrapper">
                                                 <div class="msp-provider cloud-provider" cloud="azure">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png"
-                                                            loading="lazy" alt="azure">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png" loading="lazy"
+                                                            alt="azure">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="google">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png"
-                                                            loading="lazy" alt="google">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png" loading="lazy"
+                                                            alt="google">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="aws">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png"
-                                                            loading="lazy" alt="aws">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png" loading="lazy" alt="aws">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1935,56 +2000,50 @@
                                     <div class="map-side-panel__carriers-wrapper">
                                         <button class="service-item" carrier="ledc" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg"
-                                                    loading="lazy" alt="ledc">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg" loading="lazy" alt="ledc">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vocus" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
-                                                    loading="lazy" alt="vocus">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg" loading="lazy" alt="vocus">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png"
-                                                    loading="lazy" alt="encoo">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png" loading="lazy" alt="encoo">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="transgrid" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png"
-                                                    loading="lazy" alt="transgrid">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png" loading="lazy"
+                                                    alt="transgrid">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vergetel" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png"
-                                                    loading="lazy" alt="vergetel">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png" loading="lazy"
+                                                    alt="vergetel">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="tpg" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png"
-                                                    loading="lazy" alt="tpg">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png" loading="lazy" alt="tpg">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="superloop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg"
-                                                    loading="lazy" alt="superloop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg" loading="lazy"
+                                                    alt="superloop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="swoop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg"
-                                                    loading="lazy" alt="swoop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg" loading="lazy" alt="swoop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="nexon" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png"
-                                                    loading="lazy" alt="nexon">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png" loading="lazy" alt="nexon">
                                             </div>
                                         </button>
                                     </div>
@@ -1995,32 +2054,31 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
-                                                        loading="lazy" alt="regionalIt">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png" loading="lazy"
+                                                        alt="regionalIt">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="toim">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg"
-                                                        loading="lazy" alt="toim">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg" loading="lazy" alt="toim">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="newcastleConnect">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png"
-                                                        loading="lazy" alt="newcastleConnect">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png" loading="lazy"
+                                                        alt="newcastleConnect">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="sabervox">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
-                                                        loading="lazy" alt="sabervox">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png" loading="lazy"
+                                                        alt="sabervox">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png"
-                                                        loading="lazy" alt="tamworthBroadcast">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png" loading="lazy"
+                                                        alt="tamworthBroadcast">
                                                 </div>
                                             </div>
                                         </div>
@@ -2029,27 +2087,26 @@
                                             <div class="map-side-panel__msp-wrapper">
                                                 <div class="msp-provider cloud-provider" cloud="azure">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png"
-                                                            loading="lazy" alt="azure">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png" loading="lazy"
+                                                            alt="azure">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="google">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png"
-                                                            loading="lazy" alt="google">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png" loading="lazy"
+                                                            alt="google">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="aws">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png"
-                                                            loading="lazy" alt="aws">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png" loading="lazy" alt="aws">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="map-side-panel__footer" href="#">
-                                        <a class="button button-primary bg-primary-2" href="/locations">
+                                    <div class="map-side-panel__footer">
+                                        <a class="button button-primary bg-primary-2" href="#">
                                             Select a city
                                         </a>
                                     </div>
@@ -2061,586 +2118,517 @@
             </div>
         </div>
         <script>
-            var alphabetArray = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ|()".split("");
+            const vw = Math.max(
+                document.documentElement.clientWidth || 0,
+                window.innerWidth || 0
+            );
+            var mapElement = document.getElementById("map-element");
+            var sidePanel = document.getElementById("map-side-panel");
+            var sidePanelB = document.getElementById("map-side-panel-b");
+            var selectStartCont = document.getElementById("city-select-start");
+            var selectEndCont = document.getElementById("city-select-end");
+            var selectStart = selectStartCont.querySelector("select");
+            var selectEnd = selectEndCont.querySelector("select");
+            var carrierWrapperLeft = document
+                .getElementsByClassName("map-side-panel__carriers-wrapper")
+                .item(0);
+            var carrierWrapperRight = document
+                .getElementsByClassName("map-side-panel__carriers-wrapper")
+                .item(1);
+            var pingPanel = document.getElementById("map-ping-panel");
+            var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
+            var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
+            var pingPanelContent = document.getElementById("map-ping-content");
+            var pingPanelButton = document.getElementById("map-ping-button");
+            var mapLinkPanel = document.getElementById("map-link-panel");
+            var mapLinkName = document.getElementById("map-link__city-name");
+            var mapLinkLink = document.getElementById("map-link__city-link");
 
-            async function changeText(el, newText) {
-                if (el.innerHTML === newText) return;
-                const textChangeId = parseInt(el.getAttribute('text-change-id') || 0) + 1;
-                el.setAttribute('text-change-id', textChangeId);
+            // function called when some starting point (data center) is selected
+            function showSelection(cityName) {
+                // adjust display of dropdowns
+                selectStartCont.setAttribute("active", "");
+                selectEnd.removeAttribute("disabled");
+                selectEndCont.removeAttribute("disabled");
 
-                const clear = setInterval(interval, 5);
+                // get data about starting point from json
+                const curEndpoints = Object.keys(datacenterDetails[cityName].endpoint); // valid city endpoints of the data center
 
-                function interval() {
-                    if (el.getAttribute('text-change-id') != textChangeId || el.innerHTML === newText) {
-                        if (el.innerHTML === newText) el.removeAttribute('text-change-id');
-                        clearInterval(clear);
-                    }
-                    const textArr = [];
-                    for (let i = 0; i < newText.length; i++) {
-                        if (!el.innerHTML[i]) textArr[i] = Math.floor(Math.random() * alphabetArray.length);
-                        else if (el.innerHTML[i] === newText[i]) textArr[i] = alphabetArray.indexOf(el
-                            .innerHTML[i]);
-                        else textArr[i] = alphabetArray.indexOf(el.innerHTML[i]) + (alphabetArray.indexOf(el
-                            .innerHTML[i]) < alphabetArray.indexOf(newText[i]) ? 1 : -1);
-                    }
-                    const newArr = textArr.map(e => alphabetArray[e]);
-                    el.innerHTML = newArr.join('');
+                // display the lines and city
+                [...document.querySelectorAll(`.city-group`)].forEach((group) => {
+                    if (group.id === cityName) group.setAttribute("dc", "");
+                    else group.removeAttribute("dc");
+
+                    if (group.id === cityName || curEndpoints.includes(group.id))
+                        group.setAttribute("on", "");
+                    else group.removeAttribute("on");
+                });
+                try {
+                    [
+                        ...document.querySelector("[city-lines]").querySelectorAll("path"),
+                    ].forEach((e) => e.removeAttribute("on"));
+                    [...document.querySelectorAll(`[dc="${cityName}"], [city="${cityName}"]`)].forEach((e) => {
+                        setTimeout(() => e.setAttribute("on", ""), Math.random() * 280);
+                    });
+                } catch { }
+
+                // adjust display of destination dropdown to highlight available cities
+                [...selectEnd.querySelectorAll("option")].forEach((opt) => {
+                    if (curEndpoints.includes(opt.value) || !opt.value)
+                        opt.removeAttribute("disabled");
+                    else opt.setAttribute("disabled", "");
+                });
+
+                // adjust ping display for the datacenter to (selected?) global city
+                if (curEndpoints.includes(selectEnd.value))
+                    selectDestination(selectEnd.value);
+                else {
+                    selectEnd.value = "";
+                    selectEndCont.removeAttribute("active");
+                    // destinationDetails.setAttribute('off', '');
+                    [...document.querySelectorAll("[dc][city]")].forEach((e) =>
+                        e.removeAttribute("selected")
+                    );
+                    pingPanel.removeAttribute("active");
                 }
+
+                // hide left and right arrows if less than or equal to 6 carriers in city
+                if (vw > 767) {
+                    if (datacenterDetails[cityName]["carriers"].length <= 6) {
+                        hideArrowButtons(0);
+                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
+                    } else {
+                        showArrowButtons(0);
+                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "flex-start";
+                    }
+                }
+
+                // expand menu
+                // if (!expanded && vw > 767) {
+                //     expandMenu();
+                // }
+
+                // change carriers
+                handleCarriersChange(0, cityName);
+
+                // hide map link panel
+                mapLinkPanel.classList.remove("active-panel")
+
+                // change learn more link and datasheet city name/link
+                var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(0);
+                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
+                var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+                learnMoreLink.href = "/dc_location/" + cityName + "/";
+                downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+                downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
             }
 
-            async function changePing(el, newPing) {
-                if (parseInt(el.innerHTML) === parseInt(newPing)) return;
-                const textChangeId = parseInt(el.getAttribute('text-change-id') || 0) + 1;
-                el.setAttribute('text-change-id', textChangeId);
-
-                const clear = setInterval(interval, 80);
-
-                function interval() {
-                    if (el.getAttribute('text-change-id') != textChangeId || parseInt(el.innerHTML) ===
-                        parseInt(newPing)) {
-                        if (parseInt(el.innerHTML) === parseInt(newPing)) el.removeAttribute('text-change-id');
-                        clearInterval(clear);
-                    }
-                    const textArr = [];
-                    for (let i = 0; i < newPing.length; i++) {
-                        if (isNaN(parseInt(el.innerHTML[i]))) textArr[i] = Math.floor(Math.random() * 10 + 1);
-                        else if (el.innerHTML[i] === newPing[i]) textArr[i] = alphabetArray.indexOf(el
-                            .innerHTML[i]);
-                        else textArr[i] = alphabetArray.indexOf(el.innerHTML[i]) + (alphabetArray.indexOf(el
-                            .innerHTML[i]) < alphabetArray.indexOf(newPing[i]) ? 1 : -1);
-                    }
-                    const newArr = textArr.map(e => alphabetArray[e]);
-                    el.innerHTML = newArr.join('') + 'ms';
-                }
-            }
-        </script>
-        <script>
-        const vw = Math.max(
-            document.documentElement.clientWidth || 0,
-            window.innerWidth || 0
-        );
-        var mapElement = document.getElementById("map-element");
-        var sidePanel = document.getElementById("map-side-panel");
-        var sidePanelB = document.getElementById("map-side-panel-b");
-        var selectStartCont = document.getElementById("city-select-start");
-        var selectEndCont = document.getElementById("city-select-end");
-        var selectStart = selectStartCont.querySelector("select");
-        var selectEnd = selectEndCont.querySelector("select");
-        var carrierWrapperLeft = document
-            .getElementsByClassName("map-side-panel__carriers-wrapper")
-            .item(0);
-        var carrierWrapperRight = document
-            .getElementsByClassName("map-side-panel__carriers-wrapper")
-            .item(1);
-        var pingPanel = document.getElementById("map-ping-panel");
-        var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
-        var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
-        var pingPanelContent = document.getElementById("map-ping-content");
-        var pingPanelButton = document.getElementById("map-ping-button");
-        
-        // function called when some starting point (data center) is selected
-        function showSelection(cityName) {
-            // adjust display of dropdowns
-            selectStartCont.setAttribute("active", "");
-            selectEnd.removeAttribute("disabled");
-            selectEndCont.removeAttribute("disabled");
-        
-            // get data about starting point from json
-            const curEndpoints = Object.keys(datacenterDetails[cityName].endpoint); // valid city endpoints of the data center
-        
-            // display the lines and city
-            [...document.querySelectorAll(`.city-group`)].forEach((group) => {
-                if (group.id === cityName) group.setAttribute("dc", "");
-                else group.removeAttribute("dc");
-        
-                if (group.id === cityName || curEndpoints.includes(group.id))
-                    group.setAttribute("on", "");
-                else group.removeAttribute("on");
-            });
-            try {
+            var closeSelection = () => {
+                // telcoContainer.removeAttribute('on');
+                selectStartCont.removeAttribute("active");
+                selectEnd.value = "";
+                selectEnd.setAttribute("disabled", "");
+                selectEndCont.setAttribute("disabled", "");
                 [
                     ...document.querySelector("[city-lines]").querySelectorAll("path"),
                 ].forEach((e) => e.removeAttribute("on"));
-                [...document.querySelectorAll(`[dc="${cityName}"], [city="${cityName}"]`)].forEach((e) => {
-                    setTimeout(() => e.setAttribute("on", ""), Math.random() * 280);
+                [...document.querySelectorAll(`.city-group`)].forEach((group) => {
+                    if (Object.keys(datacenterDetails).includes(group.id))
+                        group.setAttribute("dc", "");
+                    group.removeAttribute("on");
                 });
-            } catch {}
-        
-            // adjust display of destination dropdown to highlight available cities
-            [...selectEnd.querySelectorAll("option")].forEach((opt) => {
-                if (curEndpoints.includes(opt.value) || !opt.value)
-                    opt.removeAttribute("disabled");
-                else opt.setAttribute("disabled", "");
-            });
-        
-            // adjust ping display for the datacenter to (selected?) global city
-            if (curEndpoints.includes(selectEnd.value))
-                selectDestination(selectEnd.value);
-            else {
-                selectEnd.value = "";
+
+                // hide menu
+                if (expanded) {
+                    expandMenu();
+                }
+
+                // change download data sheet button text to "Select a city"
+                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
+                downloadDataSheetBtn.innerHTML = "Select a city";
+                downloadDataSheetBtn.href = "#";
+
+                closeDestination();
+            };
+
+            function selectDestination(cityName) {
+                selectEndCont.setAttribute("active", "");
+                // destinationDetails.removeAttribute('off');
+                [...document.querySelectorAll("[dc][city]")].forEach((e) =>
+                    e.removeAttribute("selected")
+                );
+
+                // add dc to selected destination city to make it highlighted
+                let otherCities = document.querySelectorAll(
+                    "g.city-group:not(#" + selectStart.value + ")"
+                );
+                for (let i = 0; i < otherCities.length; i++) {
+                    otherCities[i].removeAttribute("dc");
+                }
+                document.querySelector("#" + cityName).setAttribute("dc", "");
+
+                // Hide map-panel-a-notification
+                document.getElementById("map-panel-a-notification").style.maxHeight = '0px';
+                document.getElementById("map-panel-a-notification").style.visibility = 'hidden';
+                sidePanel.classList.remove("notification-active");
+
+                // set other lines invisible
+                let otherLines = document.querySelectorAll(
+                    `[city-lines] path`
+                );
+                for (let i = 0; i < otherLines.length; i++) {
+                    let dcFilter = otherLines[i].getAttribute("dc")
+                    let cityFilter = otherLines[i].getAttribute("cityFilter")
+                    if (!(dcFilter === selectStart.value && cityFilter === cityName)
+                        && !(cityFilter === selectStart.value && dcFilter === cityName)) {
+                        otherLines[i].setAttribute("invisible", "");
+                    }
+                }
+
+                const curLine = document.querySelector(
+                    `[dc="${selectStart.value}"][city="${cityName}"],
+                        [city="${selectStart.value}"][dc="${cityName}"]`
+                );
+                curLine.setAttribute("selected", "");
+
+                const dString = curLine
+                    .getAttribute("d")
+                    .replaceAll(",", " ")
+                    .replaceAll("M", "")
+                    .replaceAll("C", " ");
+                const [px, py, qx, qy, rx, ry, sx, sy] = dString.split(/[ ]{1,}/);
+
+                function getMidPoint(p, q, r, s) {
+                    return (
+                        (parseFloat(p) +
+                            3 * parseFloat(q) +
+                            3 * parseFloat(r) +
+                            parseFloat(s)) /
+                        8
+                    );
+                }
+                const [anchorX, anchorY] = [
+                    getMidPoint(px, qx, rx, sx),
+                    getMidPoint(py, qy, ry, sy),
+                ];
+
+                const rootSVG = document.querySelector("#map-element svg");
+                const point = rootSVG.createSVGPoint();
+                let matrix, position;
+
+                matrix = curLine.getCTM();
+                point.x = anchorX;
+                point.y = anchorY;
+                position = point.matrixTransform(matrix);
+
+                pingPanel.style.left = position.x + "px";
+                pingPanel.style.top = position.y - 20 + "px";
+
+                changeText(
+                    pingPanelDc,
+                    selectStart.options[selectStart.selectedIndex].label
+                );
+                changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
+                changePing(
+                    document.querySelector("#map-ping-panel-ping"),
+                    `${parseInt(
+                        datacenterDetails[selectStart.value].endpoint[cityName].ping
+                    )}`
+                );
+                pingPanel.setAttribute("active", "");
+
+                // change carriers
+                handleCarriersChange(1, cityName);
+
+                // hide left and right arrows if less than or equal to 6 carriers in city
+                if (vw > 767) {
+                    if (datacenterDetails[cityName]["carriers"].length <= 6) {
+                        hideArrowButtons(1);
+                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "center";
+                    } else {
+                        showArrowButtons(1);
+                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "flex-start";
+                    }
+                }
+
+                // expand menu
+                if (!expanded) {
+                    expandMenu();
+                }
+
+                // change learn more link and datasheet city name/link
+                var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(1);
+                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
+                var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+                learnMoreLink.href = "/dc_location/" + cityName + "/";
+                downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+                downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
+            }
+
+            var closeDestination = () => {
                 selectEndCont.removeAttribute("active");
+                if (selectStart.value)
+                    document
+                        .querySelectorAll("g.city-group:not(#" + selectStart.value + ")")
+                        .forEach((e) => e.removeAttribute("dc"));
                 // destinationDetails.setAttribute('off', '');
                 [...document.querySelectorAll("[dc][city]")].forEach((e) =>
                     e.removeAttribute("selected")
                 );
+
+                [...document.querySelectorAll(`[city-lines] path[invisible]`)].forEach(
+                    (e) => e.removeAttribute("invisible")
+                );
                 pingPanel.removeAttribute("active");
-            }
-        
-            // hide left and right arrows if less than or equal to 6 carriers in city
-            if (vw > 767) {
-                if (datacenterDetails[cityName]["carriers"].length <= 6) {
-                    hideArrowButtons(0);
-                    document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
+
+                // change download data sheet button text to "Select a city"
+                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
+                downloadDataSheetBtn.innerHTML = "Select a city";
+                downloadDataSheetBtn.href = "#";
+            };
+
+            selectStart.addEventListener("change", () => {
+                if (selectStart.value) {
+                    showSelection(selectStart.value);
                 } else {
-                    showArrowButtons(0);
-                    document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "flex-start";
+                    closeSelection();
                 }
-            }
-        
-            // expand menu
-            // if (!expanded && vw > 767) {
-            //     expandMenu();
-            // }
-        
-            // change carriers
-            handleCarriersChange(0, cityName);
-        
-            // change learn more link and datasheet city name/link
-            var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(0);
-            var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
-            var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
-            learnMoreLink.href = "/dc_location/" + cityName + "/";
-            downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
-            downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
-        }
-        
-        var closeSelection = () => {
-            // telcoContainer.removeAttribute('on');
-            selectStartCont.removeAttribute("active");
-            selectEnd.value = "";
-            selectEnd.setAttribute("disabled", "");
-            selectEndCont.setAttribute("disabled", "");
-            [
-                ...document.querySelector("[city-lines]").querySelectorAll("path"),
-            ].forEach((e) => e.removeAttribute("on"));
-            [...document.querySelectorAll(`.city-group`)].forEach((group) => {
-                if (Object.keys(datacenterDetails).includes(group.id))
-                    group.setAttribute("dc", "");
-                group.removeAttribute("on");
             });
-        
-            // hide menu
-            if (expanded) {
-                expandMenu();
-            }
-            
-            // change download data sheet button text to "Select a city"
-            var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
-            downloadDataSheetBtn.innerHTML = "Select a city";
-            downloadDataSheetBtn.href = "#";
-        
-            closeDestination();
-        };
-        
-        function selectDestination(cityName) {
-            selectEndCont.setAttribute("active", "");
-            // destinationDetails.removeAttribute('off');
-            [...document.querySelectorAll("[dc][city]")].forEach((e) =>
-                e.removeAttribute("selected")
-            );
-        
-            // add dc to selected destination city to make it highlighted
-            let otherCities = document.querySelectorAll(
-                "g.city-group:not(#" + selectStart.value + ")"
-            );
-            for (let i = 0; i < otherCities.length; i++) {
-                otherCities[i].removeAttribute("dc");
-            }
-            document.querySelector("#" + cityName).setAttribute("dc", "");
-        
-            // set other lines invisible
-            let otherLines = document.querySelectorAll(
-                `[city-lines] path`
-            );
-            for (let i = 0; i < otherLines.length; i++) {
-                let dcFilter = otherLines[i].getAttribute("dc")
-                let cityFilter = otherLines[i].getAttribute("cityFilter")
-                if (!(dcFilter === selectStart.value && cityFilter === cityName) 
-                    && !(cityFilter === selectStart.value && dcFilter === cityName)) {
-                    otherLines[i].setAttribute("invisible", "");
+
+            selectEnd.addEventListener("change", () => {
+                if (selectEnd.value) {
+                    selectDestination(selectEnd.value);
+                } else {
+                    closeDestination();
+                }
+            });
+
+            // listen for pingpanel going off the page
+            let prvRight = parseInt(pingPanelContent.getBoundingClientRect().right);
+            setInterval(() => {
+                if (parseInt(pingPanelContent.getBoundingClientRect().right) != prvRight) {
+                    prvRight =
+                        parseInt(pingPanelContent.getBoundingClientRect().right) || 0;
+                    marginLeft = parseInt(pingPanelContent.style.marginLeft) || 0;
+                    mapBounds = parseInt(mapElement.getBoundingClientRect().right);
+                    if (prvRight - marginLeft > mapBounds) {
+                        pingPanelContent.style.marginLeft =
+                            mapBounds - prvRight + marginLeft + "px";
+                    } else {
+                        pingPanelContent.style.marginLeft = "";
+                    }
+                    pingPanelButton.style.marginRight = pingPanelContent.style.marginLeft;
+                }
+            }, 20);
+
+            /**
+             *  Expand side panel menu on expand btn click
+             */
+            var expanded = false;
+            var expandIcon = sidePanel.querySelector(".expand-icon");
+            var sidePanelBMaxHeight = vw > 767 ? "500px" : "60vh";
+            var expandOverlay = document.getElementById("map-side-panel-overlay");
+
+            function expandMenu() {
+                if (expanded) {
+                    sidePanelB.style.maxHeight = "0px";
+                    expandIcon.style.transform = "rotate(0deg)";
+                    expanded = false;
+                    expandOverlay.style.visibility = "hidden";
+                    expandOverlay.style.opacity = 0;
+                    if (vw > 767) {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
+                    }
+                } else if (selectStart.value !== "" || selectEnd.value !== "") {
+                    sidePanelB.style.maxHeight = sidePanelBMaxHeight;
+                    expandIcon.style.transform = "rotate(180deg)";
+                    if (vw > 767) {
+                        window.scrollTo({
+                            top:
+                                sidePanel.offsetTop -
+                                sidePanel.scrollTop +
+                                sidePanel.clientTop -
+                                200,
+                            behavior: "smooth",
+                        });
+                    }
+                    expanded = true;
+                    expandOverlay.style.visibility = "visible";
+                    expandOverlay.style.opacity = 0.6;
                 }
             }
-        
-            const curLine = document.querySelector(
-                `[dc="${selectStart.value}"][city="${cityName}"],
-                [city="${selectStart.value}"][dc="${cityName}"]`
+
+            /**
+             * Carrier nav buttons click handlers. Scrolls left or right
+             * @param {*} carriersWrapperIndex 0 for left side carriers, 1 for right side carriers
+             */
+
+            function carrierScrollLeft(carriersWrapperIndex) {
+                var wrapper =
+                    carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
+                var scrollWidth = wrapper
+                    .getElementsByClassName("service-item")
+                    .item(0).clientWidth;
+                wrapper.scroll({
+                    left: wrapper.scrollLeft - scrollWidth,
+                    behavior: "smooth",
+                });
+            }
+
+            function carrierScrollRight(carriersWrapperIndex) {
+                var wrapper =
+                    carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
+                var scrollWidth = wrapper
+                    .getElementsByClassName("service-item")
+                    .item(1).clientWidth;
+                wrapper.scroll({
+                    left: wrapper.scrollLeft + scrollWidth,
+                    behavior: "smooth",
+                });
+            }
+
+            // Attach events to buttons
+            var carrierNavButtonsLeft = document.getElementsByClassName(
+                "carriers-nav-btn left"
             );
-            curLine.setAttribute("selected", "");
-        
-            const dString = curLine
-                .getAttribute("d")
-                .replaceAll(",", " ")
-                .replaceAll("M", "")
-                .replaceAll("C", " ");
-            const [px, py, qx, qy, rx, ry, sx, sy] = dString.split(/[ ]{1,}/);
-        
-            function getMidPoint(p, q, r, s) {
-                return (
-                    (parseFloat(p) +
-                        3 * parseFloat(q) +
-                        3 * parseFloat(r) +
-                        parseFloat(s)) /
-                    8
+            var carrierNavButtonsRight = document.getElementsByClassName(
+                "carriers-nav-btn right"
+            );
+            try {
+                carrierNavButtonsLeft.item(0).addEventListener("click", function () {
+                    carrierScrollLeft(0);
+                });
+                carrierNavButtonsRight.item(0).addEventListener("click", function () {
+                    carrierScrollRight(0);
+                });
+                carrierNavButtonsLeft.item(1).addEventListener("click", function () {
+                    carrierScrollLeft(1);
+                });
+                carrierNavButtonsRight.item(1).addEventListener("click", function () {
+                    carrierScrollRight(1);
+                });
+            } catch (e) {
+                console.error(e);
+            }
+
+            function handleCarriersChange(carriersWrapperIndex, cityName) {
+                // determine if wrapper is on left or right side
+                var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+                var carrierWrapper = document
+                    .getElementsByClassName("map-side-panel__carriers-wrapper")
+                    .item(leftRightSide);
+                var mspWrapper = document
+                    .getElementsByClassName("map-side-panel__msp-wrapper msp-wrapper")
+                    .item(leftRightSide);
+                var cityDetails = datacenterDetails[cityName];
+
+                // hide carriers that aren't in the selected city
+                [...carrierWrapper.getElementsByClassName("service-item")].forEach(
+                    function (carrierEl) {
+                        if (
+                            cityDetails["carriers"].includes(
+                                carrierEl.getAttribute("carrier")
+                            )
+                        ) {
+                            carrierEl.style.display = "block";
+                        } else {
+                            carrierEl.style.display = "none";
+                        }
+                    }
+                );
+
+                // hide msp providers that aren't in the selected city
+                [...mspWrapper.getElementsByClassName("msp-provider")].forEach(function (
+                    mspEl
+                ) {
+                    if (cityDetails["msps"].includes(mspEl.getAttribute("provider"))) {
+                        mspEl.style.display = "block";
+                    } else {
+                        mspEl.style.display = "none";
+                    }
+                });
+            }
+
+            function hideArrowButtons(carriersWrapperIndex) {
+                // determine if wrapper is on left or right side
+                var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+                var networkTopDiv = document
+                    .getElementsByClassName("map-side-panel__network-top")
+                    .item(leftRightSide);
+                [...networkTopDiv.getElementsByClassName("carriers-nav-btn")].forEach(
+                    function (btn) {
+                        btn.style.display = "none";
+                    }
                 );
             }
-            const [anchorX, anchorY] = [
-                getMidPoint(px, qx, rx, sx),
-                getMidPoint(py, qy, ry, sy),
-            ];
-        
-            const rootSVG = document.querySelector("#map-element svg");
-            const point = rootSVG.createSVGPoint();
-            let matrix, position;
-        
-            matrix = curLine.getCTM();
-            point.x = anchorX;
-            point.y = anchorY;
-            position = point.matrixTransform(matrix);
-        
-            pingPanel.style.left = position.x + "px";
-            pingPanel.style.top = position.y - 20 + "px";
-        
-            changeText(
-                pingPanelDc,
-                selectStart.options[selectStart.selectedIndex].label
-            );
-            changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
-            changePing(
-                document.querySelector("#map-ping-panel-ping"),
-                `${parseInt(
-                    datacenterDetails[selectStart.value].endpoint[cityName].ping
-                )}`
-            );
-            pingPanel.setAttribute("active", "");
-        
-            // change carriers
-            handleCarriersChange(1, cityName);
-        
-            // hide left and right arrows if less than or equal to 6 carriers in city
-            if (vw > 767) {
-                if (datacenterDetails[cityName]["carriers"].length <= 6) {
-                    hideArrowButtons(1);
-                    document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "center";
-                } else {
-                    showArrowButtons(1);
-                    document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "flex-start";
-                }
-            }
-        
-            // expand menu
-            if (!expanded) {
-                expandMenu();
-            }
-        
-            // change learn more link and datasheet city name/link
-            var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(1);
-            var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
-            var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
-            learnMoreLink.href = "/dc_location/" + cityName + "/";
-            downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
-            downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
-        }
-        
-        var closeDestination = () => {
-            selectEndCont.removeAttribute("active");
-            if (selectStart.value)
-                document
-                    .querySelectorAll("g.city-group:not(#" + selectStart.value + ")")
-                    .forEach((e) => e.removeAttribute("dc"));
-            // destinationDetails.setAttribute('off', '');
-            [...document.querySelectorAll("[dc][city]")].forEach((e) =>
-                e.removeAttribute("selected")
-            );
-        
-            [...document.querySelectorAll(`[city-lines] path[invisible]`)].forEach(
-                (e) => e.removeAttribute("invisible")
-            );
-            pingPanel.removeAttribute("active");
-            
-            // change download data sheet button text to "Select a city"
-            var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
-            downloadDataSheetBtn.innerHTML = "Select a city";
-            downloadDataSheetBtn.href = "#";
-        };
-        
-        selectStart.addEventListener("change", () => {
-            if (selectStart.value) {
-                showSelection(selectStart.value);
-            } else {
-                closeSelection();
-            }
-        });
-        
-        selectEnd.addEventListener("change", () => {
-            if (selectEnd.value) {
-                selectDestination(selectEnd.value);
-            } else {
-                closeDestination();
-            }
-        });
-        
-        // listen for pingpanel going off the page
-        let prvRight = parseInt(pingPanelContent.getBoundingClientRect().right);
-        setInterval(() => {
-            if (parseInt(pingPanelContent.getBoundingClientRect().right) != prvRight) {
-                prvRight =
-                    parseInt(pingPanelContent.getBoundingClientRect().right) || 0;
-                marginLeft = parseInt(pingPanelContent.style.marginLeft) || 0;
-                mapBounds = parseInt(mapElement.getBoundingClientRect().right);
-                if (prvRight - marginLeft > mapBounds) {
-                    pingPanelContent.style.marginLeft =
-                        mapBounds - prvRight + marginLeft + "px";
-                } else {
-                    pingPanelContent.style.marginLeft = "";
-                }
-                pingPanelButton.style.marginRight = pingPanelContent.style.marginLeft;
-            }
-        }, 20);
-        
-        /**
-         *  Expand side panel menu on expand btn click
-         */
-        var expanded = false;
-        var expandIcon = sidePanel.querySelector(".expand-icon");
-        var sidePanelBMaxHeight = vw > 767 ? "500px" : "60vh";
-        var expandOverlay = document.getElementById("map-side-panel-overlay");
-        
-        function expandMenu() {
-            if (expanded) {
-                sidePanelB.style.maxHeight = "0px";
-                expandIcon.style.transform = "rotate(0deg)";
-                expanded = false;
-                expandOverlay.style.visibility = "hidden";
-                expandOverlay.style.opacity = 0;
-                if (vw > 767) {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: "smooth",
-                    });
-                }
-            } else if (selectStart.value !== "" || selectEnd.value !== "") {
-                sidePanelB.style.maxHeight = sidePanelBMaxHeight;
-                expandIcon.style.transform = "rotate(180deg)";
-                if (vw > 767){
-                    window.scrollTo({
-                        top:
-                            sidePanel.offsetTop -
-                            sidePanel.scrollTop +
-                            sidePanel.clientTop -
-                            200,
-                        behavior: "smooth",
-                    });
-                }
-                expanded = true;
-                expandOverlay.style.visibility = "visible";
-                expandOverlay.style.opacity = 0.6;
-            }
-        }
-        
-        /**
-         * Carrier nav buttons click handlers. Scrolls left or right
-         * @param {*} carriersWrapperIndex 0 for left side carriers, 1 for right side carriers
-         */
-        
-        function carrierScrollLeft(carriersWrapperIndex) {
-            var wrapper =
-                carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
-            var scrollWidth = wrapper
-                .getElementsByClassName("service-item")
-                .item(0).clientWidth;
-            wrapper.scroll({
-                left: wrapper.scrollLeft - scrollWidth,
-                behavior: "smooth",
-            });
-        }
-        
-        function carrierScrollRight(carriersWrapperIndex) {
-            var wrapper =
-                carriersWrapperIndex <= 0 ? carrierWrapperLeft : carrierWrapperRight;
-            var scrollWidth = wrapper
-                .getElementsByClassName("service-item")
-                .item(1).clientWidth;
-            wrapper.scroll({
-                left: wrapper.scrollLeft + scrollWidth,
-                behavior: "smooth",
-            });
-        }
-        
-        // Attach events to buttons
-        var carrierNavButtonsLeft = document.getElementsByClassName(
-            "carriers-nav-btn left"
-        );
-        var carrierNavButtonsRight = document.getElementsByClassName(
-            "carriers-nav-btn right"
-        );
-        try {
-            carrierNavButtonsLeft.item(0).addEventListener("click", function () {
-                carrierScrollLeft(0);
-            });
-            carrierNavButtonsRight.item(0).addEventListener("click", function () {
-                carrierScrollRight(0);
-            });
-            carrierNavButtonsLeft.item(1).addEventListener("click", function () {
-                carrierScrollLeft(1);
-            });
-            carrierNavButtonsRight.item(1).addEventListener("click", function () {
-                carrierScrollRight(1);
-            });
-        } catch (e) {
-            console.error(e);
-        }
-        
-        /**
-         * Event handler for when a carrier is clicked
-         *
-         * @param {*} e Click event object
-         * @param {*} carriersWrapperIndex 0 for left side, 1 for right side carrier.
-         */
-        // function handleCarrierClick(e, carriersWrapperIndex) {
-        //     // determine if wrapper is on left or right side
-        //     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-        //     var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
-        //     var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
-        //     var cloudProviders = document.getElementsByClassName("cloud-wrapper").item(leftRightSide);
-        
-        //     if (e.currentTarget.getAttribute("active") === ""){
-        //         // if cilcked carrier is already active - hide the msp section
-        
-        //         e.currentTarget.removeAttribute("active");
-        
-        //         // hide cloud wrapper
-        //         cloudWrapper.style.maxHeight = '0px';
-        //         setTimeout(function(){cloudWrapper.style.display = 'none';}, 400)
-        //     } else {
-        //         // if clicked carrier is not already active
-        
-        //         // remove active from all on click
-        //         [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
-        //             el.removeAttribute("active");
-        //         });
-        //         e.currentTarget.setAttribute("active", "");
-        
-        //         // filter cloud providers
-        //         var selectedCloudProviders = carrierCloudProviders[e.currentTarget.getAttribute("carrier")];
-        //         if (selectedCloudProviders.length <= 0) {
-        //             // if the selected carrier has no public cloud providers, hide providers wrapper
-        //             cloudProviders.style.maxHeight = '0px';
-        //         } else {
-        //             cloudProviders.style.maxHeight = '150px';
-        //             [...cloudProviders.getElementsByClassName("cloud-provider")].forEach(function(cloudEl) {
-        //                 if (selectedCloudProviders.includes(cloudEl.getAttribute("cloud"))) {
-        //                     // if cloud provider is in selected list
-        //                     cloudEl.style.display = 'block';
-        //                 } else {
-        //                     cloudEl.style.display = 'none';
-        //                 }
-        //             })
-        //         }
-        
-        //         // set cloud wrapper max height to 400px
-        //         cloudWrapper.style.display = 'block';
-        //         setTimeout(function(){cloudWrapper.style.maxHeight = '300px';}, 10);
-        //     }
-        // }
-        
-        function handleCarriersChange(carriersWrapperIndex, cityName) {
-            // determine if wrapper is on left or right side
-            var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-            var carrierWrapper = document
-                .getElementsByClassName("map-side-panel__carriers-wrapper")
-                .item(leftRightSide);
-            var mspWrapper = document
-                .getElementsByClassName("map-side-panel__msp-wrapper msp-wrapper")
-                .item(leftRightSide);
-            var cityDetails = datacenterDetails[cityName];
-        
-            // hide carriers that aren't in the selected city
-            [...carrierWrapper.getElementsByClassName("service-item")].forEach(
-                function (carrierEl) {
-                    if (
-                        cityDetails["carriers"].includes(
-                            carrierEl.getAttribute("carrier")
-                        )
-                    ) {
-                        carrierEl.style.display = "block";
-                    } else {
-                        carrierEl.style.display = "none";
+
+            function showArrowButtons(carriersWrapperIndex) {
+                // determine if wrapper is on left or right side
+                var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+                var networkTopDiv = document
+                    .getElementsByClassName("map-side-panel__network-top")
+                    .item(leftRightSide);
+                [...networkTopDiv.getElementsByClassName("carriers-nav-btn")].forEach(
+                    function (btn) {
+                        btn.style.display = "block";
                     }
-                }
-            );
-        
-            // hide msp providers that aren't in the selected city
-            [...mspWrapper.getElementsByClassName("msp-provider")].forEach(function (
-                mspEl
-            ) {
-                if (cityDetails["msps"].includes(mspEl.getAttribute("provider"))) {
-                    mspEl.style.display = "block";
-                } else {
-                    mspEl.style.display = "none";
-                }
-            });
-        }
-        
-        function hideArrowButtons(carriersWrapperIndex) {
-            // determine if wrapper is on left or right side
-            var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-            var networkTopDiv = document
-                .getElementsByClassName("map-side-panel__network-top")
-                .item(leftRightSide);
-            [...networkTopDiv.getElementsByClassName("carriers-nav-btn")].forEach(
-                function (btn) {
-                    btn.style.display = "none";
-                }
-            );
-        }
-        
-        function showArrowButtons(carriersWrapperIndex) {
-            // determine if wrapper is on left or right side
-            var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-            var networkTopDiv = document
-                .getElementsByClassName("map-side-panel__network-top")
-                .item(leftRightSide);
-            [...networkTopDiv.getElementsByClassName("carriers-nav-btn")].forEach(
-                function (btn) {
-                    btn.style.display = "block";
-                }
-            );
-        }
-        
-        // [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
-        //     .item(0)
-        //     .getElementsByClassName("service-item")]
-        //     .forEach(function(btn){
-        //         btn.addEventListener("click", function(e){
-        //             e.stopPropagation();
-        //             e.preventDefault();
-        
-        //             handleCarrierClick(e, 0);
-        //         });
-        //     });
-        
-        // [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
-        //     .item(1)
-        //     .getElementsByClassName("service-item")]
-        //     .forEach(function(btn){
-        //         btn.addEventListener("click", function(e){
-        //             e.stopPropagation();
-        //             e.preventDefault();
-        
-        //             handleCarrierClick(e, 1)
-        //         });
-        //     });
-        
+                );
+            }
+
+            /**
+            *  When you hover over an open city, how map link panel and change text/link accordingly
+            */
+            if (vw > 992) {
+                document.querySelectorAll(".city-group[dc]").forEach(cityGroupEl => {
+                    var cityGroupRect = cityGroupEl.querySelector("ellipse[fill]:not([pulse]):not([identifier])");
+
+
+                    var rootSVG = document.querySelector("#map-element svg");
+                    var point = rootSVG.createSVGPoint();
+                    var matrix, position;
+                    matrix = cityGroupEl.getCTM();
+
+                    cityGroupEl.addEventListener("mouseenter", function (e) {
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+
+                        if (selectStart.value || selectEnd.value) {
+                            return;
+                        }
+
+                        // inner content and links
+                        mapLinkName.innerHTML = cityGroupEl.getElementsByClassName("city-name").item(0).innerHTML;
+                        mapLinkLink.href = "/dc_location/" + cityGroupEl.id;
+
+                        // positioning
+                        point.x = cityGroupRect.getAttribute("cx");
+                        point.y = cityGroupRect.getAttribute("cy");
+                        position = point.matrixTransform(matrix);
+
+                        mapLinkPanel.style.left = position.x + "px";
+                        mapLinkPanel.style.top = position.y + "px";
+
+                        // styling
+                        mapLinkPanel.classList.add("active-panel");
+                    })
+
+                    cityGroupEl.addEventListener("mouseleave", function (e) {
+                        e.stopPropagation();
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+
+                        if (selectStart.value || selectEnd.value) {
+                            return;
+                        }
+
+                        mapLinkPanel.classList.remove("active-panel")
+                    })
+                })
+            }
         </script>
         <script>
             // const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -2651,7 +2639,7 @@
             const elem = document.getElementById('map-element');
             const panzoom = Panzoom(elem, {
                 startX: -90,
-                startScale: 1.1,
+                startScale: 1,
                 minScale: 0.5,
             });
 
@@ -2679,8 +2667,8 @@
             elem.addEventListener("panzoomzoom", function (e) {
                 mapPingContent.style.transform = `scale(${1 / e.detail.scale})`;
             });
-            elem.addEventListener("panzoomreset", function(e) {
-                mapPingContent.style.transform = `scale(${1/e.detail.scale})`;
+            elem.addEventListener("panzoomreset", function (e) {
+                mapPingContent.style.transform = `scale(${1 / e.detail.scale})`;
             })
 
             /**
