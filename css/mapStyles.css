@@ -331,6 +331,59 @@ p {
 	overflow: hidden;
 }
 
+#map-link-panel {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 12px 16px;
+
+	background: #001F5C;
+	box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	cursor: default;
+
+	visibility: hidden;
+	opacity: 0;
+
+	transition: opacity 0.3s ease-out;
+	transition-property: visibility, opacity;
+	transition-delay: 0.4s;
+	transform-origin: center;
+}
+
+#map-link-panel.active-panel, #map-link-panel:hover {
+	visibility: visible;
+	opacity: 1;
+}
+
+#map-link-panel > p {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 24px;
+	color: #FFFFFF;
+}
+
+#map-link__arrow {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	width: 10px;
+	height: 5px;
+	transform: translate(-50%, 100%);
+	background-image: url("/public/ArrowDownPanel.svg");
+	background-position: center;
+	background-size: contain;
+}
+
+#map-link__city-name {
+	margin-right: 6px;
+}
+
 #map-ping-panel {
 	height: 2px;
 	width: 2px;
@@ -411,7 +464,7 @@ p {
 	gap: 12px;
 }
 
-.map__ping-city-link {
+.map__ping-city-link, #map-link__city-link {
 	padding-right: 18px;
 	font-size: 14px;
 	line-height: 20px;
@@ -423,7 +476,7 @@ p {
 	color: #0097CE;
 }
 
-.map__ping-city-link:hover {
+.map__ping-city-link:hover, #map-link__city-link:hover {
 	text-decoration: underline;
 }
 
@@ -816,7 +869,6 @@ p {
 	position: absolute;
 	display: flex;
 	justify-content: end;
-	z-index: 2;
 	bottom: 0;
 	transform: translateY(-88px);
 }
@@ -824,6 +876,10 @@ p {
 .map-controls-wrapper {
 	width: auto;
 	display: flex;
+	position: absolute;
+	bottom: 0;
+	top: auto;
+	z-index: 2;
 	flex-direction: column;
 	margin-bottom: 10px;
 	border-radius: 6px;
@@ -904,6 +960,10 @@ p {
 	.container {
 		padding-right: 31px;
 		padding-left: 31px;
+	}
+
+	#map-link-panel {
+		display: none;
 	}
 
 	#map-element svg {

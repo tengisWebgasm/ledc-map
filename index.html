@@ -129,6 +129,7 @@
                                     [city-lines] path[on][selected] {
                                         stroke-dasharray: 1200;
                                         stroke-dashoffset: 1200;
+                                        stroke: #001F5C;
                                         animation: dash 2000ms linear forwards;
                                         opacity: 1;
                                     }
@@ -507,7 +508,6 @@
                                         <text x="730" y="630" class="city-name">Geelong</text>
                                     </g>
 
-
                                 </g>
                                 <defs>
                                     <radialGradient id="pulseFill">
@@ -711,6 +711,12 @@
                                     </filter>
                                 </defs>
                             </svg>
+                            <div id="map-link-panel">
+                                <img src="./public/ConnectCircle.svg"></img>
+                                <p id="map-link__city-name">City Name</p>
+                                <a href="#" id="map-link__city-link">Learn more</a>
+                                <div id="map-link__arrow"></div>
+                            </div>
                             <div id="map-ping-panel">
                                 <div id="map-ping-content">
                                     <div id="map__ping-main">

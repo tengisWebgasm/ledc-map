@@ -523,3 +523,35 @@ function showArrowButtons(carriersWrapperIndex) {
 //             handleCarrierClick(e, 1)
 //         });
 //     });
+
+/**
+ *  When you hover over an open city, how map link panel and change text/link accordingly
+ */
+if (vw > 992) {
+	var mapLinkPanel = document.getElementById("map-link-panel");
+	var mapLinkName = document.getElementById("map-link__city-name");
+	var mapLinkLink = document.getElementById("map-link__city-link");
+	document.querySelectorAll(".city-group[dc]").forEach(cityGroupEl => {
+	
+		var cityGroupRect = cityGroupEl.querySelector("ellipse[fill]:not([pulse]):not([identifier])");
+
+		cityGroupEl.addEventListener("mouseenter", function(e){
+			e.stopPropagation();
+			e.stopImmediatePropagation();
+			e.preventDefault();
+
+			mapLinkName.innerHTML = cityGroupEl.getElementsByClassName("city-name").item(0).innerHTML;
+			mapLinkLink.href = "/dc_location/" + cityGroupEl.id; 
+			mapLinkPanel.style.transform = `translate(calc(${cityGroupRect.getAttribute("cx")}px - 8px), calc(${cityGroupRect.getAttribute("cy")}px - 40%))`;
+			mapLinkPanel.classList.add("active-panel");
+		})
+	
+		cityGroupEl.addEventListener("mouseleave", function(e){
+			e.stopPropagation();
+			e.stopImmediatePropagation();
+			e.preventDefault();
+	
+			mapLinkPanel.classList.remove("active-panel")
+		})
+	})
+}
