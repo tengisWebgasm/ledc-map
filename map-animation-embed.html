@@ -21,8 +21,8 @@
                 'dubbo': {
                     // HKG2
                     'endpoint': {
-                        'tamworth': {
-                            'ping': 47,
+                        'nextDcBrisbane': {
+                            'ping': 70
                         }
                     },
                     'carriers': [
@@ -62,11 +62,11 @@
                 'tamworth': {
                     // SIN1
                     'endpoint': {
-                        'dubbo': {
-                            'ping': 47,
-                        },
                         'newcastle': {
                             'ping': 30,
+                        },
+                        'equinixSydney': {
+                            'ping': 52,
                         },
                     },
                     'carriers': [
@@ -80,6 +80,30 @@
                         'regionalIt',
                         'toim',
                         'tamworthBroadcast'
+                    ]
+                },
+                'equinixSydney': {
+                    // SIN1
+                    'endpoint': {
+                        'tamworth': {
+                            'ping': 52,
+                        },
+                    },
+                    'carriers': [
+                    ],
+                    'msps': [
+                    ]
+                },
+                'nextDcBrisbane': {
+                    // SIN1
+                    'endpoint': {
+                        'dubbo': {
+                            'ping': 70,
+                        },
+                    },
+                    'carriers': [
+                    ],
+                    'msps': [
                     ]
                 },
             };
@@ -1223,7 +1247,7 @@
                                 event.stopPropagation();
                                 event.preventDefault();
                                 event.stopImmediatePropagation();
-                                if (event.currentTarget.hasAttribute('dc')) {
+                                if (selectStart.value === '') {
                                     if (selectStart.value === event.currentTarget.id) {
                                         selectStart.value = '';
                                         closeSelection();
@@ -1232,8 +1256,13 @@
                                         showSelection(event.currentTarget.id);
                                     }
                                 } else {
-                                    selectEnd.value = event.currentTarget.id;
-                                    selectDestination(event.currentTarget.id);
+                                    if (selectStart.value === event.currentTarget.id) {
+                                        selectStart.value = '';
+                                        closeSelection();
+                                    } else {
+                                        selectEnd.value = event.currentTarget.id;
+                                        selectDestination(event.currentTarget.id);
+                                    }
                                 }
                             }
                         </script>
@@ -1249,9 +1278,6 @@
 
                                 [city-lines] path[on] {
                                     opacity: 1;
-                                    stroke-dasharray: 1200;
-                                    stroke-dashoffset: 1200;
-                                    animation: dash 2000ms linear forwards;
                                 }
 
                                 [city-lines] path[on][selected] {
@@ -1272,6 +1298,11 @@
                                     opacity: 1;
                                     transition: opacity 200ms ease;
                                     pointer-events: none;
+                                }
+
+                                .city-group#equinixSydney,
+                                .city-group#nextDcBrisbane {
+                                    pointer-events: all;
                                 }
 
                                 .city-group[on] {
@@ -1303,6 +1334,10 @@
                                 }
 
                                 .city-group[soon] ellipse[identifier] {
+                                    fill: #7caec1;
+                                }
+
+                                .city-group[inprogress] ellipse[identifier] {
                                     fill: #FF9500;
                                 }
 
@@ -1357,6 +1392,20 @@
                                 <path stroke-dasharray="10, 5" dc="bundaberg" city="nextDcBrisbane"
                                     d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
 
+                                <path stroke-dasharray="10, 5" dc="albury" city="nextDcMelbourne"
+                                    d="M830.58,565 C825.41,590.87 809.45,611.48 792.58,621" />
+                                <path stroke-dasharray="10, 5" dc="albury" city="equinixSydney"
+                                    d="M830.58,565 C872,564.2 908.78,550.75 928,513.4" />
+                                <path dc="equinixSydney" city="tamworth"
+                                    d="M928,513.4 C914.16,495.12 912.02,463.63 924.58,438" />
+                                <path stroke-dasharray="10, 5" dc="bathurst" city="nextDcSydney"
+                                    d="M895.58 494C902.05 504.13 908.53 514.27 915,524.4" />
+                                <path dc="nextDcBrisbane" city="dubbo"
+                                    d="M957.58,355 C915.63,378.45 877.18,417.75 867.58,469" />
+                                <path stroke-dasharray="10, 5" dc="mildura" city="horsham"
+                                    d="M729.58,519 C721.58,543.12 717.73,567.43 729.58,587" />
+
+
                             </g>
 
                             <g city-pins>
@@ -1403,8 +1452,16 @@
                                     <text x="965.58" y="278" class="city-name">Bundaberg</text>
                                 </g>
 
-                                <g id="nextDcBrisbane" class="city-group" soon>
-
+                                <g id="nextDcBrisbane" class="city-group" dc soon onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="957.58" cy="355" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
                                     <ellipse cx="957.58" cy="355" rx="7" ry="7" fill="white" />
                                     <ellipse cx="957.58" cy="355" rx="5" ry="5" identifier />
                                     <text x="966.58" y="358" class="city-name">NextDC Brisbane</text>
@@ -1476,8 +1533,16 @@
                                     <text x="924" y="527.4" class="city-name">NextDC Sydney</text>
                                 </g>
 
-                                <g id="equinixSydney" class="city-group" soon>
-
+                                <g id="equinixSydney" class="city-group" dc soon onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="928" cy="513.4" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
                                     <ellipse cx="928" cy="513.4" rx="7" ry="7" fill="white" />
                                     <ellipse cx="928" cy="513.4" rx="5" ry="5" identifier />
                                     <text x="937" y="516.4" class="city-name">Equinix Sydney</text>
@@ -1490,23 +1555,15 @@
                                     <text x="925" y="545.4" class="city-name">Nowra</text>
                                 </g>
 
-                                <g id="wagga" class="city-group" soon>
+                                <g id="wagga" class="city-group" inprogress>
 
                                     <ellipse cx="847.58" cy="538" rx="7" ry="7" fill="white" />
                                     <ellipse cx="847.58" cy="538" rx="5" ry="5" identifier />
                                     <text x="813.6800000000001" y="552" class="city-name">Wagga Wagga</text>
                                 </g>
 
-                                <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
-                                    <ellipse pulse cx="830.58" cy="565" rx="16" ry="16" fill="url('#pulseFill')"
-                                        restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
-                                            repeatCount="indefinite" keyTimes="0;0.5;1"
-                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
-                                            repeatCount="indefinite" keyTimes="0;0.5;1"
-                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                    </ellipse>
+                                <g id="albury" class="city-group" inprogress>
+
                                     <ellipse cx="830.58" cy="565" rx="7" ry="7" fill="white" />
                                     <ellipse cx="830.58" cy="565" rx="5" ry="5" identifier />
                                     <text x="816.38" y="579" class="city-name">Albury</text>
@@ -1809,7 +1866,7 @@
                     </div>
                     <div id=map-element-label>
                         <div class="map-legend-section">
-                            <p class="m-hide">Explore our Datacentre network to find your location</p>
+                            <p class="m-hide">Explore Our Network</p>
                             <div class="label-seperator m-hide"></div>
                             <div class="label-marker" style="background-color: #34C759;"></div>
                             <p>Live</p>
@@ -1854,6 +1911,8 @@
                                     <option value="dubbo">Dubbo</option>
                                     <option value="newcastle">Newcastle</option>
                                     <option value="tamworth">Tamworth</option>
+                                    <option value="equinixSydney">Equinix Sydney</option>
+                                    <option value="nextDcBrisbane">NextDC Brisbane</option>
                                 </select>
                             </div>
                             <div id="city-select-end" class="city-select" disabled>
@@ -1863,13 +1922,15 @@
                                     <option value="dubbo">Dubbo</option>
                                     <option value="newcastle">Newcastle</option>
                                     <option value="tamworth">Tamworth</option>
+                                    <option value="equinixSydney">Equinix Sydney</option>
+                                    <option value="nextDcBrisbane">NextDC Brisbane</option>
                                 </select>
                             </div>
                         </div>
                         <!-- <div id="city-destination-details" off>
-                                <div class="city-select-mini-label">Ping/latency</div>
-                                <div id="ping-display">158ms</div>
-                            </div> -->
+                            <div class="city-select-mini-label">Ping/latency</div>
+                            <div id="ping-display">158ms</div>
+                        </div> -->
                     </div>
                     <div id="map-side-panel-b">
                         <div class="map-side-panel__network-container container">
@@ -2207,6 +2268,12 @@
             var carrierWrapperRight = document
                 .getElementsByClassName("map-side-panel__carriers-wrapper")
                 .item(1);
+            var networkWrapperLeft = document
+                .getElementsByClassName("map-side-panel__network-wrapper")
+                .item(0);
+            var networkWrapperRight = document
+                .getElementsByClassName("map-side-panel__network-wrapper")
+                .item(1);
             var pingPanel = document.getElementById("map-ping-panel");
             var pingPanelDc = pingPanel.querySelector('[city-label="dc"]');
             var pingPanelCt = pingPanel.querySelector('[city-label="destination"]');
@@ -2215,6 +2282,10 @@
             var mapLinkPanel = document.getElementById("map-link-panel");
             var mapLinkName = document.getElementById("map-link__city-name");
             var mapLinkLink = document.getElementById("map-link__city-link");
+            var clickableSoonCities = [
+                "equinixSydney",
+                "nextDcBrisbane"
+            ]
 
             // function called when some starting point (data center) is selected
             function showSelection(cityName) {
@@ -2275,10 +2346,17 @@
                     }
                 }
 
-                // expand menu
-                // if (!expanded && vw > 767) {
-                //     expandMenu();
-                // }
+                // Hide and show carrier depending on if a city is live or not
+                var learnMoreButton = document.getElementsByClassName("map__ping-city-link").item(0);
+
+                if (clickableSoonCities.includes(cityName)) {
+                    networkWrapperLeft.style.visibility = 'hidden';
+                    learnMoreButton.style.visibility = 'hidden';
+
+                } else {
+                    networkWrapperLeft.style.visibility = 'visible';
+                    learnMoreButton.style.visibility = 'visible';
+                }
 
                 // change carriers
                 handleCarriersChange(0, cityName);
@@ -2357,9 +2435,20 @@
                     }
                 }
 
+                // Hide and show carrier depending on if a city is live or not
+                var learnMoreButton = document.getElementsByClassName("map__ping-city-link").item(1);
+
+                if (clickableSoonCities.includes(cityName)) {
+                    networkWrapperRight.style.visibility = 'hidden';
+                    learnMoreButton.style.visibility = 'hidden';
+                } else {
+                    networkWrapperRight.style.visibility = 'visible';
+                    learnMoreButton.style.visibility = 'visible';
+                }
+
                 const curLine = document.querySelector(
                     `[dc="${selectStart.value}"][city="${cityName}"],
-                        [city="${selectStart.value}"][dc="${cityName}"]`
+		[city="${selectStart.value}"][dc="${cityName}"]`
                 );
                 curLine.setAttribute("selected", "");
 
@@ -2514,6 +2603,7 @@
                             behavior: "smooth",
                         });
                     }
+
                 } else if (selectStart.value !== "" || selectEnd.value !== "") {
                     sidePanelB.style.maxHeight = sidePanelBMaxHeight;
                     expandIcon.style.transform = "rotate(180deg)";
@@ -2586,6 +2676,59 @@
                 console.error(e);
             }
 
+            /**
+             * Event handler for when a carrier is clicked
+             *
+             * @param {*} e Click event object
+             * @param {*} carriersWrapperIndex 0 for left side, 1 for right side carrier.
+             */
+            // function handleCarrierClick(e, carriersWrapperIndex) {
+            //     // determine if wrapper is on left or right side
+            //     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
+            //     var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
+            //     var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
+            //     var cloudProviders = document.getElementsByClassName("cloud-wrapper").item(leftRightSide);
+
+            //     if (e.currentTarget.getAttribute("active") === ""){
+            //         // if cilcked carrier is already active - hide the msp section
+
+            //         e.currentTarget.removeAttribute("active");
+
+            //         // hide cloud wrapper
+            //         cloudWrapper.style.maxHeight = '0px';
+            //         setTimeout(function(){cloudWrapper.style.display = 'none';}, 400)
+            //     } else {
+            //         // if clicked carrier is not already active
+
+            //         // remove active from all on click
+            //         [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
+            //             el.removeAttribute("active");
+            //         });
+            //         e.currentTarget.setAttribute("active", "");
+
+            //         // filter cloud providers
+            //         var selectedCloudProviders = carrierCloudProviders[e.currentTarget.getAttribute("carrier")];
+            //         if (selectedCloudProviders.length <= 0) {
+            //             // if the selected carrier has no public cloud providers, hide providers wrapper
+            //             cloudProviders.style.maxHeight = '0px';
+            //         } else {
+            //             cloudProviders.style.maxHeight = '150px';
+            //             [...cloudProviders.getElementsByClassName("cloud-provider")].forEach(function(cloudEl) {
+            //                 if (selectedCloudProviders.includes(cloudEl.getAttribute("cloud"))) {
+            //                     // if cloud provider is in selected list
+            //                     cloudEl.style.display = 'block';
+            //                 } else {
+            //                     cloudEl.style.display = 'none';
+            //                 }
+            //             })
+            //         }
+
+            //         // set cloud wrapper max height to 400px
+            //         cloudWrapper.style.display = 'block';
+            //         setTimeout(function(){cloudWrapper.style.maxHeight = '300px';}, 10);
+            //     }
+            // }
+
             function handleCarriersChange(carriersWrapperIndex, cityName) {
                 // determine if wrapper is on left or right side
                 var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
@@ -2650,13 +2793,39 @@
                 );
             }
 
+            // [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
+            //     .item(0)
+            //     .getElementsByClassName("service-item")]
+            //     .forEach(function(btn){
+            //         btn.addEventListener("click", function(e){
+            //             e.stopPropagation();
+            //             e.preventDefault();
+
+            //             handleCarrierClick(e, 0);
+            //         });
+            //     });
+
+            // [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
+            //     .item(1)
+            //     .getElementsByClassName("service-item")]
+            //     .forEach(function(btn){
+            //         btn.addEventListener("click", function(e){
+            //             e.stopPropagation();
+            //             e.preventDefault();
+
+            //             handleCarrierClick(e, 1)
+            //         });
+            //     });
+
             /**
-            *  When you hover over an open city, how map link panel and change text/link accordingly
-            */
+             *  When you hover over an open city, how map link panel and change text/link accordingly
+             */
             if (vw > 992) {
                 document.querySelectorAll(".city-group[dc]").forEach(cityGroupEl => {
-                    var cityGroupRect = cityGroupEl.querySelector("ellipse[fill]:not([pulse]):not([identifier])");
+                    if (cityGroupEl.getAttribute("soon") != null)
+                        return;
 
+                    var cityGroupRect = cityGroupEl.querySelector("ellipse[fill]:not([pulse]):not([identifier])");
 
                     var rootSVG = document.querySelector("#map-element svg");
                     var point = rootSVG.createSVGPoint();

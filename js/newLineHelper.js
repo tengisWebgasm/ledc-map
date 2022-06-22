@@ -1,8 +1,8 @@
 let left = true;
 let pos1, pos2, pos3, pos4 = 0;
 
-const dc = 'horsham';
-const city = 'ballarat';
+const dc = '';
+const city = '';
 const line = document.querySelector(`path[dc="${dc}"][city="${city}"]`);
 [...document.querySelectorAll(`path[dc="${dc}"]`)].forEach(line => {
     line.style.opacity = '0.3';
