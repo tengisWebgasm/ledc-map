@@ -134,6 +134,17 @@ p {
 	padding: 4px 16px;
 }
 
+.map-legend-part {
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
+	border-right: 1px solid #D6D6D6;
+}
+
+.map-legend-part:last-of-type {
+	border-right: none;
+}
+
 .city-select {
 	width: 100%;
 }
@@ -288,12 +299,6 @@ p {
 	font-size: 14px;
 	line-height: 20px;
 	color: #6e6d7a;
-}
-
-.label-seperator {
-	margin: 2px 12px;
-	width: 1px;
-	background-color: #D6D6D6;
 }
 
 .label-marker {
@@ -553,6 +558,15 @@ p {
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 20px;
+}
+
+#map-side-panel-disclaimer {
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 4px;
+	font-size: 10px;
+	text-align: right;
 }
 
 #map-side-panel-a {
@@ -919,6 +933,11 @@ p {
 	justify-content: end;
 	bottom: 0;
 	transform: translateY(-88px);
+	transition: transform 0.3s ease-out;
+}
+
+#map-controls-holder.notification-active {
+	transform: translateY(-128px);
 }
 
 .map-controls-wrapper {
@@ -1111,6 +1130,10 @@ p {
 		line-height: 18px;
 	}
 
+	#map-side-panel-disclaimer {
+		display: none;
+	}
+
 	.label-marker {
 		width: 16px;
 		height: 16px;
@@ -1135,6 +1158,10 @@ p {
 
 	.map-side-panel__network-container {
 		flex-direction: column;
+	}
+
+	.map-legend-section {
+		flex-wrap: wrap;
 	}
 
 	#map-side-panel-b {

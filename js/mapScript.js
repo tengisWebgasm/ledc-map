@@ -168,6 +168,7 @@ function selectDestination(cityName) {
 	document.getElementById("map-panel-a-notification").style.maxHeight = '0px';
 	document.getElementById("map-panel-a-notification").style.visibility = 'hidden';
 	sidePanel.classList.remove("notification-active");
+	document.getElementById("map-controls-holder").classList.remove("notification-active");
 
 	// set other lines invisible
 	let otherLines = document.querySelectorAll(

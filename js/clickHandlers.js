@@ -9,11 +9,24 @@ var handleMapClick = (event) => {
     }
 }
 
+var initialCityOptions = [
+    "newcastle",
+    "tamworth",
+    "dubbo"
+]
+
 var handleCityClick = (event) => {
     event.stopPropagation();
     event.preventDefault();
     event.stopImmediatePropagation();
     if (selectStart.value === '') {
+        // no cities selected initially
+
+        // if city not in whitelist
+        if (!initialCityOptions.includes(event.currentTarget.id)) {
+            return;
+        }
+
         if (selectStart.value === event.currentTarget.id) {
             selectStart.value = '';
             closeSelection();
@@ -22,6 +35,8 @@ var handleCityClick = (event) => {
             showSelection(event.currentTarget.id);
         }
     } else {
+        // initial city selected
+
         if (selectStart.value === event.currentTarget.id) {
             selectStart.value = '';
             closeSelection();

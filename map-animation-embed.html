@@ -2,28 +2,15 @@
     <div id="map-animation-embed">
         <script>
             var datacenterDetails = {
-                'albury': {
-                    // CAN1
-                    'endpoint': {
-
-                    },
-                    'carriers': [
-                        'ledc',
-                        'vocus',
-                        'encoo',
-                        'transgrid',
-                    ],
-                    'msps': [
-
-                    ]
-                    // Could add cloud providers to here in the future
-                },
                 'dubbo': {
                     // HKG2
                     'endpoint': {
-                        'nextDcBrisbane': {
-                            'ping': 70
-                        }
+                        'tamworth': {
+                            'ping': 12
+                        },
+                        'equinixSydney': {
+                            'ping': 6
+                        },
                     },
                     'carriers': [
                         'ledc',
@@ -39,8 +26,11 @@
                     // NKG1
                     'endpoint': {
                         'tamworth': {
-                            'ping': 30,
-                        }
+                            'ping': 4,
+                        },
+                        'equinixSydney': {
+                            'ping': 3,
+                        },
                     },
                     'carriers': [
                         'ledc',
@@ -63,10 +53,13 @@
                     // SIN1
                     'endpoint': {
                         'newcastle': {
-                            'ping': 30,
+                            'ping': 4,
+                        },
+                        'dubbo': {
+                            'ping': 12,
                         },
                         'equinixSydney': {
-                            'ping': 52,
+                            'ping': 6,
                         },
                     },
                     'carriers': [
@@ -85,21 +78,15 @@
                 'equinixSydney': {
                     // SIN1
                     'endpoint': {
-                        'tamworth': {
-                            'ping': 52,
-                        },
                     },
                     'carriers': [
                     ],
                     'msps': [
                     ]
                 },
-                'nextDcBrisbane': {
+                'nextDcSydney': {
                     // SIN1
                     'endpoint': {
-                        'dubbo': {
-                            'ping': 70,
-                        },
                     },
                     'carriers': [
                     ],
@@ -257,6 +244,17 @@
                 padding: 4px 16px;
             }
 
+            .map-legend-part {
+                display: flex;
+                align-items: center;
+                padding: 0 12px;
+                border-right: 1px solid #D6D6D6;
+            }
+
+            .map-legend-part:last-of-type {
+                border-right: none;
+            }
+
             .city-select {
                 width: 100%;
             }
@@ -411,12 +409,6 @@
                 font-size: 14px;
                 line-height: 20px;
                 color: #6e6d7a;
-            }
-
-            .label-seperator {
-                margin: 2px 12px;
-                width: 1px;
-                background-color: #D6D6D6;
             }
 
             .label-marker {
@@ -681,6 +673,15 @@
                 line-height: 20px;
             }
 
+            #map-side-panel-disclaimer {
+                position: absolute;
+                right: 0;
+                left: 0;
+                bottom: 4px;
+                font-size: 10px;
+                text-align: right;
+            }
+
             #map-side-panel-a {}
 
             #map-panel-a-notification {
@@ -808,6 +809,43 @@
                 transform: translate(50%, calc(-50% - 12px));
             }
 
+            /* .service-container {
+	display: grid;
+	margin: 16px 0px 8px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: 46px;
+	column-gap: 6px;
+	row-gap: 8px;
+}
+
+.service-container[collapsed] {
+	height: 100px;
+	overflow: hidden;
+}
+
+.service-container-collapse {
+	font-size: 12px;
+	line-height: 12px;
+	text-align: center;
+	color: #05a8d0;
+	transition: opacity ease 200ms;
+	opacity: 0;
+	pointer-events: none;
+	margin-top: 2px;
+	margin-bottom: 0px;
+}
+
+.service-container-collapse:hover {
+	text-decoration: underline;
+}
+
+.service-container-collapse[numCollapsing] {
+	opacity: 1;
+	pointer-events: all;
+	margin-bottom: 10px;
+	cursor: pointer;
+} */
+
             .service-item {
                 box-sizing: border-box;
                 border: none;
@@ -820,6 +858,10 @@
                 /* transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out; */
                 overflow: hidden;
             }
+
+            /* .service-item[active] {
+	border-color: #0097CE;
+} */
 
             .service-item div {
                 position: relative;
@@ -839,10 +881,18 @@
                 object-fit: contain;
             }
 
+            /* .service-item:hover {
+	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.15);
+} */
+
             .map-side-panel__cloud-wrapper {
                 border-top: 1px solid #D6D6D6;
                 padding-bottom: 16px;
+                /* display: none; */
+                /* max-height: 0px; */
+                /* will-change: max-height; */
                 overflow: hidden;
+                /* transition: max-height 0.5s ease; */
             }
 
             .map-side-panel__cloud-wrapper p {
@@ -999,6 +1049,11 @@
                 justify-content: end;
                 bottom: 0;
                 transform: translateY(-88px);
+                transition: transform 0.3s ease-out;
+            }
+
+            #map-controls-holder.notification-active {
+                transform: translateY(-128px);
             }
 
             .map-controls-wrapper {
@@ -1186,6 +1241,10 @@
                     line-height: 18px;
                 }
 
+                #map-side-panel-disclaimer {
+                    display: none;
+                }
+
                 .label-marker {
                     width: 16px;
                     height: 16px;
@@ -1212,6 +1271,10 @@
                     flex-direction: column;
                 }
 
+                .map-legend-section {
+                    flex-wrap: wrap;
+                }
+
                 #map-side-panel-b {
                     max-height: 0vh;
                     overflow-y: auto;
@@ -1233,6 +1296,7 @@
                 <div id="map-element-holder">
                     <div id="map-element">
                         <script>
+
                             var handleMapClick = (event) => {
                                 if (selectEnd.value) {
                                     selectEnd.value = '';
@@ -1243,11 +1307,24 @@
                                 }
                             }
 
+                            var initialCityOptions = [
+                                "newcastle",
+                                "tamworth",
+                                "dubbo"
+                            ]
+
                             var handleCityClick = (event) => {
                                 event.stopPropagation();
                                 event.preventDefault();
                                 event.stopImmediatePropagation();
                                 if (selectStart.value === '') {
+                                    // no cities selected initially
+
+                                    // if city not in whitelist
+                                    if (!initialCityOptions.includes(event.currentTarget.id)) {
+                                        return;
+                                    }
+
                                     if (selectStart.value === event.currentTarget.id) {
                                         selectStart.value = '';
                                         closeSelection();
@@ -1256,6 +1333,8 @@
                                         showSelection(event.currentTarget.id);
                                     }
                                 } else {
+                                    // initial city selected
+
                                     if (selectStart.value === event.currentTarget.id) {
                                         selectStart.value = '';
                                         closeSelection();
@@ -1266,8 +1345,7 @@
                                 }
                             }
                         </script>
-                        <embed src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/Map.svg"
-                            alt="Map of Australia" id="map-img"></embed>
+                        <embed src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/Map.svg" alt="Map of Australia" id="map-img"></embed>
                         <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
                             <style>
                                 [city-lines] path {
@@ -1402,9 +1480,35 @@
                                     d="M895.58 494C902.05 504.13 908.53 514.27 915,524.4" />
                                 <path dc="nextDcBrisbane" city="dubbo"
                                     d="M957.58,355 C915.63,378.45 877.18,417.75 867.58,469" />
-                                <path stroke-dasharray="10, 5" dc="mildura" city="horsham"
-                                    d="M729.58,519 C721.58,543.12 717.73,567.43 729.58,587" />
 
+                                <path stroke-dasharray="10, 5" dc="mildura" city="adelaide"
+                                    d="M729.58,519 C703.1,515.25 672.11,520.6 650.58,534" />
+                                <path stroke-dasharray="10, 5" dc="adelaide" city="horsham"
+                                    d="M650.58,534 C680.61,565.52 698.1,575.08 729.58,587" />
+                                <path stroke-dasharray="10, 5" dc="nextDcBrisbane" city="coffsHarbour"
+                                    d="M957.58,355 C969.22,376.5 976.51,399.25 973,420.4" />
+                                <path stroke-dasharray="10, 5" dc="tamworth" city="dubbo"
+                                    d="M924.58,438 C902.88,440.53 883.73,452.27 867.58,469" />
+                                <path stroke-dasharray="10, 5" dc="coffsHarbour" city="tamworth"
+                                    d="M973,420.4 C957.66,422.32 938.67,430.13 924.58,438" />
+                                <path stroke-dasharray="10, 5" dc="dubbo" city="bathurst"
+                                    d="M867.58,469 C881.26,474.88 889.35,484.52 895.58,494" />
+                                <path stroke-dasharray="10, 5" dc="wagga" city="albury"
+                                    d="M847.58 538C841.91 547 836.25 556 830.58,565" />
+                                <path stroke-dasharray="10, 5" dc="mildura" city="shepparton"
+                                    d="M729.58,519 C780.03,539.63 792.28,558.12 801.58,577" />
+                                <path stroke-dasharray="10, 5" dc="shepparton" city="bendigo"
+                                    d="M801.58 577C792.91 581.67 784.25 586.33 775.58,591" />
+                                <path stroke-dasharray="10, 5" dc="horsham" city="ballarat"
+                                    d="M729.58,587 C739.71,598.73 749.85,601.72 760.58,606" />
+                                <path stroke-dasharray="10, 5" dc="traralgon" city="nextDcMelbourne"
+                                    d="M814.58 626C807.25 624.33 799.91 622.67 792.58,621" />
+                                <path dc="equinixSydney" city="dubbo"
+                                    d="M928,513.4 C913.01,490.4 893.57,476.7 867.58,469" />
+                                <path stroke-dasharray="10, 5" dc="equinixSydney" city="nextDcMelbourne"
+                                    d="M928,513.4 C932.86,582.57 842.32,605.13 792.58,621" />
+                                <path stroke-dasharray="10, 5" dc="ballarat" city="nextDcMelbourne"
+                                    d="M760.58 606C771.25 611 781.91 616 792.58,621" />
 
                             </g>
 
@@ -1452,22 +1556,14 @@
                                     <text x="965.58" y="278" class="city-name">Bundaberg</text>
                                 </g>
 
-                                <g id="nextDcBrisbane" class="city-group" dc soon onclick="handleCityClick(event)">
-                                    <ellipse pulse cx="957.58" cy="355" rx="16" ry="16" fill="url('#pulseFill')"
-                                        restart="always">
-                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
-                                            repeatCount="indefinite" keyTimes="0;0.5;1"
-                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
-                                            repeatCount="indefinite" keyTimes="0;0.5;1"
-                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
-                                    </ellipse>
+                                <g id="nextDcBrisbane" class="city-group" soon>
+
                                     <ellipse cx="957.58" cy="355" rx="7" ry="7" fill="white" />
                                     <ellipse cx="957.58" cy="355" rx="5" ry="5" identifier />
                                     <text x="966.58" y="358" class="city-name">NextDC Brisbane</text>
                                 </g>
 
-                                <g id="coffsHarbour" class="city-group" soon>
+                                <g id="coffsHarbour" class="city-group" inprogress>
 
                                     <ellipse cx="973" cy="420.4" rx="7" ry="7" fill="white" />
                                     <ellipse cx="973" cy="420.4" rx="5" ry="5" identifier />
@@ -1526,14 +1622,22 @@
                                     <text x="876.88" y="508" class="city-name">Bathurst</text>
                                 </g>
 
-                                <g id="nextDcSydney" class="city-group" soon>
-
+                                <g id="nextDcSydney" class="city-group" dc onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="915" cy="524.4" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
                                     <ellipse cx="915" cy="524.4" rx="7" ry="7" fill="white" />
                                     <ellipse cx="915" cy="524.4" rx="5" ry="5" identifier />
                                     <text x="924" y="527.4" class="city-name">NextDC Sydney</text>
                                 </g>
 
-                                <g id="equinixSydney" class="city-group" dc soon onclick="handleCityClick(event)">
+                                <g id="equinixSydney" class="city-group" dc onclick="handleCityClick(event)">
                                     <ellipse pulse cx="928" cy="513.4" rx="16" ry="16" fill="url('#pulseFill')"
                                         restart="always">
                                         <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
@@ -1824,8 +1928,7 @@
                             </defs>
                         </svg>
                         <div id="map-link-panel">
-                            <img
-                                src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/ConnectCircle.svg"></img>
+                            <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/ConnectCircle.svg"></img>
                             <p id="map-link__city-name">City Name</p>
                             <a href="#" id="map-link__city-link">Learn more</a>
                             <div id="map-link__arrow"></div>
@@ -1855,7 +1958,7 @@
                                     </div>
                                 </div>
                                 <div id="map__ping-foot">
-                                    <p>Ping</p>
+                                    <p>Latency*</p>
                                     <div id="map-ping-panel-ping"></div>
                                 </div>
                                 <div id="map-ping-panel-ping-holder">
@@ -1866,28 +1969,34 @@
                     </div>
                     <div id=map-element-label>
                         <div class="map-legend-section">
-                            <p class="m-hide">Explore Our Network</p>
-                            <div class="label-seperator m-hide"></div>
-                            <div class="label-marker" style="background-color: #34C759;"></div>
-                            <p>Live</p>
-                            <div class="label-seperator"></div>
-                            <div class="label-marker" style="background-color: #FF9500;"></div>
-                            <p>In Progress</p>
-                            <div class="label-seperator"></div>
-                            <div class="label-marker" style="background-color: #2b4a71;"></div>
-                            <p>Coming Soon</p>
-                        </div>
-                        <div class="map-legend-section">
-                            <div class="label-line" style="background-color: #2b4a71;"></div>
-                            <p>Live</p>
-                            <div class="label-seperator"></div>
-                            <div class="label-line"
-                                style="background: linear-gradient(90deg, rgba(43,74,113,1) 35%, rgba(255,255,255,1) 36%, rgba(255,255,255,1) 64%, rgba(43,74,113,1) 65%);">
+                            <div class="map-legend-part m-hide">
+                                <p class="m-hide">Explore Our Network</p>
                             </div>
-                            <p>Coming Soon</p>
+                            <div class="map-legend-part">
+                                <div class="label-marker" style="background-color: #34C759;"></div>
+                                <p>Live</p>
+                            </div>
+                            <div class="map-legend-part">
+                                <div class="label-marker" style="background-color: #FF9500;"></div>
+                                <p>In Progress</p>
+                            </div>
+                            <div class="map-legend-part">
+                                <div class="label-marker" style="background-color: #7caec1;"></div>
+                                <p>Coming Soon</p>
+                            </div>
+                            <div class="map-legend-part">
+                                <div class="label-line" style="background-color: #2b4a71;"></div>
+                                <p>Live</p>
+                            </div>
+                            <div class="map-legend-part">
+                                <div class="label-line"
+                                    style="background: linear-gradient(90deg, rgba(43,74,113,1) 35%, rgba(255,255,255,1) 36%, rgba(255,255,255,1) 64%, rgba(43,74,113,1) 65%);">
+                                </div>
+                                <p>Coming Soon</p>
+                            </div>
                         </div>
                     </div>
-                    <div id="map-controls-holder" class="container">
+                    <div id="map-controls-holder" class="container notification-active">
                         <div class="map-controls-wrapper">
                             <button class="map-control-zoom-btn" id="map-btn-zoom-in"></button>
                             <button class="map-control-zoom-btn" id="map-btn-zoom-out"></button>
@@ -1907,30 +2016,25 @@
                             <div id="city-select-start" class="city-select">
                                 <select>
                                     <option value="">Select Data Centre</option>
-                                    <option value="albury">Albury</option>
-                                    <option value="dubbo">Dubbo</option>
                                     <option value="newcastle">Newcastle</option>
                                     <option value="tamworth">Tamworth</option>
-                                    <option value="equinixSydney">Equinix Sydney</option>
-                                    <option value="nextDcBrisbane">NextDC Brisbane</option>
+                                    <option value="dubbo">Dubbo</option>
                                 </select>
                             </div>
                             <div id="city-select-end" class="city-select" disabled>
                                 <select disabled>
                                     <option value="">Select Data Centre</option>
-                                    <option value="albury">Albury</option>
-                                    <option value="dubbo">Dubbo</option>
                                     <option value="newcastle">Newcastle</option>
                                     <option value="tamworth">Tamworth</option>
+                                    <option value="dubbo">Dubbo</option>
                                     <option value="equinixSydney">Equinix Sydney</option>
-                                    <option value="nextDcBrisbane">NextDC Brisbane</option>
                                 </select>
                             </div>
                         </div>
                         <!-- <div id="city-destination-details" off>
-                            <div class="city-select-mini-label">Ping/latency</div>
-                            <div id="ping-display">158ms</div>
-                        </div> -->
+                                <div class="city-select-mini-label">Ping/latency</div>
+                                <div id="ping-display">158ms</div>
+                            </div> -->
                     </div>
                     <div id="map-side-panel-b">
                         <div class="map-side-panel__network-container container">
@@ -1942,56 +2046,50 @@
                                     <div class="map-side-panel__carriers-wrapper">
                                         <button class="service-item" carrier="ledc" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg"
-                                                    loading="lazy" alt="ledc">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg" loading="lazy" alt="ledc">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vocus" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
-                                                    loading="lazy" alt="vocus">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg" loading="lazy" alt="vocus">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png"
-                                                    loading="lazy" alt="encoo">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png" loading="lazy" alt="encoo">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="transgrid" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png"
-                                                    loading="lazy" alt="transgrid">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png" loading="lazy"
+                                                    alt="transgrid">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vergetel" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png"
-                                                    loading="lazy" alt="vergetel">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png" loading="lazy"
+                                                    alt="vergetel">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="tpg" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png"
-                                                    loading="lazy" alt="tpg">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png" loading="lazy" alt="tpg">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="superloop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg"
-                                                    loading="lazy" alt="superloop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg" loading="lazy"
+                                                    alt="superloop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="swoop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg"
-                                                    loading="lazy" alt="swoop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg" loading="lazy" alt="swoop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="nexon" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png"
-                                                    loading="lazy" alt="nexon">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png" loading="lazy" alt="nexon">
                                             </div>
                                         </button>
                                     </div>
@@ -2002,32 +2100,31 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
-                                                        loading="lazy" alt="regionalIt">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png" loading="lazy"
+                                                        alt="regionalIt">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="toim">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg"
-                                                        loading="lazy" alt="toim">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg" loading="lazy" alt="toim">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="newcastleConnect">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png"
-                                                        loading="lazy" alt="newcastleConnect">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png" loading="lazy"
+                                                        alt="newcastleConnect">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="sabervox">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
-                                                        loading="lazy" alt="sabervox">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png" loading="lazy"
+                                                        alt="sabervox">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png"
-                                                        loading="lazy" alt="tamworthBroadcast">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png" loading="lazy"
+                                                        alt="tamworthBroadcast">
                                                 </div>
                                             </div>
                                         </div>
@@ -2036,20 +2133,19 @@
                                             <div class="map-side-panel__msp-wrapper">
                                                 <div class="msp-provider cloud-provider" cloud="azure">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png"
-                                                            loading="lazy" alt="azure">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png" loading="lazy"
+                                                            alt="azure">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="google">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png"
-                                                            loading="lazy" alt="google">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png" loading="lazy"
+                                                            alt="google">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="aws">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png"
-                                                            loading="lazy" alt="aws">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png" loading="lazy" alt="aws">
                                                     </div>
                                                 </div>
                                             </div>
@@ -2071,56 +2167,50 @@
                                     <div class="map-side-panel__carriers-wrapper">
                                         <button class="service-item" carrier="ledc" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg"
-                                                    loading="lazy" alt="ledc">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg" loading="lazy" alt="ledc">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vocus" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
-                                                    loading="lazy" alt="vocus">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg" loading="lazy" alt="vocus">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png"
-                                                    loading="lazy" alt="encoo">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png" loading="lazy" alt="encoo">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="transgrid" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png"
-                                                    loading="lazy" alt="transgrid">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png" loading="lazy"
+                                                    alt="transgrid">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vergetel" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png"
-                                                    loading="lazy" alt="vergetel">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png" loading="lazy"
+                                                    alt="vergetel">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="tpg" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png"
-                                                    loading="lazy" alt="tpg">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png" loading="lazy" alt="tpg">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="superloop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg"
-                                                    loading="lazy" alt="superloop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg" loading="lazy"
+                                                    alt="superloop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="swoop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg"
-                                                    loading="lazy" alt="swoop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg" loading="lazy" alt="swoop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="nexon" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png"
-                                                    loading="lazy" alt="nexon">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png" loading="lazy" alt="nexon">
                                             </div>
                                         </button>
                                     </div>
@@ -2131,32 +2221,31 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
-                                                        loading="lazy" alt="regionalIt">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png" loading="lazy"
+                                                        alt="regionalIt">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="toim">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg"
-                                                        loading="lazy" alt="toim">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg" loading="lazy" alt="toim">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="newcastleConnect">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png"
-                                                        loading="lazy" alt="newcastleConnect">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png" loading="lazy"
+                                                        alt="newcastleConnect">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="sabervox">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
-                                                        loading="lazy" alt="sabervox">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png" loading="lazy"
+                                                        alt="sabervox">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png"
-                                                        loading="lazy" alt="tamworthBroadcast">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png" loading="lazy"
+                                                        alt="tamworthBroadcast">
                                                 </div>
                                             </div>
                                         </div>
@@ -2165,20 +2254,19 @@
                                             <div class="map-side-panel__msp-wrapper">
                                                 <div class="msp-provider cloud-provider" cloud="azure">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png"
-                                                            loading="lazy" alt="azure">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png" loading="lazy"
+                                                            alt="azure">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="google">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png"
-                                                            loading="lazy" alt="google">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png" loading="lazy"
+                                                            alt="google">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="aws">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png"
-                                                            loading="lazy" alt="aws">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png" loading="lazy" alt="aws">
                                                     </div>
                                                 </div>
                                             </div>
@@ -2192,6 +2280,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div id="map-side-panel-disclaimer" class="container">
+                        <p>
+                            *Disclaimer - For up to date latency information, please fill out the contact form
+                            <span><a href="/contact-us">located here</a></span>.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -2421,6 +2515,7 @@
                 document.getElementById("map-panel-a-notification").style.maxHeight = '0px';
                 document.getElementById("map-panel-a-notification").style.visibility = 'hidden';
                 sidePanel.classList.remove("notification-active");
+                document.getElementById("map-controls-holder").classList.remove("notification-active");
 
                 // set other lines invisible
                 let otherLines = document.querySelectorAll(
@@ -2676,59 +2771,6 @@
                 console.error(e);
             }
 
-            /**
-             * Event handler for when a carrier is clicked
-             *
-             * @param {*} e Click event object
-             * @param {*} carriersWrapperIndex 0 for left side, 1 for right side carrier.
-             */
-            // function handleCarrierClick(e, carriersWrapperIndex) {
-            //     // determine if wrapper is on left or right side
-            //     var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
-            //     var wrapper = document.getElementsByClassName("map-side-panel__carriers-wrapper").item(leftRightSide);
-            //     var cloudWrapper = document.getElementsByClassName("map-side-panel__cloud-wrapper").item(leftRightSide);
-            //     var cloudProviders = document.getElementsByClassName("cloud-wrapper").item(leftRightSide);
-
-            //     if (e.currentTarget.getAttribute("active") === ""){
-            //         // if cilcked carrier is already active - hide the msp section
-
-            //         e.currentTarget.removeAttribute("active");
-
-            //         // hide cloud wrapper
-            //         cloudWrapper.style.maxHeight = '0px';
-            //         setTimeout(function(){cloudWrapper.style.display = 'none';}, 400)
-            //     } else {
-            //         // if clicked carrier is not already active
-
-            //         // remove active from all on click
-            //         [...wrapper.getElementsByClassName("service-item")].forEach(function(el){
-            //             el.removeAttribute("active");
-            //         });
-            //         e.currentTarget.setAttribute("active", "");
-
-            //         // filter cloud providers
-            //         var selectedCloudProviders = carrierCloudProviders[e.currentTarget.getAttribute("carrier")];
-            //         if (selectedCloudProviders.length <= 0) {
-            //             // if the selected carrier has no public cloud providers, hide providers wrapper
-            //             cloudProviders.style.maxHeight = '0px';
-            //         } else {
-            //             cloudProviders.style.maxHeight = '150px';
-            //             [...cloudProviders.getElementsByClassName("cloud-provider")].forEach(function(cloudEl) {
-            //                 if (selectedCloudProviders.includes(cloudEl.getAttribute("cloud"))) {
-            //                     // if cloud provider is in selected list
-            //                     cloudEl.style.display = 'block';
-            //                 } else {
-            //                     cloudEl.style.display = 'none';
-            //                 }
-            //             })
-            //         }
-
-            //         // set cloud wrapper max height to 400px
-            //         cloudWrapper.style.display = 'block';
-            //         setTimeout(function(){cloudWrapper.style.maxHeight = '300px';}, 10);
-            //     }
-            // }
-
             function handleCarriersChange(carriersWrapperIndex, cityName) {
                 // determine if wrapper is on left or right side
                 var leftRightSide = carriersWrapperIndex > 0 ? 1 : 0;
@@ -2792,30 +2834,6 @@
                     }
                 );
             }
-
-            // [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
-            //     .item(0)
-            //     .getElementsByClassName("service-item")]
-            //     .forEach(function(btn){
-            //         btn.addEventListener("click", function(e){
-            //             e.stopPropagation();
-            //             e.preventDefault();
-
-            //             handleCarrierClick(e, 0);
-            //         });
-            //     });
-
-            // [...document.getElementsByClassName("map-side-panel__carriers-wrapper")
-            //     .item(1)
-            //     .getElementsByClassName("service-item")]
-            //     .forEach(function(btn){
-            //         btn.addEventListener("click", function(e){
-            //             e.stopPropagation();
-            //             e.preventDefault();
-
-            //             handleCarrierClick(e, 1)
-            //         });
-            //     });
 
             /**
              *  When you hover over an open city, how map link panel and change text/link accordingly
