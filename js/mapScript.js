@@ -29,10 +29,7 @@ var pingPanelButton = document.getElementById("map-ping-button");
 var mapLinkPanel = document.getElementById("map-link-panel");
 var mapLinkName = document.getElementById("map-link__city-name");
 var mapLinkLink = document.getElementById("map-link__city-link");
-var clickableSoonCities = [
-	"equinixSydney",
-	"nextDcBrisbane"
-]
+var noLocationPageCities = ["equinixSydney", "nextDcSydney"];
 
 // function called when some starting point (data center) is selected
 function showSelection(cityName) {
@@ -57,7 +54,11 @@ function showSelection(cityName) {
 		[
 			...document.querySelector("[city-lines]").querySelectorAll("path"),
 		].forEach((e) => e.removeAttribute("on"));
-		[...document.querySelectorAll(`[dc="${cityName}"], [city="${cityName}"]`)].forEach((e) => {
+		[
+			...document.querySelectorAll(
+				`[dc="${cityName}"], [city="${cityName}"]`
+			),
+		].forEach((e) => {
 			setTimeout(() => e.setAttribute("on", ""), Math.random() * 280);
 		});
 	} catch {}
@@ -86,37 +87,50 @@ function showSelection(cityName) {
 	if (vw > 767) {
 		if (datacenterDetails[cityName]["carriers"].length <= 6) {
 			hideArrowButtons(0);
-			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
+			document
+				.getElementsByClassName("map-side-panel__carriers-wrapper")
+				.item(0).style.justifyContent = "center";
 		} else {
 			showArrowButtons(0);
-			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "flex-start";
+			document
+				.getElementsByClassName("map-side-panel__carriers-wrapper")
+				.item(0).style.justifyContent = "flex-start";
 		}
 	}
 
 	// Hide and show carrier depending on if a city is live or not
-	var learnMoreButton = document.getElementsByClassName("map__ping-city-link").item(0);
+	var learnMoreButton = document
+		.getElementsByClassName("map__ping-city-link")
+		.item(0);
 
-	if (clickableSoonCities.includes(cityName)) {
-		networkWrapperLeft.style.visibility = 'hidden';
-		learnMoreButton.style.visibility = 'hidden';
-		
+	if (noLocationPageCities.includes(cityName)) {
+		networkWrapperLeft.style.visibility = "hidden";
+		learnMoreButton.style.visibility = "hidden";
 	} else {
-		networkWrapperLeft.style.visibility = 'visible';
-		learnMoreButton.style.visibility = 'visible';
+		networkWrapperLeft.style.visibility = "visible";
+		learnMoreButton.style.visibility = "visible";
 	}
 
 	// change carriers
 	handleCarriersChange(0, cityName);
 
 	// hide map link panel
-	mapLinkPanel.classList.remove("active-panel")
+	mapLinkPanel.classList.remove("active-panel");
 
 	// change learn more link and datasheet city name/link
-	var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(0);
-	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
-	var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+	var learnMoreLink = document
+		.getElementsByClassName("map__ping-city-link")
+		.item(0);
+	var downloadDataSheetBtn = document
+		.getElementsByClassName("button button-primary bg-primary-2")
+		.item(0);
+	var capitalizedName = document
+		.getElementById(cityName)
+		.getElementsByClassName("city-name")
+		.item(0).innerHTML;
 	learnMoreLink.href = "/dc_location/" + cityName + "/";
-	downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+	downloadDataSheetBtn.innerHTML =
+		"Visit " + capitalizedName + " Data Centre";
 	downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
 }
 
@@ -139,9 +153,11 @@ var closeSelection = () => {
 	if (expanded) {
 		expandMenu();
 	}
-	
+
 	// change download data sheet button text to "Select a city"
-	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
+	var downloadDataSheetBtn = document
+		.getElementsByClassName("button button-primary bg-primary-2")
+		.item(0);
 	downloadDataSheetBtn.innerHTML = "Select a city";
 	downloadDataSheetBtn.href = "#";
 
@@ -165,33 +181,38 @@ function selectDestination(cityName) {
 	document.querySelector("#" + cityName).setAttribute("dc", "");
 
 	// Hide map-panel-a-notification
-	document.getElementById("map-panel-a-notification").style.maxHeight = '0px';
-	document.getElementById("map-panel-a-notification").style.visibility = 'hidden';
+	document.getElementById("map-panel-a-notification").style.maxHeight = "0px";
+	document.getElementById("map-panel-a-notification").style.visibility =
+		"hidden";
 	sidePanel.classList.remove("notification-active");
-	document.getElementById("map-controls-holder").classList.remove("notification-active");
+	document
+		.getElementById("map-controls-holder")
+		.classList.remove("notification-active");
 
 	// set other lines invisible
-	let otherLines = document.querySelectorAll(
-		`[city-lines] path`
-	);
+	let otherLines = document.querySelectorAll(`[city-lines] path`);
 	for (let i = 0; i < otherLines.length; i++) {
-		let dcFilter = otherLines[i].getAttribute("dc")
-		let cityFilter = otherLines[i].getAttribute("cityFilter")
-		if (!(dcFilter === selectStart.value && cityFilter === cityName) 
-			&& !(cityFilter === selectStart.value && dcFilter === cityName)) {
+		let dcFilter = otherLines[i].getAttribute("dc");
+		let cityFilter = otherLines[i].getAttribute("cityFilter");
+		if (
+			!(dcFilter === selectStart.value && cityFilter === cityName) &&
+			!(cityFilter === selectStart.value && dcFilter === cityName)
+		) {
 			otherLines[i].setAttribute("invisible", "");
 		}
 	}
 
 	// Hide and show carrier depending on if a city is live or not
-	var learnMoreButton = document.getElementsByClassName("map__ping-city-link").item(1);
+	var learnMoreButton = document
+		.getElementsByClassName("map__ping-city-link")
+		.item(1);
 
-	if (clickableSoonCities.includes(cityName)) {
-		networkWrapperRight.style.visibility = 'hidden';
-		learnMoreButton.style.visibility = 'hidden';
+	if (noLocationPageCities.includes(cityName)) {
+		networkWrapperRight.style.visibility = "hidden";
+		learnMoreButton.style.visibility = "hidden";
 	} else {
-		networkWrapperRight.style.visibility = 'visible';
-		learnMoreButton.style.visibility = 'visible';
+		networkWrapperRight.style.visibility = "visible";
+		learnMoreButton.style.visibility = "visible";
 	}
 
 	const curLine = document.querySelector(
@@ -253,10 +274,14 @@ function selectDestination(cityName) {
 	if (vw > 767) {
 		if (datacenterDetails[cityName]["carriers"].length <= 6) {
 			hideArrowButtons(1);
-			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "center";
+			document
+				.getElementsByClassName("map-side-panel__carriers-wrapper")
+				.item(1).style.justifyContent = "center";
 		} else {
 			showArrowButtons(1);
-			document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "flex-start";
+			document
+				.getElementsByClassName("map-side-panel__carriers-wrapper")
+				.item(1).style.justifyContent = "flex-start";
 		}
 	}
 
@@ -266,11 +291,19 @@ function selectDestination(cityName) {
 	}
 
 	// change learn more link and datasheet city name/link
-	var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(1);
-	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
-	var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+	var learnMoreLink = document
+		.getElementsByClassName("map__ping-city-link")
+		.item(1);
+	var downloadDataSheetBtn = document
+		.getElementsByClassName("button button-primary bg-primary-2")
+		.item(1);
+	var capitalizedName = document
+		.getElementById(cityName)
+		.getElementsByClassName("city-name")
+		.item(0).innerHTML;
 	learnMoreLink.href = "/dc_location/" + cityName + "/";
-	downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+	downloadDataSheetBtn.innerHTML =
+		"Visit " + capitalizedName + " Data Centre";
 	downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
 }
 
@@ -289,9 +322,11 @@ var closeDestination = () => {
 		(e) => e.removeAttribute("invisible")
 	);
 	pingPanel.removeAttribute("active");
-	
+
 	// change download data sheet button text to "Select a city"
-	var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
+	var downloadDataSheetBtn = document
+		.getElementsByClassName("button button-primary bg-primary-2")
+		.item(1);
 	downloadDataSheetBtn.innerHTML = "Select a city";
 	downloadDataSheetBtn.href = "#";
 };
@@ -351,11 +386,10 @@ function expandMenu() {
 				behavior: "smooth",
 			});
 		}
-
 	} else if (selectStart.value !== "" || selectEnd.value !== "") {
 		sidePanelB.style.maxHeight = sidePanelBMaxHeight;
 		expandIcon.style.transform = "rotate(180deg)";
-		if (vw > 767){
+		if (vw > 767) {
 			window.scrollTo({
 				top:
 					sidePanel.offsetTop -
@@ -569,18 +603,19 @@ function showArrowButtons(carriersWrapperIndex) {
  *  When you hover over an open city, how map link panel and change text/link accordingly
  */
 if (vw > 992) {
-	document.querySelectorAll(".city-group[dc]").forEach(cityGroupEl => {
-		if (cityGroupEl.getAttribute("soon") != null)
-			return;
+	document.querySelectorAll(".city-group[dc]").forEach((cityGroupEl) => {
+		if (cityGroupEl.getAttribute("soon") != null) return;
 
-		var cityGroupRect = cityGroupEl.querySelector("ellipse[fill]:not([pulse]):not([identifier])");
+		var cityGroupRect = cityGroupEl.querySelector(
+			"ellipse[fill]:not([pulse]):not([identifier])"
+		);
 
 		var rootSVG = document.querySelector("#map-element svg");
 		var point = rootSVG.createSVGPoint();
 		var matrix, position;
 		matrix = cityGroupEl.getCTM();
 
-		cityGroupEl.addEventListener("mouseenter", function(e){
+		cityGroupEl.addEventListener("mouseenter", function (e) {
 			e.stopPropagation();
 			e.stopImmediatePropagation();
 			e.preventDefault();
@@ -590,9 +625,11 @@ if (vw > 992) {
 			}
 
 			// inner content and links
-			mapLinkName.innerHTML = cityGroupEl.getElementsByClassName("city-name").item(0).innerHTML;
-			mapLinkLink.href = "/dc_location/" + cityGroupEl.id; 
-			
+			mapLinkName.innerHTML = cityGroupEl
+				.getElementsByClassName("city-name")
+				.item(0).innerHTML;
+			mapLinkLink.href = "/dc_location/" + cityGroupEl.id;
+
 			// positioning
 			point.x = cityGroupRect.getAttribute("cx");
 			point.y = cityGroupRect.getAttribute("cy");
@@ -603,9 +640,9 @@ if (vw > 992) {
 
 			// styling
 			mapLinkPanel.classList.add("active-panel");
-		})
-	
-		cityGroupEl.addEventListener("mouseleave", function(e){
+		});
+
+		cityGroupEl.addEventListener("mouseleave", function (e) {
 			e.stopPropagation();
 			e.stopImmediatePropagation();
 			e.preventDefault();
@@ -613,8 +650,8 @@ if (vw > 992) {
 			if (selectStart.value || selectEnd.value) {
 				return;
 			}
-	
-			mapLinkPanel.classList.remove("active-panel")
-		})
-	})
+
+			mapLinkPanel.classList.remove("active-panel");
+		});
+	});
 }

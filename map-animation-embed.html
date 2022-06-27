@@ -11,6 +11,12 @@
                         'equinixSydney': {
                             'ping': 6
                         },
+                        'nextDcSydney': {
+                            'ping': 7
+                        },
+                        'newcastle': {
+                            'ping': 9
+                        },
                     },
                     'carriers': [
                         'ledc',
@@ -28,8 +34,14 @@
                         'tamworth': {
                             'ping': 4,
                         },
+                        'dubbo': {
+                            'ping': 9,
+                        },
                         'equinixSydney': {
                             'ping': 3,
+                        },
+                        'nextDcSydney': {
+                            'ping': 4
                         },
                     },
                     'carriers': [
@@ -60,6 +72,9 @@
                         },
                         'equinixSydney': {
                             'ping': 6,
+                        },
+                        'nextDcSydney': {
+                            'ping': 7
                         },
                     },
                     'carriers': [
@@ -92,7 +107,7 @@
                     ],
                     'msps': [
                     ]
-                },
+                }
             };
         </script>
         <style>
@@ -680,6 +695,18 @@
                 bottom: 4px;
                 font-size: 10px;
                 text-align: right;
+            }
+
+            #map-side-panel-disclaimer a {
+                font-weight: 700;
+                text-decoration: none;
+                color: #001f5c;
+                position: relative;
+                z-index: 11;
+            }
+
+            #map-side-panel-disclaimer a:hover {
+                text-decoration: underline;
             }
 
             #map-side-panel-a {}
@@ -1345,7 +1372,8 @@
                                 }
                             }
                         </script>
-                        <embed src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/Map.svg" alt="Map of Australia" id="map-img"></embed>
+                        <embed src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/Map.svg"
+                            alt="Map of Australia" id="map-img"></embed>
                         <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
                             <style>
                                 [city-lines] path {
@@ -1464,7 +1492,7 @@
                                 <path stroke-dasharray="10, 5" dc="mackay" city="rockhampton"
                                     d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
                                 <path stroke-dasharray="10, 5" dc="rockhampton" city="gladstone"
-                                    d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
+                                    d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251 " />
                                 <path stroke-dasharray="10, 5" dc="gladstone" city="bundaberg"
                                     d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
                                 <path stroke-dasharray="10, 5" dc="bundaberg" city="nextDcBrisbane"
@@ -1509,6 +1537,13 @@
                                     d="M928,513.4 C932.86,582.57 842.32,605.13 792.58,621" />
                                 <path stroke-dasharray="10, 5" dc="ballarat" city="nextDcMelbourne"
                                     d="M760.58 606C771.25 611 781.91 616 792.58,621" />
+
+                                <path dc="newcastle" city="nextDcSydney" passthrough
+                                    d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
+                                <path dc="tamworth" city="nextDcSydney" passthrough
+                                    d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
+                                <path dc="dubbo" city="nextDcSydney" passthrough
+                                    d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
 
                             </g>
 
@@ -1928,7 +1963,8 @@
                             </defs>
                         </svg>
                         <div id="map-link-panel">
-                            <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/ConnectCircle.svg"></img>
+                            <img
+                                src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/ConnectCircle.svg"></img>
                             <p id="map-link__city-name">City Name</p>
                             <a href="#" id="map-link__city-link">Learn more</a>
                             <div id="map-link__arrow"></div>
@@ -2028,6 +2064,7 @@
                                     <option value="tamworth">Tamworth</option>
                                     <option value="dubbo">Dubbo</option>
                                     <option value="equinixSydney">Equinix Sydney</option>
+                                    <option value="nextDcSydney">NextDC Sydney</option>
                                 </select>
                             </div>
                         </div>
@@ -2046,50 +2083,56 @@
                                     <div class="map-side-panel__carriers-wrapper">
                                         <button class="service-item" carrier="ledc" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg" loading="lazy" alt="ledc">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg"
+                                                    loading="lazy" alt="ledc">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vocus" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg" loading="lazy" alt="vocus">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
+                                                    loading="lazy" alt="vocus">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png" loading="lazy" alt="encoo">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png"
+                                                    loading="lazy" alt="encoo">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="transgrid" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png" loading="lazy"
-                                                    alt="transgrid">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png"
+                                                    loading="lazy" alt="transgrid">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vergetel" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png" loading="lazy"
-                                                    alt="vergetel">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png"
+                                                    loading="lazy" alt="vergetel">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="tpg" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png" loading="lazy" alt="tpg">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png"
+                                                    loading="lazy" alt="tpg">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="superloop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg" loading="lazy"
-                                                    alt="superloop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg"
+                                                    loading="lazy" alt="superloop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="swoop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg" loading="lazy" alt="swoop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg"
+                                                    loading="lazy" alt="swoop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="nexon" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png" loading="lazy" alt="nexon">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png"
+                                                    loading="lazy" alt="nexon">
                                             </div>
                                         </button>
                                     </div>
@@ -2100,31 +2143,32 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png" loading="lazy"
-                                                        alt="regionalIt">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
+                                                        loading="lazy" alt="regionalIt">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="toim">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg" loading="lazy" alt="toim">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg"
+                                                        loading="lazy" alt="toim">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="newcastleConnect">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png" loading="lazy"
-                                                        alt="newcastleConnect">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png"
+                                                        loading="lazy" alt="newcastleConnect">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="sabervox">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png" loading="lazy"
-                                                        alt="sabervox">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
+                                                        loading="lazy" alt="sabervox">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png" loading="lazy"
-                                                        alt="tamworthBroadcast">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png"
+                                                        loading="lazy" alt="tamworthBroadcast">
                                                 </div>
                                             </div>
                                         </div>
@@ -2133,19 +2177,20 @@
                                             <div class="map-side-panel__msp-wrapper">
                                                 <div class="msp-provider cloud-provider" cloud="azure">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png" loading="lazy"
-                                                            alt="azure">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png"
+                                                            loading="lazy" alt="azure">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="google">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png" loading="lazy"
-                                                            alt="google">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png"
+                                                            loading="lazy" alt="google">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="aws">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png" loading="lazy" alt="aws">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png"
+                                                            loading="lazy" alt="aws">
                                                     </div>
                                                 </div>
                                             </div>
@@ -2167,50 +2212,56 @@
                                     <div class="map-side-panel__carriers-wrapper">
                                         <button class="service-item" carrier="ledc" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg" loading="lazy" alt="ledc">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/ledc.svg"
+                                                    loading="lazy" alt="ledc">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vocus" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg" loading="lazy" alt="vocus">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/Vocus.svg"
+                                                    loading="lazy" alt="vocus">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="encoo" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png" loading="lazy" alt="encoo">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/encoo.png"
+                                                    loading="lazy" alt="encoo">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="transgrid" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png" loading="lazy"
-                                                    alt="transgrid">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/transgrid.png"
+                                                    loading="lazy" alt="transgrid">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="vergetel" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png" loading="lazy"
-                                                    alt="vergetel">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/vergetel.png"
+                                                    loading="lazy" alt="vergetel">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="tpg" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png" loading="lazy" alt="tpg">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tpg.png"
+                                                    loading="lazy" alt="tpg">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="superloop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg" loading="lazy"
-                                                    alt="superloop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/superloop.svg"
+                                                    loading="lazy" alt="superloop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="swoop" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg" loading="lazy" alt="swoop">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/swoop.svg"
+                                                    loading="lazy" alt="swoop">
                                             </div>
                                         </button>
                                         <button class="service-item" carrier="nexon" href="#">
                                             <div>
-                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png" loading="lazy" alt="nexon">
+                                                <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/nexon.png"
+                                                    loading="lazy" alt="nexon">
                                             </div>
                                         </button>
                                     </div>
@@ -2221,31 +2272,32 @@
                                         <div class="map-side-panel__msp-wrapper msp-wrapper">
                                             <div class="msp-provider" provider="regionalIt">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png" loading="lazy"
-                                                        alt="regionalIt">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/regionalIt.png"
+                                                        loading="lazy" alt="regionalIt">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="toim">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg" loading="lazy" alt="toim">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/toim.svg"
+                                                        loading="lazy" alt="toim">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="newcastleConnect">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png" loading="lazy"
-                                                        alt="newcastleConnect">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/newcastleConnect.png"
+                                                        loading="lazy" alt="newcastleConnect">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="sabervox">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png" loading="lazy"
-                                                        alt="sabervox">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/sabervox.png"
+                                                        loading="lazy" alt="sabervox">
                                                 </div>
                                             </div>
                                             <div class="msp-provider" provider="tamworthBroadcast">
                                                 <div>
-                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png" loading="lazy"
-                                                        alt="tamworthBroadcast">
+                                                    <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/tamworthBroadcast.png"
+                                                        loading="lazy" alt="tamworthBroadcast">
                                                 </div>
                                             </div>
                                         </div>
@@ -2254,19 +2306,20 @@
                                             <div class="map-side-panel__msp-wrapper">
                                                 <div class="msp-provider cloud-provider" cloud="azure">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png" loading="lazy"
-                                                            alt="azure">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/azure.png"
+                                                            loading="lazy" alt="azure">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="google">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png" loading="lazy"
-                                                            alt="google">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/google.png"
+                                                            loading="lazy" alt="google">
                                                     </div>
                                                 </div>
                                                 <div class="msp-provider cloud-provider" cloud="aws">
                                                     <div>
-                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png" loading="lazy" alt="aws">
+                                                        <img src="https://ledc.kholab.co/wp-content/themes/twentytwentyone/assets/images/providers/aws.png"
+                                                            loading="lazy" alt="aws">
                                                     </div>
                                                 </div>
                                             </div>
@@ -2283,7 +2336,7 @@
                     </div>
                     <div id="map-side-panel-disclaimer" class="container">
                         <p>
-                            *Disclaimer - For up to date latency information, please fill out the contact form
+                            *Disclaimer - For up to date latency and path information, please fill out the contact form
                             <span><a href="/contact-us">located here</a></span>.
                         </p>
                     </div>
@@ -2376,10 +2429,7 @@
             var mapLinkPanel = document.getElementById("map-link-panel");
             var mapLinkName = document.getElementById("map-link__city-name");
             var mapLinkLink = document.getElementById("map-link__city-link");
-            var clickableSoonCities = [
-                "equinixSydney",
-                "nextDcBrisbane"
-            ]
+            var noLocationPageCities = ["equinixSydney", "nextDcSydney"];
 
             // function called when some starting point (data center) is selected
             function showSelection(cityName) {
@@ -2404,7 +2454,11 @@
                     [
                         ...document.querySelector("[city-lines]").querySelectorAll("path"),
                     ].forEach((e) => e.removeAttribute("on"));
-                    [...document.querySelectorAll(`[dc="${cityName}"], [city="${cityName}"]`)].forEach((e) => {
+                    [
+                        ...document.querySelectorAll(
+                            `[dc="${cityName}"], [city="${cityName}"]`
+                        ),
+                    ].forEach((e) => {
                         setTimeout(() => e.setAttribute("on", ""), Math.random() * 280);
                     });
                 } catch { }
@@ -2433,37 +2487,50 @@
                 if (vw > 767) {
                     if (datacenterDetails[cityName]["carriers"].length <= 6) {
                         hideArrowButtons(0);
-                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "center";
+                        document
+                            .getElementsByClassName("map-side-panel__carriers-wrapper")
+                            .item(0).style.justifyContent = "center";
                     } else {
                         showArrowButtons(0);
-                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(0).style.justifyContent = "flex-start";
+                        document
+                            .getElementsByClassName("map-side-panel__carriers-wrapper")
+                            .item(0).style.justifyContent = "flex-start";
                     }
                 }
 
                 // Hide and show carrier depending on if a city is live or not
-                var learnMoreButton = document.getElementsByClassName("map__ping-city-link").item(0);
+                var learnMoreButton = document
+                    .getElementsByClassName("map__ping-city-link")
+                    .item(0);
 
-                if (clickableSoonCities.includes(cityName)) {
-                    networkWrapperLeft.style.visibility = 'hidden';
-                    learnMoreButton.style.visibility = 'hidden';
-
+                if (noLocationPageCities.includes(cityName)) {
+                    networkWrapperLeft.style.visibility = "hidden";
+                    learnMoreButton.style.visibility = "hidden";
                 } else {
-                    networkWrapperLeft.style.visibility = 'visible';
-                    learnMoreButton.style.visibility = 'visible';
+                    networkWrapperLeft.style.visibility = "visible";
+                    learnMoreButton.style.visibility = "visible";
                 }
 
                 // change carriers
                 handleCarriersChange(0, cityName);
 
                 // hide map link panel
-                mapLinkPanel.classList.remove("active-panel")
+                mapLinkPanel.classList.remove("active-panel");
 
                 // change learn more link and datasheet city name/link
-                var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(0);
-                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
-                var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+                var learnMoreLink = document
+                    .getElementsByClassName("map__ping-city-link")
+                    .item(0);
+                var downloadDataSheetBtn = document
+                    .getElementsByClassName("button button-primary bg-primary-2")
+                    .item(0);
+                var capitalizedName = document
+                    .getElementById(cityName)
+                    .getElementsByClassName("city-name")
+                    .item(0).innerHTML;
                 learnMoreLink.href = "/dc_location/" + cityName + "/";
-                downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+                downloadDataSheetBtn.innerHTML =
+                    "Visit " + capitalizedName + " Data Centre";
                 downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
             }
 
@@ -2488,7 +2555,9 @@
                 }
 
                 // change download data sheet button text to "Select a city"
-                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(0);
+                var downloadDataSheetBtn = document
+                    .getElementsByClassName("button button-primary bg-primary-2")
+                    .item(0);
                 downloadDataSheetBtn.innerHTML = "Select a city";
                 downloadDataSheetBtn.href = "#";
 
@@ -2512,33 +2581,38 @@
                 document.querySelector("#" + cityName).setAttribute("dc", "");
 
                 // Hide map-panel-a-notification
-                document.getElementById("map-panel-a-notification").style.maxHeight = '0px';
-                document.getElementById("map-panel-a-notification").style.visibility = 'hidden';
+                document.getElementById("map-panel-a-notification").style.maxHeight = "0px";
+                document.getElementById("map-panel-a-notification").style.visibility =
+                    "hidden";
                 sidePanel.classList.remove("notification-active");
-                document.getElementById("map-controls-holder").classList.remove("notification-active");
+                document
+                    .getElementById("map-controls-holder")
+                    .classList.remove("notification-active");
 
                 // set other lines invisible
-                let otherLines = document.querySelectorAll(
-                    `[city-lines] path`
-                );
+                let otherLines = document.querySelectorAll(`[city-lines] path`);
                 for (let i = 0; i < otherLines.length; i++) {
-                    let dcFilter = otherLines[i].getAttribute("dc")
-                    let cityFilter = otherLines[i].getAttribute("cityFilter")
-                    if (!(dcFilter === selectStart.value && cityFilter === cityName)
-                        && !(cityFilter === selectStart.value && dcFilter === cityName)) {
+                    let dcFilter = otherLines[i].getAttribute("dc");
+                    let cityFilter = otherLines[i].getAttribute("cityFilter");
+                    if (
+                        !(dcFilter === selectStart.value && cityFilter === cityName) &&
+                        !(cityFilter === selectStart.value && dcFilter === cityName)
+                    ) {
                         otherLines[i].setAttribute("invisible", "");
                     }
                 }
 
                 // Hide and show carrier depending on if a city is live or not
-                var learnMoreButton = document.getElementsByClassName("map__ping-city-link").item(1);
+                var learnMoreButton = document
+                    .getElementsByClassName("map__ping-city-link")
+                    .item(1);
 
-                if (clickableSoonCities.includes(cityName)) {
-                    networkWrapperRight.style.visibility = 'hidden';
-                    learnMoreButton.style.visibility = 'hidden';
+                if (noLocationPageCities.includes(cityName)) {
+                    networkWrapperRight.style.visibility = "hidden";
+                    learnMoreButton.style.visibility = "hidden";
                 } else {
-                    networkWrapperRight.style.visibility = 'visible';
-                    learnMoreButton.style.visibility = 'visible';
+                    networkWrapperRight.style.visibility = "visible";
+                    learnMoreButton.style.visibility = "visible";
                 }
 
                 const curLine = document.querySelector(
@@ -2600,10 +2674,14 @@
                 if (vw > 767) {
                     if (datacenterDetails[cityName]["carriers"].length <= 6) {
                         hideArrowButtons(1);
-                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "center";
+                        document
+                            .getElementsByClassName("map-side-panel__carriers-wrapper")
+                            .item(1).style.justifyContent = "center";
                     } else {
                         showArrowButtons(1);
-                        document.getElementsByClassName("map-side-panel__carriers-wrapper").item(1).style.justifyContent = "flex-start";
+                        document
+                            .getElementsByClassName("map-side-panel__carriers-wrapper")
+                            .item(1).style.justifyContent = "flex-start";
                     }
                 }
 
@@ -2613,11 +2691,19 @@
                 }
 
                 // change learn more link and datasheet city name/link
-                var learnMoreLink = document.getElementsByClassName("map__ping-city-link").item(1);
-                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
-                var capitalizedName = document.getElementById(cityName).getElementsByClassName("city-name").item(0).innerHTML;
+                var learnMoreLink = document
+                    .getElementsByClassName("map__ping-city-link")
+                    .item(1);
+                var downloadDataSheetBtn = document
+                    .getElementsByClassName("button button-primary bg-primary-2")
+                    .item(1);
+                var capitalizedName = document
+                    .getElementById(cityName)
+                    .getElementsByClassName("city-name")
+                    .item(0).innerHTML;
                 learnMoreLink.href = "/dc_location/" + cityName + "/";
-                downloadDataSheetBtn.innerHTML = "Visit " + capitalizedName + " Data Centre";
+                downloadDataSheetBtn.innerHTML =
+                    "Visit " + capitalizedName + " Data Centre";
                 downloadDataSheetBtn.href = "/dc_location/" + cityName + "/";
             }
 
@@ -2638,7 +2724,9 @@
                 pingPanel.removeAttribute("active");
 
                 // change download data sheet button text to "Select a city"
-                var downloadDataSheetBtn = document.getElementsByClassName("button button-primary bg-primary-2").item(1);
+                var downloadDataSheetBtn = document
+                    .getElementsByClassName("button button-primary bg-primary-2")
+                    .item(1);
                 downloadDataSheetBtn.innerHTML = "Select a city";
                 downloadDataSheetBtn.href = "#";
             };
@@ -2698,7 +2786,6 @@
                             behavior: "smooth",
                         });
                     }
-
                 } else if (selectStart.value !== "" || selectEnd.value !== "") {
                     sidePanelB.style.maxHeight = sidePanelBMaxHeight;
                     expandIcon.style.transform = "rotate(180deg)";
@@ -2839,11 +2926,12 @@
              *  When you hover over an open city, how map link panel and change text/link accordingly
              */
             if (vw > 992) {
-                document.querySelectorAll(".city-group[dc]").forEach(cityGroupEl => {
-                    if (cityGroupEl.getAttribute("soon") != null)
-                        return;
+                document.querySelectorAll(".city-group[dc]").forEach((cityGroupEl) => {
+                    if (cityGroupEl.getAttribute("soon") != null) return;
 
-                    var cityGroupRect = cityGroupEl.querySelector("ellipse[fill]:not([pulse]):not([identifier])");
+                    var cityGroupRect = cityGroupEl.querySelector(
+                        "ellipse[fill]:not([pulse]):not([identifier])"
+                    );
 
                     var rootSVG = document.querySelector("#map-element svg");
                     var point = rootSVG.createSVGPoint();
@@ -2860,7 +2948,9 @@
                         }
 
                         // inner content and links
-                        mapLinkName.innerHTML = cityGroupEl.getElementsByClassName("city-name").item(0).innerHTML;
+                        mapLinkName.innerHTML = cityGroupEl
+                            .getElementsByClassName("city-name")
+                            .item(0).innerHTML;
                         mapLinkLink.href = "/dc_location/" + cityGroupEl.id;
 
                         // positioning
@@ -2873,7 +2963,7 @@
 
                         // styling
                         mapLinkPanel.classList.add("active-panel");
-                    })
+                    });
 
                     cityGroupEl.addEventListener("mouseleave", function (e) {
                         e.stopPropagation();
@@ -2884,10 +2974,11 @@
                             return;
                         }
 
-                        mapLinkPanel.classList.remove("active-panel")
-                    })
-                })
+                        mapLinkPanel.classList.remove("active-panel");
+                    });
+                });
             }
+
         </script>
         <script>
             // const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);

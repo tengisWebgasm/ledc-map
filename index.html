@@ -31,6 +31,12 @@
                             'equinixSydney': {
                                 'ping': 6
                             },
+                            'nextDcSydney': {
+                                'ping': 7
+                            },
+                            'newcastle': {
+                                'ping': 9
+                            },
                         },
                         'carriers': [
                             'ledc',
@@ -48,8 +54,14 @@
                             'tamworth': {
                                 'ping': 4,
                             },
+                            'dubbo': {
+                                'ping': 9,
+                            },
                             'equinixSydney': {
                                 'ping': 3,
+                            },
+                            'nextDcSydney': {
+                                'ping': 4
                             },
                         },
                         'carriers': [
@@ -80,6 +92,9 @@
                             },
                             'equinixSydney': {
                                 'ping': 6,
+                            },
+                            'nextDcSydney': {
+                                'ping': 7
                             },
                         },
                         'carriers': [
@@ -112,7 +127,7 @@
                         ],
                         'msps': [
                         ]
-                    },
+                    }
                 };
             </script>
             <div id="map-container">
@@ -240,7 +255,7 @@
                                     <path stroke-dasharray="10, 5" dc="mackay" city="rockhampton"
                                         d="M886.58,189 C885.76,213 900.05,229.4 914.58,240" />
                                     <path stroke-dasharray="10, 5" dc="rockhampton" city="gladstone"
-                                        d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251" />
+                                        d="M914.58 240C921.25 243.67 927.91 247.33 934.58,251 " />
                                     <path stroke-dasharray="10, 5" dc="gladstone" city="bundaberg"
                                         d="M934.58,251 C943.71,260.35 952.25,267.25 956.58,275" />
                                     <path stroke-dasharray="10, 5" dc="bundaberg" city="nextDcBrisbane"
@@ -284,6 +299,13 @@
                                         d="M928,513.4 C932.86,582.57 842.32,605.13 792.58,621" />
                                     <path stroke-dasharray="10, 5" dc="ballarat" city="nextDcMelbourne" 
                                         d="M760.58 606C771.25 611 781.91 616 792.58,621" />
+                                    
+                                    <path dc="newcastle" city="nextDcSydney" passthrough 
+                                        d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
+                                    <path dc="tamworth" city="nextDcSydney" passthrough 
+                                        d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
+                                    <path dc="dubbo" city="nextDcSydney" passthrough 
+                                        d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
                                     
                                 </g>
 
@@ -820,6 +842,7 @@
                                         <option value="tamworth">Tamworth</option>
                                         <option value="dubbo">Dubbo</option>
                                         <option value="equinixSydney">Equinix Sydney</option>
+                                        <option value="nextDcSydney">NextDC Sydney</option>
                                     </select>
                                 </div>
                             </div>
@@ -1079,7 +1102,7 @@
                         </div>
                         <div id="map-side-panel-disclaimer" class="container">
                             <p>
-                                *Disclaimer - For up to date latency information, please fill out the contact form 
+                                *Disclaimer - For up to date latency and path information, please fill out the contact form 
                                 <span><a href="/contact-us">located here</a></span>.
                             </p>
                         </div>

@@ -569,6 +569,18 @@ p {
 	text-align: right;
 }
 
+#map-side-panel-disclaimer a {
+	font-weight: 700;
+	text-decoration: none;
+	color: #001f5c;
+	position: relative;
+	z-index: 11;
+}
+
+#map-side-panel-disclaimer a:hover {
+	text-decoration: underline;
+}
+
 #map-side-panel-a {
 	
 }
