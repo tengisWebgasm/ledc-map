@@ -1373,16 +1373,17 @@
                                 }
                             }
 
-                            var initialCityOptions = [
-                                "newcastle",
-                                "tamworth",
-                                "dubbo"
-                            ]
+                            var initialCityOptions;
 
                             var handleCityClick = (event) => {
                                 event.stopPropagation();
                                 event.preventDefault();
                                 event.stopImmediatePropagation();
+
+                                if (!initialCityOptions) {
+                                    initialCityOptions = [...document.querySelectorAll("#city-select-start>select>option:not([value=''])")].map(node => node.getAttribute("value"))
+                                }
+
                                 if (selectStart.value === '') {
                                     // no cities selected initially
 
@@ -1577,11 +1578,11 @@
                                 <path stroke-dasharray="10, 5" dc="ballarat" city="nextDcMelbourne"
                                     d="M760.58 606C771.25 611 781.91 616 792.58,621" />
 
-                                <path dc="newcastle" city="nextDcSydney" passthrough 
+                                <path dc="newcastle" city="nextDcSydney" passthrough
                                     d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
-                                <path dc="tamworth" city="nextDcSydney" passthrough 
+                                <path dc="tamworth" city="nextDcSydney" passthrough
                                     d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
-                                <path dc="dubbo" city="nextDcSydney" passthrough 
+                                <path dc="dubbo" city="nextDcSydney" passthrough
                                     d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
                                 <path dc="newcastle" city="dubbo" passthrough
                                     d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 932.67,505.07 937.33,496.73 942,488.4" />
@@ -1752,7 +1753,7 @@
 
                                 <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
                                     <ellipse pulse cx="830.58" cy="565" rx="16" ry="16" fill="url('#pulseFill')"
-                                    restart="always">
+                                        restart="always">
                                         <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
                                             repeatCount="indefinite" keyTimes="0;0.5;1"
                                             keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
@@ -2395,7 +2396,7 @@
                     </div>
                     <div id="map-side-panel-disclaimer" class="container">
                         <p>
-                            *For up to date latency and path information, please fill out the contact form 
+                            *For up to date latency and path information, please fill out the contact form
                             <span><a href="/contact-us">located here</a></span>.
                         </p>
                     </div>
