@@ -564,9 +564,9 @@ p {
 	position: absolute;
 	right: 0;
 	left: 0;
-	bottom: 4px;
-	font-size: 10px;
-	text-align: right;
+	bottom: 0px;
+	font-size: 12px;
+	text-align: center;
 }
 
 #map-side-panel-disclaimer a {

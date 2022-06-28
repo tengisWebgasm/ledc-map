@@ -47,6 +47,6 @@ async function changePing(el, newPing) {
                 .innerHTML[i]) < alphabetArray.indexOf(newPing[i]) ? 1 : -1);
         }
         const newArr = textArr.map(e => alphabetArray[e]);
-        el.innerHTML = newArr.join('') + 'ms';
+        el.innerHTML = newArr.join('') + 'ms^';
     }
 }

@@ -9,16 +9,17 @@ var handleMapClick = (event) => {
     }
 }
 
-var initialCityOptions = [
-    "newcastle",
-    "tamworth",
-    "dubbo"
-]
+var initialCityOptions;
 
 var handleCityClick = (event) => {
     event.stopPropagation();
     event.preventDefault();
     event.stopImmediatePropagation();
+
+    if (!initialCityOptions) {
+        initialCityOptions = [...document.querySelectorAll("#city-select-start>select>option:not([value=''])")].map(node => node.getAttribute("value"))
+    }
+
     if (selectStart.value === '') {
         // no cities selected initially
 

@@ -11,6 +11,9 @@
                         'equinixSydney': {
                             'ping': 6
                         },
+                        'albury': {
+                            'ping': 14,
+                        },
                         'nextDcSydney': {
                             'ping': 7
                         },
@@ -36,6 +39,9 @@
                         },
                         'dubbo': {
                             'ping': 9,
+                        },
+                        'albury': {
+                            'ping': 11,
                         },
                         'equinixSydney': {
                             'ping': 3,
@@ -70,6 +76,9 @@
                         'dubbo': {
                             'ping': 12,
                         },
+                        'albury': {
+                            'ping': 14,
+                        },
                         'equinixSydney': {
                             'ping': 6,
                         },
@@ -89,6 +98,36 @@
                         'toim',
                         'tamworthBroadcast'
                     ]
+                },
+                'albury': {
+                    // CAN1
+                    'endpoint': {
+                        'newcastle': {
+                            'ping': 9,
+                        },
+                        'tamworth': {
+                            'ping': 12,
+                        },
+                        'dubbo': {
+                            'ping': 14,
+                        },
+                        'equinixSydney': {
+                            'ping': 6,
+                        },
+                        'nextDcSydney': {
+                            'ping': 7
+                        },
+                    },
+                    'carriers': [
+                        'ledc',
+                        'vocus',
+                        'encoo',
+                        'transgrid',
+                    ],
+                    'msps': [
+
+                    ]
+                    // Could add cloud providers to here in the future
                 },
                 'equinixSydney': {
                     // SIN1
@@ -1500,7 +1539,7 @@
 
                                 <path stroke-dasharray="10, 5" dc="albury" city="nextDcMelbourne"
                                     d="M830.58,565 C825.41,590.87 809.45,611.48 792.58,621" />
-                                <path stroke-dasharray="10, 5" dc="albury" city="equinixSydney"
+                                <path dc="albury" city="equinixSydney"
                                     d="M830.58,565 C872,564.2 908.78,550.75 928,513.4" />
                                 <path dc="equinixSydney" city="tamworth"
                                     d="M928,513.4 C914.16,495.12 912.02,463.63 924.58,438" />
@@ -1538,12 +1577,22 @@
                                 <path stroke-dasharray="10, 5" dc="ballarat" city="nextDcMelbourne"
                                     d="M760.58 606C771.25 611 781.91 616 792.58,621" />
 
-                                <path dc="newcastle" city="nextDcSydney" passthrough
-                                    d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
-                                <path dc="tamworth" city="nextDcSydney" passthrough
-                                    d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
-                                <path dc="dubbo" city="nextDcSydney" passthrough
-                                    d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 C923.67,517.07 919.33,520.73 915,524.4" />
+                                <path dc="newcastle" city="nextDcSydney" passthrough 
+                                    d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
+                                <path dc="tamworth" city="nextDcSydney" passthrough 
+                                    d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
+                                <path dc="dubbo" city="nextDcSydney" passthrough 
+                                    d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
+                                <path dc="newcastle" city="dubbo" passthrough
+                                    d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 932.67,505.07 937.33,496.73 942,488.4" />
+                                <path dc="newcastle" city="albury" passthrough
+                                    d="M942 488.4C937.33 496.73 932.67 505.07 928,513.4 908.78,550.75 872,564.2 830.58,565" />
+                                <path dc="dubbo" city="albury" passthrough
+                                    d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 908.78,550.75 872,564.2 830.58,565" />
+                                <path dc="tamworth" city="albury" passthrough
+                                    d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 908.78,550.75 872,564.2 830.58,565" />
+                                <path dc="nextDcSydney" city="albury" passthrough
+                                    d="M915 524.4C919.33 520.73 923.67 517.07 928,513.4 908.78,550.75 872,564.2 830.58,565" />
 
                             </g>
 
@@ -1701,8 +1750,16 @@
                                     <text x="813.6800000000001" y="552" class="city-name">Wagga Wagga</text>
                                 </g>
 
-                                <g id="albury" class="city-group" inprogress>
-
+                                <g id="albury" class="city-group" dc onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="830.58" cy="565" rx="16" ry="16" fill="url('#pulseFill')"
+                                    restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
                                     <ellipse cx="830.58" cy="565" rx="7" ry="7" fill="white" />
                                     <ellipse cx="830.58" cy="565" rx="5" ry="5" identifier />
                                     <text x="816.38" y="579" class="city-name">Albury</text>
@@ -2055,6 +2112,7 @@
                                     <option value="newcastle">Newcastle</option>
                                     <option value="tamworth">Tamworth</option>
                                     <option value="dubbo">Dubbo</option>
+                                    <option value="albury">Albury</option>
                                 </select>
                             </div>
                             <div id="city-select-end" class="city-select" disabled>
@@ -2063,6 +2121,7 @@
                                     <option value="newcastle">Newcastle</option>
                                     <option value="tamworth">Tamworth</option>
                                     <option value="dubbo">Dubbo</option>
+                                    <option value="albury">Albury</option>
                                     <option value="equinixSydney">Equinix Sydney</option>
                                     <option value="nextDcSydney">NextDC Sydney</option>
                                 </select>
@@ -2336,7 +2395,7 @@
                     </div>
                     <div id="map-side-panel-disclaimer" class="container">
                         <p>
-                            *Disclaimer - For up to date latency and path information, please fill out the contact form
+                            *For up to date latency and path information, please fill out the contact form 
                             <span><a href="/contact-us">located here</a></span>.
                         </p>
                     </div>
