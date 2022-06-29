@@ -29,7 +29,7 @@ var pingPanelButton = document.getElementById("map-ping-button");
 var mapLinkPanel = document.getElementById("map-link-panel");
 var mapLinkName = document.getElementById("map-link__city-name");
 var mapLinkLink = document.getElementById("map-link__city-link");
-var noLocationPageCities = ["equinixSydney", "nextDcSydney"];
+var noLocationPageCities = ["equinixSydney", "nextDcSydney", "nextDcBrisbane", "nextDcMelbourne"];
 
 // function called when some starting point (data center) is selected
 function showSelection(cityName) {
@@ -261,9 +261,9 @@ function selectDestination(cityName) {
 	changeText(pingPanelCt, selectEnd.options[selectEnd.selectedIndex].label);
 	changePing(
 		document.querySelector("#map-ping-panel-ping"),
-		`${parseInt(
+		`${
 			datacenterDetails[selectStart.value].endpoint[cityName].ping
-		)}`
+		}`
 	);
 	pingPanel.setAttribute("active", "");
 

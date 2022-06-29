@@ -564,7 +564,7 @@ p {
 	position: absolute;
 	right: 0;
 	left: 0;
-	bottom: 0px;
+	bottom: -16px;
 	font-size: 12px;
 	text-align: center;
 }

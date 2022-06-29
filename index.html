@@ -22,35 +22,6 @@
         <div id="map-animation-embed">
             <script>
                 var datacenterDetails = {
-                    'dubbo': {
-                        // HKG2
-                        'endpoint': {
-                            'tamworth': {
-                                'ping': 12
-                            },
-                            'equinixSydney': {
-                                'ping': 6
-                            },
-                            'albury': {
-                                'ping': 14,
-                            },
-                            'nextDcSydney': {
-                                'ping': 7
-                            },
-                            'newcastle': {
-                                'ping': 9
-                            },
-                        },
-                        'carriers': [
-                            'ledc',
-                            'vocus',
-                            'encoo',
-                        ],
-                        'msps': [
-                            'regionalIt',
-                            'toim',
-                        ]
-                    },
                     'newcastle': {
                         // NKG1
                         'endpoint': {
@@ -68,6 +39,12 @@
                             },
                             'nextDcSydney': {
                                 'ping': 4
+                            },
+                            'nextDcBrisbane': {
+                                'ping': "TBA",
+                            },
+                            'nextDcMelbourne': {
+                                'ping': "TBA",
                             },
                         },
                         'carriers': [
@@ -105,6 +82,12 @@
                             'nextDcSydney': {
                                 'ping': 7
                             },
+                            'nextDcBrisbane': {
+                                'ping': "TBA",
+                            },
+                            'nextDcMelbourne': {
+                                'ping': "TBA",
+                            },
                         },
                         'carriers': [
                             'ledc',
@@ -117,6 +100,41 @@
                             'regionalIt',
                             'toim',
                             'tamworthBroadcast'
+                        ]
+                    },
+                    'dubbo': {
+                        // HKG2
+                        'endpoint': {
+                            'tamworth': {
+                                'ping': 12
+                            },
+                            'equinixSydney': {
+                                'ping': 6
+                            },
+                            'albury': {
+                                'ping': 14,
+                            },
+                            'nextDcSydney': {
+                                'ping': 7
+                            },
+                            'newcastle': {
+                                'ping': 9
+                            },
+                            'nextDcBrisbane': {
+                                'ping': "TBA",
+                            },
+                            'nextDcMelbourne': {
+                                'ping': "TBA",
+                            },
+                        },
+                        'carriers': [
+                            'ledc',
+                            'vocus',
+                            'encoo',
+                        ],
+                        'msps': [
+                            'regionalIt',
+                            'toim',
                         ]
                     },
                     'albury': {
@@ -136,6 +154,12 @@
                             },
                             'nextDcSydney': {
                                 'ping': 7
+                            },
+                            'nextDcBrisbane': {
+                                'ping': "TBA",
+                            },
+                            'nextDcMelbourne': {
+                                'ping': "TBA",
                             },
                         },
                         'carriers': [
@@ -166,7 +190,25 @@
                         ],
                         'msps': [
                         ]
-                    }
+                    },
+                    'nextDcBrisbane': {
+                        // SIN1
+                        'endpoint': {
+                        },
+                        'carriers': [
+                        ],
+                        'msps': [
+                        ]
+                    },
+                    'nextDcMelbourne': {
+                        // SIN1
+                        'endpoint': {
+                        },
+                        'carriers': [
+                        ],
+                        'msps': [
+                        ]
+                    },
                 };
             </script>
             <div id="map-container">
@@ -304,7 +346,7 @@
                                     <path stroke-dasharray="10, 5" dc="bundaberg" city="nextDcBrisbane"
                                         d="M956.58,275 C946.26,300.22 946.05,332.08 957.58,355" />
 
-                                    <path stroke-dasharray="10, 5" dc="albury" city="nextDcMelbourne"
+                                    <path dc="albury" city="nextDcMelbourne"
                                         d="M830.58,565 C825.41,590.87 809.45,611.48 792.58,621" />
                                     <path dc="albury" city="equinixSydney"
                                         d="M830.58,565 C872,564.2 908.78,550.75 928,513.4" />
@@ -321,8 +363,6 @@
                                         d="M650.58,534 C680.61,565.52 698.1,575.08 729.58,587" />
                                     <path stroke-dasharray="10, 5" dc="nextDcBrisbane" city="coffsHarbour"
                                         d="M957.58,355 C969.22,376.5 976.51,399.25 973,420.4" />
-                                    <path stroke-dasharray="10, 5" dc="tamworth" city="dubbo"
-                                        d="M924.58,438 C902.88,440.53 883.73,452.27 867.58,469" />
                                     <path stroke-dasharray="10, 5" dc="coffsHarbour" city="tamworth"
                                         d="M973,420.4 C957.66,422.32 938.67,430.13 924.58,438" />
                                     <path stroke-dasharray="10, 5" dc="dubbo" city="bathurst"
@@ -359,7 +399,22 @@
                                         d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 908.78,550.75 872,564.2 830.58,565" />
                                     <path dc="nextDcSydney" city="albury" passthrough
                                         d="M915 524.4C919.33 520.73 923.67 517.07 928,513.4 908.78,550.75 872,564.2 830.58,565" />
-                                    
+                                    <path dc="tamworth" city="dubbo" passthrough
+                                        d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 913.01,490.4 893.57,476.7 867.58,469" />
+
+                                    <path dc="newcastle" city="nextDcBrisbane" passthrough
+                                        d="M957.58,355 C915.63,378.45 877.18,417.75 867.58,469 893.57,476.7 913.01,490.4 928,513.4 932.67,505.07 937.33,496.73 942,488.4" />
+                                    <path dc="newcastle" city="nextDcMelbourne" passthrough
+                                        d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 908.78,550.75 872,564.2 830.58,565 825.41,590.87 809.45,611.48 792.58,621" />
+                                    <path dc="tamworth" city="nextDcBrisbane" passthrough
+                                        d="M957.58,355 C915.63,378.45 877.18,417.75 867.58,469 893.57,476.7 913.01,490.4 928,513.4 914.16,495.12 912.02,463.63 924.58,438" />
+                                    <path dc="tamworth" city="nextDcMelbourne" passthrough
+                                        d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 908.78,550.75 872,564.2 830.58,565 825.41,590.87 809.45,611.48 792.58,621" />
+                                    <path dc="dubbo" city="nextDcMelbourne" passthrough
+                                        d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 908.78,550.75 872,564.2 830.58,565 825.41,590.87 809.45,611.48 792.58,621" />
+                                    <path dc="albury" city="nextDcBrisbane" passthrough
+                                        d="M957.58,355 C915.63,378.45 877.18,417.75 867.58,469 893.57,476.7 913.01,490.4 928,513.4 908.78,550.75 872,564.2 830.58,565" />
+
                                 </g>
 
                                 <g city-pins>
@@ -406,8 +461,16 @@
                                         <text x="965.58" y="278" class="city-name">Bundaberg</text>
                                     </g>
 
-                                    <g id="nextDcBrisbane" class="city-group" soon>
-
+                                    <g id="nextDcBrisbane" class="city-group" dc onclick="handleCityClick(event)">
+                                        <ellipse pulse cx="957.58" cy="355" rx="16" ry="16" fill="url('#pulseFill')"
+                                            restart="always">
+                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        </ellipse>
                                         <ellipse cx="957.58" cy="355" rx="7" ry="7" fill="white" />
                                         <ellipse cx="957.58" cy="355" rx="5" ry="5" identifier />
                                         <text x="966.58" y="358" class="city-name">NextDC Brisbane</text>
@@ -531,14 +594,14 @@
                                         <text x="816.38" y="579" class="city-name">Albury</text>
                                     </g>
 
-                                    <g id="mildura" class="city-group" soon>
+                                    <g id="mildura" class="city-group" inprogress>
 
                                         <ellipse cx="729.58" cy="519" rx="7" ry="7" fill="white" />
                                         <ellipse cx="729.58" cy="519" rx="5" ry="5" identifier />
                                         <text x="713.1800000000001" y="533" class="city-name">Mildura</text>
                                     </g>
 
-                                    <g id="shepparton" class="city-group" soon>
+                                    <g id="shepparton" class="city-group" inprogress>
 
                                         <ellipse cx="801.58" cy="577" rx="7" ry="7" fill="white" />
                                         <ellipse cx="801.58" cy="577" rx="5" ry="5" identifier />
@@ -559,8 +622,16 @@
                                         <text x="752" y="582" class="city-name">Bendigo</text>
                                     </g>
 
-                                    <g id="nextDcMelbourne" class="city-group" soon>
-
+                                    <g id="nextDcMelbourne" class="city-group" dc onclick="handleCityClick(event)">
+                                        <ellipse pulse cx="792.58" cy="621" rx="16" ry="16" fill="url('#pulseFill')"
+                                        restart="always">
+                                            <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                            <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                                repeatCount="indefinite" keyTimes="0;0.5;1"
+                                                keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        </ellipse>
                                         <ellipse cx="792.58" cy="621" rx="7" ry="7" fill="white" />
                                         <ellipse cx="792.58" cy="621" rx="5" ry="5" identifier />
                                         <text x="770" y="630" class="city-name">
@@ -576,14 +647,14 @@
                                         <text x="631.0300000000001" y="548" class="city-name">Adelaide</text>
                                     </g>
 
-                                    <g id="horsham" class="city-group" soon>
+                                    <g id="horsham" class="city-group" inprogress>
 
                                         <ellipse cx="729.58" cy="587" rx="7" ry="7" fill="white" />
                                         <ellipse cx="729.58" cy="587" rx="5" ry="5" identifier />
                                         <text x="709.2800000000001" y="601" class="city-name">Horsham</text>
                                     </g>
 
-                                    <g id="ballarat" class="city-group" soon>
+                                    <g id="ballarat" class="city-group" inprogress>
 
                                         <ellipse cx="760.58" cy="606" rx="7" ry="7" fill="white" />
                                         <ellipse cx="760.58" cy="606" rx="5" ry="5" identifier />
@@ -906,6 +977,8 @@
                                         <option value="albury">Albury</option>
                                         <option value="equinixSydney">Equinix Sydney</option>
                                         <option value="nextDcSydney">NextDC Sydney</option>
+                                        <option value="nextDcBrisbane">NextDC Brisbane</option>
+                                        <option value="nextDcMelbourne">NextDC Melbourne</option>
                                     </select>
                                 </div>
                             </div>
@@ -1168,6 +1241,7 @@
                                 *For up to date latency and path information, please fill out the contact form 
                                 <span><a href="/contact-us">located here</a></span>.
                             </p>
+                            <p>^Approximately</p>
                         </div>
                     </div>
                 </div>

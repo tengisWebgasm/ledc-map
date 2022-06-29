@@ -33,6 +33,12 @@ async function changePing(el, newPing) {
     const clear = setInterval(interval, 80);
 
     function interval() {
+        console.log(newPing)
+        if (newPing === "TBA"){
+            el.innerHTML = 'TBA';
+            clearInterval(clear);
+            return;
+        }
         if (el.getAttribute('text-change-id') != textChangeId || parseInt(el.innerHTML) ===
             parseInt(newPing)) {
             if (parseInt(el.innerHTML) === parseInt(newPing)) el.removeAttribute('text-change-id');
