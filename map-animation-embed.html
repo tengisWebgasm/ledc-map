@@ -1458,6 +1458,10 @@
                             alt="Map of Australia" id="map-img"></embed>
                         <svg xmlns="http://www.w3.org/2000/svg" id="map-svg" viewBox="0 0 1440 784" fill="none">
                             <style>
+                                g[city-pins], g[city-lines] {
+                                    transform: translateY(69px);
+                                }
+
                                 [city-lines] path {
                                     pointer-events: none;
                                     stroke: #2b4a71;
