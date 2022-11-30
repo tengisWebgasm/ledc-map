@@ -48,8 +48,16 @@
             <text x="966.58" y="358" class="city-name">NextDC Brisbane</text>
         </g>
     
-        <g id="coffsHarbour" class="city-group" soon>
-            
+        <g id="coffsHarbour" class="city-group" dc onclick="handleCityClick(event)">
+            <ellipse pulse cx="973" cy="420.4" rx="16" ry="16"
+                fill="url('#pulseFill')" restart="always">
+                <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                    repeatCount="indefinite" keyTimes="0;0.5;1"
+                    keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                    repeatCount="indefinite" keyTimes="0;0.5;1"
+                    keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+            </ellipse>
             <ellipse cx="973" cy="420.4" rx="7" ry="7" fill="white" />
             <ellipse cx="973" cy="420.4" rx="5" ry="5" identifier />
             <text x="982" y="423.4" class="city-name">Coffs Harbour</text>

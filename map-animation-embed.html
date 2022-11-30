@@ -26,6 +26,9 @@
                         'nextDcMelbourne': {
                             'ping': "TBA",
                         },
+                        'coffsHarbour': {
+                            'ping': "TBA",
+                        }
                     },
                     'carriers': [
                         'ledc',
@@ -71,6 +74,9 @@
                         'nextDcMelbourne': {
                             'ping': "TBA",
                         },
+                        'coffsHarbour': {
+                            'ping': "TBA",
+                        }
                     },
                     'carriers': [
                         'ledc',
@@ -111,6 +117,9 @@
                         'nextDcMelbourne': {
                             'ping': "TBA",
                         },
+                        'coffsHarbour': {
+                            'ping': "TBA",
+                        }
                     },
                     'carriers': [
                         'ledc',
@@ -148,6 +157,9 @@
                         'nextDcMelbourne': {
                             'ping': "TBA",
                         },
+                        'coffsHarbour': {
+                            'ping': "TBA",
+                        }
                     },
                     'carriers': [
                         'ledc',
@@ -160,6 +172,44 @@
                         'kinetix',
                     ]
                     // Could add cloud providers to here in the future
+                },
+                'coffsHarbour': {
+                    // NKG1
+                    'endpoint': {
+                        'tamworth': {
+                            'ping': "TBA",
+                        },
+                        'dubbo': {
+                            'ping': "TBA",
+                        },
+                        'albury': {
+                            'ping': "TBA",
+                        },
+                        'equinixSydney': {
+                            'ping': "TBA",
+                        },
+                        'nextDcSydney': {
+                            'ping': "TBA",
+                        },
+                        'nextDcBrisbane': {
+                            'ping': "TBA",
+                        },
+                        'nextDcMelbourne': {
+                            'ping': "TBA",
+                        },
+                    },
+                    'carriers': [
+                        'ledc',
+                        'vocus',
+                        'encoo',
+                        'transgrid',
+                        'kinetix',
+                    ],
+                    'msps': [
+                        'regionalIt',
+                        'kinetix',
+                        'blueSkyIT'
+                    ]
                 },
                 'equinixSydney': {
                     // SIN1
@@ -1573,7 +1623,7 @@
                                     d="M867.58,469 C865.66,494.05 858.95,520.25 847.58,538" />
                                 <path stroke-dasharray="10, 5" dc="nextDcMelbourne" city="geelong"
                                     d="M792.58 621C787.25 623 781.91 625 776.58,627" />
-                                <path stroke-dasharray="10, 5" dc="coffsHarbour" city="newcastle"
+                                <path dc="coffsHarbour" city="newcastle"
                                     d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4" />
                                 <path dc="tamworth" city="newcastle"
                                     d="M924.58,438 C933.89,456.1 939.64,471 942,488.4" />
@@ -1611,9 +1661,9 @@
                                     d="M729.58,519 C703.1,515.25 672.11,520.6 650.58,534" />
                                 <path stroke-dasharray="10, 5" dc="adelaide" city="horsham"
                                     d="M650.58,534 C680.61,565.52 698.1,575.08 729.58,587" />
-                                <path stroke-dasharray="10, 5" dc="nextDcBrisbane" city="coffsHarbour"
+                                <path stroke-dasharray="10, 5"
                                     d="M957.58,355 C969.22,376.5 976.51,399.25 973,420.4" />
-                                <path stroke-dasharray="10, 5" dc="coffsHarbour" city="tamworth"
+                                <path stroke-dasharray="10, 5"
                                     d="M973,420.4 C957.66,422.32 938.67,430.13 924.58,438" />
                                 <path stroke-dasharray="10, 5" dc="dubbo" city="bathurst"
                                     d="M867.58,469 C881.26,474.88 889.35,484.52 895.58,494" />
@@ -1634,6 +1684,7 @@
                                 <path stroke-dasharray="10, 5" dc="ballarat" city="nextDcMelbourne"
                                     d="M760.58 606C771.25 611 781.91 616 792.58,621" />
 
+                                <!-- Passes through 1 city -->
                                 <path dc="newcastle" city="nextDcSydney" passthrough
                                     d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
                                 <path dc="tamworth" city="nextDcSydney" passthrough
@@ -1653,6 +1704,53 @@
                                 <path dc="tamworth" city="dubbo" passthrough
                                     d="M924.58,438 C912.02,463.63 914.16,495.12 928,513.4 913.01,490.4 893.57,476.7 867.58,469" />
 
+                                <path dc="coffsHarbour" city="tamworth"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 C939.64,471 933.89,456.1 924.58,438" /> 
+                                <path dc="coffsHarbour" city="equinixSydney"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 937.33 496.73 932.67 505.07 928,513.4" />
+
+                                <path dc="coffsHarbour" city="dubbo"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 937.33,496.73 932.67,505.07 928,513.4 913.01,490.4 893.57,476.7 867.58,469" />
+                                <path dc="coffsHarbour" city="albury"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 937.33 496.73 932.67 505.07 928,513.4 908.78,550.75 872,564.2 830.58,565" />
+                                <path dc="coffsHarbour" city="nextDcSydney"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 937.33,496.73 932.67,505.07 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
+
+                                <path dc="coffsHarbour" city="nextDcBrisbane"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 937.33,496.73 932.67,505.07 928,513.4 913.01,490.4 893.57,476.7 867.58,469 877.18,417.75 915.63,378.45 957.58,355" />
+                                <path dc="coffsHarbour" city="nextDcMelbourne"
+                                    d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 937.33,496.73 932.67,505.07 928,513.4 908.78,550.75 872,564.2 830.58,565 825.41,590.87 809.45,611.48 792.58,621" />
+                                <!-- 
+                                    1
+
+                                    <path dc="coffsHarbour" city="newcastle"
+                                        d="M973,420.4 C957.87,438.12 947.88,462.93 942,488.4" />
+                                
+                                    2
+
+                                    <path dc="tamworth" city="newcastle"
+                                        d="M924.58,438 C933.89,456.1 939.64,471 942,488.4" />
+                                       M973,420.4 C957.87,438.12 947.88,462.93 942,488.4 C939.64,471 933.89,456.1 924.58,438
+                                    <path dc="newcastle" city="equinixSydney"
+                                        d="M942 488.4C937.33 496.73 932.67 505.07 928,513.4" />
+
+                                    3
+
+                                    <path dc="newcastle" city="dubbo" passthrough
+                                        d="M867.58,469 C893.57,476.7 913.01,490.4 928,513.4 932.67,505.07 937.33,496.73 942,488.4" /> 
+                                    <path dc="newcastle" city="albury" passthrough
+                                        d="M942 488.4C937.33 496.73 932.67 505.07 928,513.4 908.78,550.75 872,564.2 830.58,565" />
+                                    <path dc="newcastle" city="nextDcSydney" passthrough
+                                        d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 923.67,517.07 919.33,520.73 915,524.4" />
+                                    
+                                    4
+                                    <path dc="newcastle" city="nextDcBrisbane" passthrough
+                                        d="M957.58,355 C915.63,378.45 877.18,417.75 867.58,469 893.57,476.7 913.01,490.4 928,513.4 932.67,505.07 937.33,496.73 942,488.4" />
+                                    <path dc="newcastle" city="nextDcMelbourne" passthrough
+                                        d="M942,488.4 C937.33,496.73 932.67,505.07 928,513.4 908.78,550.75 872,564.2 830.58,565 825.41,590.87 809.45,611.48 792.58,621" />
+                                -->
+
+                                <!-- Passes through 2 cities -->
                                 <path dc="newcastle" city="nextDcBrisbane" passthrough
                                     d="M957.58,355 C915.63,378.45 877.18,417.75 867.58,469 893.57,476.7 913.01,490.4 928,513.4 932.67,505.07 937.33,496.73 942,488.4" />
                                 <path dc="newcastle" city="nextDcMelbourne" passthrough
@@ -1727,8 +1825,16 @@
                                     <text x="966.58" y="358" class="city-name">NextDC Brisbane</text>
                                 </g>
 
-                                <g id="coffsHarbour" class="city-group" inprogress>
-
+                                <g id="coffsHarbour" class="city-group" dc onclick="handleCityClick(event)">
+                                    <ellipse pulse cx="973" cy="420.4" rx="16" ry="16"
+                                        fill="url('#pulseFill')" restart="always">
+                                        <animate attributeName="rx" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                        <animate attributeName="ry" values="6.5;16;6.5" dur="1.6s"
+                                            repeatCount="indefinite" keyTimes="0;0.5;1"
+                                            keySplines="0.61, 1, 0.88, 1; 0.12, 0, 0.39, 0" />
+                                    </ellipse>
                                     <ellipse cx="973" cy="420.4" rx="7" ry="7" fill="white" />
                                     <ellipse cx="973" cy="420.4" rx="5" ry="5" identifier />
                                     <text x="982" y="423.4" class="city-name">Coffs Harbour</text>
@@ -2201,6 +2307,7 @@
                                     <option value="tamworth">Tamworth</option>
                                     <option value="dubbo">Dubbo</option>
                                     <option value="albury">Albury</option>
+                                    <option value="coffsHarbour">Coffs Harbour</option>
                                 </select>
                             </div>
                             <div id="city-select-end" class="city-select" disabled>
@@ -2214,6 +2321,7 @@
                                     <option value="nextDcSydney">NextDC Sydney</option>
                                     <option value="nextDcBrisbane">NextDC Brisbane</option>
                                     <option value="nextDcMelbourne">NextDC Melbourne</option>
+                                    <option value="coffsHarbour">Coffs Harbour</option>
                                 </select>
                             </div>
                         </div>
@@ -2336,6 +2444,12 @@
                                                 <div>
                                                     <img src="https://www.leadingedgedc.com/wp-content/themes/twentytwentyone/assets/images/providers/kinetix.png"
                                                         loading="lazy" alt="kinetix">
+                                                </div>
+                                            </div>
+                                            <div class="msp-provider" provider="blueSkyIT">
+                                                <div>
+                                                    <img src="https://leadingedgedc.com/wp-content/uploads/2022/12/Blue-Sky-IT-Consulting-logo.png"
+                                                        loading="lazy" alt="blueSkyIT">
                                                 </div>
                                             </div>
                                         </div>
@@ -2483,6 +2597,12 @@
                                                 <div>
                                                     <img src="https://www.leadingedgedc.com/wp-content/themes/twentytwentyone/assets/images/providers/kinetix.png"
                                                         loading="lazy" alt="kinetix">
+                                                </div>
+                                            </div>
+                                            <div class="msp-provider" provider="blueSkyIT">
+                                                <div>
+                                                    <img src="https://leadingedgedc.com/wp-content/uploads/2022/12/Blue-Sky-IT-Consulting-logo.png"
+                                                        loading="lazy" alt="blueSkyIT">
                                                 </div>
                                             </div>
                                         </div>

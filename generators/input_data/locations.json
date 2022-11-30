@@ -80,7 +80,7 @@
         "x": 973,
         "y": 420.4,
         "capitalizedName": "Coffs Harbour",
-        "isOpen": false,
+        "isOpen": true,
         "labelDirection": "r",
         "connections": [
             "nextDcBrisbane",
